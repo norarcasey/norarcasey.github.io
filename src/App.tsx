@@ -1,5 +1,7 @@
 import React from "react";
 
+import MineSweeper, { Difficulty } from "@norarcasey/mine-sweeper";
+
 import "./App.css";
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
 
           <section className="tile">
             <h2>Projects</h2>
+            <MineSweeper difficulty={Difficulty.Beginner} />
           </section>
         </section>
       </section>
