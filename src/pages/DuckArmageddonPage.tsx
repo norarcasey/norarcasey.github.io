@@ -8,7 +8,7 @@ export function DuckArmageddonPage(): React.ReactElement {
     <Grid container display="flex" flexDirection="column" alignItems="center">
       <Grid item xs={12} md={8} lg={6}>
         <section className="tile">
-          <h1>Mine Sweeper</h1>
+          <h1>Duck Armageddon</h1>
           <article>
             <p>
               There is a Youtube show called{" "}
