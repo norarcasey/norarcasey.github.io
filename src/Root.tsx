@@ -11,12 +11,10 @@ export function Root(): React.ReactElement {
         </Link>
       </header>
       <main className="page-body">
-        <section className="page">
-          <Routes>
-            <Route path="/" element={<App />} />
-          </Routes>
-          <Outlet />
-        </section>
+        <Routes>
+          <Route path="/" element={<App />} />
+        </Routes>
+        <Outlet />
       </main>
       <footer className="page-footer">
         <div className="copyright">

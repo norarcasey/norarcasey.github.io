@@ -6,10 +6,6 @@ body {
   margin: 0;
 }
 
-body {
-  min-width: 500px;
-}
-
 h1 {
   margin: 20px;
 }
@@ -52,7 +48,7 @@ a {
 }
 
 .page-footer {
-  height: 80px;
+  height: 40px;
   border-top: dashed 2px black;
   display: flex;
   justify-content: right;
@@ -62,12 +58,7 @@ a {
 .copyright {
   text-align: right;
   margin-bottom: 10px;
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-right: 10px;
 }
 
 .tiles {
@@ -79,10 +70,10 @@ a {
   margin: 20px;
   padding: 10px 15px;
   border: dashed 2px black;
-  max-width: 450px;
-  min-width: 400px;
 }
 
+.tile h1,
 .tile h2 {
   text-align: right;
+  margin-bottom: 10px;
 }
