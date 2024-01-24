@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import MineSweeper, { Difficulty } from "@norarcasey/mine-sweeper";
 import "./App.css";
@@ -45,7 +46,9 @@ function App() {
 
       <section className="tile">
         <h2>Projects</h2>
-        <h3>Mine Sweeper</h3>
+        <Link to="/mine-sweeper">
+          <h3>Mine Sweeper</h3>
+        </Link>
         <article>
           <a
             href="https://www.npmjs.com/package/@norarcasey/mine-sweeper"
@@ -63,7 +66,7 @@ function App() {
             Github
           </a>
         </article>
-        <MineSweeper difficulty={Difficulty.Intermediate} />
+        <MineSweeper difficulty={Difficulty.Beginner} />
       </section>
     </section>
   );

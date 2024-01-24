@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ContactMePage, ErrorPage } from "./pages";
 
 import "./index.css";
+import { MineSweeperPage } from "./pages/MineSweeperPage";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "contact-me",
         element: <ContactMePage />,
+      },
+      {
+        path: "mine-sweeper",
+        element: <MineSweeperPage />,
       },
     ],
   },
