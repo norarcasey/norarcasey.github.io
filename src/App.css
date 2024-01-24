@@ -1,3 +1,8 @@
+a {
+  color: #4b9ae7;
+  text-decoration: none;
+}
+
 .page {
   display: flex;
   flex-direction: column;
@@ -10,11 +15,10 @@ h1 {
 
 .tiles {
   display: flex;
+  flex-direction: column;
 }
 
 .tile {
-  min-width: 200px;
-  max-width: 350px;
   margin: 20px;
   padding: 10px 15px;
   border: dashed 2px black;
