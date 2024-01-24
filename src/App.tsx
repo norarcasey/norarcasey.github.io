@@ -16,9 +16,12 @@ function App() {
         <Grid item xs={12} md={8} lg={6} width="100%">
           <section className="tile">
             <h2>Projects</h2>
-            <Link to="/mine-sweeper">
-              <h3>Mine Sweeper</h3>
-            </Link>
+            <h3>
+              <Link to="/mine-sweeper">Mine Sweeper</Link>
+            </h3>
+            <h3>
+              <Link to="/duck-armageddon">Duck Armageddon</Link>
+            </h3>
           </section>
         </Grid>
       </Grid>
