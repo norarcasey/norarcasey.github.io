@@ -4,17 +4,7 @@ export function About(): React.ReactElement {
   return (
     <section className="tile">
       <h2>About</h2>
-      <article
-        style={{
-          maxWidth: 400,
-          marginTop: 10,
-          marginBottom: 10,
-          display: "flex",
-          flexDirection: "column",
-          gap: 15,
-          lineHeight: "1.5rem",
-        }}
-      >
+      <article>
         <p>
           My mission is to collaborate with my team and stakeholders on
           challenging and complex frontend and full stack issues, and to deliver

@@ -1,5 +1,10 @@
 body {
-  min-width: 600px;
+  min-width: 500px;
+}
+
+article p {
+  margin-bottom: 15px;
+  line-height: "1.5rem";
 }
 
 a {
@@ -26,6 +31,8 @@ h1 {
   margin: 20px;
   padding: 10px 15px;
   border: dashed 2px black;
+  max-width: 450px;
+  min-width: 400px;
 }
 
 .tile h2 {
