@@ -15,6 +15,10 @@ a {
   text-decoration: none;
 }
 
+h3 {
+  border-bottom: dashed 1px #df6695;
+}
+
 button {
   color: #4b9ae7;
 }
@@ -37,9 +41,10 @@ button {
 }
 
 .page-header {
-  border-bottom: dashed 2px black;
+  border-bottom: dashed 1px #df6695;
   margin-bottom: 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
 }
@@ -51,7 +56,7 @@ button {
 
 .page-footer {
   height: 40px;
-  border-top: dashed 2px black;
+  border-top: dashed 1px #df6695;
   display: flex;
   justify-content: right;
   align-items: end;
@@ -71,7 +76,6 @@ button {
 .tile {
   margin: 20px;
   padding: 10px 15px;
-  border: dashed 2px black;
 }
 
 .tile h1,

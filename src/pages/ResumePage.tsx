@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-
-import { Box, Button, Typography } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPrint } from "@fortawesome/free-solid-svg-icons";
+import { Box, Button } from "@mui/material";
 
 import { Resume } from "../components/Resume";
 
@@ -13,9 +14,14 @@ export function ResumePage(): React.ReactElement {
 
   return (
     <Box>
-      <Box textAlign="right">
+      <Box textAlign="right" mr={2}>
         <Button variant="text" onClick={handlePrint}>
-          <Typography variant="h6">Print</Typography>
+          <FontAwesomeIcon
+            aria-label="print resume"
+            icon={faPrint}
+            size="4x"
+            color="black"
+          />
         </Button>
       </Box>
       <Resume ref={ref} />
