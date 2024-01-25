@@ -9,7 +9,7 @@ import {
 import { Outlet, Routes, Route, Link } from "react-router-dom";
 
 import { LinkedInIcon, GithubIcon, ResumeIcon } from "./icons";
-import App from "./App";
+import Home from "./pages/HomePage";
 
 const theme = createTheme({
   palette: {
@@ -21,6 +21,12 @@ const theme = createTheme({
     },
   },
   typography: {
+    h3: {
+      fontSize: "24px",
+    },
+    body1: {
+      fontSize: "16px",
+    },
     fontFamily: [
       '"Roboto Mono"',
       "Menlo",
@@ -47,7 +53,7 @@ export function Root(): React.ReactElement {
       <Box component="header" className="page-header">
         <Box>
           <Link to="/">
-            <Typography variant="h2">{`Nora Casey`}</Typography>
+            <Typography variant="h2">{`[\\]ora Casey`}</Typography>
           </Link>
         </Box>
         <Box display="flex" justifyContent="end" gap={2} alignItems="center">
@@ -68,13 +74,10 @@ export function Root(): React.ReactElement {
             />
           </Box>
         </Box>
-        {/* <Typography variant="h4" className="resume-link">
-          <Link to="/resume">Resume</Link>
-        </Typography> */}
       </Box>
       <main className="page-body">
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route path="/" element={<Home />} />
         </Routes>
         <Outlet />
       </main>

@@ -3,8 +3,6 @@
   padding: 0;
 }
 
-h1,
-h2,
 h3,
 h4,
 h5,
@@ -21,4 +19,100 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+html,
+body {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  margin: 20px;
+}
+
+a {
+  color: #4b9ae7;
+  text-decoration: none;
+}
+
+h3 {
+  border-bottom: dashed 1px #df6695;
+}
+
+button {
+  color: #4b9ae7;
+}
+
+#root {
+  box-sizing: border-box;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header,
+.page-footer {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.page-body {
+  flex-grow: 1;
+}
+
+.page-header {
+  border-bottom: dashed 1px #df6695;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.page-header a {
+  width: 100%;
+  height: 100%;
+}
+
+.page-footer {
+  height: 40px;
+  border-top: dashed 1px #df6695;
+  display: flex;
+  justify-content: right;
+  align-items: end;
+}
+
+.copyright {
+  text-align: right;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.tiles {
+  display: flex;
+  flex-direction: column;
+}
+
+.tile {
+  margin: 20px;
+  padding: 10px 15px;
+}
+
+.tile h1,
+.tile h2,
+.tile h3 {
+  margin-bottom: 10px;
+}
+
+.project-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: dashed 1px #df6695;
+  height: 200px;
+  width: 200px;
+  text-align: center;
 }

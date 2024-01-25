@@ -51,15 +51,6 @@ export function About(): React.ReactElement {
             program.
           </span>
         </Typography>
-        <Typography variant="body1">
-          Check me out on{" "}
-          <ExternalLink
-            url="https://www.linkedin.com/in/nora-casey/"
-            label="linkedin"
-          />{" "}
-          or <ExternalLink url="https://github.com/norarcasey" label="github" />
-          .
-        </Typography>
       </Box>
     </section>
   );
