@@ -4,9 +4,9 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import { ExternalLink } from "./ExternalLink";
 import { ResumeExperience } from "./ResumeExperience";
 
-export function Resume(): React.ReactElement {
+export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <Grid container gap={2} p={5}>
+    <Grid container gap={2} p={5} pt={0} ref={ref}>
       <Grid
         container
         item
@@ -224,7 +224,7 @@ export function Resume(): React.ReactElement {
           </Box>
         </Box>
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <Box>
           <Typography variant="h5">Microsoft Certified Professional</Typography>
           <Typography variant="subtitle1">
@@ -235,4 +235,4 @@ export function Resume(): React.ReactElement {
       </Grid>
     </Grid>
   );
-}
+});

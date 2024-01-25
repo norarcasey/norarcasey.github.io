@@ -24,8 +24,13 @@ export function ResumeExperience({
       <Typography variant="subtitle1">{companyDescription}</Typography>
       <Typography variant="subtitle2">{employmentDate}</Typography>
       <List sx={{ listStyleType: "disc", pl: 4 }}>
-        {duties.map((duty) => (
-          <ListItem sx={{ display: "list-item" }}>{duty}</ListItem>
+        {duties.map((duty, index) => (
+          <ListItem
+            key={`${company}-${title}-${duty}-${index}`}
+            sx={{ display: "list-item" }}
+          >
+            {duty}
+          </ListItem>
         ))}
       </List>
     </Box>
