@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 import { ExternalLink } from "../components/ExternalLink";
 
@@ -8,9 +8,9 @@ export function DuckArmageddonPage(): React.ReactElement {
     <Grid container display="flex" flexDirection="column" alignItems="center">
       <Grid item xs={12} md={8} lg={6}>
         <section className="tile">
-          <h1>Duck Armageddon</h1>
-          <article>
-            <p>
+          <Box display="flex" flexDirection="column" gap={2}>
+            <Typography variant="h3">Duck Armageddon</Typography>
+            <Typography variant="body1">
               There is a Youtube show called{" "}
               <ExternalLink
                 url={"https://www.youtube.com/@Drawfee"}
@@ -24,18 +24,20 @@ export function DuckArmageddonPage(): React.ReactElement {
               />
               , the prompt was to design games based on the random name they
               got. I highly recommend checking them out!
-            </p>
-            <p>
+            </Typography>
+            <Typography variant="body1">
               Duck Armageddon was a silly experiment to try out color matching
               with imbedding html elements that match the art work.
+            </Typography>
+            <p>
+              The code for Duck Armageddon is hosted on{" "}
+              <ExternalLink
+                url="https://github.com/norarcasey/duck-armageddon"
+                label="Github"
+              />
+              .
             </p>
-
-            <br />
-            <ExternalLink
-              url="https://github.com/norarcasey/duck-armageddon"
-              label="Github"
-            />
-          </article>
+          </Box>
         </section>
       </Grid>
       <Grid

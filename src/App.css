@@ -10,11 +10,6 @@ h1 {
   margin: 20px;
 }
 
-article p {
-  margin-bottom: 15px;
-  line-height: "1.5rem";
-}
-
 a {
   color: #4b9ae7;
   text-decoration: none;
@@ -73,7 +68,8 @@ a {
 }
 
 .tile h1,
-.tile h2 {
+.tile h2,
+.tile h3 {
   text-align: right;
   margin-bottom: 10px;
 }
