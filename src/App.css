@@ -36,6 +36,7 @@ a {
   border-bottom: dashed 2px black;
   margin-bottom: 20px;
   display: flex;
+  padding: 10px;
 }
 
 .resume-link {
