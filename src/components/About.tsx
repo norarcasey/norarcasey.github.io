@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 
 import { ExternalLink } from "./ExternalLink";
@@ -28,6 +29,7 @@ export function About(): React.ReactElement {
           or <ExternalLink url="https://github.com/norarcasey" label="github" />
           .
         </Typography>
+
         <Typography variant="body1">
           I love to mentor other engineers. I apply a mix of listening, goal
           setting, leading by example, and offering ideas to help others achieve

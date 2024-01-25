@@ -35,6 +35,11 @@ a {
 .page-header {
   border-bottom: dashed 2px black;
   margin-bottom: 20px;
+  display: flex;
+}
+
+.resume-link {
+  padding: 10px;
 }
 
 .page-header a {

@@ -27,6 +27,9 @@ export function Root(): React.ReactElement {
         <Link to="/">
           <Typography variant="h2">Nora Casey</Typography>
         </Link>
+        <Typography variant="body1" className="resume-link">
+          <Link to="/resume">Resume</Link>
+        </Typography>
       </header>
       <main className="page-body">
         <Routes>

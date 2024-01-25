@@ -3,10 +3,15 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./Root";
 import reportWebVitals from "./reportWebVitals";
-import { ContactMePage, ErrorPage, MineSweeperPage } from "./pages";
+import {
+  ContactMePage,
+  ErrorPage,
+  MineSweeperPage,
+  ResumePage,
+  DuckArmageddonPage,
+} from "./pages";
 
 import "./index.css";
-import { DuckArmageddonPage } from "./pages/DuckArmageddonPage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +23,7 @@ const router = createBrowserRouter([
         path: "contact-me",
         element: <ContactMePage />,
       },
+      { path: "resume", element: <ResumePage /> },
       {
         path: "mine-sweeper",
         element: <MineSweeperPage />,
