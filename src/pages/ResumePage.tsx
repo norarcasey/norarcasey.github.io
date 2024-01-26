@@ -19,7 +19,7 @@ export function ResumePage(): React.ReactElement {
           <FontAwesomeIcon
             aria-label="print resume"
             icon={faPrint}
-            size="4x"
+            size="3x"
             color="black"
           />
         </Button>

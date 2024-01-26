@@ -4,7 +4,7 @@ import {
   Typography,
   ThemeProvider,
   createTheme,
-  Button,
+  useTheme,
 } from "@mui/material";
 import { Outlet, Routes, Route, Link } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const theme = createTheme({
       main: "#363435",
     },
     secondary: {
-      main: "#363435",
+      main: "#4b9ae7",
     },
   },
   typography: {
@@ -48,31 +48,46 @@ const theme = createTheme({
 });
 
 export function Root(): React.ReactElement {
+  const theme = useTheme();
+
+  /**
+   * LOGO:
+   *
+   * Square brackets ( ) in regular expressions,
+   * also known as metacharacters, have a special meaning.
+   * Brackets indicate a set of characters to match.
+   * Any character between the brackets matches,
+   * and a hyphen can be used to define a set.
+   *
+   * In regular expressions (regex),
+   * the character \n matches a newline character.
+   * The backslash escape character, `\`,
+   * gives special meaning to the character following it.
+   * For example, the combination \n stands for the newline,
+   * which is a control character.
+   */
+
   return (
     <ThemeProvider theme={theme}>
       <Box component="header" className="page-header">
         <Box>
           <Link to="/">
-            <Typography variant="h2">{`[\\]ora Casey`}</Typography>
+            <Typography
+              className="root-title"
+              sx={{ typography: { sm: "h2", xs: "h3" } }}
+            >{`[\\n]ora casey`}</Typography>
           </Link>
         </Box>
         <Box display="flex" justifyContent="end" gap={2} alignItems="center">
-          <Link to="/resume">
+          <Link to="/resume" className="button-link">
             <ResumeIcon />
           </Link>
-          <Button
-            target="_blank"
-            href="https://www.linkedin.com/in/nora-casey/"
-            startIcon={<LinkedInIcon />}
-          />
-          <Box width="100%">
-            <Button
-              size="small"
-              target="_blank"
-              href="https://github.com/norarcasey"
-              startIcon={<GithubIcon />}
-            />
-          </Box>
+          <a target="_blank" href="https://www.linkedin.com/in/nora-casey/">
+            <LinkedInIcon />
+          </a>
+          <a target="_blank" href="https://github.com/norarcasey">
+            <GithubIcon />
+          </a>
         </Box>
       </Box>
       <main className="page-body">

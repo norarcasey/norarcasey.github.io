@@ -3,6 +3,14 @@
   padding: 0;
 }
 
+html,
+body {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 h3,
 h4,
 h5,
@@ -19,18 +27,6 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-html,
-body {
-  box-sizing: border-box;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-h1 {
-  margin: 20px;
 }
 
 a {
@@ -107,12 +103,21 @@ button {
   margin-bottom: 10px;
 }
 
+.root-title {
+  color: #4b9ae7;
+}
+
 .project-box {
   display: flex;
   justify-content: center;
   align-items: center;
   border: dashed 1px #df6695;
-  height: 200px;
-  width: 200px;
   text-align: center;
+  padding: 5px;
+}
+
+a.button-link {
+  margin: 0;
+  padding: 0;
+  width: 30px;
 }

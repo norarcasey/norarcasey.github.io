@@ -1,11 +1,16 @@
 import React from "react";
 
-export function LinkedInIcon(): React.ReactElement {
+export function LinkedInIcon({
+  color,
+}: {
+  color?: string;
+}): React.ReactElement {
+  const fill = color || "black";
   return (
     <svg
-      fill="#000000"
-      height="64px"
-      width="64px"
+      fill={fill}
+      height="30px"
+      width="30px"
       version="1.1"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"

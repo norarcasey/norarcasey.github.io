@@ -1,15 +1,16 @@
 import React from "react";
 
-export function GithubIcon(): React.ReactElement {
+export function GithubIcon({ color }: { color?: string }): React.ReactElement {
+  const fill = color || "black";
   return (
     <svg
-      width="64px"
-      height="64px"
+      width="30px"
+      height="30px"
       viewBox="0 0 20 20"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      fill="#000000"
+      fill={fill}
     >
       <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
