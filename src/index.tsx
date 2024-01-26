@@ -1,4 +1,5 @@
 import React from "react";
+import { Box } from "@mui/material";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./Root";
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: "duck-armageddon",
         element: <DuckArmageddonPage />,
+      },
+      {
+        path: "space-invaders",
+        element: <Box ml={10}>Coming Soon! Space Invaders</Box>,
+      },
+      {
+        path: "piano",
+        element: <Box ml={10}>Coming Soon! A piano</Box>,
       },
     ],
   },

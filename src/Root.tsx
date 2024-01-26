@@ -48,8 +48,6 @@ const theme = createTheme({
 });
 
 export function Root(): React.ReactElement {
-  const theme = useTheme();
-
   /**
    * LOGO:
    *
@@ -74,8 +72,14 @@ export function Root(): React.ReactElement {
           <Link to="/">
             <Typography
               className="root-title"
-              sx={{ typography: { sm: "h2", xs: "h3" } }}
-            >{`[\\n]ora casey`}</Typography>
+              sx={{
+                typography: { sm: "h2", xs: "h3" },
+                letterSpacing: 0.01,
+              }}
+            >
+              <strong>{`[\\n]`}</strong>
+              {`ora casey`}
+            </Typography>
           </Link>
         </Box>
         <Box display="flex" justifyContent="end" gap={2} alignItems="center">
