@@ -22,7 +22,7 @@ const theme = createTheme({
       fontSize: "16px",
     },
     fontFamily: [
-      '"Roboto Mono"',
+      '"Roboto Flex"',
       "Menlo",
       "Monaco",
       '"Courier New"',
@@ -30,7 +30,6 @@ const theme = createTheme({
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI"',
-      "Roboto",
       '"Helvetica Neue"',
       "Arial",
       "sans-serif",
