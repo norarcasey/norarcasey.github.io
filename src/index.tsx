@@ -43,6 +43,15 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/mine-sweeper",
+    element: <Root />,
+    children: [
+      {
+        element: <MineSweeperPage />,
+      },
+    ],
+  },
 ]);
 
 const root = ReactDOM.createRoot(
