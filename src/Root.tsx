@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  ThemeProvider,
-  createTheme,
-  useTheme,
-} from "@mui/material";
+import { Box, Typography, ThemeProvider, createTheme } from "@mui/material";
 import { Outlet, Routes, Route, Link } from "react-router-dom";
 
 import { LinkedInIcon, GithubIcon, ResumeIcon } from "./icons";
