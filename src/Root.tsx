@@ -1,44 +1,10 @@
 import React from "react";
-import { Box, Typography, ThemeProvider, createTheme } from "@mui/material";
+import { Box, Typography, ThemeProvider } from "@mui/material";
 import { Outlet, Routes, Route, Link } from "react-router-dom";
 
 import { LinkedInIcon, GithubIcon, ResumeIcon } from "./icons";
 import Home from "./pages/HomePage";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#363435",
-    },
-    secondary: {
-      main: "#4b9ae7",
-    },
-  },
-  typography: {
-    h3: {
-      fontSize: "24px",
-    },
-    body1: {
-      fontSize: "16px",
-    },
-    fontFamily: [
-      '"Roboto Flex"',
-      "Menlo",
-      "Monaco",
-      '"Courier New"',
-      "monospace",
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-  },
-});
+import { theme } from "./theme";
 
 export function Root(): React.ReactElement {
   /**
@@ -70,8 +36,7 @@ export function Root(): React.ReactElement {
                 letterSpacing: 0.01,
               }}
             >
-              <strong>{`[\\n]`}</strong>
-              {`ora casey`}
+              {`[\\n]ora casey`}
             </Typography>
           </Link>
         </Box>

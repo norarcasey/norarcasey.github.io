@@ -3,10 +3,18 @@ import React from "react";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import { ExternalLink } from "./ExternalLink";
 import { ResumeExperience } from "./ResumeExperience";
+import { EducationItem } from "./EducationItem";
 
 export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <Grid container gap={2} p={5} pt={0} ref={ref}>
+    <Grid
+      container
+      gap={2}
+      p={5}
+      pt={0}
+      ref={ref}
+      sx={{ fontFamily: '"Roboto Flex"' }}
+    >
       <Grid
         container
         item
@@ -55,8 +63,8 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Grid>
       <Grid item>
         <Box display="flex" flexDirection="column" gap={1}>
-          <Typography variant="h5">Summary</Typography>
-          <Typography variant="body1">
+          <Typography variant="h6">Summary</Typography>
+          <Typography variant="body2">
             As a staff software engineer at Outreach, I apply my frontend and
             teamwork skills to create and improve the core business workflows of
             the leading sales engagement platform. I have over six years of
@@ -64,7 +72,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
             TypeScript, Node, GraphQL, and Ruby on Rails and over fourteen years
             of experience developing web based applications.
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body2">
             My primary aim is to deliver software that people <b>use</b> and
             improves their quality of life or work by making what they do easier
             and faster to do, with consistent and measureable value in their
@@ -78,7 +86,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       <Grid item>
         {/* TODO: Add Icons for companies */}
         <Box>
-          <Typography variant="h5">Experience</Typography>
+          <Typography variant="h6">Experience</Typography>
           <ResumeExperience
             title="Staff Software Engineer"
             company="Outreach"
@@ -86,8 +94,8 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
               with 4.4B valuation"
             employmentDate="Nov 2022 - Present (1 year 2 months)"
             duties={[
-              "Built a data visualization tool to display expected salespipeline and developed the API contracts to be used by the datascience team.",
-              "Extended the automation workflow engine to enable tiered conditional statements and actions, acted as liaison between product, design, and backend.",
+              "Collaborated on a data visualization tool that generates an expected sales pipeline, developed the client rendering for the tool and designed the API to be used by the data science team.",
+              "Extended the automation workflow builder to enable tiered conditional statements and actions, acted as liaison between product, design, and backend.",
               "Managed team agile processes and worked with team members to ensure timely feedback and process adjustments to improve team productivity.",
             ]}
           />
@@ -195,38 +203,27 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       <Grid item>
         {/* TODO: Add Icons for schools */}
         <Box>
-          <Typography variant="h5">Eduction</Typography>
-
-          <Box>
-            <Typography variant="h6">
-              Georgia Institute of Technology
-            </Typography>
-            <Typography variant="subtitle1">
-              Master's Degree, Computer Science
-            </Typography>
-            <Typography variant="subtitle2">
-              In progress, graduation Spring 2024
-            </Typography>
-          </Box>
-          <Box>
-            <Typography variant="h6">Northern Arizona University</Typography>
-            <Typography variant="subtitle1">
-              BS Advertising and BA Philosophy
-            </Typography>
-            <Typography variant="subtitle2">2006</Typography>
-          </Box>
-          <Box>
-            <Typography variant="h6">Strategy Computers</Typography>
-            <Typography variant="subtitle1">
-              Certificate Program MCP, Web Development
-            </Typography>
-            <Typography variant="subtitle2">2008</Typography>
-          </Box>
+          <Typography variant="h6">Eduction</Typography>
+          <EducationItem
+            school="Georgia Institute of Technology"
+            degree="MS in Computer Science"
+            graduationDate="Spring 2024"
+          />
+          <EducationItem
+            school="Northern Arizona University"
+            degree="BS Advertising and BA Philosophy"
+            graduationDate="2006"
+          />
+          <EducationItem
+            school="Strategy Computers"
+            degree="Microsoft Certificate Program MCP, Web Development"
+            graduationDate="2006"
+          />
         </Box>
       </Grid>
       <Grid item xs={12}>
         <Box>
-          <Typography variant="h5">Microsoft Certified Professional</Typography>
+          <Typography variant="h6">Microsoft Certified Professional</Typography>
           <Typography variant="subtitle1">
             JavaScript • TypeScript • Apollo GraphQL • React • Agile
             Methodologies • Jest • Ruby on Rails
