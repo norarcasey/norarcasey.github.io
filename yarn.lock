@@ -1922,10 +1922,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@norarcasey/mine-sweeper@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@norarcasey/mine-sweeper/-/mine-sweeper-0.1.6.tgz#d0bb55f4956afdb1917927b6157656a1e22ec2b9"
-  integrity sha512-3+YlcvJQvorI0EqTbP1WCjwrx4qlIkhB1AFgtUyZnvBpJN491NoWnzMJ5HLHT/GQ0cIvaVMULF7OX5HNsvsMCw==
+"@norarcasey/mine-sweeper@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@norarcasey/mine-sweeper/-/mine-sweeper-0.2.3.tgz#e19e8a8c081b41b059ddc8ecc7631ea1551f0ff0"
+  integrity sha512-XIQdANpBX9GEJkZwXQKCacKpLqmsiyVfn36Irx4m3JKKPrbOAg1EmcMsV3rsK51DVZjabhXK3nnN/Ln/HrsnCw==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.5.1"
     "@fortawesome/free-solid-svg-icons" "^6.5.1"

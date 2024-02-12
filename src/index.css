@@ -38,10 +38,6 @@ h3 {
   border-bottom: dashed 1px #df6695;
 }
 
-button {
-  color: #4b9ae7;
-}
-
 #root {
   box-sizing: border-box;
   min-height: 100%;
