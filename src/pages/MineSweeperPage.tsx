@@ -47,7 +47,7 @@ export function MineSweeperPage(): React.ReactElement {
               >
                 Github
               </a>
-              .
+              . I am still actively developing features for minesweeper.
             </Typography>
           </Box>
         </section>
