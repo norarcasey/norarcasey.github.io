@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/material";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./Root";
@@ -10,6 +9,7 @@ import {
   MineSweeperPage,
   ResumePage,
   DuckArmageddonPage,
+  SpaceInvadersPage,
 } from "./pages";
 
 import "./index.css";
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: "space-invaders",
-        element: <Box ml={10}>Coming Soon! Space Invaders</Box>,
+        element: <SpaceInvadersPage />,
       },
     ],
   },
