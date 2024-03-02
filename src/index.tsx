@@ -13,6 +13,7 @@ import {
 } from "./pages";
 
 import "./index.css";
+import { PianoPage } from "./pages/PianoPage";
 
 const router = createBrowserRouter([
   {
@@ -34,12 +35,12 @@ const router = createBrowserRouter([
         element: <DuckArmageddonPage />,
       },
       {
-        path: "space-invaders",
-        element: <Box ml={10}>Coming Soon! Space Invaders</Box>,
+        path: "piano",
+        element: <PianoPage />,
       },
       {
-        path: "piano",
-        element: <Box ml={10}>Coming Soon! A piano</Box>,
+        path: "space-invaders",
+        element: <Box ml={10}>Coming Soon! Space Invaders</Box>,
       },
     ],
   },
