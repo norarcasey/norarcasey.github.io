@@ -45,8 +45,8 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
             gap={1}
           >
             <ExternalLink
-              url="mailto:norareneecasey@gmail.com"
-              label="norareneecasey@gmail.com"
+              url="mailto:noracasey@duck.com"
+              label="noracasey@duck.com"
             />
             <Divider orientation="vertical" flexItem />
             <ExternalLink

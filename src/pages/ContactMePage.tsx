@@ -24,9 +24,7 @@ export function ContactMePage(): React.ReactElement {
             <Box display="flex" flexDirection="column" gap={1}>
               <Typography variant="body1">
                 <FontAwesomeIcon icon={faEnvelope} />{" "}
-                <a href="mailto:norareneecasey@gmail.com">
-                  norareneecasey@gmail.com
-                </a>
+                <a href="mailto:noracasey@duck.com">noracasey@duck.com</a>
               </Typography>
               <Typography variant="body1">
                 <FontAwesomeIcon icon={faLink} />{" "}
