@@ -3,8 +3,14 @@ import { Box, Grid, Typography } from "@mui/material";
 
 import { About } from "../components/About";
 import { ProjectBox } from "../components/ProjectBox";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 function Home() {
+  usePageMeta(
+    "Nora Casey",
+    "Nora Casey — software engineer building frontend and full-stack tools that empower people. Browse my projects, résumé, and ways to get in touch."
+  );
+
   return (
     <section className="tiles">
       <Grid container display="flex" flexDirection="column" alignItems="center">

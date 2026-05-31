@@ -3,8 +3,14 @@ import { Box, Grid, Typography } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLink } from "@fortawesome/free-solid-svg-icons";
 import { ExternalLink } from "../components/ExternalLink";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export function ContactMePage(): React.ReactElement {
+  usePageMeta(
+    "Contact",
+    "Get in touch with Nora Casey by email, LinkedIn, or GitHub."
+  );
+
   return (
     <Grid container display="flex" flexDirection="column" alignItems="center">
       <Grid item xs={12} md={8} lg={6}>

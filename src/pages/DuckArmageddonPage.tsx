@@ -2,8 +2,14 @@ import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 
 import { ExternalLink } from "../components/ExternalLink";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export function DuckArmageddonPage(): React.ReactElement {
+  usePageMeta(
+    "Duck Armageddon",
+    "Duck Armageddon — a playful browser game experiment in color matching by Nora Casey."
+  );
+
   return (
     <Grid container display="flex" flexDirection="column" alignItems="center">
       <Grid item xs={12} md={8} lg={6}>
@@ -48,6 +54,7 @@ export function DuckArmageddonPage(): React.ReactElement {
         sx={{ display: { xs: "none", md: "block" } }}
       >
         <iframe
+          title="Duck Armageddon game"
           src="https://duck-armageddon.stackblitz.io/"
           style={{
             border: "none",
@@ -65,6 +72,7 @@ export function DuckArmageddonPage(): React.ReactElement {
         sx={{ display: { xs: "block", md: "none" } }}
       >
         <iframe
+          title="Duck Armageddon game"
           src="https://duck-armageddon.stackblitz.io/"
           style={{
             border: "none",

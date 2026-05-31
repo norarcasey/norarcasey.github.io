@@ -1,8 +1,14 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { ExternalLink } from "../components/ExternalLink";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export function SpaceInvadersPage(): React.ReactElement {
+  usePageMeta(
+    "Space Invaders",
+    "A TypeScript Space Invaders game by Nora Casey, playable in the browser."
+  );
+
   return (
     <Grid container display="flex" flexDirection="column" alignItems="center">
       <Grid item xs={12} md={8} lg={6}>

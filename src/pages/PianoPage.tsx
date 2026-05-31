@@ -1,8 +1,14 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { ExternalLink } from "../components/ExternalLink";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export function PianoPage(): React.ReactElement {
+  usePageMeta(
+    "Piano",
+    "A playable browser piano built with tone.js by Nora Casey."
+  );
+
   return (
     <Grid container display="flex" flexDirection="column" alignItems="center">
       <Grid item xs={12} md={8} lg={6}>

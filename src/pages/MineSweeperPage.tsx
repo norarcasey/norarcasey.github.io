@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { MineSweeper, Difficulty } from "@norarcasey/mine-sweeper";
 
+import { usePageMeta } from "../hooks/usePageMeta";
+
 export function MineSweeperPage(): React.ReactElement {
+  usePageMeta(
+    "Mine Sweeper",
+    "A React Mine Sweeper game by Nora Casey, also published as the @norarcasey/mine-sweeper npm package."
+  );
+
   const [difficulty, setDifficulty] = useState(Difficulty.Beginner);
 
   return (
