@@ -11,6 +11,20 @@ export function MineSweeperPage(): React.ReactElement {
         <section className="tile">
           <Typography variant="h3">Mine Sweeper</Typography>
 
+          <Box mb={2}>
+            <a
+              href="https://www.npmjs.com/package/@norarcasey/mine-sweeper"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View the Mine Sweeper package on npm"
+            >
+              <img
+                src="https://img.shields.io/npm/v/@norarcasey/mine-sweeper?logo=npm&label=mine-sweeper"
+                alt="Mine Sweeper npm version"
+              />
+            </a>
+          </Box>
+
           <Box display="flex" flexDirection="column" gap={2}>
             <Typography variant="body1">
               Mine sweeper was inspired by a interview I did back in 2018. The
