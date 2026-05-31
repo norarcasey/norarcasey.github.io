@@ -47,7 +47,6 @@ export function PianoPage(): React.ReactElement {
           </Box>
         </section>
       </Grid>
-      <Grid></Grid>
     </Grid>
   );
 }

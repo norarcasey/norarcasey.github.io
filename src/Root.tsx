@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Typography, ThemeProvider } from "@mui/material";
 import { Outlet, Routes, Route, Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import { LinkedInIcon, GithubIcon, ResumeIcon } from "./icons";
 import Home from "./pages/HomePage";
@@ -41,13 +43,30 @@ export function Root(): React.ReactElement {
           </Link>
         </Box>
         <Box display="flex" justifyContent="end" gap={2} alignItems="center">
-          <Link to="/resume" className="button-link">
+          <Link to="/resume" className="button-link" aria-label="Résumé">
             <ResumeIcon />
           </Link>
-          <a target="_blank" href="https://www.linkedin.com/in/nora-casey/">
+          <Link
+            to="/contact-me"
+            className="button-link"
+            aria-label="Contact me"
+          >
+            <FontAwesomeIcon icon={faEnvelope} size="lg" />
+          </Link>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            href="https://www.linkedin.com/in/nora-casey/"
+          >
             <LinkedInIcon />
           </a>
-          <a target="_blank" href="https://github.com/norarcasey">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            href="https://github.com/norarcasey"
+          >
             <GithubIcon />
           </a>
         </Box>
