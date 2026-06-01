@@ -14,10 +14,27 @@ function Home() {
   return (
     <section className="tiles">
       <Grid container display="flex" flexDirection="column" alignItems="center">
-        <Grid item xs={12} sm={12} md={11} lg={10} xl={9}>
+        <Grid
+          size={{
+            xs: 12,
+            sm: 12,
+            md: 11,
+            lg: 10,
+            xl: 9,
+          }}
+        >
           <About />
         </Grid>
-        <Grid item xs={12} sm={12} md={11} lg={10} xl={9} width="100%">
+        <Grid
+          width="100%"
+          size={{
+            xs: 12,
+            sm: 12,
+            md: 11,
+            lg: 10,
+            xl: 9,
+          }}
+        >
           <section className="tile">
             <Typography variant="h3">Projects</Typography>
             <Box display="flex" justifyContent="start" flexWrap="wrap" gap={2}>

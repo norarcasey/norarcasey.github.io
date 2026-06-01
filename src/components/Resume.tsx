@@ -15,14 +15,8 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       ref={ref}
       sx={{ fontFamily: '"Roboto Flex"' }}
     >
-      <Grid
-        container
-        item
-        display="flex"
-        alignItems="center"
-        flexDirection="column"
-      >
-        <Grid item textAlign="center">
+      <Grid container display="flex" alignItems="center" flexDirection="column">
+        <Grid textAlign="center">
           <Box
             display="flex"
             justifyContent="center"
@@ -61,7 +55,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
           </Box>
         </Grid>
       </Grid>
-      <Grid item>
+      <Grid>
         <Box display="flex" flexDirection="column" gap={1}>
           <Typography variant="h6">Summary</Typography>
           <Typography variant="body2">
@@ -83,7 +77,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
           </Typography>
         </Box>
       </Grid>
-      <Grid item>
+      <Grid>
         {/* TODO: Add Icons for companies */}
         <Box>
           <Typography variant="h6">Experience</Typography>
@@ -200,7 +194,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
           />
         </Box>
       </Grid>
-      <Grid item>
+      <Grid>
         {/* TODO: Add Icons for schools */}
         <Box>
           <Typography variant="h6">Eduction</Typography>
@@ -221,7 +215,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
           />
         </Box>
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Box>
           <Typography variant="h6">Microsoft Certified Professional</Typography>
           <Typography variant="subtitle1">

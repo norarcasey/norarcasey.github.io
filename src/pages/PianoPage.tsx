@@ -11,7 +11,13 @@ export function PianoPage(): React.ReactElement {
 
   return (
     <Grid container display="flex" flexDirection="column" alignItems="center">
-      <Grid item xs={12} md={8} lg={6}>
+      <Grid
+        size={{
+          xs: 12,
+          md: 8,
+          lg: 6,
+        }}
+      >
         <section className="tile">
           <Box display="flex" flexDirection="column" gap={2}>
             <Typography variant="h3">Piano</Typography>

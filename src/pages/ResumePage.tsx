@@ -13,15 +13,15 @@ export function ResumePage(): React.ReactElement {
     "Nora Casey's résumé — experience, education, and skills in frontend and full-stack software engineering."
   );
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
-    content: () => ref.current,
+    contentRef: ref,
   });
 
   return (
     <Box>
       <Box textAlign="right" mr={2}>
-        <Button variant="text" onClick={handlePrint}>
+        <Button variant="text" onClick={() => handlePrint()}>
           <FontAwesomeIcon
             aria-label="print resume"
             icon={faPrint}

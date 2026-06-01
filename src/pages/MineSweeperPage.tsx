@@ -14,7 +14,13 @@ export function MineSweeperPage(): React.ReactElement {
 
   return (
     <Grid container display="flex" flexDirection="column" alignItems="center">
-      <Grid item xs={12} md={8} lg={6}>
+      <Grid
+        size={{
+          xs: 12,
+          md: 8,
+          lg: 6,
+        }}
+      >
         <section className="tile">
           <Typography variant="h3">Mine Sweeper</Typography>
 
@@ -73,19 +79,18 @@ export function MineSweeperPage(): React.ReactElement {
           </Box>
         </section>
       </Grid>
-
       <Grid
         container
         display="flex"
         flexDirection="column"
         alignItems="center"
-        item
-        xs={12}
-        md={8}
-        lg={6}
+        size={{
+          xs: 12,
+          md: 8,
+          lg: 6,
+        }}
       >
         <Grid
-          item
           display="flex"
           gap={2}
           sx={{ display: { xs: "none", md: "flex" } }}
@@ -119,12 +124,12 @@ export function MineSweeperPage(): React.ReactElement {
           />
           <label htmlFor="expert">Expert</label>
         </Grid>
-        <Grid item sx={{ display: { xs: "none", md: "flex" } }}>
+        <Grid sx={{ display: { xs: "none", md: "flex" } }}>
           {difficulty === 10 && <MineSweeper difficulty={difficulty} />}
           {difficulty === 40 && <MineSweeper difficulty={difficulty} />}
           {difficulty === 99 && <MineSweeper difficulty={difficulty} />}
         </Grid>
-        <Grid item sx={{ display: { xs: "flex", md: "none" } }}>
+        <Grid sx={{ display: { xs: "flex", md: "none" } }}>
           <MineSweeper difficulty={Difficulty.Beginner} />
         </Grid>
       </Grid>
