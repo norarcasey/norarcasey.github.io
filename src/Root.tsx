@@ -1,10 +1,8 @@
 import React from "react";
 import { Box, Typography, ThemeProvider } from "@mui/material";
 import { Outlet, Routes, Route, Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-import { LinkedInIcon, GithubIcon, ResumeIcon } from "./icons";
+import { EmailIcon, LinkedInIcon, GithubIcon, ResumeIcon } from "./icons";
 import Home from "./pages/HomePage";
 import { theme } from "./theme";
 
@@ -51,10 +49,7 @@ export function Root(): React.ReactElement {
             className="button-link"
             aria-label="Contact me"
           >
-            <FontAwesomeIcon
-              icon={faEnvelope}
-              style={{ fontSize: 30, color: "black" }}
-            />
+            <EmailIcon />
           </Link>
           <a
             target="_blank"
