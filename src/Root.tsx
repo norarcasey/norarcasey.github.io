@@ -51,7 +51,10 @@ export function Root(): React.ReactElement {
             className="button-link"
             aria-label="Contact me"
           >
-            <FontAwesomeIcon icon={faEnvelope} size="lg" />
+            <FontAwesomeIcon
+              icon={faEnvelope}
+              style={{ fontSize: 30, color: "black" }}
+            />
           </Link>
           <a
             target="_blank"
