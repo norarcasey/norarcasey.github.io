@@ -40,16 +40,17 @@ export function MineSweeperPage(): React.ReactElement {
 
           <Box display="flex" flexDirection="column" gap={2}>
             <Typography variant="body1">
-              Mine sweeper was inspired by a interview I did back in 2018. The
-              prompt was on the white board, "build the popular Windows game
-              Mine sweeper".
+              Mine Sweeper started as a whiteboard prompt in a 2018 interview:
+              "build the popular Windows game Mine Sweeper." The interview was
+              over in an hour, but the problem stuck with me — so I went home
+              and actually built it in React and Redux.
             </Typography>
 
             <Typography variant="body1">
-              After the interview, I went home and built a version using React
-              with Redux. I built a very bare bones example that was just the
-              beginner level and have always wanted to go back and extend the
-              project to have the different difficulty levels.
+              That first version was bare bones, just the beginner level. I kept
+              coming back to it over the years, extending it into the
+              multi-difficulty game you can play here and packaging it as a
+              reusable library along the way.
             </Typography>
             <Typography variant="body1" fontWeight="bold">
               If you don't see the level selector try a larger screen size.

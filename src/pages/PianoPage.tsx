@@ -24,22 +24,21 @@ export function PianoPage(): React.ReactElement {
           </Box>
           <Box display="flex" flexDirection="column" gap={2}>
             <Typography variant="body1">
-              At a previous job, we had a design interview question that was to
-              build a piano. I had only talked about it hypothetically and never
-              actually built one. My gut told me this really isn't a good design
-              interview question. I thought it was only fair to the interviewers
-              I was shadowing and interviewees that were receiving this question
-              to actually build one myself. And see what building this in
-              practice actually looks like.{" "}
+              At a previous job, one of our design interview questions was
+              "build a piano." I'd been part of asking it — shadowing interviews
+              and talking through it in the abstract — but I'd never actually
+              built one myself. It didn't feel fair to ask candidates to design
+              something I hadn't tried in practice, so I built it. It turns out
+              there's a lot more to a piano than the whiteboard version lets on.{" "}
               <ExternalLink
                 url="https://noracasey.com/keyboard/"
                 label="Can you play the piano?"
               />
             </Typography>
             <Typography variant="body1">
-              I needed a test track to play while wiring this up to tone.js. I
-              chose Alex f and there is still an Easter Egg in the app if you
-              click the play button without recording any notes.
+              I needed a test track while wiring it up to tone.js, so I used
+              "Axel F" — and there's still an Easter egg in the app if you click
+              the play button without recording any notes.
             </Typography>
 
             <Typography variant="body1">
@@ -52,8 +51,8 @@ export function PianoPage(): React.ReactElement {
             </Typography>
 
             <Typography variant="body1">
-              If you want to build something with tone.js, here is a link this
-              their documentation.{" "}
+              If you want to build something with tone.js yourself, here are
+              their docs:{" "}
               <ExternalLink url="https://tonejs.github.io/" label="Tone.js" />
             </Typography>
           </Box>

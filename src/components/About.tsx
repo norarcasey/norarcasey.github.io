@@ -42,13 +42,12 @@ export function About(): React.ReactElement {
               url="https://www.gettyimages.com/search/photographer?photographer=Nora%20Casey&assettype=image&sort=mostpopular&family=creative"
               label="Getty Images"
             />
-            ) . I'm also an active member of the{" "}
+            ). I also take classes and perform at the{" "}
             <ExternalLink
-              url="https://www.seattleguitar.org/"
-              label="Seattle Classical Guitar Society"
-            />{" "}
-            and currently finishing my final semester at Georgia Tech's graduate
-            program.
+              url="https://www.barcelonaimprovgroup.com/"
+              label="Barcelona Improv Group"
+            />
+            , and I recently earned my MS in Computer Science from Georgia Tech.
           </span>
         </Typography>
       </Box>

@@ -39,7 +39,7 @@ export function DuckArmageddonPage(): React.ReactElement {
             </Typography>
             <Typography variant="body1">
               Duck Armageddon was a silly experiment to try out color matching
-              with imbedding html elements that match the art work.
+              by embedding HTML elements that match the artwork.
             </Typography>
             <p>
               The code for Duck Armageddon is hosted on{" "}
