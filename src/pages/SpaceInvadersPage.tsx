@@ -57,7 +57,7 @@ export function SpaceInvadersPage(): React.ReactElement {
         </section>
       </Grid>
       <Grid
-        sx={{ display: { xs: "none", md: "block" } }}
+        sx={{ display: { xs: "none", md: "block" }, pb: 4 }}
         size={{
           xs: 12,
           md: 8,
