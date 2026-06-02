@@ -1,12 +1,13 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
+import { StarSiege } from "@norarcasey/star-siege-nora";
 import { ExternalLink } from "../components/ExternalLink";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export function SpaceInvadersPage(): React.ReactElement {
   usePageMeta(
-    "Space Invaders",
-    "A TypeScript Space Invaders game by Nora Casey, playable in the browser."
+    "Star Siege",
+    "Star Siege — a retro arcade space-shooter by Nora Casey, published as a React component on npm and playable in the browser."
   );
 
   return (
@@ -20,21 +21,37 @@ export function SpaceInvadersPage(): React.ReactElement {
       >
         <section className="tile">
           <Box display="flex" flexDirection="column" gap={2}>
-            <Typography variant="h3">Space Invaders</Typography>
+            <Typography variant="h3">Star Siege</Typography>
+
+            <Box>
+              <a
+                href="https://www.npmjs.com/package/@norarcasey/star-siege-nora"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View the Star Siege package on npm"
+              >
+                <img
+                  src="https://img.shields.io/npm/v/@norarcasey/star-siege-nora?logo=npm&label=star-siege-nora"
+                  alt="Star Siege npm version"
+                />
+              </a>
+            </Box>
+
             <Typography variant="body1">
-              Space Invaders is the classic arcade game — waves of aliens
-              marching down the screen while you fire back from a moving cannon.
-              I built this version in TypeScript as a way to play with game
-              loops and rendering in the browser.
+              Star Siege is my take on the classic arcade space-shooter — waves
+              of invaders marching down the screen while you fire back from a
+              moving ship. I built it in TypeScript to play with game loops and
+              canvas rendering in the browser.
             </Typography>
             <Typography variant="body1">
-              The playable build is embedded below on wider screens. On a phone
-              you can play it full screen over on{" "}
+              It's published as a React component and hook on npm, so the build
+              embedded below on wider screens is the real package — dropped
+              straight into this page. Grab it from{" "}
               <ExternalLink
-                url="https://typescript-dg8ddk.stackblitz.io/"
-                label="StackBlitz"
+                url="https://www.npmjs.com/package/@norarcasey/star-siege-nora"
+                label="npm"
               />
-              .
+              . Arrow keys move your ship; space or up fires.
             </Typography>
           </Box>
         </section>
@@ -46,15 +63,14 @@ export function SpaceInvadersPage(): React.ReactElement {
           md: 8,
           lg: 6,
         }}
+        justifyContent="center"
       >
-        <iframe
-          title="Space Invaders game"
-          src="https://typescript-dg8ddk.stackblitz.io/"
+        <StarSiege
+          cellSize={28}
           style={{
-            border: "none",
-            overflow: "hidden",
-            height: "400px",
-            width: "400px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         />
       </Grid>
