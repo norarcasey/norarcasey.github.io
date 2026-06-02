@@ -25,7 +25,13 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       ref={ref}
       sx={{ fontFamily: '"Roboto Flex"' }}
     >
-      <Grid container display="flex" alignItems="center" flexDirection="column">
+      <Grid
+        container
+        size={12}
+        display="flex"
+        alignItems="center"
+        flexDirection="column"
+      >
         <Grid textAlign="center">
           <Box
             display="flex"
