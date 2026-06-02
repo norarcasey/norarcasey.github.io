@@ -592,10 +592,10 @@
     "@fortawesome/free-solid-svg-icons" "^7"
     "@fortawesome/react-fontawesome" "^3"
 
-"@norarcasey/star-siege-nora@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@norarcasey/star-siege-nora/-/star-siege-nora-0.2.0.tgz#3f1431b034c1dbb67686da0ddcaac83cb58691e5"
-  integrity sha512-Ng9UPyWtloUNgGtm4Z40HBX2qS9WdMU/24JMFJ/fvIKmrPVrDCa+F6YfsjeATK6AKD9YaGvYGu4A1BhqLkIc3w==
+"@norarcasey/star-siege-nora@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@norarcasey/star-siege-nora/-/star-siege-nora-0.3.0.tgz#0ffb162b831e84dd6fb0b7b16a113baf3e8db8da"
+  integrity sha512-LBkS0vRJ6O2PTucCXdyTzlPk+nLorFTfljgv/P6Zb/anHn1HKx4qXG/eokKgHoSvUbjDh7TLlh3MhvYxUsMl1Q==
 
 "@oxc-project/types@=0.133.0":
   version "0.133.0"
