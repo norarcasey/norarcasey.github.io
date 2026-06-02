@@ -44,14 +44,16 @@ export function SpaceInvadersPage(): React.ReactElement {
               canvas rendering in the browser.
             </Typography>
             <Typography variant="body1">
-              It's published as a React component and hook on npm, so the build
-              embedded below on wider screens is the real package — dropped
-              straight into this page. Grab it from{" "}
+              It's published as a React component on npm — dropped straight into
+              this page. Grab it from{" "}
               <ExternalLink
                 url="https://www.npmjs.com/package/@norarcasey/star-siege-nora"
                 label="npm"
               />
-              . Arrow keys move your ship; space or up fires.
+              .
+            </Typography>
+            <Typography variant="body1">
+              Arrow keys move your ship; space or up fires; P to pause.
             </Typography>
           </Box>
         </section>
