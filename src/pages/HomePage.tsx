@@ -39,8 +39,8 @@ function Home() {
             <Typography variant="h3">Projects</Typography>
             <Box display="flex" justifyContent="start" flexWrap="wrap" gap={2}>
               <ProjectBox title="Mine Sweeper" url="/mine-sweeper" />
+              <ProjectBox title="Star Siege" url="/space-invaders" />
               <ProjectBox title="Duck Armageddon" url="/duck-armageddon" />
-              <ProjectBox title="Space Invaders" url="/space-invaders" />
               <ProjectBox title="Piano" url="/piano" />
             </Box>
           </section>
