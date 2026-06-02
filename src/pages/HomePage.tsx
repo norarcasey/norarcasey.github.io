@@ -40,7 +40,7 @@ function Home() {
             <Box display="flex" justifyContent="start" flexWrap="wrap" gap={2}>
               <ProjectBox title="Mine Sweeper" url="/mine-sweeper" />
               <ProjectBox title="Star Siege" url="/space-invaders" />
-              <ProjectBox title="Duck Armageddon" url="/duck-armageddon" />
+              <ProjectBox title="Tic Tac Nora" url="/tic-tac-nora" />
               <ProjectBox title="Piano" url="/piano" />
             </Box>
           </section>

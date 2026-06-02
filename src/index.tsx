@@ -7,7 +7,7 @@ import {
   ErrorPage,
   MineSweeperPage,
   ResumePage,
-  DuckArmageddonPage,
+  TicTacNoraPage,
   SpaceInvadersPage,
 } from "./pages";
 
@@ -30,8 +30,8 @@ const router = createBrowserRouter([
         element: <MineSweeperPage />,
       },
       {
-        path: "duck-armageddon",
-        element: <DuckArmageddonPage />,
+        path: "tic-tac-nora",
+        element: <TicTacNoraPage />,
       },
       {
         path: "piano",
