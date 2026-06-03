@@ -2,7 +2,13 @@ import React from "react";
 import { Box, Typography, ThemeProvider } from "@mui/material";
 import { Outlet, Routes, Route, Link } from "react-router-dom";
 
-import { EmailIcon, LinkedInIcon, GithubIcon, NpmIcon, ResumeIcon } from "./icons";
+import {
+  EmailIcon,
+  LinkedInIcon,
+  GithubIcon,
+  NpmIcon,
+  ResumeIcon,
+} from "./icons";
 import Home from "./pages/HomePage";
 import { theme } from "./theme";
 
