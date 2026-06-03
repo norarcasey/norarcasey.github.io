@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, ThemeProvider } from "@mui/material";
 import { Outlet, Routes, Route, Link } from "react-router-dom";
 
-import { EmailIcon, LinkedInIcon, GithubIcon, ResumeIcon } from "./icons";
+import { EmailIcon, LinkedInIcon, GithubIcon, NpmIcon, ResumeIcon } from "./icons";
 import Home from "./pages/HomePage";
 import { theme } from "./theme";
 
@@ -66,6 +66,14 @@ export function Root(): React.ReactElement {
             href="https://github.com/norarcasey"
           >
             <GithubIcon />
+          </a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="npm"
+            href="https://www.npmjs.com/org/norarcasey"
+          >
+            <NpmIcon />
           </a>
         </Box>
       </Box>
