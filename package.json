@@ -15,6 +15,7 @@
     "@fortawesome/react-fontawesome": "^3",
     "@mui/material": "^7",
     "@norarcasey/mine-sweeper": "^1.0.1",
+    "@norarcasey/pianora": "^0.1.0",
     "@norarcasey/star-siege-nora": "^0.3.0",
     "@norarcasey/tic-tac-nora": "^0.1.0",
     "@types/node": "^22",

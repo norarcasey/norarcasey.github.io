@@ -12,7 +12,7 @@ import {
 } from "./pages";
 
 import "./index.css";
-import { PianoPage } from "./pages/PianoPage";
+import { PianoraPage } from "./pages/PianoraPage";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
         element: <TicTacNoraPage />,
       },
       {
-        path: "piano",
-        element: <PianoPage />,
+        path: "pianora",
+        element: <PianoraPage />,
       },
       {
         path: "space-invaders",
