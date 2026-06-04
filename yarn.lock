@@ -583,6 +583,11 @@
   dependencies:
     "@tybys/wasm-util" "^0.10.1"
 
+"@norarcasey/anoraconda@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@norarcasey/anoraconda/-/anoraconda-0.1.0.tgz#cce87f043cdd5ee419df6722d07b6287f20f2bca"
+  integrity sha512-OZO5lLdKQKjTE3bsoEbMh1+XMQe9xYmrptffAitbJyg0gx6cIJh6j3fUB/5qQmHCQnRzoluQPSw7k1q+WIZF9w==
+
 "@norarcasey/mine-sweeper@^1.0.1":
   version "1.0.1"
   resolved "https://registry.npmjs.org/@norarcasey/mine-sweeper/-/mine-sweeper-1.0.1.tgz"

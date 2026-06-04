@@ -41,6 +41,7 @@ function Home() {
               <ProjectBox title="Mine Sweeper" url="/mine-sweeper" />
               <ProjectBox title="Star Siege" url="/space-invaders" />
               <ProjectBox title="Tic Tac Nora" url="/tic-tac-nora" />
+              <ProjectBox title="Anoraconda" url="/anoraconda" />
               <ProjectBox title="Pianora" url="/pianora" />
             </Box>
           </section>
