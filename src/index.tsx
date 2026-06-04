@@ -9,6 +9,7 @@ import {
   ResumePage,
   TicTacNoraPage,
   AnoracondaPage,
+  ArkanoraPage,
   SpaceInvadersPage,
 } from "./pages";
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "anoraconda",
         element: <AnoracondaPage />,
+      },
+      {
+        path: "arkanora",
+        element: <ArkanoraPage />,
       },
       {
         path: "pianora",

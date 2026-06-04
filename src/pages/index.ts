@@ -3,6 +3,7 @@ export { ErrorPage } from "./ErrorPage";
 export { MineSweeperPage } from "./MineSweeperPage";
 export { TicTacNoraPage } from "./TicTacNoraPage";
 export { AnoracondaPage } from "./AnoracondaPage";
+export { ArkanoraPage } from "./ArkanoraPage";
 export { ResumePage } from "./ResumePage";
 export { PianoraPage } from "./PianoraPage";
 export { SpaceInvadersPage } from "./SpaceInvadersPage";
