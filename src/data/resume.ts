@@ -33,11 +33,13 @@ export const experience: ResumeEntry[] = [
     start: "2025-10",
     end: null,
     duties: [
-      "Team lead across the core equity platform teams, balancing feature delivery with a sustained investment in engineering quality.",
-      "Built tax tooling that lets founders and employees file 83(b) elections through a simple guided flow, replacing an error-prone manual paperwork process.",
-      "Drove a code-quality initiative: introduced and enforced linting rules, planned dedicated quality cycles, and used AI-assisted tooling to backfill unit tests across core functionality.",
+      "Lead the frontend across core equity-platform teams, owning UI architecture, component patterns, and code quality while continuing to ship complex features hands-on.",
+      "Partnered closely with design in Figma to translate mockups into polished, faithful UI, building reusable component patterns in React and Tailwind CSS.",
+      "Absorbed team-lead and management responsibilities delegated by my manager: ran team ceremonies and technical design, contributed performance input and led growth conversations for peers, and mentored engineers toward higher quality and seniority.",
+      "Drove a code-quality initiative: introduced and enforced linting rules, and planned dedicated quality cycles across our core functionality.",
+      "Built guided tax tooling that lets founders and employees file 83(b) elections, replacing an error-prone manual process.",
+      "Shipped an admin feature to surface and safely merge duplicate user accounts, giving the team a reliable way to resolve duplication.",
       "Migrated a complex Playwright end-to-end suite to TypeScript, rewrote its documentation, and fixed the custom test-user tool, making the suite faster to maintain and more reliable.",
-      "Shipped an admin feature to surface duplicate user accounts and merge them safely, giving the team a reliable way to resolve duplication.",
     ],
   },
   {
@@ -50,8 +52,8 @@ export const experience: ResumeEntry[] = [
     duties: [
       "Built an AI-aware content editor that let users make bulk or granular edits to AI-generated content, with seamless prompt continuation for iterative AI workflows.",
       "Engineered a file upload and processing system leveraging Gemini AI for document analysis, content extraction, and automated workflow integration.",
-      "Diagnosed and resolved rendering performance issues in the Tables product using the React DevTools Profiler, redesigning component architecture and state management to eliminate flickering and unnecessary re-renders.",
       "Built an admin tool for AI credit allocation and usage tracking to manage costs across enterprise accounts, plus a CSV export system for the Tables and Workflows products.",
+      "Diagnosed and resolved rendering performance issues in the Tables product using the React DevTools Profiler, redesigning component architecture and state management to eliminate flickering and unnecessary re-renders.",
     ],
   },
   {
@@ -76,6 +78,7 @@ export const experience: ResumeEntry[] = [
     end: "2022-11",
     duties: [
       "Led a team of engineers and liaison between product, design, management, and backend team to successfully complete a multi-quarter automation framework migration with feature enhancements.",
+      "Interviewed engineering candidates and contributed to hiring decisions, helping apply a consistent hiring bar for the team.",
       "Authored a conditional logic syntax for the inhouse if/then workflow engine, leveraging proof of concepts and design documentation to engage stakeholders and achieve a consensus across teams.",
       "Developed and extended React component functionality across the organization, allowing other engineers to leverage shared work and reduce cost of implementation.",
     ],

@@ -43,7 +43,8 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
             <Typography variant="h5">(she/they)</Typography>
           </Box>
           <Typography variant="subtitle1">
-            Staff Software Engineer (React/TypeScript/GraphQL/Rails)
+            Staff Front-End Engineer &amp; Team Lead · React · TypeScript ·
+            UI/UX
           </Typography>
           <Typography variant="subtitle1">
             Barcelona, Spain | {yearsOfExperience}+ years of experience
@@ -78,22 +79,19 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
         <Box display="flex" flexDirection="column" gap={1}>
           <Typography variant="h6">Summary</Typography>
           <Typography variant="body2">
-            As a staff software engineer at Pulley, I apply my frontend and
-            teamwork skills to build and improve the core workflows of a fast
-            growing product. I have over {reactYearsOfExperience} years of
-            experience in developing high-quality web applications with React,
-            TypeScript, Node, GraphQL, and Ruby on Rails and over{" "}
-            {yearsOfExperience} years of experience developing web based
-            applications.
+            Staff / lead front-end engineer with {yearsOfExperience}+ years
+            building web applications and the last several leading frontend
+            teams, owning UI architecture, component patterns, and code quality
+            across a domain while staying hands-on shipping complex features. I
+            bring {reactYearsOfExperience}+ years of React and TypeScript
+            expertise paired with strong UX sensibilities. I leverage AI every
+            day as a tool to extend, enhance, and expediate my own abilities.
           </Typography>
           <Typography variant="body2">
-            My primary aim is to deliver software that people <b>use</b> and
-            improves their quality of life or work by making what they do easier
-            and faster to do, with consistent and measurable value in their
-            results. I enjoy collaborating with teams and stakeholders on
-            challenging and complex frontend and full stack issues. I work to
-            deliver solutions that are right for the customer, reliable, and
-            user-friendly.
+            My aim is to help people, whether through the technology I build or
+            by mentoring the engineers and teams I work with. In my next role
+            I'm looking to continue my path into leadership and help shape the
+            technology and direction of the organization.
           </Typography>
         </Box>
       </Grid>
@@ -129,10 +127,12 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Grid>
       <Grid size={12}>
         <Box>
-          <Typography variant="h6">Microsoft Certified Professional</Typography>
+          <Typography variant="h6">Skills</Typography>
           <Typography variant="subtitle1">
-            JavaScript • TypeScript • Apollo GraphQL • React • Agile
-            Methodologies • Jest • Ruby on Rails
+            React • TypeScript • JavaScript • HTML • CSS • Tailwind CSS • Node •
+            Apollo GraphQL • Ruby on Rails • Jest • Playwright • State
+            management • Design systems / component libraries • Figma •
+            Performance optimization • AI-assisted development (Claude) • Agile
           </Typography>
         </Box>
       </Grid>
