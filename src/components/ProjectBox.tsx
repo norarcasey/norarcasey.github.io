@@ -25,8 +25,18 @@ export function ProjectBox({
   description: string;
   image?: string;
 }): React.ReactElement {
+  const isExternal = /^https?:\/\//.test(url);
+  const linkProps = isExternal
+    ? {
+        component: "a" as const,
+        href: url,
+        target: "_blank",
+        rel: "noopener noreferrer",
+      }
+    : { component: Link, to: url };
+
   return (
-    <Link to={url} style={{ textDecoration: "none" }}>
+    <Box {...linkProps} sx={{ textDecoration: "none" }}>
       <Box
         className="project-box"
         sx={{
@@ -75,6 +85,6 @@ export function ProjectBox({
           </Typography>
         </Box>
       </Box>
-    </Link>
+    </Box>
   );
 }

@@ -21,4 +21,21 @@ describe("ProjectBox", () => {
       screen.getByText("Clear the board without detonating a mine.")
     ).toBeInTheDocument();
   });
+
+  it("opens external http(s) urls in a new tab", () => {
+    render(
+      <MemoryRouter>
+        <ProjectBox
+          title="Legends of Noragon"
+          url="https://www.legendsofnoragon.com/"
+          description="An adventure with its own website."
+        />
+      </MemoryRouter>
+    );
+
+    const link = screen.getByRole("link");
+    expect(link).toHaveAttribute("href", "https://www.legendsofnoragon.com/");
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
 });

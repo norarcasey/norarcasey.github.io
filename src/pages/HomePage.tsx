@@ -11,6 +11,7 @@ import ticTacNoraScreen from "../assets/screens/tic-tac-nora.png";
 import anoracondaScreen from "../assets/screens/anoraconda.png";
 import arkanoraScreen from "../assets/screens/arkanora.png";
 import pianoraScreen from "../assets/screens/pianora.png";
+import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.png";
 
 function Home() {
   usePageMeta(
@@ -80,6 +81,12 @@ function Home() {
                 url="/pianora"
                 image={pianoraScreen}
                 description="A playable browser piano — tap or type to make music in your key of choice."
+              />
+              <ProjectBox
+                title="Legends of Noragon"
+                url="https://www.legendsofnoragon.com/"
+                image={legendsOfNoragonScreen}
+                description="A standalone adventure with its own world and website — step into the legends of Noragon."
               />
             </Box>
           </section>
