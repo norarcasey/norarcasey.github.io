@@ -5,6 +5,13 @@ import { About } from "../components/About";
 import { ProjectBox } from "../components/ProjectBox";
 import { usePageMeta } from "../hooks/usePageMeta";
 
+import mineSweeperScreen from "../assets/screens/mine-sweeper.png";
+import starSiegeScreen from "../assets/screens/star-siege.png";
+import ticTacNoraScreen from "../assets/screens/tic-tac-nora.png";
+import anoracondaScreen from "../assets/screens/anoraconda.png";
+import arkanoraScreen from "../assets/screens/arkanora.png";
+import pianoraScreen from "../assets/screens/pianora.png";
+
 function Home() {
   usePageMeta(
     "Nora Casey",
@@ -38,12 +45,42 @@ function Home() {
           <section className="tile">
             <Typography variant="h3">Projects</Typography>
             <Box display="flex" justifyContent="start" flexWrap="wrap" gap={2}>
-              <ProjectBox title="Mine Sweeper" url="/mine-sweeper" />
-              <ProjectBox title="Star Siege" url="/space-invaders" />
-              <ProjectBox title="Tic Tac Nora" url="/tic-tac-nora" />
-              <ProjectBox title="Anoraconda" url="/anoraconda" />
-              <ProjectBox title="Arkanora" url="/arkanora" />
-              <ProjectBox title="Pianora" url="/pianora" />
+              <ProjectBox
+                title="Mine Sweeper"
+                url="/mine-sweeper"
+                image={mineSweeperScreen}
+                description="The classic flag-the-bombs puzzle — clear the board without detonating a mine."
+              />
+              <ProjectBox
+                title="Star Siege"
+                url="/space-invaders"
+                image={starSiegeScreen}
+                description="A retro arcade shooter: blast waves of descending invaders before they reach you."
+              />
+              <ProjectBox
+                title="Tic Tac Nora"
+                url="/tic-tac-nora"
+                image={ticTacNoraScreen}
+                description="A quick, friendly twist on tic-tac-toe — line up three to win."
+              />
+              <ProjectBox
+                title="Anoraconda"
+                url="/anoraconda"
+                image={anoracondaScreen}
+                description="Guide the growing snake to eat and survive without biting your own tail."
+              />
+              <ProjectBox
+                title="Arkanora"
+                url="/arkanora"
+                image={arkanoraScreen}
+                description="A brick-breaker in the Arkanoid tradition — bounce the ball to smash every block."
+              />
+              <ProjectBox
+                title="Pianora"
+                url="/pianora"
+                image={pianoraScreen}
+                description="A playable browser piano — tap or type to make music in your key of choice."
+              />
             </Box>
           </section>
         </Grid>

@@ -104,12 +104,15 @@ h3 {
 }
 
 .project-box {
-  display: flex;
-  justify-content: center;
   align-items: center;
   border: dashed 1px #df6695;
-  text-align: center;
-  padding: 5px;
+  padding: 8px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.project-box:hover {
+  border-color: #4b9ae7;
+  background-color: rgba(75, 154, 231, 0.06);
 }
 
 a.button-link {

@@ -12,7 +12,7 @@ describe("HomePage", () => {
 
     expect(screen.getByText("About me")).toBeInTheDocument();
     expect(screen.getByText("Projects")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Mine Sweeper" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /Mine Sweeper/ })).toHaveAttribute(
       "href",
       "/mine-sweeper"
     );
