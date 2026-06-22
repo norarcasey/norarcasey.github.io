@@ -107,7 +107,9 @@ h3 {
   align-items: center;
   border: dashed 1px #df6695;
   padding: 8px;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .project-box:hover {
