@@ -86,7 +86,7 @@ function Home() {
                 title="Legends of Noragon"
                 url="https://www.legendsofnoragon.com/"
                 image={legendsOfNoragonScreen}
-                description="A standalone adventure with its own world and website — step into the legends of Noragon."
+                description="A dungeon crawler with procedurally generated dungeons — no two descents into Noragon are the same."
               />
             </Box>
           </section>

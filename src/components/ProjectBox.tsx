@@ -55,7 +55,6 @@ export function ProjectBox({
             objectFit: "cover",
             flexShrink: 0,
             borderRadius: 1,
-            border: "1px solid #4b9ae7",
           }}
         />
         <Box
