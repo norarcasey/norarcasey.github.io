@@ -36,8 +36,11 @@ export function About(): React.ReactElement {
         <Typography variant="body1">
           <strong>Beyond the code:</strong>{" "}
           <span>
-            In my free time, I capture the beauty of the world through indoor
-            and outdoor stock photography (see my work on{" "}
+            In my free time, I build crossword puzzles — find them at{" "}
+            <ExternalLink url="https://crucinora.com" label="crucinora.com" />.
+            I'm also an avid traveler, with 20+ countries across four continents
+            explored so far, and I capture the beauty of the world through
+            indoor and outdoor stock photography (see my work on{" "}
             <ExternalLink
               url="https://www.gettyimages.com/search/photographer?photographer=Nora%20Casey&assettype=image&sort=mostpopular&family=creative"
               label="Getty Images"
@@ -47,7 +50,7 @@ export function About(): React.ReactElement {
               url="https://www.barcelonaimprovgroup.com/"
               label="Barcelona Improv Group"
             />
-            , and I recently earned my MS in Computer Science from Georgia Tech.
+            , and I hold an MS in Computer Science from Georgia Tech.
           </span>
         </Typography>
       </Box>
