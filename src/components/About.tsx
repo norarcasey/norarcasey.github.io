@@ -39,18 +39,18 @@ export function About(): React.ReactElement {
             In my free time, I build crossword puzzles you can find at{" "}
             <ExternalLink url="https://crucinora.com" label="crucinora.com" />.
             I'm also an avid traveler, with 20+ countries across four continents
-            explored so far, and I capture the beauty of the world through
-            indoor and outdoor stock photography (see my work on{" "}
+            explored so far, and a photographer (see my work on{" "}
             <ExternalLink
               url="https://www.gettyimages.com/search/photographer?photographer=Nora%20Casey&assettype=image&sort=mostpopular&family=creative"
               label="Getty Images"
             />
-            ). I also take classes and perform at the{" "}
+            ). My latest passion is improv, where I take classes and perform at
+            the{" "}
             <ExternalLink
               url="https://www.barcelonaimprovgroup.com/"
               label="Barcelona Improv Group"
             />
-            , and I hold an MS in Computer Science from Georgia Tech.
+            . I also hold an MS in Computer Science from Georgia Tech.
           </span>
         </Typography>
       </Box>
