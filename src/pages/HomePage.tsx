@@ -12,6 +12,7 @@ import anoracondaScreen from "../assets/screens/anoraconda.png";
 import arkanoraScreen from "../assets/screens/arkanora.png";
 import pianoraScreen from "../assets/screens/pianora.png";
 import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.png";
+import crucinoraScreen from "../assets/screens/crucinora.png";
 
 function Home() {
   usePageMeta(
@@ -87,6 +88,12 @@ function Home() {
                 url="/legends-of-noragon"
                 image={legendsOfNoragonScreen}
                 description="A dungeon crawler with procedurally generated dungeons — no two descents into Noragon are the same."
+              />
+              <ProjectBox
+                title="CruciNora"
+                url="/crucinora"
+                image={crucinoraScreen}
+                description="An AI-assisted crossword construction app — design a grid, auto-fill it, and clue it with Claude's help."
               />
             </Box>
           </section>

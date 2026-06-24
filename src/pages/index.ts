@@ -8,3 +8,4 @@ export { ResumePage } from "./ResumePage";
 export { PianoraPage } from "./PianoraPage";
 export { SpaceInvadersPage } from "./SpaceInvadersPage";
 export { NoragonPage } from "./NoragonPage";
+export { CruciNoraPage } from "./CruciNoraPage";

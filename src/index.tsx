@@ -12,6 +12,7 @@ import {
   ArkanoraPage,
   SpaceInvadersPage,
   NoragonPage,
+  CruciNoraPage,
 } from "./pages";
 
 import "./index.css";
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "legends-of-noragon",
         element: <NoragonPage />,
+      },
+      {
+        path: "crucinora",
+        element: <CruciNoraPage />,
       },
     ],
   },
