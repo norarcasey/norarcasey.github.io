@@ -7,3 +7,4 @@ export { ArkanoraPage } from "./ArkanoraPage";
 export { ResumePage } from "./ResumePage";
 export { PianoraPage } from "./PianoraPage";
 export { SpaceInvadersPage } from "./SpaceInvadersPage";
+export { NoragonPage } from "./NoragonPage";

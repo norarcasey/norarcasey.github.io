@@ -84,7 +84,7 @@ function Home() {
               />
               <ProjectBox
                 title="Legends of Noragon"
-                url="https://www.legendsofnoragon.com/"
+                url="/legends-of-noragon"
                 image={legendsOfNoragonScreen}
                 description="A dungeon crawler with procedurally generated dungeons — no two descents into Noragon are the same."
               />
