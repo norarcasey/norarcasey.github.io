@@ -10,7 +10,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 export function ResumePage(): React.ReactElement {
   usePageMeta(
     "Résumé",
-    "Nora Casey's résumé — experience, education, and skills in frontend and full-stack software engineering."
+    "Nora Casey's résumé: experience, education, and skills in frontend and full-stack software engineering."
   );
 
   const ref = useRef<HTMLDivElement>(null);

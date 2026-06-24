@@ -9,7 +9,7 @@ const PLAY_URL = "https://www.legendsofnoragon.com/";
 export function NoragonPage(): React.ReactElement {
   usePageMeta(
     "Legends of Noragon",
-    "Legends of Noragon — a turn-based, top-down dungeon crawler with procedurally generated dungeons by Nora Casey. Read how it's built, the fun challenges behind it, and play it in your browser."
+    "Legends of Noragon, a turn-based, top-down dungeon crawler with procedurally generated dungeons by Nora Casey. Read how it's built, the fun challenges behind it, and play it in your browser."
   );
 
   return (
@@ -81,7 +81,7 @@ export function NoragonPage(): React.ReactElement {
                 <Typography variant="body1">
                   Legends of Noragon is a turn-based, top-down dungeon crawler
                   built in React and TypeScript. You move the hero one tile at a
-                  time — arrow keys or WASD — bumping foes to fight them,
+                  time (arrow keys or WASD), bumping foes to fight them,
                   clearing each room, and taking the stairs down into a deeper,
                   tougher level. It's an endless descent: slay bats through
                   trolls, disarm traps, trade at the merchant, level up, and see
@@ -98,12 +98,12 @@ export function NoragonPage(): React.ReactElement {
                 </Typography>
                 <Typography variant="body1">
                   The whole game runs on a framework-free engine hook. Every
-                  turn — the hero's step plus every enemy's response — is a
-                  single pure reducer transition, so it behaves identically
-                  under React StrictMode and is easy to drive headlessly in
-                  tests. Each dungeon is built from a seed, so any run can be
-                  replayed exactly. It's bundled with Vite and covered by Vitest
-                  and React Testing Library.
+                  turn (the hero's step plus every enemy's response) is a single
+                  pure reducer transition, so it behaves identically under React
+                  StrictMode and is easy to drive headlessly in tests. Each
+                  dungeon is built from a seed, so any run can be replayed
+                  exactly. It's bundled with Vite and covered by Vitest and
+                  React Testing Library.
                 </Typography>
 
                 <Typography variant="h6" sx={{ color: "#4b9ae7" }}>
@@ -112,7 +112,7 @@ export function NoragonPage(): React.ReactElement {
                 <Typography variant="body1">
                   The fun is in the systems. Procedural generation has to make
                   dungeons that are always connected and beatable while still
-                  feeling irregular — L-shaped maps, cramped closets beside open
+                  feeling irregular: L-shaped maps, cramped closets beside open
                   halls, corridors twisting through the dark. Traps spring on
                   foes too, so a hazard between you and a charging monster
                   becomes a weapon. And the difficulty has to climb honestly:

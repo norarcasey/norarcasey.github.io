@@ -17,7 +17,7 @@ import crucinoraScreen from "../assets/screens/crucinora.png";
 function Home() {
   usePageMeta(
     "Nora Casey",
-    "Nora Casey — software engineer building frontend and full-stack tools that empower people. Browse my projects, résumé, and ways to get in touch."
+    "Nora Casey, software engineer building frontend and full-stack tools that empower people. Browse my projects, résumé, and ways to get in touch."
   );
 
   return (
@@ -51,7 +51,7 @@ function Home() {
                 title="Mine Sweeper"
                 url="/mine-sweeper"
                 image={mineSweeperScreen}
-                description="The classic flag-the-bombs puzzle — clear the board without detonating a mine."
+                description="The classic flag-the-bombs puzzle. Clear the board without detonating a mine."
               />
               <ProjectBox
                 title="Star Siege"
@@ -63,7 +63,7 @@ function Home() {
                 title="Tic Tac Nora"
                 url="/tic-tac-nora"
                 image={ticTacNoraScreen}
-                description="A quick, friendly twist on tic-tac-toe — line up three to win."
+                description="A quick, friendly twist on tic-tac-toe. Line up three to win."
               />
               <ProjectBox
                 title="Anoraconda"
@@ -75,25 +75,25 @@ function Home() {
                 title="Arkanora"
                 url="/arkanora"
                 image={arkanoraScreen}
-                description="A brick-breaker in the Arkanoid tradition — bounce the ball to smash every block."
+                description="A brick-breaker in the Arkanoid tradition. Bounce the ball to smash every block."
               />
               <ProjectBox
                 title="Pianora"
                 url="/pianora"
                 image={pianoraScreen}
-                description="A playable browser piano — tap or type to make music in your key of choice."
+                description="A playable browser piano. Tap or type to make music in your key of choice."
               />
               <ProjectBox
                 title="Legends of Noragon"
                 url="/legends-of-noragon"
                 image={legendsOfNoragonScreen}
-                description="A dungeon crawler with procedurally generated dungeons — no two descents into Noragon are the same."
+                description="A dungeon crawler with procedurally generated dungeons. No two descents into Noragon are the same."
               />
               <ProjectBox
                 title="CruciNora"
                 url="/crucinora"
                 image={crucinoraScreen}
-                description="An AI-assisted crossword construction app — design a grid, auto-fill it, and clue it with Claude's help."
+                description="An AI-assisted crossword construction app. Design a grid, auto-fill it, and clue it with Claude's help."
               />
             </Box>
           </section>

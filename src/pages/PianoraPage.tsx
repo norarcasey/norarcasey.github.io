@@ -10,7 +10,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 export function PianoraPage(): React.ReactElement {
   usePageMeta(
     "Pianora",
-    "Pianora — a playable browser piano built with Tone.js by Nora Casey, published as a React component on npm. Play with your mouse or computer keyboard, record a melody, and play it back."
+    "Pianora, a playable browser piano built with Tone.js by Nora Casey, published as a React component on npm. Play with your mouse or computer keyboard, record a melody, and play it back."
   );
 
   return (
@@ -21,19 +21,19 @@ export function PianoraPage(): React.ReactElement {
     >
       <Typography variant="body1">
         At a previous job, one of our design interview questions was "build a
-        piano." I'd been part of asking it — shadowing interviews and talking
-        through it in the abstract — but I'd never actually built one myself. It
+        piano." I'd been part of asking it (shadowing interviews and talking
+        through it in the abstract), but I'd never actually built one myself. It
         didn't feel fair to ask candidates to design something I hadn't tried in
         practice, so I built it. It turns out there's a lot more to a piano than
         the whiteboard version lets on.
       </Typography>
       <Typography variant="body1">
-        I needed a test track while wiring it up to Tone.js, so I used "Axel F"
-        — and there's still an Easter egg if you hit play without recording any
+        I needed a test track while wiring it up to Tone.js, so I used "Axel F",
+        and there's still an Easter egg if you hit play without recording any
         notes first.
       </Typography>
       <Typography variant="body1">
-        It's now published as a React component on npm — dropped straight into
+        It's now published as a React component on npm, dropped straight into
         this page. Grab it from{" "}
         <ExternalLink
           url="https://www.npmjs.com/package/@norarcasey/pianora"

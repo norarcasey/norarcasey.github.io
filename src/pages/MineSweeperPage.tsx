@@ -77,7 +77,7 @@ export function MineSweeperPage(): React.ReactElement {
       <Typography variant="body1">
         Mine Sweeper started as a whiteboard prompt in a 2018 interview: "build
         the popular Windows game Mine Sweeper." The interview was over in an
-        hour, but the problem stuck with me — so I went home and actually built
+        hour, but the problem stuck with me, so I went home and actually built
         it in React and Redux.
       </Typography>
       <Typography variant="body1">
@@ -91,7 +91,7 @@ export function MineSweeperPage(): React.ReactElement {
         only Beginner is enabled in small screen sizes.
       </Typography>
       <Typography variant="body1">
-        It's published as a React component on npm — dropped straight into this
+        It's published as a React component on npm, dropped straight into this
         page. Grab it from{" "}
         <a
           href="https://www.npmjs.com/package/@norarcasey/mine-sweeper"

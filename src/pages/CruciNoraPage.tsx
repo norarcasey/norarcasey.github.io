@@ -9,7 +9,7 @@ const VISIT_URL = "https://crucinora.com";
 export function CruciNoraPage(): React.ReactElement {
   usePageMeta(
     "CruciNora",
-    "CruciNora — an AI-assisted crossword construction app by Nora Casey. Design an NYT-style grid, auto-fill it with a backtracking solver, and clue it with Claude's help."
+    "CruciNora, an AI-assisted crossword construction app by Nora Casey. Design an NYT-style grid, auto-fill it with a backtracking solver, and clue it with Claude's help."
   );
 
   return (
@@ -82,7 +82,7 @@ export function CruciNoraPage(): React.ReactElement {
                   CruciNora is an AI-assisted crossword construction app. You
                   design an NYT-style grid, enter the long "theme" answers, let
                   a solver auto-fill the rest with valid words, then write a
-                  clue for every entry with Claude's help — accepting the AI's
+                  clue for every entry with Claude's help, accepting the AI's
                   suggestions or overriding them. It's hosted at{" "}
                   <a href={VISIT_URL} target="_blank" rel="noopener noreferrer">
                     crucinora.com
@@ -94,8 +94,8 @@ export function CruciNoraPage(): React.ReactElement {
                   How it's built
                 </Typography>
                 <Typography variant="body1">
-                  The crossword engine is plain TypeScript with no React or DOM
-                  — the grid, the live NYT rule checks, the word list, and the
+                  The crossword engine is plain TypeScript with no React or DOM.
+                  The grid, the live NYT rule checks, the word list, and the
                   solver all live in a framework-free core that's unit-tested in
                   isolation. Around it sits a Vite + React app backed by
                   Supabase (magic-link auth with a single-admin allowlist), and
@@ -109,8 +109,8 @@ export function CruciNoraPage(): React.ReactElement {
                 <Typography variant="body1">
                   The trick is splitting the work by what each tool is actually
                   good at. Filling a grid is a constraint-satisfaction problem
-                  where every crossing must form a valid word — something LLMs
-                  do unreliably — so it's handled by a backtracking solver
+                  where every crossing must form a valid word, something LLMs do
+                  unreliably, so it's handled by a backtracking solver
                   (most-constrained-variable plus forward checking) over a
                   scored word list, which fills a real 15×15 grid in well under
                   a second. Writing clues, which AI is genuinely good at, goes

@@ -36,7 +36,7 @@ export function About(): React.ReactElement {
         <Typography variant="body1">
           <strong>Beyond the code:</strong>{" "}
           <span>
-            In my free time, I build crossword puzzles — find them at{" "}
+            In my free time, I build crossword puzzles you can find at{" "}
             <ExternalLink url="https://crucinora.com" label="crucinora.com" />.
             I'm also an avid traveler, with 20+ countries across four continents
             explored so far, and I capture the beauty of the world through

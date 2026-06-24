@@ -8,7 +8,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 export function SpaceInvadersPage(): React.ReactElement {
   usePageMeta(
     "Star Siege",
-    "Star Siege — a retro arcade space-shooter by Nora Casey, published as a React component on npm and playable in the browser."
+    "Star Siege, a retro arcade space-shooter by Nora Casey, published as a React component on npm and playable in the browser."
   );
 
   return (
@@ -28,13 +28,13 @@ export function SpaceInvadersPage(): React.ReactElement {
       }
     >
       <Typography variant="body1">
-        Star Siege is my take on the classic arcade space-shooter — waves of
+        Star Siege is my take on the classic arcade space-shooter: waves of
         invaders marching down the screen while you fire back from a moving
         ship. I built it in TypeScript to play with game loops and canvas
         rendering in the browser.
       </Typography>
       <Typography variant="body1">
-        It's published as a React component on npm — dropped straight into this
+        It's published as a React component on npm, dropped straight into this
         page. Grab it from{" "}
         <ExternalLink
           url="https://www.npmjs.com/package/@norarcasey/star-siege-nora"
