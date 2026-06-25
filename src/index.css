@@ -105,16 +105,30 @@ h3 {
 
 .project-box {
   align-items: center;
-  border: dashed 1px #df6695;
-  padding: 8px;
-  transition:
-    border-color 0.15s ease,
-    background-color 0.15s ease;
+  padding: 8px 4px 18px;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+/* Underline as an inset pseudo-element so it stops short of the full-width
+   section header above the list. */
+.project-box--divider::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 48px;
+  bottom: 0;
+  margin-right: 15px;
+  border-bottom: dashed 1px #df6695;
+  transition: border-color 0.15s ease;
 }
 
 .project-box:hover {
-  border-color: #4b9ae7;
   background-color: rgba(75, 154, 231, 0.06);
+}
+
+.project-box:hover.project-box--divider::after {
+  border-bottom-color: #4b9ae7;
 }
 
 a.button-link {

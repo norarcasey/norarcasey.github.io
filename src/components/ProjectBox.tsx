@@ -19,11 +19,14 @@ export function ProjectBox({
   url,
   description,
   image = PLACEHOLDER_IMAGE,
+  divider = true,
 }: {
   title: string;
   url: string;
   description: string;
   image?: string;
+  /** Show the dashed bottom border. Turn off for the last item in a list. */
+  divider?: boolean;
 }): React.ReactElement {
   const isExternal = /^https?:\/\//.test(url);
   const linkProps = isExternal
@@ -38,9 +41,10 @@ export function ProjectBox({
   return (
     <Box {...linkProps} sx={{ textDecoration: "none" }}>
       <Box
-        className="project-box"
+        className={divider ? "project-box project-box--divider" : "project-box"}
         sx={{
           width: { xs: "100%", sm: 340 },
+          maxWidth: "100%",
           display: "flex",
           gap: 1.5,
         }}
@@ -77,7 +81,7 @@ export function ProjectBox({
           <Typography
             sx={{
               typography: "body2",
-              color: "#c7ccd4",
+              color: "#5a626d",
             }}
           >
             {description}
