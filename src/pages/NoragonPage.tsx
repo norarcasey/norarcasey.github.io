@@ -90,8 +90,17 @@ export function NoragonPage(): React.ReactElement {
                   trolls, disarm traps, trade at the merchant, level up, and see
                   how far down you can get before you die. It lives on its own
                   at{" "}
-                  <a href={PLAY_URL} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={PLAY_URL}
+                    className="inline-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     legendsofnoragon.com
+                    <span className="visually-hidden">
+                      {" "}
+                      (opens in a new tab)
+                    </span>
                   </a>
                   .
                 </Typography>

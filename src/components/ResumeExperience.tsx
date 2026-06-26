@@ -18,13 +18,17 @@ export function ResumeExperience({
 }: ResumeExperienceProps): React.ReactElement {
   return (
     <Box>
-      <Typography variant="subtitle1">
+      <Typography variant="subtitle1" component="h4">
         <strong>
           {title} | {company}
         </strong>
       </Typography>
-      <Typography variant="caption">{companyDescription}</Typography>
-      <Typography variant="subtitle2">{employmentDate}</Typography>
+      <Typography variant="caption" component="p">
+        {companyDescription}
+      </Typography>
+      <Typography variant="subtitle2" component="p">
+        {employmentDate}
+      </Typography>
       <List sx={{ listStyleType: "disc", pl: 4 }}>
         {duties.map((duty, index) => (
           <ListItem

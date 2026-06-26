@@ -59,6 +59,7 @@ export function Root(): React.ReactElement {
             <Typography
               component="h1"
               className="root-title"
+              aria-label="Nora Casey"
               sx={{
                 typography: { sm: "h2", xs: "h3" },
                 letterSpacing: 0.01,

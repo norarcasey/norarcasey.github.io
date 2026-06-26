@@ -14,10 +14,10 @@ export function EducationItem({
 }: EducationItemProps): React.ReactElement {
   return (
     <Box sx={{ ml: 5, mb: 1 }}>
-      <Typography variant="subtitle1">
+      <Typography variant="subtitle1" component="h4">
         {school} | {graduationDate}
       </Typography>
-      <Typography variant="subtitle2">
+      <Typography variant="subtitle2" component="p">
         <strong>{degree}</strong>
       </Typography>
     </Box>

@@ -46,14 +46,14 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
               (she/they)
             </Typography>
           </Box>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle1" component="p">
             Staff Front-End Engineer &amp; Team Lead · React · TypeScript ·
             UI/UX
           </Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle1" component="p">
             Barcelona, Spain | {yearsOfExperience}+ years of experience
           </Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle1" component="p">
             US &amp; EU work authorized
           </Typography>
           <Box
@@ -140,7 +140,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
           <Typography variant="h6" component="h3">
             Skills
           </Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle1" component="p">
             React • TypeScript • JavaScript • HTML • CSS • Tailwind CSS • Node •
             Apollo GraphQL • Ruby on Rails • Jest • Playwright • State
             management • Design systems / component libraries • Figma •
@@ -153,7 +153,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
           <Typography variant="h6" component="h3">
             Languages
           </Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle1" component="p">
             English (Native) • Spanish (Limited Working)
           </Typography>
         </Box>
