@@ -13,10 +13,10 @@ import {
   SpaceInvadersPage,
   NoragonPage,
   CruciNoraPage,
+  PianoraPage,
 } from "./pages";
 
 import "./index.css";
-import { PianoraPage } from "./pages/PianoraPage";
 
 const router = createBrowserRouter([
   {

@@ -68,7 +68,7 @@ export function Root(): React.ReactElement {
             </Typography>
           </Link>
         </Box>
-        <Box display="flex" justifyContent="end" gap={2} alignItems="center">
+        <Box display="flex" justifyContent="end" alignItems="center">
           <Link to="/resume" className="header-action" aria-label="Résumé">
             <ResumeIcon />
           </Link>
