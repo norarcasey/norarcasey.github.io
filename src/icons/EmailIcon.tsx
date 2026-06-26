@@ -4,6 +4,8 @@ export function EmailIcon({ color }: { color?: string }): React.ReactElement {
   const fill = color || "black";
   return (
     <svg
+      aria-hidden="true"
+      focusable={false}
       fill={fill}
       height="30px"
       width="30px"

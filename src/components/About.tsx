@@ -6,7 +6,9 @@ import { ExternalLink } from "./ExternalLink";
 export function About(): React.ReactElement {
   return (
     <section className="tile">
-      <Typography variant="h3">About me</Typography>
+      <Typography variant="h3" component="h2">
+        About me
+      </Typography>
 
       <Box display="flex" flexDirection="column" gap={2}>
         <Typography variant="body1">

@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
 import { usePageMeta } from "../hooks/usePageMeta";
+import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
 import crucinoraScreen from "../assets/screens/crucinora.png";
 
 const VISIT_URL = "https://crucinora.com";
@@ -17,7 +18,9 @@ export function CruciNoraPage(): React.ReactElement {
       <Box sx={{ width: { xs: "100%", lg: "auto" }, maxWidth: "100%" }}>
         {/* Header spanning both columns */}
         <Box className="tile" sx={{ mb: 0, pb: 0 }}>
-          <Typography variant="h3">CruciNora</Typography>
+          <Typography variant="h3" component="h2">
+            CruciNora
+          </Typography>
         </Box>
 
         {/* Body: screenshot + visit link beside the write-up on large screens */}
@@ -59,8 +62,8 @@ export function CruciNoraPage(): React.ReactElement {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                backgroundColor: "#df6695",
-                "&:hover": { backgroundColor: "#c7507e" },
+                backgroundColor: ACCENT_PINK,
+                "&:hover": { backgroundColor: ACCENT_PINK_HOVER },
                 fontWeight: 600,
               }}
             >
@@ -84,13 +87,26 @@ export function CruciNoraPage(): React.ReactElement {
                   a solver auto-fill the rest with valid words, then write a
                   clue for every entry with Claude's help, accepting the AI's
                   suggestions or overriding them. It's hosted at{" "}
-                  <a href={VISIT_URL} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={VISIT_URL}
+                    className="inline-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     crucinora.com
+                    <span className="visually-hidden">
+                      {" "}
+                      (opens in a new tab)
+                    </span>
                   </a>
                   .
                 </Typography>
 
-                <Typography variant="h6" sx={{ color: "#4b9ae7" }}>
+                <Typography
+                  variant="h6"
+                  component="h3"
+                  sx={{ color: ACCENT_BLUE }}
+                >
                   How it's built
                 </Typography>
                 <Typography variant="body1">
@@ -103,7 +119,11 @@ export function CruciNoraPage(): React.ReactElement {
                   never reaches the browser.
                 </Typography>
 
-                <Typography variant="h6" sx={{ color: "#4b9ae7" }}>
+                <Typography
+                  variant="h6"
+                  component="h3"
+                  sx={{ color: ACCENT_BLUE }}
+                >
                   Fun challenges
                 </Typography>
                 <Typography variant="body1">

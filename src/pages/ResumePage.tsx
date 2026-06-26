@@ -21,13 +21,12 @@ export function ResumePage(): React.ReactElement {
   return (
     <Box>
       <Box textAlign="right" mr={2}>
-        <Button variant="text" onClick={() => handlePrint()}>
-          <FontAwesomeIcon
-            aria-label="print resume"
-            icon={faPrint}
-            size="3x"
-            color="black"
-          />
+        <Button
+          variant="text"
+          onClick={() => handlePrint()}
+          aria-label="Print résumé"
+        >
+          <FontAwesomeIcon icon={faPrint} size="3x" color="black" />
         </Button>
       </Box>
       <Resume ref={ref} />

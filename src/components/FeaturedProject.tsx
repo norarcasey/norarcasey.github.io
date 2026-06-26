@@ -3,6 +3,12 @@ import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import { HOME_BAND_MAX_WIDTH } from "./Hero";
+import {
+  ACCENT_BLUE,
+  ACCENT_PINK,
+  ACCENT_PINK_HOVER,
+  DECORATIVE_PINK,
+} from "../colors";
 import crucinoraScreen from "../assets/screens/crucinora.png";
 
 const VISIT_URL = "https://crucinora.com";
@@ -19,7 +25,9 @@ export function FeaturedProject(): React.ReactElement {
       className="tile"
       sx={{ width: "100%", maxWidth: HOME_BAND_MAX_WIDTH, mx: "auto" }}
     >
-      <Typography variant="h3">Latest project</Typography>
+      <Typography variant="h3" component="h2">
+        Latest side project
+      </Typography>
 
       <Box
         sx={{
@@ -41,7 +49,7 @@ export function FeaturedProject(): React.ReactElement {
             maxWidth: "100%",
             borderRadius: 1,
             overflow: "hidden",
-            border: "dashed 1px #df6695",
+            border: `dashed 1px ${ACCENT_BLUE}`,
           }}
         >
           <Box
@@ -54,7 +62,11 @@ export function FeaturedProject(): React.ReactElement {
 
         {/* Pitch */}
         <Box display="flex" flexDirection="column" gap={1.5}>
-          <Typography variant="h4" sx={{ color: "#4b9ae7" }}>
+          <Typography
+            variant="h4"
+            component="h3"
+            sx={{ color: ACCENT_BLUE, borderBottom: "none" }}
+          >
             CruciNora
           </Typography>
           <Typography variant="body1" sx={{ color: "#4a4f57" }}>
@@ -72,8 +84,8 @@ export function FeaturedProject(): React.ReactElement {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                backgroundColor: "#df6695",
-                "&:hover": { backgroundColor: "#c7507e" },
+                backgroundColor: ACCENT_PINK,
+                "&:hover": { backgroundColor: ACCENT_PINK_HOVER },
                 fontWeight: 600,
               }}
             >
@@ -84,11 +96,11 @@ export function FeaturedProject(): React.ReactElement {
               component={Link}
               to="/crucinora"
               sx={{
-                color: "#4b9ae7",
-                borderColor: "#4b9ae7",
+                color: ACCENT_BLUE,
+                borderColor: ACCENT_BLUE,
                 "&:hover": {
-                  borderColor: "#4b9ae7",
-                  backgroundColor: "rgba(75, 154, 231, 0.08)",
+                  borderColor: ACCENT_BLUE,
+                  backgroundColor: "rgba(31, 120, 194, 0.08)",
                 },
                 fontWeight: 600,
               }}

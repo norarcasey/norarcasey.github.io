@@ -3,6 +3,8 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
+import { ACCENT_BLUE } from "../colors";
+
 // Hardcoded placeholder until real screenshots are dropped in.
 const PLACEHOLDER_IMAGE =
   "data:image/svg+xml;charset=UTF-8," +
@@ -73,7 +75,7 @@ export function ProjectBox({
           <Typography
             sx={{
               typography: { sm: "h6", md: "h5" },
-              color: "#4b9ae7",
+              color: ACCENT_BLUE,
             }}
           >
             {title}

@@ -5,15 +5,16 @@ describe("ExternalLink", () => {
   it("renders the label and points at the url", () => {
     render(<ExternalLink url="https://example.com" label="My Site" />);
 
-    const link = screen.getByRole("link", { name: "My Site" });
+    const link = screen.getByRole("link", { name: /My Site/ });
     expect(link).toHaveAttribute("href", "https://example.com");
   });
 
-  it("opens in a new tab safely", () => {
+  it("opens in a new tab safely, and announces it", () => {
     render(<ExternalLink url="https://example.com" label="My Site" />);
 
-    const link = screen.getByRole("link", { name: "My Site" });
+    const link = screen.getByRole("link", { name: /My Site/ });
     expect(link).toHaveAttribute("target", "_blank");
-    expect(link).toHaveAttribute("rel", "noreferrer");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    expect(link).toHaveAccessibleName(/opens in a new tab/);
   });
 });

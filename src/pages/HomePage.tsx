@@ -7,6 +7,12 @@ import { Hero, HOME_BAND_MAX_WIDTH } from "../components/Hero";
 import { FeaturedProject } from "../components/FeaturedProject";
 import { ProjectBox } from "../components/ProjectBox";
 import { usePageMeta } from "../hooks/usePageMeta";
+import {
+  ACCENT_BLUE,
+  ACCENT_PINK,
+  ACCENT_PINK_HOVER,
+  DECORATIVE_PINK,
+} from "../colors";
 
 import mineSweeperScreen from "../assets/screens/mine-sweeper.png";
 import starSiegeScreen from "../assets/screens/star-siege.png";
@@ -30,10 +36,10 @@ function Home() {
         alignItems="stretch"
         sx={{ width: "100%", maxWidth: HOME_BAND_MAX_WIDTH, mx: "auto" }}
       >
-        <Grid size={{ xs: 12, md: 7 }} sx={{ display: "flex" }}>
+        <Grid size={{ xs: 12, md: 8 }} sx={{ display: "flex" }}>
           <Hero />
         </Grid>
-        <Grid size={{ xs: 12, md: 5 }} sx={{ display: "flex" }}>
+        <Grid size={{ xs: 12, md: 4 }} sx={{ display: "flex" }}>
           <Box
             component="section"
             className="tile"
@@ -41,11 +47,14 @@ function Home() {
               width: "100%",
               display: "flex",
               flexDirection: "column",
-              borderLeft: { md: "dashed 1px #df6695" },
+              borderLeft: { md: `dashed 1px ${DECORATIVE_PINK}` },
               pl: { md: 4 },
+              justifyContent: "center",
             }}
           >
-            <Typography variant="h3">Let&apos;s work together</Typography>
+            <Typography variant="h3" component="h2">
+              Let&apos;s work together
+            </Typography>
             <Typography variant="body1" sx={{ color: "#4a4f57", mt: 2, mb: 2 }}>
               I&apos;m looking for my next staff or leadership role, somewhere I
               can shape the technology and direction of the team while staying
@@ -58,8 +67,8 @@ function Home() {
                 component={Link}
                 to="/resume"
                 sx={{
-                  backgroundColor: "#df6695",
-                  "&:hover": { backgroundColor: "#c7507e" },
+                  backgroundColor: ACCENT_PINK,
+                  "&:hover": { backgroundColor: ACCENT_PINK_HOVER },
                   fontWeight: 600,
                 }}
               >
@@ -70,11 +79,11 @@ function Home() {
                 component={Link}
                 to="/contact-me"
                 sx={{
-                  color: "#4b9ae7",
-                  borderColor: "#4b9ae7",
+                  color: ACCENT_BLUE,
+                  borderColor: ACCENT_BLUE,
                   "&:hover": {
-                    borderColor: "#4b9ae7",
-                    backgroundColor: "rgba(75, 154, 231, 0.08)",
+                    borderColor: ACCENT_BLUE,
+                    backgroundColor: "rgba(31, 120, 194, 0.08)",
                   },
                   fontWeight: 600,
                 }}
@@ -91,15 +100,23 @@ function Home() {
       {/* About me (2) beside projects (1) */}
       <Grid
         container
-        sx={{ width: "100%", maxWidth: HOME_BAND_MAX_WIDTH, mx: "auto" }}
+        sx={{
+          width: "100%",
+          maxWidth: HOME_BAND_MAX_WIDTH,
+          mx: "auto",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
       >
-        <Grid size={{ xs: 12, md: 8 }}>
+        <Grid size={{ xs: 12, md: 7 }}>
           <About />
         </Grid>
 
         <Grid size={{ xs: 12, md: 4 }}>
           <section className="tile">
-            <Typography variant="h3">More projects</Typography>
+            <Typography variant="h3" component="h2">
+              More projects
+            </Typography>
             <Box
               display="flex"
               justifyContent="start"
@@ -112,6 +129,12 @@ function Home() {
                 url="/legends-of-noragon"
                 image={legendsOfNoragonScreen}
                 description="A dungeon crawler with procedurally generated dungeons. No two descents into Noragon are the same."
+              />
+              <ProjectBox
+                title="Mine Sweeper"
+                url="/mine-sweeper"
+                image={mineSweeperScreen}
+                description="The classic flag-the-bombs puzzle. Clear the board without detonating a mine."
               />
               <ProjectBox
                 title="Pianora"
@@ -131,12 +154,7 @@ function Home() {
                 image={anoracondaScreen}
                 description="Guide the growing snake to eat and survive without biting your own tail."
               />
-              <ProjectBox
-                title="Tic Tac Nora"
-                url="/tic-tac-nora"
-                image={ticTacNoraScreen}
-                description="A quick, friendly twist on tic-tac-toe. Line up three to win."
-              />
+
               <ProjectBox
                 title="Star Siege"
                 url="/space-invaders"
@@ -144,10 +162,10 @@ function Home() {
                 description="A retro arcade shooter: blast waves of descending invaders before they reach you."
               />
               <ProjectBox
-                title="Mine Sweeper"
-                url="/mine-sweeper"
-                image={mineSweeperScreen}
-                description="The classic flag-the-bombs puzzle. Clear the board without detonating a mine."
+                title="Tic Tac Nora"
+                url="/tic-tac-nora"
+                image={ticTacNoraScreen}
+                description="A quick, friendly twist on tic-tac-toe. Line up three to win."
                 divider={false}
               />
             </Box>

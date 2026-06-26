@@ -39,8 +39,12 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
             alignItems="center"
             gap={1}
           >
-            <Typography variant="h4">Nora Casey</Typography>
-            <Typography variant="h5">(she/they)</Typography>
+            <Typography variant="h4" component="h2">
+              Nora Casey
+            </Typography>
+            <Typography variant="h5" component="p">
+              (she/they)
+            </Typography>
           </Box>
           <Typography variant="subtitle1">
             Staff Front-End Engineer &amp; Team Lead · React · TypeScript ·
@@ -77,7 +81,9 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Grid>
       <Grid>
         <Box display="flex" flexDirection="column" gap={1}>
-          <Typography variant="h6">Summary</Typography>
+          <Typography variant="h6" component="h3">
+            Summary
+          </Typography>
           <Typography variant="body2">
             Staff / lead front-end engineer with {yearsOfExperience}+ years
             building web applications and the last several leading frontend
@@ -98,7 +104,9 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       <Grid>
         {/* TODO: Add Icons for companies */}
         <Box>
-          <Typography variant="h6">Experience</Typography>
+          <Typography variant="h6" component="h3">
+            Experience
+          </Typography>
           {experience.map((entry, index) => (
             <ResumeExperience
               key={`${entry.company}-${entry.title}-${index}`}
@@ -114,7 +122,9 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       <Grid>
         {/* TODO: Add Icons for schools */}
         <Box>
-          <Typography variant="h6">Education</Typography>
+          <Typography variant="h6" component="h3">
+            Education
+          </Typography>
           {education.map((entry) => (
             <EducationItem
               key={entry.school}
@@ -127,7 +137,9 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Grid>
       <Grid size={12}>
         <Box>
-          <Typography variant="h6">Skills</Typography>
+          <Typography variant="h6" component="h3">
+            Skills
+          </Typography>
           <Typography variant="subtitle1">
             React • TypeScript • JavaScript • HTML • CSS • Tailwind CSS • Node •
             Apollo GraphQL • Ruby on Rails • Jest • Playwright • State
@@ -138,7 +150,9 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Grid>
       <Grid size={12}>
         <Box>
-          <Typography variant="h6">Languages</Typography>
+          <Typography variant="h6" component="h3">
+            Languages
+          </Typography>
           <Typography variant="subtitle1">
             English (Native) • Spanish (Limited Working)
           </Typography>

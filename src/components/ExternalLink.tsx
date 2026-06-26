@@ -8,8 +8,14 @@ export function ExternalLink({
   label: string;
 }): React.ReactElement {
   return (
-    <a href={url} target="_blank" rel="noreferrer">
+    <a
+      href={url}
+      className="inline-link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       {label}
+      <span className="visually-hidden"> (opens in a new tab)</span>
     </a>
   );
 }

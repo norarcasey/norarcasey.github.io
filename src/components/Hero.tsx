@@ -9,12 +9,13 @@ import {
   getReactYearsOfExperience,
   getYearsOfExperience,
 } from "../data/resume";
+import { ACCENT_PINK, DECORATIVE_PINK } from "../colors";
 
 function Highlight({ label }: { label: string }): React.ReactElement {
   return (
     <Box
       sx={{
-        border: "dashed 1px #df6695",
+        border: `dashed 1px ${DECORATIVE_PINK}`,
         borderRadius: 1,
         px: 1.25,
         py: 0.5,
@@ -46,12 +47,13 @@ export function Hero(): React.ReactElement {
     >
       <Typography
         variant="overline"
-        sx={{ color: "#df6695", letterSpacing: 1.5, fontWeight: 600 }}
+        sx={{ color: ACCENT_PINK, letterSpacing: 1.5, fontWeight: 600 }}
       >
         Staff Front-End Engineer &amp; Team Lead
       </Typography>
       <Typography
         variant="h6"
+        component="p"
         sx={{ color: "#363435", fontWeight: 600, mt: 0.5, mb: 1.5 }}
       >
         Building products that empower people and leading the teams that ship

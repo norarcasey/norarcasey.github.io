@@ -8,7 +8,7 @@ describe("ContactMePage", () => {
     expect(
       screen.getByRole("link", { name: "noracasey@duck.com" })
     ).toHaveAttribute("href", "mailto:noracasey@duck.com");
-    expect(screen.getByRole("link", { name: "LinkedIn" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "GitHub" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /LinkedIn/ })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /GitHub/ })).toBeInTheDocument();
   });
 });

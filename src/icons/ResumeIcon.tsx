@@ -5,6 +5,8 @@ export function ResumeIcon({ color }: { color?: string }): React.ReactElement {
 
   return (
     <svg
+      aria-hidden="true"
+      focusable={false}
       fill="#000000"
       width="30px"
       height="30px"

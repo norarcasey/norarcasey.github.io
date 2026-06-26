@@ -4,6 +4,8 @@ export function GithubIcon({ color }: { color?: string }): React.ReactElement {
   const fill = color || "black";
   return (
     <svg
+      aria-hidden="true"
+      focusable={false}
       width="30px"
       height="30px"
       viewBox="0 0 20 20"

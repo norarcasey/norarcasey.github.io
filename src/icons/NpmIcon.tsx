@@ -4,6 +4,8 @@ export function NpmIcon({ color }: { color?: string }): React.ReactElement {
   const fill = color || "black";
   return (
     <svg
+      aria-hidden="true"
+      focusable={false}
       fill={fill}
       style={{ display: "block" }}
       width="62px"

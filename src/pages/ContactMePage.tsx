@@ -22,7 +22,9 @@ export function ContactMePage(): React.ReactElement {
       >
         <section className="tile">
           <Box display="flex" flexDirection="column" gap={2}>
-            <Typography variant="h3">Contact Me</Typography>
+            <Typography variant="h3" component="h2">
+              Contact Me
+            </Typography>
             <Typography variant="body1">
               The best way to reach me is by email, or find me on the links
               below.
@@ -30,7 +32,9 @@ export function ContactMePage(): React.ReactElement {
             <Box display="flex" flexDirection="column" gap={1}>
               <Typography variant="body1">
                 <FontAwesomeIcon icon={faEnvelope} />{" "}
-                <a href="mailto:noracasey@duck.com">noracasey@duck.com</a>
+                <a className="inline-link" href="mailto:noracasey@duck.com">
+                  noracasey@duck.com
+                </a>
               </Typography>
               <Typography variant="body1">
                 <FontAwesomeIcon icon={faLink} />{" "}

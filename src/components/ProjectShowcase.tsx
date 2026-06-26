@@ -43,7 +43,9 @@ export function ProjectShowcase({
       <Box sx={{ width: { xs: "100%", lg: "auto" }, maxWidth: "100%" }}>
         {/* Header spanning both columns */}
         <Box className="tile" sx={{ mb: 0, pb: 0 }}>
-          <Typography variant="h3">{title}</Typography>
+          <Typography variant="h3" component="h2">
+            {title}
+          </Typography>
         </Box>
 
         {/* Body: slim description beside the game on large screens */}

@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
 import { usePageMeta } from "../hooks/usePageMeta";
+import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
 import noragonScreen from "../assets/screens/legends-of-noragon.png";
 
 const PLAY_URL = "https://www.legendsofnoragon.com/";
@@ -17,7 +18,9 @@ export function NoragonPage(): React.ReactElement {
       <Box sx={{ width: { xs: "100%", lg: "auto" }, maxWidth: "100%" }}>
         {/* Header spanning both columns */}
         <Box className="tile" sx={{ mb: 0, pb: 0 }}>
-          <Typography variant="h3">Legends of Noragon</Typography>
+          <Typography variant="h3" component="h2">
+            Legends of Noragon
+          </Typography>
         </Box>
 
         {/* Body: screenshot + play link beside the write-up on large screens */}
@@ -59,8 +62,8 @@ export function NoragonPage(): React.ReactElement {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                backgroundColor: "#df6695",
-                "&:hover": { backgroundColor: "#c7507e" },
+                backgroundColor: ACCENT_PINK,
+                "&:hover": { backgroundColor: ACCENT_PINK_HOVER },
                 fontWeight: 600,
               }}
             >
@@ -93,7 +96,11 @@ export function NoragonPage(): React.ReactElement {
                   .
                 </Typography>
 
-                <Typography variant="h6" sx={{ color: "#4b9ae7" }}>
+                <Typography
+                  variant="h6"
+                  component="h3"
+                  sx={{ color: ACCENT_BLUE }}
+                >
                   How it's built
                 </Typography>
                 <Typography variant="body1">
@@ -106,7 +113,11 @@ export function NoragonPage(): React.ReactElement {
                   React Testing Library.
                 </Typography>
 
-                <Typography variant="h6" sx={{ color: "#4b9ae7" }}>
+                <Typography
+                  variant="h6"
+                  component="h3"
+                  sx={{ color: ACCENT_BLUE }}
+                >
                   Fun challenges
                 </Typography>
                 <Typography variant="body1">
