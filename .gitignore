@@ -7,6 +7,10 @@
 
 # testing
 /coverage
+/test-results
+/playwright-report
+/blob-report
+/.playwright
 
 # production (built by CI and published to GitHub Pages via Actions)
 /build

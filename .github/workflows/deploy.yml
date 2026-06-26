@@ -39,6 +39,12 @@ jobs:
       - name: Test
         run: yarn test
 
+      - name: Install Playwright browser
+        run: yarn playwright install --with-deps chromium
+
+      - name: End-to-end accessibility scan
+        run: yarn test:e2e
+
       - name: Build
         run: yarn build
 
