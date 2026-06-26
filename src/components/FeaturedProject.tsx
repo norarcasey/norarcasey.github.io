@@ -3,12 +3,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import { HOME_BAND_MAX_WIDTH } from "./Hero";
-import {
-  ACCENT_BLUE,
-  ACCENT_PINK,
-  ACCENT_PINK_HOVER,
-  DECORATIVE_PINK,
-} from "../colors";
+import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
 import crucinoraScreen from "../assets/screens/crucinora.png";
 
 const VISIT_URL = "https://crucinora.com";
