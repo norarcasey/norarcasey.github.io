@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { MineSweeper, Difficulty } from "@norarcasey/mine-sweeper";
 
 import { ProjectShowcase } from "../components/ProjectShowcase";
+import { StackFacts } from "../components/StackFacts";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export function MineSweeperPage(): React.ReactElement {
@@ -73,6 +74,37 @@ export function MineSweeperPage(): React.ReactElement {
       npmPackage="@norarcasey/mine-sweeper"
       gameWidth="fit-content"
       game={game}
+      details={
+        <StackFacts
+          facts={[
+            {
+              label: "Game core",
+              value:
+                "Board and scoreboard state live in React context, with generation, the cascading reveal of empty cells, flagging, and win/loss detection factored into helpers beside it so the components stay presentational. Difficulty is a single prop that drives board size and mine count.",
+            },
+            {
+              label: "Documented",
+              value:
+                "Storybook drives the component in isolation across difficulties and board states, and serves as the reference for anyone installing it.",
+            },
+            {
+              label: "Tested",
+              value:
+                "Vitest and React Testing Library with coverage reporting, run by GitHub Actions on every push and pull request alongside lint and a typecheck.",
+            },
+            {
+              label: "Released",
+              value:
+                "Published to npm behind a prepublishOnly gate that runs lint, typecheck, tests, and the library build, so a broken build cannot reach the registry.",
+            },
+            {
+              label: "Running here",
+              value:
+                "This site installs the package from npm and renders it on this page, so what you are playing is the published artifact.",
+            },
+          ]}
+        />
+      }
     >
       <Typography variant="body1">
         Mine Sweeper started as a whiteboard prompt in a 2018 interview: "build

@@ -6,6 +6,7 @@ import { About } from "../components/About";
 import { Hero, HOME_BAND_MAX_WIDTH } from "../components/Hero";
 import { FeaturedProject } from "../components/FeaturedProject";
 import { ProjectBox } from "../components/ProjectBox";
+import { SkillsMatrix } from "../components/SkillsMatrix";
 import { usePageMeta } from "../hooks/usePageMeta";
 import {
   ACCENT_BLUE,
@@ -25,7 +26,7 @@ import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.png";
 function Home() {
   usePageMeta(
     "Nora Casey",
-    "Nora Casey, software engineer building frontend and full-stack tools that empower people. Browse my projects, résumé, and ways to get in touch."
+    "Nora Casey, full-stack software engineer and team lead. React and TypeScript front ends, Node, Rails and .NET services, Postgres, and the CI/CD that ships them. Browse my projects, résumé, and ways to get in touch."
   );
 
   return (
@@ -57,9 +58,9 @@ function Home() {
             </Typography>
             <Typography variant="body1" sx={{ color: "#4a4f57", mt: 2, mb: 2 }}>
               I&apos;m looking for my next staff or leadership role, somewhere I
-              can shape the technology and direction of the team while staying
-              close to the code. If that sounds like a fit, I&apos;d love to
-              talk.
+              can own problems end to end and shape the technology and direction
+              of the team while staying close to the code. If that sounds like a
+              fit, I&apos;d love to talk.
             </Typography>
             <Box display="flex" flexWrap="wrap" gap={1.5} mt={1}>
               <Button
@@ -94,6 +95,11 @@ function Home() {
           </Box>
         </Grid>
       </Grid>
+
+      {/* Full-stack range, layer by layer, before the project spotlight */}
+      <Box sx={{ width: "100%", maxWidth: HOME_BAND_MAX_WIDTH, mx: "auto" }}>
+        <SkillsMatrix intro="I have shipped production work at each of these layers. Each project page has a write-up of how that project is built." />
+      </Box>
 
       <FeaturedProject />
 

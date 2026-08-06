@@ -19,6 +19,12 @@ interface ProjectShowcaseProps {
   gameWidth?: number | string;
   /** The descriptive copy shown under the npm badge. */
   children: React.ReactNode;
+  /**
+   * Full-width content placed below both columns, spanning the description and
+   * the game together. The engineering write-up lives here rather than in the
+   * narrow description column, where long technical prose is hard to read.
+   */
+  details?: React.ReactNode;
 }
 
 /**
@@ -34,6 +40,7 @@ export function ProjectShowcase({
   hideGameOnMobile = false,
   gameWidth = 560,
   children,
+  details,
 }: ProjectShowcaseProps): React.ReactElement {
   const shortName = npmPackage.replace(/^@[^/]+\//, "");
 
@@ -100,6 +107,17 @@ export function ProjectShowcase({
             {game}
           </Box>
         </Box>
+
+        {/* Full-width band under both columns */}
+        {details ? (
+          <Box
+            component="section"
+            className="tile"
+            sx={{ width: "100%", boxSizing: "border-box" }}
+          >
+            {details}
+          </Box>
+        ) : null}
       </Box>
     </Box>
   );

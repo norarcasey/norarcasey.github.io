@@ -5,6 +5,8 @@ import "@norarcasey/pianora/style.css";
 
 import { ExternalLink } from "../components/ExternalLink";
 import { ProjectShowcase } from "../components/ProjectShowcase";
+import { StackFacts } from "../components/StackFacts";
+import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export function PianoraPage(): React.ReactElement {
@@ -18,6 +20,23 @@ export function PianoraPage(): React.ReactElement {
       title="Pianora"
       npmPackage="@norarcasey/pianora"
       game={<Pianora title={null} />}
+      details={
+        <StackFacts
+          facts={[
+            {
+              label: "Audio",
+              value:
+                "Tone.js sits on the Web Audio API for scheduling and synthesis, so notes are timed against the audio clock. Browsers only allow audio after a user gesture, so the synth is created on the first interaction.",
+            },
+            {
+              label: "Input",
+              value:
+                "Mouse, touch, and computer keyboard all resolve to the same note events, which keeps recording and playback independent of how a note was triggered.",
+            },
+            ...COMPONENT_LIBRARY_FACTS,
+          ]}
+        />
+      }
     >
       <Typography variant="body1">
         At a previous job, one of our design interview questions was "build a

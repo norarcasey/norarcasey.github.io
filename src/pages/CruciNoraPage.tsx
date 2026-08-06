@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
+import { StackFacts } from "../components/StackFacts";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
 import crucinoraScreen from "../assets/screens/crucinora.png";
@@ -140,6 +141,50 @@ export function CruciNoraPage(): React.ReactElement {
               </Box>
             </section>
           </Box>
+        </Box>
+
+        {/* Full-width band under the screenshot and the write-up: the
+            engineering detail needs the room to read as prose. */}
+        <Box
+          component="section"
+          className="tile"
+          sx={{ width: "100%", boxSizing: "border-box" }}
+        >
+          <StackFacts
+            title="The stack, layer by layer"
+            facts={[
+              {
+                label: "Domain core",
+                value:
+                  "Plain TypeScript with no React and no DOM: the grid model, the live NYT rule checks (symmetry, word length, connectivity), the scored word list, and the backtracking solver. Unit-tested in isolation, so the rules can change without touching a component.",
+              },
+              {
+                label: "Client",
+                value:
+                  "A Vite and React single-page app that owns editing state and renders the core's output. Grid fill happens locally, so there is no network round trip between pressing fill and seeing a complete puzzle.",
+              },
+              {
+                label: "Auth",
+                value:
+                  "Supabase magic-link sign-in: no passwords are stored or handled by the app, and the session token travels with every request.",
+              },
+              {
+                label: "Data",
+                value:
+                  "Postgres with row-level security policies and a single-admin allowlist, so authorization is enforced in the database. Schema changes ship as numbered SQL migrations.",
+              },
+              {
+                label: "AI",
+                value:
+                  "A Vercel serverless function proxies Claude: it holds the API key server-side, shapes the prompt, and returns clue suggestions. The key never reaches the browser or the bundle.",
+              },
+              {
+                label: "Delivery",
+                value:
+                  "GitHub Actions gates every push on formatting, lint, types, and tests before the deploy runs.",
+              },
+            ]}
+          />
         </Box>
       </Box>
     </Box>

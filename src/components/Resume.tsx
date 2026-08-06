@@ -10,6 +10,9 @@ import {
   formatEmploymentPeriod,
   getReactYearsOfExperience,
   getYearsOfExperience,
+  HEADLINE_TITLE,
+  selectedProjects,
+  skillGroups,
 } from "../data/resume";
 
 export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
@@ -47,8 +50,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
             </Typography>
           </Box>
           <Typography variant="subtitle1" component="p">
-            Staff Front-End Engineer &amp; Team Lead · React · TypeScript ·
-            UI/UX
+            {HEADLINE_TITLE} · React · TypeScript · Node · Postgres
           </Typography>
           <Typography variant="subtitle1" component="p">
             Barcelona, Spain | {yearsOfExperience}+ years of experience
@@ -85,13 +87,16 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
             Summary
           </Typography>
           <Typography variant="body2">
-            Staff / lead front-end engineer with {yearsOfExperience}+ years
-            building web applications and the last several leading frontend
-            teams, owning UI architecture, component patterns, and code quality
-            across a domain while staying hands-on shipping complex features. I
-            bring {reactYearsOfExperience}+ years of React and TypeScript
-            expertise paired with strong UX sensibilities. I leverage AI every
-            day as a tool to extend, enhance, and expediate my own abilities.
+            Staff / lead full-stack engineer with {yearsOfExperience}+ years
+            building web applications end to end, from React clients through the
+            APIs, services, and relational data models behind them, and the
+            CI/CD pipelines that ship them. The last several years leading
+            teams, owning architecture and code quality across a domain while
+            staying hands-on shipping complex features. I bring{" "}
+            {reactYearsOfExperience}+ years of React and TypeScript paired with
+            a decade of server-side work across, in reverse chonological order,
+            Node, Ruby on Rails, and C#/.NET. I leverage AI every day as a tool
+            to extend, enhance, and expediate my own abilities.
           </Typography>
           <Typography variant="body2">
             My aim is to help people, whether through the technology I build or
@@ -99,6 +104,25 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
             I'm looking to continue my path into leadership and help shape the
             technology and direction of the organization.
           </Typography>
+        </Box>
+      </Grid>
+      <Grid size={12}>
+        <Box>
+          <Typography variant="h6" component="h3">
+            Skills
+          </Typography>
+          {/* Grouped by layer so the full-stack range is legible at a glance
+              instead of buried in one long comma-separated list. */}
+          {skillGroups.map((group) => (
+            <Typography
+              variant="body2"
+              component="p"
+              key={group.label}
+              mt={0.5}
+            >
+              <strong>{group.label}:</strong> {group.skills.join(" • ")}
+            </Typography>
+          ))}
         </Box>
       </Grid>
       <Grid>
@@ -138,14 +162,22 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       <Grid size={12}>
         <Box>
           <Typography variant="h6" component="h3">
-            Skills
+            Selected projects
           </Typography>
-          <Typography variant="subtitle1" component="p">
-            React • TypeScript • JavaScript • HTML • CSS • Tailwind CSS • Node •
-            Apollo GraphQL • Ruby on Rails • Jest • Playwright • State
-            management • Design systems / component libraries • Figma •
-            Performance optimization • AI-assisted development (Claude) • Agile
-          </Typography>
+          {selectedProjects.map((project) => (
+            <Box key={project.name} mt={1}>
+              <Typography variant="body2" component="p">
+                <strong>{project.name}</strong>{" "}
+                <ExternalLink
+                  url={project.url}
+                  label={project.url.replace(/^https:\/\/(www\.)?/, "")}
+                />
+              </Typography>
+              <Typography variant="body2" component="p">
+                {project.description}
+              </Typography>
+            </Box>
+          ))}
         </Box>
       </Grid>
       <Grid size={12}>

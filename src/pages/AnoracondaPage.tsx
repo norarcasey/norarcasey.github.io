@@ -5,6 +5,8 @@ import "@norarcasey/anoraconda/style.css";
 
 import { ExternalLink } from "../components/ExternalLink";
 import { ProjectShowcase } from "../components/ProjectShowcase";
+import { StackFacts } from "../components/StackFacts";
+import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export function AnoracondaPage(): React.ReactElement {
@@ -18,6 +20,18 @@ export function AnoracondaPage(): React.ReactElement {
       title="Anoraconda"
       npmPackage="@norarcasey/anoraconda"
       game={<Anoraconda title={null} />}
+      details={
+        <StackFacts
+          facts={[
+            {
+              label: "Game core",
+              value:
+                "The board is a grid of cells advanced by a fixed tick, so each tick is a single state transition covering movement, growth, apple placement, and the wall or tail collision that ends the run. The tick is the only clock, so the game behaves the same regardless of frame rate.",
+            },
+            ...COMPONENT_LIBRARY_FACTS,
+          ]}
+        />
+      }
     >
       <Typography variant="body1">
         Anoraconda is my take on the classic Snake game. Guide the snake around

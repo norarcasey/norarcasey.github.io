@@ -5,6 +5,8 @@ import "@norarcasey/arkanora/style.css";
 
 import { ExternalLink } from "../components/ExternalLink";
 import { ProjectShowcase } from "../components/ProjectShowcase";
+import { StackFacts } from "../components/StackFacts";
+import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export function ArkanoraPage(): React.ReactElement {
@@ -18,6 +20,18 @@ export function ArkanoraPage(): React.ReactElement {
       title="Arkanora"
       npmPackage="@norarcasey/arkanora"
       game={<Arkanora title={null} />}
+      details={
+        <StackFacts
+          facts={[
+            {
+              label: "Game core",
+              value:
+                "Ball physics, paddle deflection, brick collisions, and level state are handled by a pure reducer in src/game: one transition per tick, with the React components rendering whatever it returns.",
+            },
+            ...COMPONENT_LIBRARY_FACTS,
+          ]}
+        />
+      }
     >
       <Typography variant="body1">
         Arkanora is my take on the classic brick-breaker. Bounce the ball off

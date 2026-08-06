@@ -22,9 +22,10 @@ export function About(): React.ReactElement {
         <Typography variant="body1">
           <strong>Collaboration champion:</strong>{" "}
           <span>
-            I thrive in teams, tackling complex frontend and full-stack
-            challenges alongside stakeholders. My focus? Solutions that are
-            customer-centric, reliable, and intuitive.
+            I thrive in teams, tackling problems end to end alongside
+            stakeholders, from the data model up through the interface. I'm
+            focused on solutions that are customer-centric, reliable, and
+            intuitive.
           </span>
         </Typography>
         <Typography variant="body1">

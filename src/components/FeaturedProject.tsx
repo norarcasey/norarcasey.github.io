@@ -21,7 +21,7 @@ export function FeaturedProject(): React.ReactElement {
       sx={{ width: "100%", maxWidth: HOME_BAND_MAX_WIDTH, mx: "auto" }}
     >
       <Typography variant="h3" component="h2">
-        Latest side project
+        Latest personal passion project
       </Typography>
 
       <Box

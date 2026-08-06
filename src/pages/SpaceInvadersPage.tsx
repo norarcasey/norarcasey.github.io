@@ -3,6 +3,8 @@ import { Typography } from "@mui/material";
 import { StarSiege } from "@norarcasey/star-siege-nora";
 import { ExternalLink } from "../components/ExternalLink";
 import { ProjectShowcase } from "../components/ProjectShowcase";
+import { StackFacts } from "../components/StackFacts";
+import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export function SpaceInvadersPage(): React.ReactElement {
@@ -16,6 +18,18 @@ export function SpaceInvadersPage(): React.ReactElement {
       title="Star Siege"
       npmPackage="@norarcasey/star-siege-nora"
       hideGameOnMobile
+      details={
+        <StackFacts
+          facts={[
+            {
+              label: "Game core",
+              value:
+                "The repo splits into src/engine and src/react: waves, movement, firing, and collisions are plain TypeScript, and the React layer feeds it input and renders what comes back. The same engine drives the demo, the tests, and the published component.",
+            },
+            ...COMPONENT_LIBRARY_FACTS,
+          ]}
+        />
+      }
       game={
         <StarSiege
           cellSize={28}

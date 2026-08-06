@@ -6,6 +6,7 @@ import { axe } from "jest-axe";
 import { Root } from "./Root";
 import { ContactMePage } from "./pages/ContactMePage";
 import { CruciNoraPage } from "./pages/CruciNoraPage";
+import { MinimaxDiagram } from "./components/MinimaxDiagram";
 import { Resume } from "./components/Resume";
 
 // `region` asserts every bit of content sits inside a landmark. The skip link
@@ -36,6 +37,7 @@ describe("accessibility (axe)", () => {
   it.each([
     ["Contact page", <ContactMePage />],
     ["CruciNora page", <CruciNoraPage />],
+    ["Minimax diagram", <MinimaxDiagram />],
     ["Résumé", <Resume />],
   ])(
     "%s has no violations",

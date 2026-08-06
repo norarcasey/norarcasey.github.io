@@ -104,43 +104,49 @@ export function NoragonPage(): React.ReactElement {
                   </a>
                   .
                 </Typography>
-
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  sx={{ color: ACCENT_BLUE }}
-                >
-                  How it's built
-                </Typography>
-                <Typography variant="body1">
-                  The whole game runs on a framework-free engine hook. Every
-                  turn (the hero's step plus every enemy's response) is a single
-                  pure reducer transition, so it behaves identically under React
-                  StrictMode and is easy to drive headlessly in tests. Each
-                  dungeon is built from a seed, so any run can be replayed
-                  exactly. It's bundled with Vite and covered by Vitest and
-                  React Testing Library.
-                </Typography>
-
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  sx={{ color: ACCENT_BLUE }}
-                >
-                  Fun challenges
-                </Typography>
-                <Typography variant="body1">
-                  The fun is in the systems. Procedural generation has to make
-                  dungeons that are always connected and beatable while still
-                  feeling irregular: L-shaped maps, cramped closets beside open
-                  halls, corridors twisting through the dark. Traps spring on
-                  foes too, so a hazard between you and a charging monster
-                  becomes a weapon. And the difficulty has to climb honestly:
-                  every enemy kind has a minimum spawn depth and stiffens as you
-                  descend, keeping the heavy hitters off the early floors.
-                </Typography>
               </Box>
             </section>
+          </Box>
+        </Box>
+
+        {/* Full-width band under the screenshot and the write-up: the
+            engineering detail needs the room to read as prose. */}
+        <Box
+          component="section"
+          className="tile"
+          sx={{ width: "100%", boxSizing: "border-box" }}
+        >
+          <Box sx={{ width: "72ch", marginBottom: 4 }}>
+            <Typography variant="h6" component="h3" sx={{ color: ACCENT_BLUE }}>
+              How it's built
+            </Typography>
+            <Typography variant="body1">
+              The game rules are plain TypeScript. Dungeon generation, line of
+              sight, enemy movement, combat, and leveling are pure functions in
+              src/game, each with its own unit tests. React's job is holding the
+              state and rendering it: a useReducer inside the useNoragon hook,
+              where every turn (the hero's step plus every enemy's response) is
+              a single transition. That keeps the game identical under React
+              StrictMode and easy to drive headlessly in tests. Each dungeon is
+              built from a seed, so any run can be replayed exactly. It's
+              bundled with Vite and covered by Vitest and React Testing Library.
+            </Typography>
+          </Box>
+
+          <Box sx={{ width: "72ch" }}>
+            <Typography variant="h6" component="h3" sx={{ color: ACCENT_BLUE }}>
+              Fun challenges
+            </Typography>
+            <Typography variant="body1">
+              The fun is in the systems. Procedural generation has to make
+              dungeons that are always connected and beatable while still
+              feeling irregular: L-shaped maps, cramped closets beside open
+              halls, corridors twisting through the dark. Traps spring on foes
+              too, so a hazard between you and a charging monster becomes a
+              weapon. And the difficulty has to climb honestly: every enemy kind
+              has a minimum spawn depth and stiffens as you descend, keeping the
+              heavy hitters off the early floors.
+            </Typography>
           </Box>
         </Box>
       </Box>

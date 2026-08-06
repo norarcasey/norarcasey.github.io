@@ -1,10 +1,13 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { TicTacNora } from "@norarcasey/tic-tac-nora";
 import "@norarcasey/tic-tac-nora/style.css";
 
 import { ExternalLink } from "../components/ExternalLink";
+import { MinimaxDiagram } from "../components/MinimaxDiagram";
 import { ProjectShowcase } from "../components/ProjectShowcase";
+import { StackFacts } from "../components/StackFacts";
+import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export function TicTacNoraPage(): React.ReactElement {
@@ -18,6 +21,28 @@ export function TicTacNoraPage(): React.ReactElement {
       title="Tic Tac Nora"
       npmPackage="@norarcasey/tic-tac-nora"
       game={<TicTacNora difficulty="smart" />}
+      details={
+        <>
+          <MinimaxDiagram />
+          <Box sx={{ mt: 4 }}>
+            <StackFacts
+              facts={[
+                {
+                  label: "Opponent",
+                  value:
+                    "Nora's moves come from a minimax search over the game tree. The search is a pure function of the board: given the same position she plays the same move every time, so tests assert the exact move for a given position.",
+                },
+                {
+                  label: "Configurable",
+                  value:
+                    "Difficulty is a prop on the component, so a host app can mount a beatable opponent or the unbeatable one. This page mounts the smart setting.",
+                },
+                ...COMPONENT_LIBRARY_FACTS,
+              ]}
+            />
+          </Box>
+        </>
+      }
     >
       <Typography variant="body1">
         Tic Tac Nora is my spin on tic-tac-toe. You play X and go first, and

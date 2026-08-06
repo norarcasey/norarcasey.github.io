@@ -4,6 +4,8 @@ import {
   getReactYearsOfExperience,
   getYearsOfExperience,
   REACT_EXPERIENCE_SINCE_YEAR,
+  selectedProjects,
+  skillGroups,
 } from "./resume";
 
 function entry(overrides: Partial<ResumeEntry>): ResumeEntry {
@@ -16,6 +18,37 @@ function entry(overrides: Partial<ResumeEntry>): ResumeEntry {
     ...overrides,
   };
 }
+
+describe("skillGroups", () => {
+  it("covers the whole stack, not just the client", () => {
+    const labels = skillGroups.map((group) => group.label);
+    expect(labels).toEqual(expect.arrayContaining(["Front end", "Data"]));
+    expect(labels).toEqual(
+      expect.arrayContaining(["Back end & APIs", "Infrastructure & delivery"])
+    );
+  });
+
+  it("gives every group a blurb and at least one skill", () => {
+    for (const group of skillGroups) {
+      expect(group.blurb).not.toBe("");
+      expect(group.skills.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("has no duplicate group labels", () => {
+    const labels = skillGroups.map((group) => group.label);
+    expect(new Set(labels).size).toBe(labels.length);
+  });
+});
+
+describe("selectedProjects", () => {
+  it("links every project over https so the résumé label can strip the scheme", () => {
+    for (const project of selectedProjects) {
+      expect(project.url.startsWith("https://")).toBe(true);
+      expect(project.description).not.toBe("");
+    }
+  });
+});
 
 describe("formatEmploymentPeriod", () => {
   it("formats a closed range with an inclusive duration", () => {
