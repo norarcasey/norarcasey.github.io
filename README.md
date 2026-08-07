@@ -21,6 +21,12 @@ yarn dev
 | `yarn lint`   | Lint with ESLint                |
 | `yarn format` | Format with Prettier            |
 
+## Project pages
+
+Each project page is built from the shared showcase layout. See
+[`src/components/ProjectShowcase.md`](src/components/ProjectShowcase.md) for the
+slots, the recipes, and the checklist for adding a page.
+
 ## Deploying
 
 Push to `main`. GitHub Actions runs the checks and deploys to GitHub Pages.

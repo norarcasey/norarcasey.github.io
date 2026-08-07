@@ -1,6 +1,14 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
+import { ExternalLink } from "../components/ExternalLink";
+import {
+  ProjectShowcase,
+  ShowcaseDetails,
+  ShowcaseGame,
+  ShowcaseHeader,
+  ShowcaseSummary,
+} from "../components/ProjectShowcase";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
 import noragonScreen from "../assets/screens/legends-of-noragon.png";
@@ -14,109 +22,78 @@ export function NoragonPage(): React.ReactElement {
   );
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", pb: 2 }}>
-      <Box sx={{ width: { xs: "100%", lg: "auto" }, maxWidth: "100%" }}>
-        {/* Header spanning both columns */}
-        <Box className="tile" sx={{ mb: 0, pb: 0 }}>
-          <Typography variant="h3" component="h2">
-            Legends of Noragon
-          </Typography>
-        </Box>
+    <ProjectShowcase>
+      <ShowcaseHeader title="Legends of Noragon" />
 
-        {/* Body: screenshot + play link beside the write-up on large screens */}
+      <ShowcaseSummary>
+        <Typography variant="body1">
+          Legends of Noragon is a turn-based, top-down dungeon crawler built in
+          React and TypeScript. You move the hero one tile at a time (arrow keys
+          or WASD), bumping foes to fight them, clearing each room, and taking
+          the stairs down into a deeper, tougher level. It's an endless descent:
+          slay bats through trolls, disarm traps, trade at the merchant, level
+          up, and see how far down you can get before you die. It lives on its
+          own at <ExternalLink url={PLAY_URL} label="legendsofnoragon.com" />.
+        </Typography>
+      </ShowcaseSummary>
+
+      {/* The game lives on its own site rather than as an npm component, so the
+          visual column carries a screenshot and the link out to it. */}
+      <ShowcaseGame width={480}>
         <Box
           sx={{
+            width: "100%",
+            maxWidth: 560,
             display: "flex",
-            flexDirection: { xs: "column", lg: "row" },
-            alignItems: { xs: "center", lg: "flex-start" },
-            gap: { xs: 0, lg: 4 },
-            mt: { xs: 2, lg: 7 },
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 2,
           }}
         >
-          {/* Screenshot + Play button */}
           <Box
+            component="img"
+            src={noragonScreen}
+            alt="A procedurally generated dungeon in Legends of Noragon"
             sx={{
-              width: { xs: "100%", lg: 480 },
-              maxWidth: 560,
-              flexShrink: 0,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 2,
+              width: "100%",
+              height: "auto",
+              borderRadius: 1,
+              display: "block",
+            }}
+          />
+          <Button
+            variant="contained"
+            href={PLAY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              backgroundColor: ACCENT_PINK,
+              "&:hover": { backgroundColor: ACCENT_PINK_HOVER },
+              fontWeight: 600,
             }}
           >
-            <Box
-              component="img"
-              src={noragonScreen}
-              alt="A procedurally generated dungeon in Legends of Noragon"
-              sx={{
-                width: "100%",
-                height: "auto",
-                borderRadius: 1,
-                display: "block",
-              }}
-            />
-            <Button
-              variant="contained"
-              href={PLAY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                backgroundColor: ACCENT_PINK,
-                "&:hover": { backgroundColor: ACCENT_PINK_HOVER },
-                fontWeight: 600,
-              }}
-            >
-              Play Legends of Noragon
-            </Button>
-          </Box>
-
-          {/* Write-up */}
-          <Box
-            sx={{
-              width: { xs: "100%", lg: 400 },
-              maxWidth: { xs: 640, lg: 400 },
-              flexShrink: 0,
-            }}
-          >
-            <section className="tile">
-              <Box display="flex" flexDirection="column" gap={2}>
-                <Typography variant="body1">
-                  Legends of Noragon is a turn-based, top-down dungeon crawler
-                  built in React and TypeScript. You move the hero one tile at a
-                  time (arrow keys or WASD), bumping foes to fight them,
-                  clearing each room, and taking the stairs down into a deeper,
-                  tougher level. It's an endless descent: slay bats through
-                  trolls, disarm traps, trade at the merchant, level up, and see
-                  how far down you can get before you die. It lives on its own
-                  at{" "}
-                  <a
-                    href={PLAY_URL}
-                    className="inline-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    legendsofnoragon.com
-                    <span className="visually-hidden">
-                      {" "}
-                      (opens in a new tab)
-                    </span>
-                  </a>
-                  .
-                </Typography>
-              </Box>
-            </section>
-          </Box>
+            Play Legends of Noragon
+          </Button>
         </Box>
+      </ShowcaseGame>
 
-        {/* Full-width band under the screenshot and the write-up: the
-            engineering detail needs the room to read as prose. */}
+      <ShowcaseDetails>
+        {/* The two write-ups read as a pair, so they sit side by side on wide
+            screens. Grid rather than flex: equal columns that stay equal, and
+            `minmax(0, 1fr)` lets a column shrink below its longest word. */}
         <Box
-          component="section"
-          className="tile"
-          sx={{ width: "100%", boxSizing: "border-box" }}
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "minmax(0, 1fr)",
+              md: "repeat(2, minmax(0, 1fr))",
+            },
+            gap: 4,
+          }}
         >
-          <Box sx={{ width: "72ch", marginBottom: 4 }}>
+          {/* maxWidth, not width: the column caps the measure for readability
+              on a wide band but still narrows when the grid does. */}
+          <Box sx={{ maxWidth: "72ch" }}>
             <Typography variant="h6" component="h3" sx={{ color: ACCENT_BLUE }}>
               How it's built
             </Typography>
@@ -133,7 +110,7 @@ export function NoragonPage(): React.ReactElement {
             </Typography>
           </Box>
 
-          <Box sx={{ width: "72ch" }}>
+          <Box sx={{ maxWidth: "72ch" }}>
             <Typography variant="h6" component="h3" sx={{ color: ACCENT_BLUE }}>
               Fun challenges
             </Typography>
@@ -149,7 +126,7 @@ export function NoragonPage(): React.ReactElement {
             </Typography>
           </Box>
         </Box>
-      </Box>
-    </Box>
+      </ShowcaseDetails>
+    </ProjectShowcase>
   );
 }
