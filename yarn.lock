@@ -673,10 +673,10 @@
   resolved "https://registry.yarnpkg.com/@norarcasey/star-siege-nora/-/star-siege-nora-0.3.0.tgz#0ffb162b831e84dd6fb0b7b16a113baf3e8db8da"
   integrity sha512-LBkS0vRJ6O2PTucCXdyTzlPk+nLorFTfljgv/P6Zb/anHn1HKx4qXG/eokKgHoSvUbjDh7TLlh3MhvYxUsMl1Q==
 
-"@norarcasey/tic-tac-nora@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@norarcasey/tic-tac-nora/-/tic-tac-nora-0.1.0.tgz#8280e3d2db609b2557efd496853745de3b37d1c1"
-  integrity sha512-cPVsrZrOkbpFARyrisUaJmRpH3WWSEYKGnFPsPJ45lHeG5KHmuqmAxIJeRe1kQRsIjnn6VN+2LH51iLDgIssQQ==
+"@norarcasey/tic-tac-nora@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@norarcasey/tic-tac-nora/-/tic-tac-nora-0.1.1.tgz#805acbafd03ece89f571846528ad77cde04acb88"
+  integrity sha512-WS2VdSkBEG1qm1MUFIIxIugSAYIlHh40mJuegyEIvNn1ajcn9mjqezc7WN4VNOUY3YW4zYnkbuRdKH792Emh/g==
 
 "@oxc-project/types@=0.133.0":
   version "0.133.0"
