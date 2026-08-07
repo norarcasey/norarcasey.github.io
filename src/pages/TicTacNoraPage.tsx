@@ -15,13 +15,10 @@ import {
 } from "../components/ProjectShowcase";
 import { StackFacts } from "../components/StackFacts";
 import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 
 export function TicTacNoraPage(): React.ReactElement {
-  usePageMeta(
-    "Tic Tac Nora",
-    "Tic Tac Nora, a tic-tac-toe game by Nora Casey, published as a React component on npm and playable in the browser. Try to beat Nora's minimax AI."
-  );
+  useRouteMeta("/tic-tac-nora");
 
   return (
     <ProjectShowcase>

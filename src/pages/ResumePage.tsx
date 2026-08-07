@@ -5,13 +5,10 @@ import { faPrint } from "@fortawesome/free-solid-svg-icons";
 import { Box, Button } from "@mui/material";
 
 import { Resume } from "../components/Resume";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 
 export function ResumePage(): React.ReactElement {
-  usePageMeta(
-    "Résumé",
-    "Nora Casey's résumé: experience, education, and skills in frontend and full-stack software engineering."
-  );
+  useRouteMeta("/resume");
 
   const ref = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({

@@ -14,13 +14,10 @@ import {
 } from "../components/ProjectShowcase";
 import { StackFacts } from "../components/StackFacts";
 import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 
 export function PianoraPage(): React.ReactElement {
-  usePageMeta(
-    "Pianora",
-    "Pianora, a playable browser piano built with Tone.js by Nora Casey, published as a React component on npm. Play with your mouse or computer keyboard, record a melody, and play it back."
-  );
+  useRouteMeta("/pianora");
 
   return (
     <ProjectShowcase>

@@ -9,17 +9,14 @@ import {
   ShowcaseHeader,
   ShowcaseSummary,
 } from "../components/ProjectShowcase";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
 import noragonScreen from "../assets/screens/legends-of-noragon.png";
 
 const PLAY_URL = "https://www.legendsofnoragon.com/";
 
 export function NoragonPage(): React.ReactElement {
-  usePageMeta(
-    "Legends of Noragon",
-    "Legends of Noragon, a turn-based, top-down dungeon crawler with procedurally generated dungeons by Nora Casey. Read how it's built, the fun challenges behind it, and play it in your browser."
-  );
+  useRouteMeta("/legends-of-noragon");
 
   return (
     <ProjectShowcase>

@@ -12,13 +12,10 @@ import {
   ShowcaseSummary,
 } from "../components/ProjectShowcase";
 import { StackFacts } from "../components/StackFacts";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 
 export function MineSweeperPage(): React.ReactElement {
-  usePageMeta(
-    "Mine Sweeper",
-    "A React Mine Sweeper game by Nora Casey, also published as the @norarcasey/mine-sweeper npm package."
-  );
+  useRouteMeta("/mine-sweeper");
 
   const [difficulty, setDifficulty] = useState(Difficulty.Beginner);
 

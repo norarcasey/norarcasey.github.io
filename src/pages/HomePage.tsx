@@ -7,7 +7,7 @@ import { Hero, HOME_BAND_MAX_WIDTH } from "../components/Hero";
 import { FeaturedProject } from "../components/FeaturedProject";
 import { ProjectBox } from "../components/ProjectBox";
 import { SkillsMatrix } from "../components/SkillsMatrix";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 import {
   ACCENT_BLUE,
   ACCENT_PINK,
@@ -24,10 +24,7 @@ import pianoraScreen from "../assets/screens/pianora.png";
 import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.png";
 
 function Home() {
-  usePageMeta(
-    "Nora Casey",
-    "Nora Casey, full-stack software engineer and team lead. React and TypeScript, Node, Rails, Postgres and MongoDB, and CI/CD pipelines. Browse my projects, résumé, and ways to get in touch."
-  );
+  useRouteMeta("/");
 
   return (
     <section className="tiles">

@@ -1,6 +1,16 @@
 import { useEffect } from "react";
 
-const SITE_NAME = "Nora Casey";
+import { SITE_ROUTES, pageTitle, type SiteRoutePath } from "../data/siteRoutes";
+
+/**
+ * Applies a route's shared metadata, the same copy the build bakes into that
+ * route's HTML file. Pages should use this rather than passing their own
+ * strings, so what React sets on navigation matches what the server served.
+ */
+export function useRouteMeta(path: SiteRoutePath): void {
+  const { title, description } = SITE_ROUTES[path];
+  usePageMeta(title, description);
+}
 
 /**
  * Sets the document <title> and meta description for a page, restoring the
@@ -11,7 +21,7 @@ const SITE_NAME = "Nora Casey";
 export function usePageMeta(title: string, description?: string): void {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
+    document.title = pageTitle(title);
 
     const meta = description
       ? document.querySelector<HTMLMetaElement>('meta[name="description"]')

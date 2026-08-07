@@ -10,17 +10,14 @@ import {
   ShowcaseSummary,
 } from "../components/ProjectShowcase";
 import { StackFacts } from "../components/StackFacts";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
 import crucinoraScreen from "../assets/screens/crucinora.png";
 
 const VISIT_URL = "https://crucinora.com";
 
 export function CruciNoraPage(): React.ReactElement {
-  usePageMeta(
-    "CruciNora",
-    "CruciNora, an AI-assisted crossword construction app by Nora Casey. Design an NYT-style grid, auto-fill it with a backtracking solver, and clue it with Claude's help."
-  );
+  useRouteMeta("/crucinora");
 
   return (
     <ProjectShowcase>

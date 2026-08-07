@@ -12,13 +12,10 @@ import {
 } from "../components/ProjectShowcase";
 import { StackFacts } from "../components/StackFacts";
 import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 
 export function SpaceInvadersPage(): React.ReactElement {
-  usePageMeta(
-    "Star Siege",
-    "Star Siege, a retro arcade space-shooter by Nora Casey, published as a React component on npm and playable in the browser."
-  );
+  useRouteMeta("/space-invaders");
 
   return (
     <ProjectShowcase>

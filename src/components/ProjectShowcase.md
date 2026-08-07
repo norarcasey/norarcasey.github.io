@@ -124,9 +124,13 @@ than restating it.
 
 1. Write the page in `src/pages`, export it from `src/pages/index.ts`, and add
    the route in `src/index.tsx`.
-2. Call `usePageMeta(title, description)` at the top for the tab title and the
-   meta description.
-3. Add the path to `e2e/a11y.spec.ts`: `PAGES` if the page is entirely our own
+2. Add the path, title, and description to `src/data/siteRoutes.ts`. That one
+   entry is what gives the route a prerendered HTML file, a canonical URL, a
+   social card, and a sitemap line. A unit test fails if the router and this
+   list disagree.
+3. Call `useRouteMeta("/your-path")` at the top of the page. It reads the same
+   entry, so the title React sets matches the one the build served.
+4. Add the path to `e2e/a11y.spec.ts`: `PAGES` if the page is entirely our own
    markup, `SHOWCASE_PAGES` if it embeds a published component.
-4. Layout facts that depend on media queries can't be tested in jsdom. Cover
+5. Layout facts that depend on media queries can't be tested in jsdom. Cover
    those in `e2e/showcase.spec.ts` instead of the Vitest suite.

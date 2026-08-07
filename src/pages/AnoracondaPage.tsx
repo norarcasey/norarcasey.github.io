@@ -14,13 +14,10 @@ import {
 } from "../components/ProjectShowcase";
 import { StackFacts } from "../components/StackFacts";
 import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 
 export function AnoracondaPage(): React.ReactElement {
-  usePageMeta(
-    "Anoraconda",
-    "Anoraconda, a browser take on the classic Snake game by Nora Casey, published as a React component on npm. Steer with the arrow keys or WASD and chase the apples."
-  );
+  useRouteMeta("/anoraconda");
 
   return (
     <ProjectShowcase>

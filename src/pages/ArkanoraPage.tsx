@@ -14,13 +14,10 @@ import {
 } from "../components/ProjectShowcase";
 import { StackFacts } from "../components/StackFacts";
 import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
-import { usePageMeta } from "../hooks/usePageMeta";
+import { useRouteMeta } from "../hooks/usePageMeta";
 
 export function ArkanoraPage(): React.ReactElement {
-  usePageMeta(
-    "Arkanora",
-    "Arkanora, a browser take on the classic brick-breaker by Nora Casey, published as a React component on npm. Steer the paddle with the arrow keys and clear every brick."
-  );
+  useRouteMeta("/arkanora");
 
   return (
     <ProjectShowcase>
