@@ -1,6 +1,8 @@
 import {
   ResumeEntry,
+  experience,
   formatEmploymentPeriod,
+  getBackEndYearsOfExperience,
   getReactYearsOfExperience,
   getYearsOfExperience,
   REACT_EXPERIENCE_SINCE_YEAR,
@@ -108,6 +110,22 @@ describe("formatEmploymentPeriod", () => {
     it("derives React years from the React anchor", () => {
       expect(getReactYearsOfExperience()).toBe(
         2026 - REACT_EXPERIENCE_SINCE_YEAR
+      );
+    });
+
+    it("sums the back-end roles rather than spanning from the earliest one", () => {
+      const earliestMarked = Math.min(
+        ...experience
+          .filter((entry) => entry.backEnd)
+          .map((entry) => Number(entry.start.split("-")[0]))
+      );
+      // Jun 2026 clock: the marked roles total 149 months. Spanning from the
+      // earliest of them (2012) would read 14 and the career total reads 17,
+      // so landing under both proves the years in between are excluded.
+      expect(getBackEndYearsOfExperience()).toBe(12);
+      expect(getBackEndYearsOfExperience()).toBeLessThan(2026 - earliestMarked);
+      expect(getBackEndYearsOfExperience()).toBeLessThan(
+        getYearsOfExperience()
       );
     });
   });

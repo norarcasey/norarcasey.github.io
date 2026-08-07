@@ -10,6 +10,12 @@ export interface ResumeEntry {
   start: string;
   /** End as "YYYY-MM", or null for an ongoing role ("Present"). */
   end: string | null;
+  /**
+   * Marks a role where I owned server-side work: endpoints, services, and the
+   * data behind them. Summed into the back-end years figure, so it counts
+   * actual time in those roles rather than every year since the first one.
+   */
+  backEnd?: boolean;
   duties: string[];
 }
 
@@ -61,6 +67,7 @@ export const experience: ResumeEntry[] = [
       "High-growth, AI-powered content platform for go-to-market teams",
     start: "2024-03",
     end: "2025-08",
+    backEnd: true,
     duties: [
       "Engineered a file upload and processing pipeline end to end: cloud storage uploads, a server-side step that runs documents through Gemini for analysis and content extraction, and the API that feeds the results into automated workflows.",
       "Built an AI-aware content editor for bulk or granular edits to generated content, wiring the client to the streaming model endpoints so prompt continuation stayed seamless across iterative AI workflows.",
@@ -75,6 +82,7 @@ export const experience: ResumeEntry[] = [
       "Series D unicorn and industry leading sales engagement platform with 4.4B valuation",
     start: "2022-11",
     end: "2024-02",
+    backEnd: true,
     duties: [
       "Collaborated on a data visualization tool that generates an expected sales pipeline: designed the API contract consumed from the data science team's models and built the client rendering against it.",
       "Extended the automation workflow builder to enable tiered conditional statements and actions, working across the React client and the service that evaluates them, and acted as liaison between product, design, and backend.",
@@ -88,6 +96,7 @@ export const experience: ResumeEntry[] = [
       "Series D unicorn and industry leading sales engagement platform with 4.4B valuation",
     start: "2018-08",
     end: "2022-11",
+    backEnd: true,
     duties: [
       "Led a team of engineers and liaison between product, design, management, and backend team to successfully complete a multi-quarter automation framework migration with feature enhancements.",
       "Authored a conditional logic syntax for the in-house if/then workflow engine, taking it from grammar design through the evaluation semantics the backend executes, using proofs of concept and design documentation to achieve consensus across teams.",
@@ -102,6 +111,7 @@ export const experience: ResumeEntry[] = [
       "Industry leading stock photography company with over 477 million assets",
     start: "2015-03",
     end: "2018-08",
+    backEnd: true,
     duties: [
       "Full-stack developer on a high-traffic e-commerce website: a mobile-first front end in JavaScript, CSS, and HTML over Ruby on Rails and C#/.NET services, working through controllers, service endpoints, and SQL-backed data access.",
       "Built a CMS, from the content model and its admin endpoints to the authoring UI, giving non-technical contributors an easy way to create engaging articles that showcase creative and editorial imagery.",
@@ -129,6 +139,7 @@ export const experience: ResumeEntry[] = [
       "Industry leading stock photography company with over 477 million assets",
     start: "2012-06",
     end: "2014-02",
+    backEnd: true,
     duties: [
       "Paired programming, Test Driven Development, Agile environment developing new features for service based websites across the client and service tiers.",
     ],
@@ -238,11 +249,10 @@ export const skillGroups: SkillGroup[] = [
       "GraphQL (Apollo)",
       "REST API design",
       "Ruby on Rails",
-      "C# / .NET",
-      "ASP.NET MVC",
       "Authentication & OAuth flows",
       "Background & batch processing",
       "AI API integration (Claude, Gemini)",
+      "C# / .NET",
     ],
   },
   {
@@ -250,10 +260,10 @@ export const skillGroups: SkillGroup[] = [
     blurb: "Schema design, migrations, and queries.",
     skills: [
       "PostgreSQL",
+      "MongoDB",
       "SQL",
       "Schema & migration design",
       "ActiveRecord",
-      "NHibernate",
       "Supabase (Postgres + row-level security)",
       "Query performance",
       "Bulk import & export pipelines",
@@ -405,4 +415,20 @@ export function getYearsOfExperience(): number {
 /** Whole years working in React. */
 export function getReactYearsOfExperience(): number {
   return new Date().getFullYear() - REACT_EXPERIENCE_SINCE_YEAR;
+}
+
+/**
+ * Whole years of server-side work: the summed duration of the roles marked
+ * `backEnd`, not the span since the first one, so years spent elsewhere in the
+ * stack aren't counted. Uses the same inclusive month convention as the role
+ * durations, and grows on its own if an ongoing role is marked back-end.
+ */
+export function getBackEndYearsOfExperience(): number {
+  const months = experience
+    .filter((entry) => entry.backEnd && entry.start)
+    .reduce(
+      (total, entry) => total + inclusiveMonths(entry.start, entry.end),
+      0
+    );
+  return Math.floor(months / 12);
 }

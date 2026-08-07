@@ -6,6 +6,7 @@ import { Box, Typography } from "@mui/material";
 export const HOME_BAND_MAX_WIDTH = 1100;
 
 import {
+  getBackEndYearsOfExperience,
   getReactYearsOfExperience,
   getYearsOfExperience,
   HEADLINE_TITLE,
@@ -39,6 +40,7 @@ function Highlight({ label }: { label: string }): React.ReactElement {
 export function Hero(): React.ReactElement {
   const years = getYearsOfExperience();
   const reactYears = getReactYearsOfExperience();
+  const backEndYears = getBackEndYearsOfExperience();
 
   return (
     <Box
@@ -60,17 +62,18 @@ export function Hero(): React.ReactElement {
         Building products end to end and leading the teams that ship them
       </Typography>
       <Typography variant="body1" sx={{ color: "#4a4f57", maxWidth: 760 }}>
-        {years}+ years building web applications across high-growth startups:
-        React and TypeScript front ends, the Node, Rails, and .NET services
-        behind them, the relational data they sit on, and the CI/CD that deploys
-        the whole thing. I mentor engineers, partner closely with product &amp;
-        design, and use AI every day to move faster.
+        {years}+ years building web applications at small, mid-size, and
+        enterprise companies. I work across the stack: React and TypeScript,
+        Node, Rails, Postgres and MongoDB, and CI/CD pipelines. I mentor
+        engineers, work closely with product and design, and use AI every day.
       </Typography>
       <Box display="flex" flexWrap="wrap" gap={1} mt={2}>
         <Highlight label={`${years}+ years experience`} />
         <Highlight label={`${reactYears}+ yrs React · TypeScript`} />
-        <Highlight label="Node · GraphQL · Rails · .NET" />
-        <Highlight label="Postgres & SQL data modeling" />
+        <Highlight
+          label={`Combined ${backEndYears}+ yrs Node · GraphQL · Rails · .NET`}
+        />
+        <Highlight label="Postgres · MongoDB · SQL data modeling" />
         <Highlight label="CI/CD · serverless · cloud deploys" />
         <Highlight label="Mentor & team lead" />
         <Highlight label="MS CS, Georgia Tech" />

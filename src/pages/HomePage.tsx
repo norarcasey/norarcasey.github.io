@@ -26,7 +26,7 @@ import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.png";
 function Home() {
   usePageMeta(
     "Nora Casey",
-    "Nora Casey, full-stack software engineer and team lead. React and TypeScript front ends, Node, Rails and .NET services, Postgres, and the CI/CD that ships them. Browse my projects, résumé, and ways to get in touch."
+    "Nora Casey, full-stack software engineer and team lead. React and TypeScript, Node, Rails, Postgres and MongoDB, and CI/CD pipelines. Browse my projects, résumé, and ways to get in touch."
   );
 
   return (
