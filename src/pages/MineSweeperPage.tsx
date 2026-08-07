@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { MineSweeper, Difficulty } from "@norarcasey/mine-sweeper";
 
+import { ExternalLink } from "../components/ExternalLink";
 import { NpmBadge } from "../components/NpmBadge";
 import {
   ProjectShowcase,
@@ -100,21 +101,15 @@ export function MineSweeperPage(): React.ReactElement {
         <Typography variant="body1">
           It's published as a React component on npm, dropped straight into this
           page. Grab it from{" "}
-          <a
-            href="https://www.npmjs.com/package/@norarcasey/mine-sweeper"
-            target="_blank"
-            rel="noreferrer"
-          >
-            npm
-          </a>
+          <ExternalLink
+            url="https://www.npmjs.com/package/@norarcasey/mine-sweeper"
+            label="npm"
+          />
           , and the source is on{" "}
-          <a
-            href="https://github.com/norarcasey/mine-sweeper"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Github
-          </a>
+          <ExternalLink
+            url="https://github.com/norarcasey/mine-sweeper"
+            label="Github"
+          />
           . I am still actively developing features for Mine Sweeper.
         </Typography>
       </ShowcaseSummary>

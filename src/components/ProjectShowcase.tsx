@@ -136,6 +136,9 @@ export function ShowcaseGame({
 }: ShowcaseGameProps): React.ReactElement {
   return (
     <Box
+      // Names the third-party boundary: everything inside comes from the
+      // published game package, so the a11y sweep scopes itself around it.
+      className="showcase-game"
       sx={{
         gridArea: "game",
         display: hideOnMobile ? { xs: "none", md: "flex" } : "flex",
