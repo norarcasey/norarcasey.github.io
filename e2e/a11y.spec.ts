@@ -15,29 +15,25 @@ const PAGES = [
 ];
 
 // The project showcase pages embed a game from its own published npm package.
-// Where that package is clean the whole page is gated, so an a11y regression
-// in a future release of the game fails this build too.
+// Every one of those packages currently scans clean, so the whole page is
+// gated: an a11y regression in a future release of any game fails this build
+// too, rather than going unnoticed until someone runs a scan by hand.
 //
-// Where it isn't, `skipGame` names the outstanding issue and scopes the scan
-// around the widget. Those are fixes for the game's own repo and release, so
-// gating on them here would mean a red build we can't turn green from this
-// one. Everything around the game is still covered either way: the header, the
-// summary copy and its links, the npm badge, and the details band.
-const SHOWCASE_PAGES = [
+// If a game does regress and the fix has to happen in its own repo and
+// release, give that entry a `skipGame` reason. It scopes the scan around the
+// widget so this build can go green, while naming exactly what is outstanding
+// and where it belongs.
+const SHOWCASE_PAGES: {
+  name: string;
+  path: string;
+  skipGame?: string;
+}[] = [
   { name: "Mine Sweeper", path: "/mine-sweeper" },
   { name: "Tic Tac Nora", path: "/tic-tac-nora" },
   { name: "Pianora", path: "/pianora" },
   { name: "Star Siege", path: "/space-invaders" },
-  {
-    name: "Arkanora",
-    path: "/arkanora",
-    skipGame: "color-contrast on .arkanora__stat, in @norarcasey/arkanora",
-  },
-  {
-    name: "Anoraconda",
-    path: "/anoraconda",
-    skipGame: "color-contrast on .anoraconda__score, in @norarcasey/anoraconda",
-  },
+  { name: "Arkanora", path: "/arkanora" },
+  { name: "Anoraconda", path: "/anoraconda" },
 ];
 
 function report(

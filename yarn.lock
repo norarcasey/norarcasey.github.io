@@ -642,15 +642,15 @@
   dependencies:
     "@tybys/wasm-util" "^0.10.1"
 
-"@norarcasey/anoraconda@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@norarcasey/anoraconda/-/anoraconda-0.1.0.tgz#cce87f043cdd5ee419df6722d07b6287f20f2bca"
-  integrity sha512-OZO5lLdKQKjTE3bsoEbMh1+XMQe9xYmrptffAitbJyg0gx6cIJh6j3fUB/5qQmHCQnRzoluQPSw7k1q+WIZF9w==
+"@norarcasey/anoraconda@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@norarcasey/anoraconda/-/anoraconda-0.1.1.tgz#e09f8ef0514d7037eeb7b148afb0a8dca3372d89"
+  integrity sha512-qZ5t8rCrMJWS9E8QYcOkxjygKv4eOe5J1G3D7NCO+ouicuAL5PAEsnWMJgk03PS2f85K/+BxbqZ4U6fA8JJTyw==
 
-"@norarcasey/arkanora@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@norarcasey/arkanora/-/arkanora-0.1.0.tgz#23e09acaa3786ba8922b894f83e69e4bf7301721"
-  integrity sha512-mQmxVTXHKt17JudNZJxjcO5RuIL5jMgo831PiI4gJ6mkM8LkokJaKyWF7Dm2ujDNEEeqRQUR73+eeVSd70YgTg==
+"@norarcasey/arkanora@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@norarcasey/arkanora/-/arkanora-0.1.1.tgz#88203b846b1a275e21446ca98d2c3c6e81b2b897"
+  integrity sha512-Y55s1fMTsW7YKyOW+pQTGsh4Ckl8qjhV/rarp64jbEuz7xbmihY7ru9wL4xUNQ0+c1AzFyl7orQicOJA6LqFaA==
 
 "@norarcasey/mine-sweeper@^1.0.1":
   version "1.0.1"
