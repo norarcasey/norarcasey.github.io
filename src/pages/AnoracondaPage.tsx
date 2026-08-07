@@ -4,7 +4,14 @@ import { Anoraconda } from "@norarcasey/anoraconda";
 import "@norarcasey/anoraconda/style.css";
 
 import { ExternalLink } from "../components/ExternalLink";
-import { ProjectShowcase } from "../components/ProjectShowcase";
+import { NpmBadge } from "../components/NpmBadge";
+import {
+  ProjectShowcase,
+  ShowcaseDetails,
+  ShowcaseGame,
+  ShowcaseHeader,
+  ShowcaseSummary,
+} from "../components/ProjectShowcase";
 import { StackFacts } from "../components/StackFacts";
 import { COMPONENT_LIBRARY_FACTS } from "../data/projectStack";
 import { usePageMeta } from "../hooks/usePageMeta";
@@ -16,11 +23,37 @@ export function AnoracondaPage(): React.ReactElement {
   );
 
   return (
-    <ProjectShowcase
-      title="Anoraconda"
-      npmPackage="@norarcasey/anoraconda"
-      game={<Anoraconda title={null} />}
-      details={
+    <ProjectShowcase>
+      <ShowcaseHeader title="Anoraconda" />
+
+      <ShowcaseSummary>
+        <NpmBadge npmPackage="@norarcasey/anoraconda" title="Anoraconda" />
+        <Typography variant="body1">
+          Anoraconda is my take on the classic Snake game. Guide the snake
+          around the board to eat apples, growing a little longer with each one,
+          and try not to run into the walls or your own tail. I built it in
+          TypeScript to play with grid-based game state and a steady tick loop
+          in the browser.
+        </Typography>
+        <Typography variant="body1">
+          It's published as a React component on npm, dropped straight into this
+          page. Grab it from{" "}
+          <ExternalLink
+            url="https://www.npmjs.com/package/@norarcasey/anoraconda"
+            label="npm"
+          />
+          .
+        </Typography>
+        <Typography variant="body1">
+          Press Start, then steer with the arrow keys or WASD.
+        </Typography>
+      </ShowcaseSummary>
+
+      <ShowcaseGame>
+        <Anoraconda title={null} />
+      </ShowcaseGame>
+
+      <ShowcaseDetails>
         <StackFacts
           facts={[
             {
@@ -31,26 +64,7 @@ export function AnoracondaPage(): React.ReactElement {
             ...COMPONENT_LIBRARY_FACTS,
           ]}
         />
-      }
-    >
-      <Typography variant="body1">
-        Anoraconda is my take on the classic Snake game. Guide the snake around
-        the board to eat apples, growing a little longer with each one, and try
-        not to run into the walls or your own tail. I built it in TypeScript to
-        play with grid-based game state and a steady tick loop in the browser.
-      </Typography>
-      <Typography variant="body1">
-        It's published as a React component on npm, dropped straight into this
-        page. Grab it from{" "}
-        <ExternalLink
-          url="https://www.npmjs.com/package/@norarcasey/anoraconda"
-          label="npm"
-        />
-        .
-      </Typography>
-      <Typography variant="body1">
-        Press Start, then steer with the arrow keys or WASD.
-      </Typography>
+      </ShowcaseDetails>
     </ProjectShowcase>
   );
 }
