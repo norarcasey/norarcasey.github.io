@@ -39,7 +39,8 @@
     "test:e2e": "playwright test",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "images": "sh scripts/optimize-images.sh"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
