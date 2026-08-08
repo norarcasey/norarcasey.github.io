@@ -127,7 +127,7 @@ export function MinimaxDiagram(): React.ReactElement {
     <Box>
       <Typography
         variant="h6"
-        component="h3"
+        component="h2"
         sx={{ color: ACCENT_BLUE, mb: 1 }}
       >
         How minimax picks her move

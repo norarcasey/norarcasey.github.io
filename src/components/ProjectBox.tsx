@@ -55,6 +55,8 @@ export function ProjectBox({
           component="img"
           src={image}
           alt={`${title} screenshot`}
+          loading="lazy"
+          decoding="async"
           sx={{
             width: { xs: 90, sm: 110 },
             height: { xs: 90, sm: 110 },

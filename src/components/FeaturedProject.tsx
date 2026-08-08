@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { HOME_BAND_MAX_WIDTH } from "./Hero";
 import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
-import crucinoraScreen from "../assets/screens/crucinora.png";
+import crucinoraScreen from "../assets/screens/crucinora.webp";
 
 const VISIT_URL = "https://crucinora.com";
 
@@ -51,7 +51,13 @@ export function FeaturedProject(): React.ReactElement {
             component="img"
             src={crucinoraScreen}
             alt="The CruciNora crossword builder"
-            sx={{ width: "100%", height: "auto", display: "block" }}
+            decoding="async"
+            sx={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              aspectRatio: "560 / 562",
+            }}
           />
         </Box>
 

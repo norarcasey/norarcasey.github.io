@@ -7,7 +7,7 @@ import { test, expect } from "@playwright/test";
 const DESKTOP = { width: 1440, height: 1200 };
 const MOBILE = { width: 390, height: 900 };
 
-const HEADER = ".tile:has(h2)";
+const HEADER = ".tile:has(h1)";
 const SUMMARY = "section.tile:has(img[alt$='npm version'])";
 
 test.describe("project showcase layout", () => {
@@ -33,7 +33,7 @@ test.describe("project showcase layout", () => {
   test("the heading carries no trailing margin out of the header", async ({
     page,
   }) => {
-    // `.tile h2` adds a 10px bottom margin for tiles with copy under the
+    // `.tile h1` adds a 10px bottom margin for tiles with copy under the
     // heading. It used to escape the header box by margin collapsing; grid
     // items don't collapse margins, so it is zeroed at the source instead.
     await page.setViewportSize(DESKTOP);
@@ -41,7 +41,7 @@ test.describe("project showcase layout", () => {
     await page.waitForLoadState("networkidle");
 
     const marginBottom = await page
-      .locator(`${HEADER} h2`)
+      .locator(`${HEADER} h1`)
       .evaluate((el) => getComputedStyle(el).marginBottom);
     expect(marginBottom).toBe("0px");
   });

@@ -56,8 +56,12 @@ export function Root(): React.ReactElement {
       <Box component="header" className="page-header">
         <Box>
           <Link to="/" aria-label="Nora Casey, home">
+            {/* Not a heading: the site name repeats on every page, so making it
+                the h1 left each page's own subject as an h2 and told search
+                engines that every page was about the same thing. The pages own
+                their h1 now; this is just the wordmark in the banner. */}
             <Typography
-              component="h1"
+              component="p"
               className="root-title"
               aria-label="Nora Casey"
               sx={{

@@ -18,7 +18,7 @@ export function ResumeExperience({
 }: ResumeExperienceProps): React.ReactElement {
   return (
     <Box>
-      <Typography variant="subtitle1" component="h4">
+      <Typography variant="subtitle1" component="h3">
         <strong>
           {title} | {company}
         </strong>

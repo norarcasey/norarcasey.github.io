@@ -15,13 +15,13 @@ import {
   DECORATIVE_PINK,
 } from "../colors";
 
-import mineSweeperScreen from "../assets/screens/mine-sweeper.png";
-import starSiegeScreen from "../assets/screens/star-siege.png";
-import ticTacNoraScreen from "../assets/screens/tic-tac-nora.png";
-import anoracondaScreen from "../assets/screens/anoraconda.png";
-import arkanoraScreen from "../assets/screens/arkanora.png";
-import pianoraScreen from "../assets/screens/pianora.png";
-import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.png";
+import mineSweeperScreen from "../assets/screens/mine-sweeper.webp";
+import starSiegeScreen from "../assets/screens/star-siege.webp";
+import ticTacNoraScreen from "../assets/screens/tic-tac-nora.webp";
+import anoracondaScreen from "../assets/screens/anoraconda.webp";
+import arkanoraScreen from "../assets/screens/arkanora.webp";
+import pianoraScreen from "../assets/screens/pianora.webp";
+import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.webp";
 
 function Home() {
   useRouteMeta("/");

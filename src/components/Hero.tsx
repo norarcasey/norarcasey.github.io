@@ -54,9 +54,11 @@ export function Hero(): React.ReactElement {
       >
         {HEADLINE_TITLE}
       </Typography>
+      {/* The home page's h1. Styled as body copy rather than a display
+          heading: it is the page's subject, not its loudest element. */}
       <Typography
         variant="h6"
-        component="p"
+        component="h1"
         sx={{ color: "#363435", fontWeight: 600, mt: 0.5, mb: 1.5 }}
       >
         Building products end to end and leading the teams that ship them

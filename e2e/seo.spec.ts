@@ -104,7 +104,7 @@ test.describe("prerendered routes", () => {
     // the right route rather than the home page.
     await page.goto("/crucinora/");
     await page.waitForLoadState("networkidle");
-    await expect(page.getByRole("heading", { level: 2 })).toHaveText(
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       "CruciNora"
     );
     await expect(page).toHaveTitle("CruciNora · Nora Casey");

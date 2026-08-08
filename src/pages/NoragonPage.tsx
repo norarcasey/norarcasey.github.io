@@ -11,7 +11,7 @@ import {
 } from "../components/ProjectShowcase";
 import { useRouteMeta } from "../hooks/usePageMeta";
 import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
-import noragonScreen from "../assets/screens/legends-of-noragon.png";
+import noragonScreen from "../assets/screens/legends-of-noragon.webp";
 
 const PLAY_URL = "https://www.legendsofnoragon.com/";
 
@@ -51,11 +51,15 @@ export function NoragonPage(): React.ReactElement {
             component="img"
             src={noragonScreen}
             alt="A procedurally generated dungeon in Legends of Noragon"
+            decoding="async"
             sx={{
               width: "100%",
               height: "auto",
               borderRadius: 1,
               display: "block",
+              // Reserves the box before the file lands, so the page doesn't
+              // reflow around it.
+              aspectRatio: "558 / 562",
             }}
           />
           <Button
@@ -91,7 +95,7 @@ export function NoragonPage(): React.ReactElement {
           {/* maxWidth, not width: the column caps the measure for readability
               on a wide band but still narrows when the grid does. */}
           <Box sx={{ maxWidth: "72ch" }}>
-            <Typography variant="h6" component="h3" sx={{ color: ACCENT_BLUE }}>
+            <Typography variant="h6" component="h2" sx={{ color: ACCENT_BLUE }}>
               How it's built
             </Typography>
             <Typography variant="body1">
@@ -108,7 +112,7 @@ export function NoragonPage(): React.ReactElement {
           </Box>
 
           <Box sx={{ maxWidth: "72ch" }}>
-            <Typography variant="h6" component="h3" sx={{ color: ACCENT_BLUE }}>
+            <Typography variant="h6" component="h2" sx={{ color: ACCENT_BLUE }}>
               Fun challenges
             </Typography>
             <Typography variant="body1">

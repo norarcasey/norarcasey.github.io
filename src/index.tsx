@@ -2,22 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./Root";
-import {
-  ContactMePage,
-  ErrorPage,
-  MineSweeperPage,
-  ResumePage,
-  TicTacNoraPage,
-  AnoracondaPage,
-  ArkanoraPage,
-  SpaceInvadersPage,
-  NoragonPage,
-  CruciNoraPage,
-  PianoraPage,
-} from "./pages";
+import { ErrorPage } from "./pages/ErrorPage";
 
 import "./index.css";
 
+// Every project page carries its own game package, and Pianora drags in Tone.js
+// on top of that. Imported eagerly they all landed in the one bundle each
+// visitor downloads before seeing anything, whether or not they ever opened a
+// game. `lazy` fetches a page's code the first time someone asks for that
+// route. The shell, the home page, and the error page stay eager: they are
+// what a first visit renders.
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,40 +20,73 @@ const router = createBrowserRouter([
     children: [
       {
         path: "contact-me",
-        element: <ContactMePage />,
+        lazy: () =>
+          import("./pages/ContactMePage").then((m) => ({
+            Component: m.ContactMePage,
+          })),
       },
-      { path: "resume", element: <ResumePage /> },
+      {
+        path: "resume",
+        lazy: () =>
+          import("./pages/ResumePage").then((m) => ({
+            Component: m.ResumePage,
+          })),
+      },
       {
         path: "mine-sweeper",
-        element: <MineSweeperPage />,
+        lazy: () =>
+          import("./pages/MineSweeperPage").then((m) => ({
+            Component: m.MineSweeperPage,
+          })),
       },
       {
         path: "tic-tac-nora",
-        element: <TicTacNoraPage />,
+        lazy: () =>
+          import("./pages/TicTacNoraPage").then((m) => ({
+            Component: m.TicTacNoraPage,
+          })),
       },
       {
         path: "anoraconda",
-        element: <AnoracondaPage />,
+        lazy: () =>
+          import("./pages/AnoracondaPage").then((m) => ({
+            Component: m.AnoracondaPage,
+          })),
       },
       {
         path: "arkanora",
-        element: <ArkanoraPage />,
+        lazy: () =>
+          import("./pages/ArkanoraPage").then((m) => ({
+            Component: m.ArkanoraPage,
+          })),
       },
       {
         path: "pianora",
-        element: <PianoraPage />,
+        lazy: () =>
+          import("./pages/PianoraPage").then((m) => ({
+            Component: m.PianoraPage,
+          })),
       },
       {
         path: "space-invaders",
-        element: <SpaceInvadersPage />,
+        lazy: () =>
+          import("./pages/SpaceInvadersPage").then((m) => ({
+            Component: m.SpaceInvadersPage,
+          })),
       },
       {
         path: "legends-of-noragon",
-        element: <NoragonPage />,
+        lazy: () =>
+          import("./pages/NoragonPage").then((m) => ({
+            Component: m.NoragonPage,
+          })),
       },
       {
         path: "crucinora",
-        element: <CruciNoraPage />,
+        lazy: () =>
+          import("./pages/CruciNoraPage").then((m) => ({
+            Component: m.CruciNoraPage,
+          })),
       },
     ],
   },

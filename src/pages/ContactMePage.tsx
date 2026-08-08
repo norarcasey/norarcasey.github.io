@@ -19,7 +19,7 @@ export function ContactMePage(): React.ReactElement {
       >
         <section className="tile">
           <Box display="flex" flexDirection="column" gap={2}>
-            <Typography variant="h3" component="h2">
+            <Typography variant="h3" component="h1">
               Contact Me
             </Typography>
             <Typography variant="body1">

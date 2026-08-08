@@ -55,7 +55,7 @@ interface ShowcaseHeaderProps {
   title: string;
 }
 
-/** The project title, spanning the full width above both columns. */
+/** The project title, the page's h1, spanning the full width above both columns. */
 export function ShowcaseHeader({
   title,
 }: ShowcaseHeaderProps): React.ReactElement {
@@ -70,14 +70,14 @@ export function ShowcaseHeader({
         width: "100%",
         boxSizing: "border-box",
         // The heading is the only thing in this slot, so drop the trailing
-        // margin `.tile h2` adds for tiles that have copy beneath the heading.
+        // margin `.tile h1` adds for tiles that have copy beneath the heading.
         // Spacing below the header is owned here instead.
-        "& h2": { mb: 0 },
+        "& h1": { mb: 0 },
         mb: { xs: 2, lg: 7 },
         pb: 0,
       }}
     >
-      <Typography variant="h3" component="h2">
+      <Typography variant="h3" component="h1">
         {title}
       </Typography>
     </Box>

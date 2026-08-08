@@ -1,5 +1,5 @@
 import { renderRouteHtml, renderSitemap, routeOutputPath } from "./prerender";
-import { SITE_ROUTES } from "../src/data/siteRoutes";
+import { SITE_ROUTES, SITE_ROUTE_PATHS } from "../src/data/siteRoutes";
 
 // Shaped like the real index.html after Prettier: attributes wrapped across
 // lines and in no guaranteed order, which is what the tag patterns have to
@@ -137,5 +137,63 @@ describe("renderSitemap", () => {
 
   it("ends with a newline", () => {
     expect(sitemap.endsWith("\n")).toBe(true);
+  });
+});
+
+describe("structured data", () => {
+  /** The JSON-LD graph the page carries, parsed back out of the script tag. */
+  function graphOf(html: string): Record<string, unknown>[] {
+    const json = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/
+      .exec(html)?.[1]
+      ?.replace(/\\u003c/g, "<");
+    expect(json).toBeTruthy();
+    const parsed = JSON.parse(json ?? "{}");
+    expect(parsed["@context"]).toBe("https://schema.org");
+    return parsed["@graph"];
+  }
+
+  it("describes the person and the site on every page", () => {
+    for (const path of SITE_ROUTE_PATHS) {
+      const types = graphOf(renderRouteHtml(TEMPLATE, path)).map(
+        (node) => node["@type"]
+      );
+      expect(types).toContain("Person");
+      expect(types).toContain("WebSite");
+    }
+  });
+
+  it("describes a game page as software the person wrote", () => {
+    const game = graphOf(renderRouteHtml(TEMPLATE, "/arkanora")).find(
+      (node) => node["@type"] === "SoftwareApplication"
+    );
+    expect(game?.name).toBe("Arkanora");
+    expect(game?.applicationCategory).toBe("GameApplication");
+    expect(game?.author).toEqual({ "@id": "https://noracasey.com/#nora" });
+  });
+
+  it("points a hosted project at where it actually runs", () => {
+    const app = graphOf(renderRouteHtml(TEMPLATE, "/crucinora")).find(
+      (node) => node["@type"] === "SoftwareApplication"
+    );
+    expect(app?.url).toBe("https://crucinora.com");
+  });
+
+  it("does not repeat the person as a page on the home page", () => {
+    const types = graphOf(renderRouteHtml(TEMPLATE, "/")).map(
+      (node) => node["@type"]
+    );
+    expect(types).toEqual(["Person", "WebSite"]);
+  });
+
+  it("escapes markup so the JSON cannot close its own script tag", () => {
+    const html = renderRouteHtml(TEMPLATE, "/crucinora");
+    const body =
+      /<script type="application\/ld\+json">([\s\S]*?)<\/script>/.exec(
+        html
+      )?.[1];
+    // Not one raw `<` inside the block, so no value can end the tag early.
+    expect(body).not.toContain("<");
+    // And the escaping keeps it parseable.
+    expect(() => JSON.parse(body ?? "")).not.toThrow();
   });
 });

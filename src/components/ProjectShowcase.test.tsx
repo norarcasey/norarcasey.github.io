@@ -44,7 +44,7 @@ describe("ProjectShowcase", () => {
     );
 
     expect(
-      screen.getByRole("heading", { level: 2, name: "Arkanora" })
+      screen.getByRole("heading", { level: 1, name: "Arkanora" })
     ).toBeInTheDocument();
     expect(screen.getByText("What the project is.")).toBeInTheDocument();
     expect(screen.getByText("the game")).toBeInTheDocument();
@@ -71,7 +71,7 @@ describe("ProjectShowcase", () => {
     const areaFor = (el: HTMLElement) =>
       getComputedStyle(slotOf(el, container)).gridArea;
 
-    expect(areaFor(screen.getByRole("heading", { level: 2 }))).toBe("header");
+    expect(areaFor(screen.getByRole("heading", { level: 1 }))).toBe("header");
     expect(areaFor(screen.getByText("What the project is."))).toBe("summary");
     expect(areaFor(screen.getByText("the game"))).toBe("game");
     expect(areaFor(screen.getByText("How it is built."))).toBe("details");
@@ -87,7 +87,7 @@ describe("ProjectShowcase", () => {
       </ProjectShowcase>
     );
 
-    expect(screen.getByRole("heading", { level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
     expect(screen.queryByText("How it is built.")).not.toBeInTheDocument();
   });
 
@@ -101,7 +101,7 @@ describe("ProjectShowcase", () => {
       </ProjectShowcase>
     );
 
-    const header = slotOf(screen.getByRole("heading", { level: 2 }), container);
+    const header = slotOf(screen.getByRole("heading", { level: 1 }), container);
     expect(getComputedStyle(header).width).toBe("100%");
     expect(getComputedStyle(header).boxSizing).toBe("border-box");
   });

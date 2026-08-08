@@ -48,7 +48,7 @@ order anyway.
 
 | Slot              | Props                   | Holds                                                                 |
 | ----------------- | ----------------------- | --------------------------------------------------------------------- |
-| `ShowcaseHeader`  | `title`                 | The project name. Renders the `h2`, so don't add your own.            |
+| `ShowcaseHeader`  | `title`                 | The project name. Renders the page's `h1`, so don't add your own.     |
 | `ShowcaseSummary` | `children`              | The narrow left column: what the project is and how to use it.        |
 | `ShowcaseGame`    | `width`, `hideOnMobile` | The visual column: an embedded component, or a screenshot and a link. |
 | `ShowcaseDetails` | `children`              | The full-width band under both columns, for the engineering write-up. |
@@ -56,6 +56,9 @@ order anyway.
 `ShowcaseSummary` stacks its children with a gap, so give it a list of
 `Typography` blocks rather than one wrapper `Box`. `ShowcaseDetails` does not,
 so space its own children yourself.
+
+Headings inside the slots start at `h2`, since the header owns the `h1`. Skipping
+a level fails the axe suite.
 
 `ShowcaseGame` props:
 
@@ -122,8 +125,9 @@ than restating it.
 
 ## Adding a new project page
 
-1. Write the page in `src/pages`, export it from `src/pages/index.ts`, and add
-   the route in `src/index.tsx`.
+1. Write the page in `src/pages` and register it in `src/index.tsx` as a `lazy`
+   route, matching the others. Lazy so the page's game package is fetched when
+   someone opens it rather than by every visitor to the home page.
 2. Add the path, title, and description to `src/data/siteRoutes.ts`. That one
    entry is what gives the route a prerendered HTML file, a canonical URL, a
    social card, and a sitemap line. A unit test fails if the router and this

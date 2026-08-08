@@ -42,7 +42,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
             alignItems="center"
             gap={1}
           >
-            <Typography variant="h4" component="h2">
+            <Typography variant="h4" component="h1">
               Nora Casey
             </Typography>
             <Typography variant="h5" component="p">
@@ -83,7 +83,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Grid>
       <Grid>
         <Box display="flex" flexDirection="column" gap={1}>
-          <Typography variant="h6" component="h3">
+          <Typography variant="h6" component="h2">
             Summary
           </Typography>
           <Typography variant="body2">
@@ -108,7 +108,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Grid>
       <Grid size={12}>
         <Box>
-          <Typography variant="h6" component="h3">
+          <Typography variant="h6" component="h2">
             Skills
           </Typography>
           {/* Grouped by layer so the full-stack range is legible at a glance
@@ -128,7 +128,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       <Grid>
         {/* TODO: Add Icons for companies */}
         <Box>
-          <Typography variant="h6" component="h3">
+          <Typography variant="h6" component="h2">
             Experience
           </Typography>
           {experience.map((entry, index) => (
@@ -146,7 +146,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       <Grid>
         {/* TODO: Add Icons for schools */}
         <Box>
-          <Typography variant="h6" component="h3">
+          <Typography variant="h6" component="h2">
             Education
           </Typography>
           {education.map((entry) => (
@@ -161,7 +161,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Grid>
       <Grid size={12}>
         <Box>
-          <Typography variant="h6" component="h3">
+          <Typography variant="h6" component="h2">
             Selected projects
           </Typography>
           {selectedProjects.map((project) => (
@@ -182,7 +182,7 @@ export const Resume = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Grid>
       <Grid size={12}>
         <Box>
-          <Typography variant="h6" component="h3">
+          <Typography variant="h6" component="h2">
             Languages
           </Typography>
           <Typography variant="subtitle1" component="p">

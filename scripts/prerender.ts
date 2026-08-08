@@ -9,6 +9,7 @@ import {
   pageTitle,
   type SiteRoutePath,
 } from "../src/data/siteRoutes";
+import { structuredDataFor } from "../src/data/structuredData";
 
 // GitHub Pages has no server-side routing, so a single-page app there normally
 // answers every deep link with a 404 and relies on 404.html to bounce the
@@ -128,7 +129,27 @@ export function renderRouteHtml(template: string, path: SiteRoutePath): string {
     'meta name="twitter:description"'
   );
 
-  return html;
+  return replaceOne(
+    html,
+    /<\/head>/,
+    () => `  ${structuredDataTag(path)}\n  </head>`,
+    "</head>"
+  );
+}
+
+/**
+ * The route's JSON-LD, as a script tag to drop into <head>.
+ *
+ * `<` is escaped: a `</script>` sequence inside the JSON would otherwise close
+ * the tag early and spill the rest of the graph into the page as markup. The
+ * escape is invisible to a JSON parser.
+ */
+function structuredDataTag(path: SiteRoutePath): string {
+  const json = JSON.stringify(structuredDataFor(path), null, 2).replace(
+    /</g,
+    "\\u003c"
+  );
+  return `<script type="application/ld+json">\n${json}\n</script>`;
 }
 
 /**
