@@ -185,15 +185,6 @@ h3 {
 
 /* ── Blog ─────────────────────────────────────────────────────────────── */
 
-/* The header's other actions are icons; this one is a word, so it needs
-   horizontal padding and an underline — it sits in a nav, where color alone
-   would not distinguish it (WCAG 1.4.1). */
-.blog-link {
-  padding: 0 12px;
-  text-decoration: underline;
-  font-weight: 600;
-}
-
 .blog-list {
   list-style: none;
   margin: 0;

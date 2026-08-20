@@ -3,6 +3,7 @@ import { Box, Typography, ThemeProvider } from "@mui/material";
 import { Outlet, Routes, Route, Link, useLocation } from "react-router-dom";
 
 import {
+  BlogIcon,
   EmailIcon,
   LinkedInIcon,
   GithubIcon,
@@ -74,8 +75,8 @@ export function Root(): React.ReactElement {
           </Link>
         </Box>
         <Box display="flex" justifyContent="end" alignItems="center">
-          <Link to="/blog" className="header-action blog-link">
-            Blog
+          <Link to="/blog" className="header-action" aria-label="Blog">
+            <BlogIcon />
           </Link>
           <Link to="/resume" className="header-action" aria-label="Résumé">
             <ResumeIcon />
