@@ -1,11 +1,19 @@
 import { test, expect, type APIRequestContext } from "@playwright/test";
 
+import { SITE_ROUTE_PATHS } from "../src/data/siteRoutes";
+
 // These assert on what the *server* hands back, before any JavaScript runs.
 // That is the whole point of prerendering: crawlers and link unfurlers see
 // only this. `yarn preview` serves the real build output, so a passing run
 // here means the files GitHub Pages will publish are the ones checked.
 
-const ROUTES = ["/", "/crucinora/", "/legends-of-noragon/", "/resume/"];
+const ROUTES = [
+  "/",
+  "/crucinora/",
+  "/legends-of-noragon/",
+  "/resume/",
+  "/blog/",
+];
 
 /** The served HTML, fetched without executing it. */
 async function fetchHtml(
@@ -79,7 +87,16 @@ test.describe("prerendered routes", () => {
     const urls = (await response.text()).trim().split("\n");
 
     expect(urls).toContain("https://noracasey.com/crucinora/");
-    expect(urls).toHaveLength(11);
+
+    // The count is derived rather than hardcoded: the sitemap now also lists
+    // one URL per published blog post, and how many exist depends on what was
+    // published when the site was built. Checked against the blog's own
+    // manifest so a post missing from the sitemap is still a failure.
+    const posts = await (await request.get("/blog/index.json")).json();
+    expect(urls).toHaveLength(SITE_ROUTE_PATHS.length + posts.length);
+    for (const post of posts) {
+      expect(urls).toContain(`https://noracasey.com/blog/${post.slug}/`);
+    }
 
     // Every listed URL must resolve on the served build, which is the check
     // that would have caught the 404s.

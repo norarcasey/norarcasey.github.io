@@ -15,9 +15,28 @@ function routerPaths(): string[] {
   return paths.map((path) => (path.startsWith("/") ? path : `/${path}`));
 }
 
+/** Router paths with a URL parameter, e.g. "/blog/:slug". */
+function dynamicRouterPaths(): string[] {
+  return routerPaths().filter((path) => path.includes(":"));
+}
+
+/** Router paths that name one fixed page. */
+function staticRouterPaths(): string[] {
+  return routerPaths().filter((path) => !path.includes(":"));
+}
+
 describe("SITE_ROUTES", () => {
-  it("covers every route the router serves", () => {
-    expect([...SITE_ROUTE_PATHS].sort()).toEqual(routerPaths().sort());
+  it("covers every fixed route the router serves", () => {
+    expect([...SITE_ROUTE_PATHS].sort()).toEqual(staticRouterPaths().sort());
+  });
+
+  // Blog posts are pages too, but there is one per database row rather than
+  // one per entry in this table, so they can't be listed here. They get their
+  // HTML and sitemap entries from blogPages() in scripts/prerender.ts, driven
+  // by the posts fetched at build time. This test pins the exception: any
+  // *other* dynamic route added later has no prerendering and would fail here.
+  it("leaves only the blog post route to be prerendered per-post", () => {
+    expect(dynamicRouterPaths()).toEqual(["/blog/:slug"]);
   });
 
   it("gives each page a title and a description worth indexing", () => {

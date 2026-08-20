@@ -10,6 +10,9 @@ const PAGES = [
   { name: "Home", path: "/" },
   { name: "Résumé", path: "/resume" },
   { name: "Contact", path: "/contact-me" },
+  // The listing, not a post: how many posts exist depends on what's published
+  // at build time, so only this page is guaranteed to be there in CI.
+  { name: "Blog", path: "/blog" },
   { name: "CruciNora", path: "/crucinora" },
   { name: "Legends of Noragon", path: "/legends-of-noragon" },
 ];

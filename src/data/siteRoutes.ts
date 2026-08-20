@@ -67,6 +67,11 @@ export const SITE_ROUTES = {
     description:
       "CruciNora, an AI-assisted crossword construction app by Nora Casey. Design an NYT-style grid, auto-fill it with a backtracking solver, and clue it with Claude's help.",
   },
+  "/blog": {
+    title: "Blog",
+    description:
+      "Technical writing by Nora Casey on building for the web: React and TypeScript, Postgres and RLS, testing, CI/CD, and the things that went wrong along the way.",
+  },
   "/contact-me": {
     title: "Contact",
     description: "Get in touch with Nora Casey by email, LinkedIn, or GitHub.",

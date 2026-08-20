@@ -74,6 +74,9 @@ export function Root(): React.ReactElement {
           </Link>
         </Box>
         <Box display="flex" justifyContent="end" alignItems="center">
+          <Link to="/blog" className="header-action blog-link">
+            Blog
+          </Link>
           <Link to="/resume" className="header-action" aria-label="Résumé">
             <ResumeIcon />
           </Link>

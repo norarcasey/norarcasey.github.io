@@ -182,3 +182,116 @@ h3 {
   min-width: 44px;
   min-height: 44px;
 }
+
+/* ── Blog ─────────────────────────────────────────────────────────────── */
+
+/* The header's other actions are icons; this one is a word, so it needs
+   horizontal padding and an underline — it sits in a nav, where color alone
+   would not distinguish it (WCAG 1.4.1). */
+.blog-link {
+  padding: 0 12px;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.blog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.blog-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Dates and tags: secondary to the title, but still above the 4.5:1 contrast
+   floor against the page background. */
+.blog-meta {
+  color: #4a4a4a;
+}
+
+/* The post body is HTML authored in the studio, so these styles have to cover
+   whatever the editor can produce rather than a fixed set of components.
+   It is raw markup rather than MUI components, so nothing applies the theme's
+   font to it: MUI styles its own components only, and `body` sets no family.
+   Left alone it renders in the browser's default serif and reads as a
+   different site, so the stack is restated here to match theme.ts. */
+.blog-body,
+.blog-body h1,
+.blog-body h2,
+.blog-body h3,
+.blog-body h4,
+.blog-body p,
+.blog-body li,
+.blog-body blockquote,
+.blog-body td,
+.blog-body th {
+  font-family:
+    "Roboto Flex",
+    Menlo,
+    Monaco,
+    "Courier New",
+    monospace,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+
+.blog-body {
+  line-height: 1.7;
+}
+
+.blog-body h2,
+.blog-body h3,
+.blog-body h4 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.blog-body p {
+  margin: 0 0 16px;
+}
+
+.blog-body a {
+  text-decoration: underline;
+}
+
+.blog-body img,
+.blog-body video,
+.blog-body iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+.blog-body blockquote {
+  margin: 16px 0;
+  padding-left: 16px;
+  border-left: 3px solid #d0d0d0;
+  color: #3a3a3a;
+}
+
+.blog-body pre {
+  overflow-x: auto;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+
+.blog-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.95em;
+}
+
+.blog-body ul,
+.blog-body ol {
+  margin: 0 0 16px;
+  padding-left: 24px;
+}

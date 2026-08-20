@@ -16,6 +16,12 @@
 /build
 /docs
 
+# blog JSON, fetched from Supabase at build time (scripts/blogContent.ts)
+/public/blog
+
+# local Supabase credentials for the build-time blog fetch
+.env
+
 # misc
 .DS_Store
 .env.local

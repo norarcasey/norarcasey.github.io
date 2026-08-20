@@ -1,5 +1,16 @@
-import { renderRouteHtml, renderSitemap, routeOutputPath } from "./prerender";
-import { SITE_ROUTES, SITE_ROUTE_PATHS } from "../src/data/siteRoutes";
+import {
+  blogPages,
+  renderFeed,
+  renderPageHtml,
+  renderRouteHtml,
+  renderSitemap,
+  routeOutputPath,
+} from "./prerender";
+import {
+  SITE_ROUTES,
+  SITE_ROUTE_PATHS,
+  canonicalUrl,
+} from "../src/data/siteRoutes";
 
 // Shaped like the real index.html after Prettier: attributes wrapped across
 // lines and in no guaranteed order, which is what the tag patterns have to
@@ -195,5 +206,98 @@ describe("structured data", () => {
     expect(body).not.toContain("<");
     // And the escaping keeps it parseable.
     expect(() => JSON.parse(body ?? "")).not.toThrow();
+  });
+});
+
+// ── Blog ────────────────────────────────────────────────────────────────────
+
+const POST = {
+  slug: "rls-performance",
+  title: "Debugging RLS performance",
+  excerpt: "Postgres re-evaluated auth.uid() per row.",
+  tags: [{ name: "postgres", color: "#6B6454", category: "topic" }],
+  publishedAt: "2026-03-18T12:00:00Z",
+  updatedAt: "2026-03-19T12:00:00Z",
+};
+
+describe("blog pages", () => {
+  it("gives a post its own title, description, and canonical URL", () => {
+    const [page] = blogPages([POST]);
+    expect(page.path).toBe("/blog/rls-performance");
+
+    const html = renderPageHtml(TEMPLATE, page.meta);
+    expect(html).toContain(
+      "<title>Debugging RLS performance · Nora Casey</title>"
+    );
+    expect(html).toContain(
+      '<link rel="canonical" href="https://noracasey.com/blog/rls-performance/" />'
+    );
+    expect(html).toContain("Postgres re-evaluated");
+  });
+
+  it("describes the post as a BlogPosting authored by the site's person", () => {
+    const html = renderPageHtml(TEMPLATE, blogPages([POST])[0].meta);
+    const json = /<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/
+      .exec(html)?.[1]
+      .replace(/\\u003c/g, "<");
+    const graph = JSON.parse(json ?? "{}")["@graph"] as Record<
+      string,
+      unknown
+    >[];
+
+    const posting = graph.find((node) => node["@type"] === "BlogPosting");
+    expect(posting).toMatchObject({
+      headline: "Debugging RLS performance",
+      datePublished: "2026-03-18T12:00:00Z",
+      dateModified: "2026-03-19T12:00:00Z",
+      keywords: ["postgres"],
+    });
+    expect(posting?.author).toEqual({ "@id": "https://noracasey.com/#nora" });
+  });
+});
+
+describe("renderSitemap with posts", () => {
+  it("lists every static route and every post", () => {
+    const sitemap = renderSitemap([POST]);
+    expect(sitemap).toContain("https://noracasey.com/blog/rls-performance/");
+    // The static routes are still all there.
+    for (const path of SITE_ROUTE_PATHS) {
+      expect(sitemap).toContain(canonicalUrl(path));
+    }
+  });
+
+  it("lists only the static routes when there are no posts", () => {
+    expect(renderSitemap()).not.toContain("/blog/rls-performance/");
+  });
+});
+
+describe("renderFeed", () => {
+  it("produces an RSS channel with one item per post", () => {
+    const feed = renderFeed([POST]);
+    expect(feed).toContain('<rss version="2.0"');
+    expect(feed).toContain("<title>Debugging RLS performance</title>");
+    expect(feed).toContain(
+      "<link>https://noracasey.com/blog/rls-performance/</link>"
+    );
+    expect(feed).toContain("<category>postgres</category>");
+    // RFC-822 date, which is what RSS readers parse.
+    expect(feed).toContain("<pubDate>Wed, 18 Mar 2026 12:00:00 GMT</pubDate>");
+  });
+
+  it("summarises rather than shipping the body, which is styled for this site", () => {
+    const feed = renderFeed([POST]);
+    expect(feed).toContain("Postgres re-evaluated");
+    expect(feed).not.toContain("<p>");
+  });
+
+  it("escapes markup in titles so one post cannot break the feed", () => {
+    const feed = renderFeed([{ ...POST, title: "A & B <c>" }]);
+    expect(feed).toContain("<title>A &amp; B &lt;c&gt;</title>");
+  });
+
+  it("is still valid with no posts", () => {
+    const feed = renderFeed([]);
+    expect(feed).toContain("<channel>");
+    expect(feed).not.toContain("<item>");
   });
 });

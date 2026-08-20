@@ -19,6 +19,20 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "blog",
+        lazy: () =>
+          import("./pages/BlogIndexPage").then((m) => ({
+            Component: m.BlogIndexPage,
+          })),
+      },
+      {
+        path: "blog/:slug",
+        lazy: () =>
+          import("./pages/BlogPostPage").then((m) => ({
+            Component: m.BlogPostPage,
+          })),
+      },
+      {
         path: "contact-me",
         lazy: () =>
           import("./pages/ContactMePage").then((m) => ({

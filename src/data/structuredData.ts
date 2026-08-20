@@ -1,3 +1,4 @@
+import { blogIndexUrl, blogUrl, type BlogSummary } from "./blog";
 import { HEADLINE_TITLE } from "./resume";
 import {
   SITE_NAME,
@@ -113,4 +114,41 @@ export function structuredDataFor(path: SiteRoutePath): JsonLd {
   if (path !== "/") graph.push(pageNode(path));
 
   return { "@context": "https://schema.org", "@graph": graph };
+}
+
+/**
+ * The JSON-LD graph for one blog post: a BlogPosting, authored by the same
+ * person node the rest of the site points at, sitting inside the blog.
+ *
+ * Separate from structuredDataFor because posts aren't in SITE_ROUTES — they
+ * come from the database, so their metadata is per-post rather than per-route.
+ */
+export function blogPostStructuredData(post: BlogSummary): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      person(),
+      {
+        "@type": "Blog",
+        "@id": `${blogIndexUrl()}#blog`,
+        url: blogIndexUrl(),
+        name: `${SITE_NAME} — Blog`,
+        publisher: { "@id": PERSON_ID },
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": blogUrl(post.slug),
+        url: blogUrl(post.slug),
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.publishedAt,
+        dateModified: post.updatedAt,
+        author: { "@id": PERSON_ID },
+        // The post's tags, which are the subjects it actually covers.
+        keywords: post.tags.map((tag) => tag.name),
+        isPartOf: { "@id": `${blogIndexUrl()}#blog` },
+        mainEntityOfPage: blogUrl(post.slug),
+      },
+    ],
+  };
 }

@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Publishing a technical post in the Inkwell studio calls a Supabase Edge
+  # Function, which fires this. The blog's pages are generated at build time,
+  # so a new post only appears once the site is rebuilt.
+  repository_dispatch:
+    types: [content-published]
 
 # Allow this workflow to publish to GitHub Pages.
 permissions:
@@ -19,6 +24,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Healthy runs take ~3 minutes; the cap keeps an infrastructure hang from
+    # burning hours of Actions time.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
 
@@ -39,14 +47,24 @@ jobs:
       - name: Test
         run: yarn test
 
+      # Browser binary only — deliberately NOT `--with-deps`, which shells out
+      # to apt-get and has hung for hours on a bad Ubuntu mirror. The
+      # ubuntu-latest image already carries the libraries Chromium needs, so a
+      # missing one fails fast at launch rather than stalling the job.
       - name: Install Playwright browser
-        run: yarn playwright install --with-deps chromium
+        run: yarn playwright install chromium
 
       - name: End-to-end accessibility scan
         run: yarn test:e2e
 
       - name: Build
         run: yarn build
+        env:
+          # Read at build time to fetch published posts. Both are public values
+          # (the anon key is RLS-protected), but they live in secrets so the
+          # project can be pointed elsewhere without a code change.
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
