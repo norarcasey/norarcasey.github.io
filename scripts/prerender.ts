@@ -289,8 +289,14 @@ export function prerenderRoutes(): Plugin {
     },
 
     closeBundle() {
+      // Rollup still calls closeBundle when the build failed earlier, and in
+      // that case there is no index.html to read. Bailing keeps this plugin's
+      // ENOENT from burying whatever actually went wrong.
+      const indexHtml = join(outDir, "index.html");
+      if (!existsSync(indexHtml)) return;
+
       // Read once, up front: the "/" render overwrites this same file.
-      const template = readFileSync(join(outDir, "index.html"), "utf8");
+      const template = readFileSync(indexHtml, "utf8");
 
       for (const path of SITE_ROUTE_PATHS) {
         const file = join(outDir, routeOutputPath(path));

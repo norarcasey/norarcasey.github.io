@@ -56,6 +56,12 @@ jobs:
 
       - name: End-to-end accessibility scan
         run: yarn test:e2e
+        env:
+          # Playwright's webServer runs its own `yarn build`, so this step needs
+          # the same credentials as the build step below — without them the
+          # blog fetch aborts the build and the scan never gets a server.
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       - name: Build
         run: yarn build
