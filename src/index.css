@@ -295,3 +295,45 @@ h3 {
   margin: 0 0 16px;
   padding-left: 24px;
 }
+
+/* Citations, as published by the studio: a superscript marker in the prose and
+   a numbered reference list appended at the end. The markup is static HTML in
+   the post body — the studio resolves the numbering at publish time — so there
+   is nothing to style here but the presentation. */
+.blog-body sup.citation {
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+.blog-body sup.citation a {
+  text-decoration: none;
+}
+
+.blog-body .references-heading {
+  margin-top: 40px;
+  font-size: 1.1rem;
+}
+
+.blog-body ol.references {
+  font-size: 0.9em;
+  padding-left: 24px;
+}
+
+.blog-body ol.references li {
+  margin-bottom: 8px;
+  /* Long URLs shouldn't push the page sideways on a phone. */
+  overflow-wrap: anywhere;
+}
+
+.blog-body .reference-backlink {
+  margin-right: 6px;
+  text-decoration: none;
+}
+
+/* Jumping to a reference should make it obvious which one you landed on —
+   otherwise the page scrolls and nothing appears to have happened. */
+.blog-body ol.references li:target {
+  background: #fff6d6;
+  border-radius: 3px;
+}
