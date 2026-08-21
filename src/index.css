@@ -200,6 +200,14 @@ h3 {
   gap: 6px;
 }
 
+/* A post's title is a link, and .inline-link underlines it. The dashed rule
+   every h2 carries is a section divider, which under a linked title lands as a
+   second line right beneath the first. The underline is the one that carries
+   meaning here, so the divider goes. */
+.blog-list-item h2 {
+  border-bottom: none;
+}
+
 /* Dates and tags: secondary to the title, but still above the 4.5:1 contrast
    floor against the page background. */
 .blog-meta {
