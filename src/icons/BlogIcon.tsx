@@ -18,15 +18,18 @@ export function BlogIcon({ color }: { color?: string }): React.ReactElement {
           square in the corner, it read as a little striped flag. Drawn as one
           evenodd path, so the border is the outer rect minus the inner one and
           the three lines of text sit back inside that hole. The last line is
-          short, the way a paragraph ends. */}
+          short, the way a paragraph ends.
+          The drawing runs corner to corner of the viewBox rather than sitting
+          inset in it, so it renders the same size as the résumé icon beside it,
+          which fills its own box. */}
       <path
         fillRule="evenodd"
-        d="M2 2h12v14H2z M3.5 3.5h9v11h-9z M5 5.5h6v1.4H5z M5 8.3h6v1.4H5z M5 11.1h3.5v1.4H5z"
+        d="M1 .6h11.5v16.5H1z M2.5 2.1h8.5v13.5H2.5z M4 4h5.5v1.5H4z M4 6.9h5.5v1.5H4z M4 9.8h5.5v1.5H4z M4 12.7h3v1.5H4z"
       />
       {/* The pen lies across the corner the page leaves free, angled as if it
           had just been set down. It keeps clear of the page rather than
-          overlapping it: at 30px an overlap merges into one blob. */}
-      <path d="M12.3 22.7 15.76 21.64 23.8 13.6 21.4 11.2 13.36 19.24Z" />
+          overlapping it: at 30px an overlap merges into a blob. */}
+      <path d="M11.6 23.96 15.17 22.87 23.74 14.3 21.26 11.82 12.69 20.39Z" />
     </svg>
   );
 }
