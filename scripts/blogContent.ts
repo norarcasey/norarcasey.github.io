@@ -11,7 +11,7 @@ import {
 } from "../src/data/blog";
 
 // The blog's content lives in the Inkwell studio's Supabase project, in the
-// `published_entries` table. Publishing a technical post writes a snapshot
+// `public_posts` view. Publishing a technical post writes a snapshot
 // there and pokes this repo to rebuild.
 //
 // The build turns those rows into static JSON under public/blog/, which the app
@@ -25,7 +25,7 @@ import {
 
 const SITE = "noracasey";
 
-/** Shape of a `published_entries` row, as PostgREST returns it. */
+/** Shape of a `public_posts` row, as PostgREST returns it. */
 interface SnapshotRow {
   slug: string;
   title: string | null;
@@ -75,7 +75,7 @@ export async function fetchBlogPosts(
   });
 
   const response = await fetch(
-    `${supabaseUrl.replace(/\/$/, "")}/rest/v1/published_entries?${query}`,
+    `${supabaseUrl.replace(/\/$/, "")}/rest/v1/public_posts?${query}`,
     { headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` } }
   );
 
