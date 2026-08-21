@@ -1,5 +1,8 @@
 import React from "react";
 
+/** The pen: a nib and a body, lying at 45° across the page's lower corner. */
+const PEN = "M12 23.9 15.57 22.81 23.74 14.64 21.26 12.16 13.09 20.33Z";
+
 export function BlogIcon({ color }: { color?: string }): React.ReactElement {
   const fill = color || "black";
   return (
@@ -13,23 +16,35 @@ export function BlogIcon({ color }: { color?: string }): React.ReactElement {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >
-      {/* A written page and the pen that wrote it.
-          The page is an outline, not a filled block: filled, with a picture
-          square in the corner, it read as a little striped flag. Drawn as one
-          evenodd path, so the border is the outer rect minus the inner one and
-          the three lines of text sit back inside that hole. The last line is
-          short, the way a paragraph ends.
-          The drawing runs corner to corner of the viewBox rather than sitting
-          inset in it, so it renders the same size as the résumé icon beside it,
-          which fills its own box. */}
+      <defs>
+        {/* Cuts a gap out of the page wherever the pen lies over it. Painting
+            the pen into the mask in black hides the page there; stroking the
+            same path widens that by half the stroke, which is the gap. Without
+            it the solid pen and the page's corner merge into one dark wedge. */}
+        <mask id="blog-icon-pen-gap">
+          <rect width="24" height="24" fill="white" />
+          <path
+            d={PEN}
+            fill="black"
+            stroke="black"
+            strokeWidth="2.2"
+            strokeLinejoin="round"
+          />
+        </mask>
+      </defs>
+
+      {/* The page: an outline, not a filled block, which read as a striped
+          flag. One evenodd path, so the border is the outer rect minus the
+          inner one and the lines of text sit back inside that hole. The last
+          line is short, the way a paragraph ends. It fills its box like the
+          résumé icon's page beside it, which is the thing the eye compares. */}
       <path
+        mask="url(#blog-icon-pen-gap)"
         fillRule="evenodd"
-        d="M1 .6h11.5v16.5H1z M2.5 2.1h8.5v13.5H2.5z M4 4h5.5v1.5H4z M4 6.9h5.5v1.5H4z M4 9.8h5.5v1.5H4z M4 12.7h3v1.5H4z"
+        d="M1 .6h15v20H1z M2.5 2.1h12v17h-12z M4 4.1h8.5v1.5H4z M4 7.6h8.5v1.5H4z M4 11.1h8.5v1.5H4z M4 14.6h5v1.5H4z"
       />
-      {/* The pen lies across the corner the page leaves free, angled as if it
-          had just been set down. It keeps clear of the page rather than
-          overlapping it: at 30px an overlap merges into a blob. */}
-      <path d="M11.6 23.96 15.17 22.87 23.74 14.3 21.26 11.82 12.69 20.39Z" />
+
+      <path d={PEN} />
     </svg>
   );
 }
