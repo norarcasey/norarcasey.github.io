@@ -32,3 +32,11 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+# Written by `vercel link`. Holds the project and org ids, and a short-lived
+# OIDC token.
+.vercel
+
+# `.env*` is what the Vercel CLI adds, which would also swallow .env.example.
+# That file is tracked on purpose: it is how somebody knows what to put in .env.
+.env
+.env.local
