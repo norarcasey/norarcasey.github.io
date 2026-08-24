@@ -14,7 +14,7 @@
 
 # production (built by CI and published to GitHub Pages via Actions)
 /build
-/docs
+/dist
 
 # blog JSON, fetched from Supabase at build time (scripts/blogContent.ts)
 /public/blog

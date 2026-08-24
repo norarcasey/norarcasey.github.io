@@ -4,25 +4,23 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  # Publishing a technical post in the Inkwell studio calls a Supabase Edge
-  # Function, which fires this. The blog's pages are generated at build time,
-  # so a new post only appears once the site is rebuilt.
-  repository_dispatch:
-    types: [content-published]
 
-# Allow this workflow to publish to GitHub Pages.
+# Publishing a post used to arrive here as a repository_dispatch, because
+# rebuilding was something only a token with write access to this repo could
+# ask for. It goes straight to a Vercel deploy hook now, which skips this
+# workflow entirely -- deliberately. A new post rebuilds the same commit
+# against new data, so there is no new code to lint and nothing these checks
+# would be checking. Code changes still come through here and are still gated.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# Only one deploy at a time; let an in-progress run finish.
+# Only one production deploy at a time; let an in-progress run finish.
 concurrency:
-  group: pages
+  group: production
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     # Healthy runs take ~3 minutes; the cap keeps an infrastructure hang from
     # burning hours of Actions time.
@@ -63,27 +61,22 @@ jobs:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
-      - name: Build
-        run: yarn build
+      # No separate build step. `vercel build` below runs the project's own
+      # build command, and the accessibility scan above has already built the
+      # site once through Playwright's webServer. Building a third time would
+      # only prove the same thing more slowly.
+      #
+      # The two builds do differ in one useful way: the scan builds with the
+      # secrets in this repo, and `vercel build` builds with the environment
+      # configured in the Vercel project. A mismatch between them shows up here
+      # rather than as an empty blog in production.
+
+      - name: Deploy to Vercel
+        run: |
+          npx --yes vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
+          npx --yes vercel@latest build --prod --token="$VERCEL_TOKEN"
+          npx --yes vercel@latest deploy --prebuilt --prod --token="$VERCEL_TOKEN"
         env:
-          # Read at build time to fetch published posts. Both are public values
-          # (the anon key is RLS-protected), but they live in secrets so the
-          # project can be pointed elsewhere without a code change.
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: ./docs
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

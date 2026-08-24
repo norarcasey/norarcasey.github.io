@@ -17,7 +17,7 @@ import {
 // The build turns those rows into static JSON under public/blog/, which the app
 // fetches at runtime. Writing into public/ rather than the build output means
 // one code path serves both `yarn dev` and `yarn build` — Vite copies public/
-// into docs/ on its own.
+// into the build output on its own.
 //
 // Why static JSON rather than querying Supabase from the browser: the pages
 // stay up if the database is down, the anon key never ships in the bundle, and

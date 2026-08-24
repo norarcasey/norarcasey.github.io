@@ -5,7 +5,6 @@ import { blogContent } from "./scripts/blogContent";
 import { prerenderRoutes } from "./scripts/prerender";
 
 // Custom domain (noracasey.com) is served from the repo root, so base is "/".
-// Build output goes to /docs to match the GitHub Pages "deploy from /docs" setup.
 export default defineConfig({
   // blogContent must precede prerenderRoutes: it writes public/blog/index.json
   // at buildStart, which the prerender reads at closeBundle to emit one HTML
@@ -13,7 +12,7 @@ export default defineConfig({
   plugins: [react(), blogContent(), prerenderRoutes()],
   base: "/",
   build: {
-    outDir: "docs",
+    outDir: "dist",
     emptyOutDir: true,
   },
   test: {
