@@ -16,7 +16,7 @@ yarn dev
 | Command         | What it does                                 |
 | --------------- | -------------------------------------------- |
 | `yarn dev`      | Start the local dev server                   |
-| `yarn build`    | Type-check and build to `docs/`              |
+| `yarn build`    | Type-check and build to `dist/`              |
 | `yarn test`     | Run the tests                                |
 | `yarn test:e2e` | Run the Playwright accessibility and SEO e2e |
 | `yarn lint`     | Lint with ESLint                             |
@@ -32,10 +32,10 @@ slots, the recipes, and the checklist for adding a page.
 ## Routes and metadata
 
 `src/data/siteRoutes.ts` is the one list of the site's pages. `yarn build`
-writes a real HTML file per route (`docs/crucinora/index.html` and so on) with
+writes a real HTML file per route (`dist/crucinora/index.html` and so on) with
 that route's title, description, canonical URL, and social card baked in, plus
-the sitemap. Without it GitHub Pages answers every deep link with a 404 and
-leans on `404.html` to redirect, which crawlers and link unfurlers don't follow.
+the sitemap. Without it a deep link would only ever serve the empty app shell,
+which crawlers and link unfurlers do not wait around to see filled in.
 
 ## Screenshots
 
@@ -61,4 +61,14 @@ the copy beside it doesn't jump when the file lands.
 
 ## Deploying
 
-Push to `main`. GitHub Actions runs the checks and deploys to GitHub Pages.
+Push to `main`. GitHub Actions runs the checks and, if they pass, deploys to
+Vercel. The checks are the gate: nothing reaches production without them.
+
+Publishing a post in the writing studio does **not** come through here. It calls
+a Vercel deploy hook directly, which rebuilds this same commit against the new
+content. There is no new code in that case, so there is nothing for the checks
+to check, and making a post wait on a full test run would only make publishing
+slow. Code changes are gated; content is not.
+
+`vercel.json` holds a catch-all rewrite so that any route the prerender did not
+emit a file for still lands in the app rather than on Vercel's own 404.
