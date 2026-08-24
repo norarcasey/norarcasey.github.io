@@ -71,6 +71,15 @@ jobs:
       # configured in the Vercel project. A mismatch between them shows up here
       # rather than as an empty blog in production.
 
+      # `vercel pull` fetches the project's own production environment, which is
+      # where the build gets VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.
+      #
+      # Both must stay NON-sensitive in Vercel. A variable marked sensitive
+      # cannot be read back, so it pulls down as the literal string
+      # "[SENSITIVE]" and the build fails on `new URL("[SENSITIVE]")` rather
+      # than on anything that names the real problem. Marking them sensitive
+      # would also protect nothing: the publishable key is compiled into the
+      # bundle and served to every visitor.
       - name: Deploy to Vercel
         run: |
           npx --yes vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
