@@ -10,8 +10,8 @@ const VISIT_URL = "https://crucinora.com";
 
 /**
  * Spotlight for the newest, most substantial project (CruciNora): a large
- * screenshot beside an elevator pitch and two calls to action. Sits at the top
- * of the home page so the strongest work is the first thing visitors see.
+ * screenshot beside an elevator pitch and two calls to action. Sits high on the
+ * home page, above the stack pitch, so the strongest work is seen early.
  */
 export function FeaturedProject(): React.ReactElement {
   return (

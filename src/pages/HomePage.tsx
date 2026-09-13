@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { About } from "../components/About";
 import { Hero, HOME_BAND_MAX_WIDTH } from "../components/Hero";
 import { FeaturedProject } from "../components/FeaturedProject";
+import { LatestPost } from "../components/LatestPost";
 import { ProjectBox } from "../components/ProjectBox";
 import { SkillsMatrix } from "../components/SkillsMatrix";
 import { useRouteMeta } from "../hooks/usePageMeta";
@@ -93,12 +94,15 @@ function Home() {
         </Grid>
       </Grid>
 
-      {/* Full-stack range, layer by layer, before the project spotlight */}
+      {/* Newest writing, then the project spotlight, then the stack pitch */}
+      <LatestPost />
+
+      <FeaturedProject />
+
+      {/* Full-stack range, layer by layer, after the project spotlight */}
       <Box sx={{ width: "100%", maxWidth: HOME_BAND_MAX_WIDTH, mx: "auto" }}>
         <SkillsMatrix intro="I have shipped production work at each of these layers. Each project page has a write-up of how that project is built." />
       </Box>
-
-      <FeaturedProject />
 
       {/* About me (2) beside projects (1) */}
       <Grid
