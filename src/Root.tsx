@@ -66,8 +66,18 @@ export function Root(): React.ReactElement {
               className="root-title"
               aria-label="Nora Casey"
               sx={{
-                typography: { sm: "h2", xs: "h3" },
+                // Sized by hand rather than through the h2/h3 variants: those
+                // land as media-query blocks that would restate the theme's
+                // sans after the fontFamily below and win.
+                fontSize: { xs: "3rem", sm: "3.75rem" },
+                fontWeight: 300,
+                lineHeight: 1.2,
                 letterSpacing: 0.01,
+                // The one monospace element on the site, on purpose: it is a
+                // regex, and the brackets and backslash only read as one in a
+                // mono. Everything else is the theme's sans.
+                fontFamily:
+                  'ui-monospace, Menlo, Monaco, "Courier New", monospace',
               }}
             >
               {`[\\n]ora casey`}

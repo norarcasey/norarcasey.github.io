@@ -16,12 +16,13 @@ const theme = createTheme({
     body1: {
       fontSize: "16px",
     },
+    // Sans only. Menlo and Monaco used to sit ahead of the system fonts here,
+    // which was harmless while Roboto Flex loaded and the whole design while it
+    // did not: index.html never loaded it, so the site rendered in Menlo for
+    // two years. The wordmark is the one thing set in a mono, and it says so
+    // itself in Root.tsx.
     fontFamily: [
       '"Roboto Flex"',
-      "Menlo",
-      "Monaco",
-      '"Courier New"',
-      "monospace",
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI"',
