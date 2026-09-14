@@ -1,0 +1,89 @@
+# noracasey.com
+
+The portfolio site at https://noracasey.com. Vite, React 19, TypeScript, MUI for now
+(the redesign in `UI-13` replaces it with Tailwind and `@noratives/tokens`). Deployed to
+Vercel by GitHub Actions on every push to `main`. There are no pull requests here: one
+maintainer, push to `main`, the gate decides.
+
+## Before you start
+
+1. `node ~/src/noradar/scripts/runway.mjs open .` lists the unfinished items. The runway
+   itself is the Artifact at
+   https://claude.ai/code/artifact/d3f41697-663c-4428-8ab8-87130a23cb52. Read the item
+   you are taking before touching anything: the notes say what to change, what to leave
+   alone, and what was already decided.
+2. `yarn install` (Yarn 1, not npm; `yarn.lock` is the lockfile).
+3. `yarn gate` must pass before you start, so you know a failure later is yours.
+
+## The one check
+
+```
+yarn gate        # format:check, lint, tsc, test. What CI runs first.
+yarn test:e2e    # Playwright + axe over the built site. Slow; CI runs it after the gate.
+yarn build       # tsc + vite build. Needs VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
+                 # in .env.local, or the blog fetch aborts the build.
+```
+
+Run `yarn gate` before every push. Run `yarn format` first if it fails on formatting;
+Prettier is the arbiter and CI checks it before anything else.
+
+## Where things are
+
+| Concern               | Place                                                                                                                                                 |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The list of pages     | `src/data/siteRoutes.ts`. Adding a route here is what puts it in the sitemap, the prerender, and the router test. Nowhere else.                       |
+| The router            | `src/index.tsx`. Every page but home is a lazy route.                                                                                                 |
+| Shell: header, footer | `src/Root.tsx`                                                                                                                                        |
+| Colours               | `src/colors.ts`. Text uses the AA-tuned pair; the brighter pair is decorative only.                                                                   |
+| Theme and global CSS  | `src/theme.ts`, `src/index.css`                                                                                                                       |
+| Project pages         | `src/pages/*Page.tsx`, built from the slots in `src/components/ProjectShowcase.tsx`. `src/components/ProjectShowcase.md` is the recipe and checklist. |
+| Résumé content        | `src/data/resume.ts`. Dates are structured; years are computed.                                                                                       |
+| Blog                  | Content is not in this repo. `scripts/blogContent.ts` fetches it at build time into `public/blog/` (gitignored). See README, "Publishing a post".     |
+| Prerender and sitemap | `scripts/prerender.ts`. One HTML file per route, from the built `index.html`.                                                                         |
+| Screenshots           | `src/assets/screens/*.webp`. New ones go through `yarn images`.                                                                                       |
+| Unit tests            | Beside the file, `*.test.ts(x)`. jsdom, Testing Library, jest-axe.                                                                                    |
+| End-to-end            | `e2e/`. Accessibility, SEO of the served HTML, showcase slots.                                                                                        |
+
+## Rules that are not in the linter
+
+- **No em dashes** anywhere in site copy or comments. Commas, periods, colons, or
+  parentheses instead.
+- **Plain voice.** State what a thing is. No flourish, no persuasion, no exclamation.
+- **Accessibility is gated twice.** `src/a11y.test.tsx` runs axe over every page in
+  jsdom and `e2e/a11y.spec.ts` runs it over the built site in Chromium. A new page goes
+  into both lists, and into `e2e/seo.spec.ts`.
+- **Images below the fold** take `loading="lazy"` and reserve their box with
+  `aspectRatio` in `sx` (MUI's `Box` swallows `width` and `height` as style props).
+- **`index.html` is the prerender's template.** Anything added to its `<head>` reaches
+  every route. Anything per page goes through `siteRoutes.ts` and `usePageMeta`.
+
+## Commits
+
+One item per commit where possible. The message says what changed and why, not what
+files moved. The trailer is mandatory and the hook enforces it:
+
+```
+Runway: UI-11
+```
+
+or `Runway: none` for a change that belongs to no item. The hook refuses an id the
+runway does not have, so an item is written before its first commit, not after.
+
+## When you finish an item
+
+Update the runway Artifact: not "done", but what it turned out to be, what was found on
+the way, and what the plan got wrong. Then re-import it so the hook and Noradar see it:
+
+```
+node ~/src/noradar/scripts/runway.mjs import . runway.html --url https://claude.ai/code/artifact/d3f41697-663c-4428-8ab8-87130a23cb52
+```
+
+where `runway.html` is the published page saved to disk.
+
+## Items marked for hand-off
+
+An item tagged **hand-off** in the runway is specified closely enough to be taken without
+the context of the conversation that wrote it: the files are named, the acceptance is
+stated, and `yarn gate` plus the tests it names are the whole check. Take it as written.
+If the item turns out to need a decision it does not record, stop and write the question
+into the item rather than choosing.
