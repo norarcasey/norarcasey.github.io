@@ -36,14 +36,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Check formatting
-        run: yarn format:check
-
-      - name: Lint
-        run: yarn lint
-
-      - name: Test
-        run: yarn test
+      # The same command that runs locally before a push: formatting, lint,
+      # types, tests. One step, so the list of checks lives in package.json and
+      # cannot drift from what is run by hand.
+      - name: Gate
+        run: yarn gate
 
       # Browser binary only — deliberately NOT `--with-deps`, which shells out
       # to apt-get and has hung for hours on a bad Ubuntu mirror. The
