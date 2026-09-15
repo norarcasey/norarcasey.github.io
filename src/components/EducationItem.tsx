@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
 
 interface EducationItemProps {
   school: string;
@@ -13,13 +12,11 @@ export function EducationItem({
   graduationDate,
 }: EducationItemProps): React.ReactElement {
   return (
-    <Box sx={{ ml: 5, mb: 1 }}>
-      <Typography variant="subtitle1" component="h3">
+    <div className="resume-entry mt-3">
+      <h3 className="text-text text-base leading-6 font-semibold">
         {school} | {graduationDate}
-      </Typography>
-      <Typography variant="subtitle2" component="p">
-        <strong>{degree}</strong>
-      </Typography>
-    </Box>
+      </h3>
+      <p className="copy text-sm leading-5">{degree}</p>
+    </div>
   );
 }

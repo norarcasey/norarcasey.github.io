@@ -1,11 +1,9 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
 
 import { skillGroups } from "../data/resume";
-import { ACCENT_BLUE, DECORATIVE_PINK } from "../colors";
 
 interface SkillsMatrixProps {
-  /** Section heading. Defaults to the home-page wording. */
+  /** Section heading. Defaults to the résumé's wording. */
   title?: string;
   /** Optional lead-in paragraph under the heading. */
   intro?: React.ReactNode;
@@ -13,95 +11,46 @@ interface SkillsMatrixProps {
 
 /**
  * The stack, layer by layer: one card per layer (front end, back end, data,
- * infrastructure, quality, leadership) so a visitor can see the full-stack
+ * infrastructure, quality, leadership) so a reader can see the full-stack
  * range in a couple of seconds rather than parsing one long list of nouns.
- * Reads from the same `skillGroups` data the résumé renders.
+ * Reads from the same `skillGroups` data the rest of the résumé renders.
+ *
+ * It lived on the home page until UI-18 and is the résumé's Skills section
+ * now. In print the cards collapse back to one compact line per layer, which
+ * is what the résumé said before the matrix arrived; the rules are in
+ * `index.css` under `@media print`.
  */
 export function SkillsMatrix({
-  title = "Across the stack",
+  title = "Skills",
   intro,
 }: SkillsMatrixProps): React.ReactElement {
   return (
-    <section className="tile">
-      <Typography variant="h3" component="h2">
-        {title}
-      </Typography>
-      {intro ? (
-        <Typography variant="body1" sx={{ color: "#4a4f57", mt: 2 }}>
-          {intro}
-        </Typography>
-      ) : null}
+    <section className="skills">
+      <h2 className="h2">{title}</h2>
+      {intro ? <p className="copy mt-3">{intro}</p> : null}
 
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: {
-            xs: "1fr",
-            sm: "repeat(2, 1fr)",
-            md: "repeat(3, 1fr)",
-          },
-          gap: 2,
-          mt: 2,
-        }}
-      >
+      <div className="skills-grid mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {skillGroups.map((group) => (
-          <Box
-            key={group.label}
-            sx={{
-              border: `dashed 1px ${DECORATIVE_PINK}`,
-              borderRadius: 1,
-              p: 2,
-              display: "flex",
-              flexDirection: "column",
-              gap: 1,
-            }}
-          >
-            <Typography
-              variant="subtitle1"
-              component="h3"
-              sx={{
-                color: ACCENT_BLUE,
-                fontWeight: 600,
-                borderBottom: "none",
-                mb: 0,
-              }}
-            >
+          <div key={group.label} className="skills-card card gap-2 p-4">
+            <h3 className="skills-card__label text-accent text-base leading-6 font-semibold">
               {group.label}
-            </Typography>
-            <Typography variant="body2" sx={{ color: "#4a4f57" }}>
+            </h3>
+            <p className="skills-card__blurb copy text-sm leading-5">
               {group.blurb}
-            </Typography>
-            <Box
-              component="ul"
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 0.75,
-                listStyle: "none",
-                m: 0,
-                p: 0,
-              }}
-            >
+            </p>
+            <ul className="skills-card__list flex list-none flex-wrap gap-1.5">
               {group.skills.map((skill) => (
-                <Box
-                  component="li"
+                <li
                   key={skill}
-                  sx={{
-                    fontSize: "12px",
-                    color: "#363435",
-                    border: `solid 1px rgba(31, 120, 194, 0.35)`,
-                    borderRadius: 1,
-                    px: 1,
-                    py: 0.25,
-                  }}
+                  className="text-text rounded border border-accent-ring px-2 py-0.5 text-xs leading-5"
                 >
                   {skill}
-                </Box>
+                </li>
               ))}
-            </Box>
-          </Box>
+            </ul>
+          </div>
         ))}
-      </Box>
+      </div>
     </section>
   );
 }

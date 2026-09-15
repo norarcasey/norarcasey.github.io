@@ -20,21 +20,4 @@ describe("HomePage", () => {
       "/mine-sweeper"
     );
   });
-
-  it("pitches the full-stack range across every layer", () => {
-    render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText("Across the stack")).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { name: "Back end & APIs" })
-    ).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Data" })).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { name: "Infrastructure & delivery" })
-    ).toBeInTheDocument();
-  });
 });

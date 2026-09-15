@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import { Box, Chip, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import {
@@ -29,100 +28,90 @@ export function BlogIndexPage(): React.ReactElement {
   );
 
   return (
-    <Grid container display="flex" flexDirection="column" alignItems="center">
-      <Grid size={{ xs: 12, md: 10, lg: 8 }}>
-        <section className="tile">
-          <Box display="flex" flexDirection="column" gap={2}>
-            <Typography variant="h3" component="h1">
-              Blog
-            </Typography>
-            <Typography variant="body1">
-              Notes on building for the web — what I made, what broke, and what
-              I'd do differently.
-            </Typography>
+    <div className="page-wrap page-wrap--narrow">
+      <div className="flex flex-col gap-4">
+        {/* "Blog", not the nav's "Writing": this item moves the page onto the
+            tokens, it does not rename it. */}
+        <h1 className="h1">Blog</h1>
+        <p className="lead">
+          Notes on building for the web: what I made, what broke, and what I
+          would do differently.
+        </p>
 
-            {tags.length > 0 && (
-              // A filter, not navigation: each chip is a button that narrows
-              // the list in place, and aria-pressed carries its state to
-              // screen readers, which a plain Chip would not.
-              <Box
-                display="flex"
-                flexWrap="wrap"
-                gap={1}
-                role="group"
-                aria-label="Filter posts by tag"
+        {tags.length > 0 && (
+          // A filter, not navigation: each chip is a button that narrows the
+          // list in place, and aria-pressed carries its state to screen
+          // readers, which a link or a plain span would not.
+          <div
+            className="mt-2 flex flex-wrap gap-2"
+            role="group"
+            aria-label="Filter posts by tag"
+          >
+            <button
+              type="button"
+              className="tag-chip"
+              aria-pressed={activeTag === null}
+              onClick={() => setActiveTag(null)}
+            >
+              All
+            </button>
+            {tags.map((tag) => (
+              <button
+                key={tag.name}
+                type="button"
+                className="tag-chip"
+                aria-pressed={activeTag === tag.name}
+                onClick={() =>
+                  setActiveTag(activeTag === tag.name ? null : tag.name)
+                }
               >
-                <Chip
-                  label="All"
-                  component="button"
-                  clickable
-                  aria-pressed={activeTag === null}
-                  variant={activeTag === null ? "filled" : "outlined"}
-                  onClick={() => setActiveTag(null)}
-                />
-                {tags.map((tag) => (
-                  <Chip
-                    key={tag.name}
-                    label={tag.name}
-                    component="button"
-                    clickable
-                    aria-pressed={activeTag === tag.name}
-                    variant={activeTag === tag.name ? "filled" : "outlined"}
-                    onClick={() =>
-                      setActiveTag(activeTag === tag.name ? null : tag.name)
-                    }
-                  />
-                ))}
-              </Box>
-            )}
+                {tag.name}
+              </button>
+            ))}
+          </div>
+        )}
 
-            {result.status === "loading" && (
-              <Typography variant="body2" role="status">
-                Loading posts…
-              </Typography>
-            )}
+        {result.status === "loading" && (
+          <p className="copy" role="status">
+            Loading posts…
+          </p>
+        )}
 
-            {result.status === "error" && (
-              <Typography variant="body2" role="alert">
-                The posts couldn't be loaded. Please try again later.
-              </Typography>
-            )}
+        {result.status === "error" && (
+          <p className="copy" role="alert">
+            The posts couldn&apos;t be loaded. Please try again later.
+          </p>
+        )}
 
-            {result.status === "ready" && visible.length === 0 && (
-              <Typography variant="body2">
-                {posts.length === 0
-                  ? "No posts yet — check back soon."
-                  : "No posts with that tag."}
-              </Typography>
-            )}
+        {result.status === "ready" && visible.length === 0 && (
+          <p className="copy">
+            {posts.length === 0
+              ? "No posts yet. Check back soon."
+              : "No posts with that tag."}
+          </p>
+        )}
 
-            <Box component="ul" className="blog-list">
-              {visible.map((post) => (
-                <Box component="li" key={post.slug} className="blog-list-item">
-                  <Typography variant="h5" component="h2">
-                    <Link className="inline-link" to={blogPath(post.slug)}>
-                      {post.title}
-                    </Link>
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    className="blog-meta"
-                  >
-                    <time dateTime={post.publishedAt}>
-                      {formatPostDate(post.publishedAt)}
-                    </time>
-                    {post.tags.length > 0 && (
-                      <> · {post.tags.map((tag) => tag.name).join(", ")}</>
-                    )}
-                  </Typography>
-                  <Typography variant="body1">{post.excerpt}</Typography>
-                </Box>
-              ))}
-            </Box>
-          </Box>
-        </section>
-      </Grid>
-    </Grid>
+        <ul className="blog-list mt-2">
+          {visible.map((post) => (
+            <li key={post.slug} className="blog-list-item">
+              <h2 className="h3">
+                <Link className="inline-link" to={blogPath(post.slug)}>
+                  {post.title}
+                </Link>
+              </h2>
+              <p className="meta blog-meta">
+                <time dateTime={post.publishedAt}>
+                  {formatPostDate(post.publishedAt)}
+                </time>
+                {post.tags.length > 0 && (
+                  <> · {post.tags.map((tag) => tag.name).join(", ")}</>
+                )}
+              </p>
+              <p className="copy">{post.excerpt}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }

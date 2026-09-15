@@ -294,6 +294,89 @@ a {
   color: var(--text-muted);
 }
 
+/* The eyebrow over a page or section heading: mono, tracked, in the pink. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink);
+  font-weight: 500;
+}
+
+/* The type scale from the UI-14 system sheet, as classes rather than as a
+   utility per element: the sizes and their line heights travel together, and
+   the canvas names them this way. Layout stays Tailwind's. */
+.h1 {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  color: var(--text);
+}
+
+.h2 {
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.h3 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--text-muted);
+}
+
+.copy {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-muted);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+/* ── The page container ─────────────────────────────────────────────────── */
+
+/* border-box, because the reset only sets it on html and body: without it the
+   side padding is added to the 100% width and the page scrolls sideways on a
+   phone, which is the same bug `.tile` had. Tailwind's preflight sets this on
+   everything, and takes the problem away for good, when UI-19 turns it on. */
+.page-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 40px 80px;
+}
+
+/* A reading measure, for the pages that are mostly prose. */
+.page-wrap--narrow {
+  max-width: 760px;
+}
+
+@media (max-width: 767px) {
+  .page-wrap {
+    padding: 32px 20px 64px;
+  }
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -342,6 +425,34 @@ a {
 
 .navlink:hover {
   color: var(--pink);
+}
+
+/* The blog's tag filter: real buttons carrying aria-pressed, so the state is
+   announced rather than only coloured in. */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.tag-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tag-chip[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text-on-accent);
 }
 
 /* ── The shell ──────────────────────────────────────────────────────────── */
@@ -677,4 +788,179 @@ a {
 .blog-body ol.references li:target {
   background: var(--wash-pink);
   border-radius: 3px;
+}
+
+/* ── Print ──────────────────────────────────────────────────────────────────
+   The résumé prints from the page that is already on screen: no second render,
+   no print library. The shell is navigation and has no business on paper, the
+   page drops to one column, and every colour goes to black so a greyscale
+   printer does not turn the muted ink to mush.
+   ------------------------------------------------------------------------ */
+
+@media print {
+  /* Black ink on white, through the same tokens the screen uses, so nothing
+     has to be restated per element. */
+  :root {
+    --surface: #ffffff;
+    --surface-raised: #ffffff;
+    --surface-sunken: #ffffff;
+    --text: #000000;
+    --text-muted: #000000;
+    --text-subtle: #000000;
+    --accent: #000000;
+    --accent-hover: #000000;
+    --pink: #000000;
+    --border: #999999;
+    --border-strong: #999999;
+  }
+
+  .page-header,
+  .page-footer,
+  .skip-link,
+  .print-hide {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .page-wrap {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* One column. */
+  .skills-grid {
+    display: block !important;
+  }
+
+  /* A card per layer is how the screen shows the range; on paper it costs
+     most of a page, so each one collapses back to the single line the résumé
+     carried before the matrix moved here: "Front end: React • TypeScript". */
+  .skills-card {
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 0;
+    display: block;
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+  .skills-grid {
+    margin-top: 2px !important;
+  }
+
+  .skills-card__list {
+    margin: 0;
+  }
+
+  .skills-card__blurb {
+    display: none;
+  }
+
+  .skills-card__label {
+    display: inline;
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+  .skills-card__label::after {
+    content: ": ";
+  }
+
+  .skills-card__list {
+    display: inline;
+  }
+
+  .skills-card__list li {
+    display: inline;
+    border: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+  .skills-card__list li::after {
+    content: " • ";
+  }
+
+  .skills-card__list li:last-child::after {
+    content: "";
+  }
+
+  /* A job, a school or a project split across a page break is the one thing
+     that makes a printed résumé hard to read. */
+  .resume-entry,
+  .skills-card {
+    break-inside: avoid;
+  }
+
+  /* A4 and Letter at the margin the page itself declares, so the preview and
+     the file agree.
+
+     12px body (9pt) is chosen, and the reason is measured rather than
+     preferred: the résumé is three pages at 10, 11 and 12px alike, and only
+     reaches two by dropping to 9px (6.75pt) on A4, which Letter still will not
+     take. Since the page count does not move between 10 and 12, it is set at
+     the largest of them. 13px tips Letter to four. See the note on this item
+     in the runway: two pages is a content question, not a styling one. */
+  @page {
+    margin: 10mm;
+  }
+
+  .resume {
+    gap: 10px;
+  }
+
+  .resume .h1 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .resume .lead {
+    font-size: 13px;
+    line-height: 17px;
+  }
+
+  .resume .h2 {
+    font-size: 15px;
+    line-height: 19px;
+    margin-bottom: 2px;
+    border-bottom: 1px solid #999999;
+  }
+
+  .resume .copy,
+  .resume .meta,
+  .resume h3 {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .resume section > div,
+  .resume section > p {
+    margin-top: 3px;
+  }
+
+  .resume .resume-entry {
+    margin-top: 7px;
+  }
+
+  .resume ul.list-disc {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 2px;
+    padding-left: 16px;
+  }
+
+  .resume header {
+    gap: 0;
+  }
+
+  /* The URL beside a link is useful on paper, but these are already spelled
+     out in the text, so the underline is all that is needed. */
+  .resume a {
+    text-decoration: underline;
+  }
 }

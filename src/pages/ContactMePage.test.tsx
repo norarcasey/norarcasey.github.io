@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { ContactMePage } from "./ContactMePage";
 
 describe("ContactMePage", () => {
-  it("renders the contact links (with FontAwesome icons) without crashing", () => {
+  it("renders the three contact links", () => {
     render(<ContactMePage />);
 
     expect(

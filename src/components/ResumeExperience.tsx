@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, List, ListItem, Typography } from "@mui/material";
 
 interface ResumeExperienceProps {
   title: string;
@@ -17,28 +16,21 @@ export function ResumeExperience({
   duties,
 }: ResumeExperienceProps): React.ReactElement {
   return (
-    <Box>
-      <Typography variant="subtitle1" component="h3">
-        <strong>
-          {title} | {company}
-        </strong>
-      </Typography>
-      <Typography variant="caption" component="p">
-        {companyDescription}
-      </Typography>
-      <Typography variant="subtitle2" component="p">
-        {employmentDate}
-      </Typography>
-      <List sx={{ listStyleType: "disc", pl: 4 }}>
+    <div className="resume-entry mt-4">
+      <h3 className="text-text text-base leading-6 font-semibold">
+        {title} | {company}
+      </h3>
+      {companyDescription ? (
+        <p className="copy text-sm leading-5">{companyDescription}</p>
+      ) : null}
+      <p className="meta">{employmentDate}</p>
+      {/* list-disc explicitly: Tailwind's preflight, which would otherwise
+          supply it, is off until UI-19. */}
+      <ul className="copy mt-2 list-disc pl-6 text-sm leading-6">
         {duties.map((duty, index) => (
-          <ListItem
-            key={`${company}-${title}-${duty}-${index}`}
-            sx={{ display: "list-item", paddingBottom: 0 }}
-          >
-            <Typography variant="body2">{duty}</Typography>
-          </ListItem>
+          <li key={`${company}-${title}-${duty}-${index}`}>{duty}</li>
         ))}
-      </List>
-    </Box>
+      </ul>
+    </div>
   );
 }
