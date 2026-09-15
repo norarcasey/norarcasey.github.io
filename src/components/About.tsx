@@ -1,62 +1,49 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
 
 import { ExternalLink } from "./ExternalLink";
+import { SectionHeading } from "./SectionHeading";
 
+/**
+ * Two paragraphs, where there were four labelled ones.
+ *
+ * The old version led each with a bold tag (My mission, Collaboration
+ * champion, Passionate mentor, Beyond the code), which read as a list of
+ * claims about herself. These say the same things as sentences.
+ */
 export function About(): React.ReactElement {
   return (
-    <section className="tile">
-      <Typography variant="h3" component="h2">
-        About me
-      </Typography>
+    <section className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
+      <div className="md:col-span-4">
+        <SectionHeading title="About" />
+      </div>
 
-      <Box display="flex" flexDirection="column" gap={2}>
-        <Typography variant="body1">
-          <strong>My mission:</strong>{" "}
-          <span>
-            Build software that empowers people. I want to create tools that
-            make lives and work easier, delivering real, measurable value
-            through speed, efficiency, and user-friendliness.
-          </span>
-        </Typography>
-        <Typography variant="body1">
-          <strong>Collaboration champion:</strong>{" "}
-          <span>
-            I thrive in teams, tackling problems end to end alongside
-            stakeholders, from the data model up through the interface. I'm
-            focused on solutions that are customer-centric, reliable, and
-            intuitive.
-          </span>
-        </Typography>
-        <Typography variant="body1">
-          <strong>Passionate mentor:</strong>{" "}
-          <span>
-            I believe in fostering talent. By combining active listening, clear
-            goal-setting, and leading by example, I help others unlock their
-            potential and achieve their goals.
-          </span>
-        </Typography>
-        <Typography variant="body1">
-          <strong>Beyond the code:</strong>{" "}
-          <span>
-            In my free time, I build crossword puzzles you can find at{" "}
-            <ExternalLink url="https://crucinora.com" label="crucinora.com" />.
-            I'm also an avid traveler, with 20+ countries across four continents
-            explored so far, and a photographer (see my work on{" "}
-            <ExternalLink
-              url="https://www.gettyimages.com/search/photographer?photographer=Nora%20Casey&assettype=image&sort=mostpopular&family=creative"
-              label="Getty Images"
-            />
-            ). My latest passion is improv, where I take classes and perform at
-            the{" "}
-            <ExternalLink
-              url="https://www.barcelonaimprovgroup.com/"
-              label="Barcelona Improv Group"
-            />
-            . I also hold an MS in Computer Science from Georgia Tech.
-          </span>
-        </Typography>
-      </Box>
+      <div className="flex max-w-[64ch] flex-col gap-4 md:col-span-8">
+        <p className="copy text-lg leading-7">
+          <span className="text-text font-semibold">
+            I build software that empowers people.
+          </span>{" "}
+          Tools that make lives and work easier, measured in speed, reliability,
+          and how little the person has to think about them. I work end to end,
+          from the data model up through the interface, alongside product and
+          design, and I mentor the engineers around me toward owning problems
+          the same way.
+        </p>
+        <p className="copy text-lg leading-7">
+          Outside work I construct crossword puzzles at{" "}
+          <ExternalLink url="https://crucinora.com" label="crucinora.com" />,
+          travel (20+ countries across four continents), photograph for{" "}
+          <ExternalLink
+            url="https://www.gettyimages.com/search/photographer?photographer=Nora%20Casey&assettype=image&sort=mostpopular&family=creative"
+            label="Getty Images"
+          />
+          , and perform improv with the{" "}
+          <ExternalLink
+            url="https://www.barcelonaimprovgroup.com/"
+            label="Barcelona Improv Group"
+          />
+          . MS in Computer Science, Georgia Tech.
+        </p>
+      </div>
     </section>
   );
 }

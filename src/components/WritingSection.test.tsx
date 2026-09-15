@@ -2,7 +2,7 @@ import { act, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { LatestPost } from "./LatestPost";
+import { WritingSection } from "./WritingSection";
 import type { BlogSummary } from "../data/blog";
 
 function summary(overrides: Partial<BlogSummary>): BlogSummary {
@@ -34,7 +34,7 @@ function respondWith(posts: BlogSummary[] | null) {
 function renderCard() {
   return render(
     <MemoryRouter>
-      <LatestPost />
+      <WritingSection />
     </MemoryRouter>
   );
 }
@@ -49,7 +49,7 @@ async function settle() {
   await act(async () => {});
 }
 
-describe("LatestPost", () => {
+describe("WritingSection", () => {
   beforeEach(() => {
     vi.stubGlobal("fetch", vi.fn());
   });
@@ -58,20 +58,18 @@ describe("LatestPost", () => {
     vi.unstubAllGlobals();
   });
 
-  it("shows the newest post, whatever order the index arrives in", async () => {
+  it("shows the newest three, newest first, whatever order they arrive in", async () => {
     respondWith([
-      summary({
-        slug: "older",
-        title: "The older post",
-        publishedAt: "2026-02-01T00:00:00Z",
-      }),
+      summary({ slug: "third", title: "Third", publishedAt: "2026-01-01" }),
+      summary({ slug: "fourth", title: "Fourth", publishedAt: "2025-12-01" }),
       summary({
         slug: "newest",
         title: "The newest post",
-        excerpt: "The one that should show.",
+        excerpt: "The one that should lead.",
         tags: [{ name: "TypeScript", color: "#000", category: null }],
         publishedAt: "2026-03-18T00:00:00Z",
       }),
+      summary({ slug: "second", title: "Second", publishedAt: "2026-02-01" }),
     ]);
 
     renderCard();
@@ -79,18 +77,20 @@ describe("LatestPost", () => {
     expect(
       await screen.findByRole("link", { name: "The newest post" })
     ).toHaveAttribute("href", "/blog/newest");
-    expect(screen.getByText("The one that should show.")).toBeInTheDocument();
+    expect(screen.getByText("The one that should lead.")).toBeInTheDocument();
     expect(screen.getByText(/March 18, 2026/)).toBeInTheDocument();
     expect(screen.getByText(/TypeScript/)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Read the post" })).toHaveAttribute(
-      "href",
-      "/blog/newest"
-    );
     expect(screen.getByRole("link", { name: "All posts" })).toHaveAttribute(
       "href",
       "/blog"
     );
-    expect(screen.queryByText("The older post")).not.toBeInTheDocument();
+
+    // Three, in order, and the fourth is not on the home page.
+    const headings = screen
+      .getAllByRole("heading", { level: 3 })
+      .map((h) => h.textContent);
+    expect(headings).toEqual(["The newest post", "Second", "Third"]);
+    expect(screen.queryByText("Fourth")).not.toBeInTheDocument();
   });
 
   it("renders nothing when the index can't be loaded", async () => {

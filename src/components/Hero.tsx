@@ -1,86 +1,75 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
-// Shared reading width so the Hero and FeaturedProject bands line up and don't
-// stretch their text across very wide screens.
-export const HOME_BAND_MAX_WIDTH = 1100;
+import { getYearsOfExperience } from "../data/resume";
 
-import {
-  getBackEndYearsOfExperience,
-  getReactYearsOfExperience,
-  getYearsOfExperience,
-  HEADLINE_TITLE,
-} from "../data/resume";
-import { ACCENT_PINK, DECORATIVE_PINK } from "../colors";
-
-function Highlight({ label }: { label: string }): React.ReactElement {
+/** One of the three facts beside the headline. */
+function Fact({
+  value,
+  label,
+  last = false,
+}: {
+  value: string;
+  label: string;
+  last?: boolean;
+}): React.ReactElement {
   return (
-    <Box
-      sx={{
-        border: `dashed 1px ${DECORATIVE_PINK}`,
-        borderRadius: 1,
-        px: 1.25,
-        py: 0.5,
-        fontSize: "13px",
-        color: "#363435",
-        whiteSpace: "nowrap",
-      }}
+    <div
+      className={`flex flex-col gap-0.5 md:py-3 ${
+        last ? "" : "md:border-b md:border-border"
+      }`}
     >
-      {label}
-    </Box>
+      <span className="text-text text-lg leading-6 font-bold md:text-2xl md:leading-8">
+        {value}
+      </span>
+      <span className="meta text-xs md:text-[13px]">{label}</span>
+    </div>
   );
 }
 
 /**
- * Top-of-page positioning band: an at-a-glance pitch for recruiters and
- * engineering leaders landing on the site, with the headline value prop and a
- * row of quick-fact chips. Experience figures come from the résumé data so they
- * never go stale.
+ * The top of the home page, and for some readers the whole of it.
+ *
+ * It leads with what Nora does rather than with a job title, and the three
+ * facts beside it replace the eight-chip row that used to sit under the
+ * paragraph: the chips said the same things in a form nobody reads. The years
+ * figure is computed from the résumé data rather than written here, so it
+ * cannot go stale the way a number in a sentence does.
  */
 export function Hero(): React.ReactElement {
   const years = getYearsOfExperience();
-  const reactYears = getReactYearsOfExperience();
-  const backEndYears = getBackEndYearsOfExperience();
 
   return (
-    <Box
-      component="section"
-      className="tile"
-      sx={{ width: "100%", maxWidth: HOME_BAND_MAX_WIDTH, mx: "auto" }}
-    >
-      <Typography
-        variant="overline"
-        sx={{ color: ACCENT_PINK, letterSpacing: 1.5, fontWeight: 600 }}
-      >
-        {HEADLINE_TITLE}
-      </Typography>
-      {/* The home page's h1. Styled as body copy rather than a display
-          heading: it is the page's subject, not its loudest element. */}
-      <Typography
-        variant="h6"
-        component="h1"
-        sx={{ color: "#363435", fontWeight: 600, mt: 0.5, mb: 1.5 }}
-      >
-        Building products end to end and leading the teams that ship them
-      </Typography>
-      <Typography variant="body1" sx={{ color: "#4a4f57", maxWidth: 760 }}>
-        {years}+ years building web applications at small, mid-size, and
-        enterprise companies. I work across the stack: React and TypeScript,
-        Node, Rails, Postgres and MongoDB, and CI/CD pipelines. I mentor
-        engineers, work closely with product and design, and use AI every day.
-      </Typography>
-      <Box display="flex" flexWrap="wrap" gap={1} mt={2}>
-        <Highlight label={`${years}+ years experience`} />
-        <Highlight label={`${reactYears}+ yrs React · TypeScript`} />
-        <Highlight
-          label={`Combined ${backEndYears}+ yrs Node · GraphQL · Rails · .NET`}
-        />
-        <Highlight label="Postgres · MongoDB · SQL data modeling" />
-        <Highlight label="CI/CD · serverless · cloud deploys" />
-        <Highlight label="Mentor & team lead" />
-        <Highlight label="MS CS, Georgia Tech" />
-        <Highlight label="US & EU work authorized" />
-      </Box>
-    </Box>
+    <section className="grid grid-cols-1 items-end gap-8 md:grid-cols-12">
+      <div className="flex flex-col gap-5 md:col-span-8">
+        <p className="eyebrow">
+          Staff full-stack engineer · Team lead · Barcelona
+        </p>
+        <h1 className="h1 max-w-[18ch] text-[32px] leading-[38px] md:text-[44px] md:leading-[52px]">
+          I solve problems with technology. Which technology is a detail.
+        </h1>
+        <p className="lead max-w-[58ch] text-[17px] leading-[26px] md:text-lg md:leading-7">
+          {years} years shipping software across the stack, at companies from a
+          first hire to an enterprise. I lead teams, mentor engineers, and stay
+          in the code. AI writes most of the code now; the gap between what it
+          writes and what ships is where I work. Below is what I build for
+          myself: tools I wanted to exist, in production, used every day.
+        </p>
+        <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:gap-3">
+          <Link to="/resume" className="btn btn-pink">
+            View résumé
+          </Link>
+          <Link to="/contact-me" className="btn btn-blue">
+            Get in touch
+          </Link>
+        </div>
+      </div>
+
+      <div className="mt-2 flex flex-row gap-5 border-t border-border pt-4 md:col-span-4 md:mt-0 md:flex-col md:gap-0 md:self-center md:border-t-0 md:border-l md:border-border md:pt-0 md:pl-8">
+        <Fact value={`${years}+ yrs`} label="building for the web" />
+        <Fact value="MS CS" label="Georgia Tech" />
+        <Fact value="US and EU" label="work authorized" last />
+      </div>
+    </section>
   );
 }

@@ -1,4 +1,10 @@
-import { FEATURED_PROJECT, OTHER_PROJECTS, PROJECTS } from "./projects";
+import {
+  FEATURED_PROJECT,
+  GAMES,
+  OTHER_PROJECTS,
+  PRODUCTS,
+  PROJECTS,
+} from "./projects";
 import { SITE_ROUTES } from "./siteRoutes";
 
 describe("PROJECTS", () => {
@@ -29,6 +35,22 @@ describe("PROJECTS", () => {
   it("lists each project once", () => {
     const paths = PROJECTS.map((project) => project.path);
     expect(new Set(paths).size).toBe(paths.length);
+  });
+
+  it("splits into the products and the games, with nothing left over", () => {
+    expect(PRODUCTS.length + GAMES.length).toBe(PROJECTS.length);
+    expect(PRODUCTS.every((p) => p.kind === "product")).toBe(true);
+    expect(GAMES.every((p) => p.kind === "game")).toBe(true);
+  });
+
+  it("gives every product a stack line for its card, and no game one", () => {
+    // The card on the home page prints it; a game prints its package instead.
+    for (const project of PRODUCTS) {
+      expect(project.stack?.length ?? 0).toBeGreaterThan(0);
+    }
+    for (const project of GAMES) {
+      expect(project.stack).toBeUndefined();
+    }
   });
 
   it("names the npm package for every game, and for nothing else", () => {

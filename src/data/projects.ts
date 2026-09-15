@@ -35,6 +35,12 @@ export interface Project {
    * lands in: the Work grid, or the strip of games under it.
    */
   kind: "product" | "game";
+  /**
+   * One mono line of what it is built from, for the product cards on the home
+   * page. Not the showcase pages' `StackFacts`, which are paragraphs: this is
+   * the line under a card. Games use `npmPackage` instead.
+   */
+  stack?: string;
   /** The one project the home page leads with. Exactly one may carry it. */
   featured?: true;
   /** Where it runs, if it is somewhere other than this site. */
@@ -56,6 +62,7 @@ export const PROJECTS: Project[] = [
       "AI-assisted crossword construction. A backtracking solver fills the grid in under a second; Claude writes the clues.",
     screenshot: crucinoraScreen,
     kind: "product",
+    stack: "TypeScript core · Supabase · Vercel functions · Claude",
     featured: true,
     liveUrl: "https://crucinora.com",
   },
@@ -66,6 +73,7 @@ export const PROJECTS: Project[] = [
       "A dungeon crawler with procedurally generated dungeons. No two descents into Noragon are the same.",
     screenshot: legendsOfNoragonScreen,
     kind: "product",
+    stack: "React · seeded generation · Vitest",
   },
   {
     path: "/mine-sweeper",
@@ -127,7 +135,17 @@ export const FEATURED_PROJECT: Project = PROJECTS.filter(
   (project) => project.featured
 )[0];
 
-/** Everything but the featured one, in order: the home page's tile list. */
+/** Everything but the featured one, in order. */
 export const OTHER_PROJECTS: Project[] = PROJECTS.filter(
   (project) => !project.featured
+);
+
+/** The home page's Work grid: the products, in order. */
+export const PRODUCTS: Project[] = PROJECTS.filter(
+  (project) => project.kind === "product"
+);
+
+/** The strip under it: the games this site installs from npm, in order. */
+export const GAMES: Project[] = PROJECTS.filter(
+  (project) => project.kind === "game"
 );
