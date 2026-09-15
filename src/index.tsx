@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./Root";
+import Home from "./pages/HomePage";
 import { ErrorPage } from "./pages/ErrorPage";
 
 import "./index.css";
@@ -18,6 +19,12 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
+      // The home page is the index route rather than a nested <Routes> beside
+      // the shell's <Outlet>, so every page reaches the shell the same way.
+      {
+        index: true,
+        Component: Home,
+      },
       {
         path: "blog",
         lazy: () =>

@@ -1,5 +1,9 @@
 <!doctype html>
-<html lang="en">
+<!-- Pinned to light until the last MUI page goes in UI-19. The dark tokens
+     are defined and every page UI-16 to UI-18 builds is drawn against them,
+     but the pages still rendering through MUI carry hardcoded light colours,
+     and a dark shell above a white page body is worse than no dark mode. -->
+<html lang="en" data-theme="light">
   <head>
     <!-- Google tag (gtag.js) -->
     <script
@@ -17,14 +21,14 @@
     </script>
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.ico" />
-    <!-- The theme has named Roboto Flex since the site was built, but nothing
-         ever loaded it, so every browser fell through to the next name in the
-         stack and the whole site rendered in Menlo or Courier New. -->
+    <!-- Atkinson Hyperlegible, one family and two faces: Next for everything,
+         Mono for the wordmark, eyebrows, dates and stack lines. This is the
+         prerender's template, so the link reaches every route. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500;600&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />

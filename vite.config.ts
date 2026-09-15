@@ -1,5 +1,6 @@
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 import { blogContent } from "./scripts/blogContent";
 import { prerenderRoutes } from "./scripts/prerender";
@@ -9,7 +10,7 @@ export default defineConfig({
   // blogContent must precede prerenderRoutes: it writes public/blog/index.json
   // at buildStart, which the prerender reads at closeBundle to emit one HTML
   // file per post, the sitemap entries, and the feed.
-  plugins: [react(), blogContent(), prerenderRoutes()],
+  plugins: [react(), tailwindcss(), blogContent(), prerenderRoutes()],
   base: "/",
   build: {
     outDir: "dist",

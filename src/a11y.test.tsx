@@ -1,9 +1,10 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { axe } from "jest-axe";
 
 import { Root } from "./Root";
+import Home from "./pages/HomePage";
 import { ContactMePage } from "./pages/ContactMePage";
 import { CruciNoraPage } from "./pages/CruciNoraPage";
 import { MinimaxDiagram } from "./components/MinimaxDiagram";
@@ -26,9 +27,15 @@ const SECTION_RULES = {
 // structure, ARIA, names/roles, image alt text, headings, and link purpose.
 describe("accessibility (axe)", () => {
   it("the full home page has no violations", async () => {
+    // Mirrors the router in index.tsx: the home page is the shell's index
+    // route, so it only renders through the <Outlet>.
     const { container } = render(
       <MemoryRouter initialEntries={["/"]}>
-        <Root />
+        <Routes>
+          <Route path="/" element={<Root />}>
+            <Route index element={<Home />} />
+          </Route>
+        </Routes>
       </MemoryRouter>
     );
     expect(await axe(container, { rules: REGION_OFF })).toHaveNoViolations();

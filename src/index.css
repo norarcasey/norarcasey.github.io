@@ -1,3 +1,155 @@
+/* Tailwind v4, CSS-first: no JS config and no preset, the way every other
+   repo on the shelf does it.
+
+   Preflight is deliberately left out. It is the one part of Tailwind that
+   restyles markup nobody asked it to: heading font sizes collapse to 1em and
+   list markers disappear, which would silently change the eight project pages,
+   the résumé and the blog body, all of which still render through MUI in this
+   item. It comes back in UI-19, once MUI is gone and every page is ours. Until
+   then the reset below is the site's own, as it has always been. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "@noratives/tokens/tokens.css";
+
+/* ── The overrides this site makes to the shared tokens ─────────────────────
+   Every app in the suite inherits the identical neutral ramp and overrides
+   only --accent-*. This one overrides the neutrals too, and it is the first to
+   do so: the shared ramp is warm paper, and the flag the motif is drawn from
+   wants white between its tints. The values are the UI-14 canvas's system
+   sheet. When the tokens README is next touched, this exception belongs in it.
+   ------------------------------------------------------------------------ */
+:root {
+  /* Neutral ramp, cool rather than warm paper. Anchored on the canvas's light
+     values: 50 is the ground, 200 the hairline, 800 body copy, 950 the ink. */
+  --ink-50: #ffffff;
+  --ink-100: #f4f7fa;
+  --ink-200: #e3e8ee;
+  --ink-300: #cbd3dc;
+  --ink-400: #aab4bf;
+  --ink-500: #8b96a2;
+  --ink-600: #6b7783;
+  --ink-700: #5a6773;
+  --ink-800: #4a5560;
+  --ink-900: #2a333d;
+  --ink-950: #1c2229;
+
+  /* Accent ramp: the site's AA-tuned blue. 600 is the link and outline colour
+     at 4.64:1 on white, 400 the dark-mode one, and 50 is the blue wash. */
+  --accent-50: #eaf7fe;
+  --accent-100: #d3ecfb;
+  --accent-200: #ade0f8;
+  --accent-300: #8ac8f0;
+  --accent-400: #6fb1ea;
+  --accent-500: #3b91d6;
+  --accent-600: #1f78c2;
+  --accent-700: #1a63a1;
+  --accent-800: #185684;
+  --accent-900: #17486d;
+  --accent-950: #102f48;
+
+  /* The motif, which is this site's alone and not the suite's.
+
+     The flag tints are the stripe and nothing else: at 1px they are a graphic,
+     not a surface, so contrast rules do not apply to them. The washes are the
+     same hues opened up far enough to carry text, and the pink pair is the
+     second text accent the shared tokens have no room for. */
+  --flag-blue: #5bcefa;
+  --flag-pink: #f5a9b8;
+  --flag-white: #ffffff;
+  --wash-blue: #eaf7fe;
+  --wash-pink: #fdf0f3;
+  --pink: #b83d6b;
+  --pink-hover: #9e3259;
+  --text-on-pink: #ffffff;
+}
+
+/* Dark is restated rather than derived, because one ramp cannot carry both
+   ends of this palette: the canvas's dark ground (#12161b) is not the inverse
+   of its light ink (#1c2229), and its dark hairline is not the light body
+   copy. Where the shared tokens' dark block would land on the wrong value,
+   this says the canvas's. Written twice, as the tokens themselves are: once
+   for the system setting and once for an explicit toggle, so neither can win
+   by accident. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #12161b;
+    --surface-raised: #1a2027;
+    --surface-sunken: #0d1015;
+    --surface-inset: #1a2027;
+    --text: #e9edf1;
+    --text-muted: #aab4bf;
+    --text-subtle: #8b96a2;
+    --border: #2a333d;
+    --border-strong: #3a4653;
+
+    --flag-white: #e9edf1;
+    --wash-blue: #17303d;
+    --wash-pink: #3a2430;
+    --pink: #e78aab;
+    --pink-hover: #f0a4bf;
+    /* The pink inverts in dark: it is a light fill, so the label is the ground
+       rather than white, which measures 2.44:1 on it and 7.46:1 this way. */
+    --text-on-pink: #12161b;
+  }
+}
+
+:root[data-theme="dark"] {
+  /* Same values as the media query above; see the note there. */
+  --surface: #12161b;
+  --surface-raised: #1a2027;
+  --surface-sunken: #0d1015;
+  --surface-inset: #1a2027;
+  --text: #e9edf1;
+  --text-muted: #aab4bf;
+  --text-subtle: #8b96a2;
+  --border: #2a333d;
+  --border-strong: #3a4653;
+
+  --flag-white: #e9edf1;
+  --wash-blue: #17303d;
+  --wash-pink: #3a2430;
+  --pink: #e78aab;
+  --pink-hover: #f0a4bf;
+  --text-on-pink: #12161b;
+}
+
+@theme inline {
+  /* The motif, as Tailwind utilities: bg-wash-blue, text-pink, and so on. */
+  --color-flag-blue: var(--flag-blue);
+  --color-flag-pink: var(--flag-pink);
+  --color-flag-white: var(--flag-white);
+  --color-wash-blue: var(--wash-blue);
+  --color-wash-pink: var(--wash-pink);
+  --color-pink: var(--pink);
+  --color-pink-hover: var(--pink-hover);
+  --color-text-on-pink: var(--text-on-pink);
+}
+
+@theme {
+  /* Atkinson Hyperlegible, drawn by the Braille Institute so that similar
+     letterforms cannot be mistaken for each other, which is a real reason on a
+     site that gates accessibility twice. One family, two faces: Next for
+     everything, Mono for the wordmark, eyebrows, dates and stack lines.
+     index.html loads them, and the prerender copies that link into every
+     route. */
+  --font-sans:
+    "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-mono:
+    "Atkinson Hyperlegible Mono", ui-monospace, Menlo, Monaco, "Courier New",
+    monospace;
+
+  /* The shared scale stops at 36. The two page heroes need one size above it
+     each: 44 for the home headline, 48 for a case-study title. */
+  --text-5xl: 2.75rem;
+  --text-5xl--line-height: 3.25rem;
+  --text-6xl: 3rem;
+  --text-6xl--line-height: 3.5rem;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────── */
+
 * {
   margin: 0;
   padding: 0;
@@ -11,38 +163,29 @@ body {
   margin: 0;
 }
 
+body {
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 h2,
 h3,
 h4,
 h5,
 h6,
 p {
-  color: #363435;
-}
-
-/* The theme's font applies to MUI components only. Anything else, such as the
-   skill tags and the footer, inherits from here, and without this it landed in
-   the browser's default serif. */
-body {
-  font-family:
-    "Roboto Flex",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: var(--text);
 }
 
 code {
-  font-family:
-    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: var(--font-mono);
 }
 
 a {
-  color: #1f78c2;
+  color: var(--accent);
   text-decoration: none;
 }
 
@@ -72,20 +215,15 @@ a {
   top: -48px;
   z-index: 1000;
   padding: 8px 12px;
-  background: #ffffff;
-  color: #1f78c2;
-  border: 1px solid #1f78c2;
+  background: var(--surface-raised);
+  color: var(--accent);
+  border: 1px solid var(--accent);
   border-radius: 4px;
   transition: top 0.15s ease;
 }
 
 .skip-link:focus {
   top: 8px;
-}
-
-h2,
-h3 {
-  border-bottom: dashed 1px #df6695;
 }
 
 #root {
@@ -95,10 +233,128 @@ h3 {
   flex-direction: column;
 }
 
+/* ── The motif ──────────────────────────────────────────────────────────────
+   The dashed pink line used to be the site's only device and did every job.
+   It is replaced by one five-stripe rule, a pixel per stripe, full width under
+   the header and above the footer, and a 32px mark above a section heading.
+   That is its whole vocabulary; nothing else is striped and nothing is dashed.
+   The middle stripe is the ground colour rather than white, so the rule reads
+   the same on a dark page.
+   ------------------------------------------------------------------------ */
+
+.stripe,
+.section-mark {
+  background: linear-gradient(
+    to bottom,
+    var(--flag-blue) 0 1px,
+    var(--flag-pink) 1px 2px,
+    var(--flag-white) 2px 3px,
+    var(--flag-pink) 3px 4px,
+    var(--flag-blue) 4px 5px
+  );
+}
+
+.stripe {
+  height: 5px;
+}
+
+.section-mark {
+  width: 32px;
+  height: 5px;
+}
+
+/* ── Type and controls ──────────────────────────────────────────────────── */
+
+/* The wordmark is the one monospace element on the site, on purpose: it is a
+   regex, and the brackets and the backslash only read as one in a mono. The
+   flag pair is its colour, brackets in the blue and the \n in the pink. */
+.wordmark {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.wordmark__bracket {
+  color: var(--accent);
+}
+
+.wordmark__escape {
+  color: var(--pink);
+}
+
+/* Dates, stack lines and the copyright: the mono face at 13px, so the two
+   faces read as one family. */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-muted);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn-pink {
+  background: var(--pink);
+  color: var(--text-on-pink);
+}
+
+.btn-pink:hover {
+  background: var(--pink-hover);
+  color: var(--text-on-pink);
+}
+
+.btn-blue {
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+/* The canvas drew this hover as the blue on the blue wash, which measures
+   4.25:1 and fails AA for a 16px label. The text darkens to the accent's own
+   hover step instead, which is 5.75:1 on the same wash. */
+.btn-blue:hover {
+  background: var(--wash-blue);
+  color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.navlink {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.navlink:hover {
+  color: var(--pink);
+}
+
+/* ── The shell ──────────────────────────────────────────────────────────── */
+
 .page-header,
 .page-footer {
   flex-grow: 0;
   flex-shrink: 0;
+}
+
+/* The phone's link panel hangs off the header rather than out of the bar. */
+.page-header {
+  position: relative;
 }
 
 .page-body {
@@ -111,35 +367,157 @@ h3 {
   outline: none;
 }
 
-.page-header {
-  border-bottom: dashed 1px #df6695;
-  margin-bottom: 20px;
+.header-bar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  justify-content: space-between;
+  gap: 16px;
+  height: 72px;
+  padding: 0 40px;
 }
 
-.page-footer {
+.header-bar .wordmark {
+  font-size: 24px;
+}
+
+/* 40 rather than the system's 44: the canvas shrinks the button to sit inside
+   a 72px bar. The phone's is smaller again, below. */
+.header-bar .btn {
   height: 40px;
-  border-top: dashed 1px #df6695;
-  display: flex;
-  justify-content: right;
-  align-items: end;
 }
 
-.copyright {
-  text-align: right;
-  margin-bottom: 10px;
-  margin-right: 10px;
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
 }
+
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+/* The disclosure button is the phone's only, and the links are one list in the
+   markup rather than two: a row in the bar here, the panel it opens below. */
+.header-toggle {
+  display: none;
+}
+
+.footer-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 40px 40px;
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-bar .wordmark {
+  font-size: 18px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.footer-links .navlink {
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .header-bar {
+    height: 60px;
+    padding: 0 20px;
+  }
+
+  .header-bar .wordmark {
+    font-size: 20px;
+  }
+
+  /* No gap: the nav wrapping the panel is still a flex item here, and an empty
+     one would otherwise push the button and the toggle apart by it. */
+  .header-actions {
+    gap: 0;
+  }
+
+  .header-actions .btn {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 14px;
+    margin-right: 8px;
+  }
+
+  .header-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  /* One list in the markup, two shapes: the row above, and here the panel the
+     44px button opens, over the page rather than pushing it down. */
+  .header-links {
+    position: absolute;
+    /* Below the bar and its stripe, so the rule still reads across the top. */
+    top: 65px;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 4px 20px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-links li {
+    padding: 12px 0;
+  }
+
+  .header-links[data-open="false"] {
+    display: none;
+  }
+
+  .footer-bar {
+    padding: 28px 20px 36px;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+/* ── Pages, until UI-16 to UI-18 rebuild them ───────────────────────────── */
 
 .tiles {
   display: flex;
   flex-direction: column;
 }
 
+/* border-box, because the 15px of side padding was being added to a width the
+   grid had already set to the full viewport: at 390 that is the whole reason
+   the page scrolled sideways. */
 .tile {
+  box-sizing: border-box;
   margin: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -152,10 +530,6 @@ h3 {
   margin-bottom: 10px;
 }
 
-.root-title {
-  color: #1f78c2;
-}
-
 .project-box {
   align-items: center;
   padding: 8px 4px 18px;
@@ -164,7 +538,8 @@ h3 {
 }
 
 /* Underline as an inset pseudo-element so it stops short of the full-width
-   section header above the list. */
+   section header above the list. Was the dashed pink rule; now a hairline,
+   which is what the motif has instead. */
 .project-box--divider::after {
   content: "";
   position: absolute;
@@ -172,26 +547,16 @@ h3 {
   right: 48px;
   bottom: 0;
   margin-right: 15px;
-  border-bottom: dashed 1px #df6695;
+  border-bottom: 1px solid var(--border);
   transition: border-color 0.15s ease;
 }
 
 .project-box:hover {
-  background-color: rgba(31, 120, 194, 0.06);
+  background-color: var(--wash-blue);
 }
 
 .project-box:hover.project-box--divider::after {
-  border-bottom-color: #4b9ae7;
-}
-
-/* Header action links: keep at least a 44x44 tap target around the 30px
-   icons for easier pointer/touch access. */
-.header-action {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
+  border-bottom-color: var(--border-strong);
 }
 
 /* ── Blog ─────────────────────────────────────────────────────────────── */
@@ -211,18 +576,10 @@ h3 {
   gap: 6px;
 }
 
-/* A post's title is a link, and .inline-link underlines it. The dashed rule
-   every h2 carries is a section divider, which under a linked title lands as a
-   second line right beneath the first. The underline is the one that carries
-   meaning here, so the divider goes. */
-.blog-list-item h2 {
-  border-bottom: none;
-}
-
 /* Dates and tags: secondary to the title, but still above the 4.5:1 contrast
    floor against the page background. */
 .blog-meta {
-  color: #4a4a4a;
+  color: var(--text-muted);
 }
 
 /* The post body is HTML authored in the studio, so these styles have to cover
@@ -258,19 +615,19 @@ h3 {
 .blog-body blockquote {
   margin: 16px 0;
   padding-left: 16px;
-  border-left: 3px solid #d0d0d0;
-  color: #3a3a3a;
+  border-left: 3px solid var(--border-strong);
+  color: var(--text-muted);
 }
 
 .blog-body pre {
   overflow-x: auto;
   padding: 12px;
-  background: #f5f5f5;
+  background: var(--surface-sunken);
   border-radius: 6px;
 }
 
 .blog-body code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-mono);
   font-size: 0.95em;
 }
 
@@ -282,7 +639,7 @@ h3 {
 
 /* Citations, as published by the studio: a superscript marker in the prose and
    a numbered reference list appended at the end. The markup is static HTML in
-   the post body — the studio resolves the numbering at publish time — so there
+   the post body, the studio resolves the numbering at publish time, so there
    is nothing to style here but the presentation. */
 .blog-body sup.citation {
   font-size: 0.7em;
@@ -315,9 +672,9 @@ h3 {
   text-decoration: none;
 }
 
-/* Jumping to a reference should make it obvious which one you landed on —
+/* Jumping to a reference should make it obvious which one you landed on,
    otherwise the page scrolls and nothing appears to have happened. */
 .blog-body ol.references li:target {
-  background: #fff6d6;
+  background: var(--wash-pink);
   border-radius: 3px;
 }
