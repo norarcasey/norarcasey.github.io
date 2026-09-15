@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 
 import { HOME_BAND_MAX_WIDTH } from "./Hero";
 import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
-import crucinoraScreen from "../assets/screens/crucinora.webp";
-
-const VISIT_URL = "https://crucinora.com";
+import { FEATURED_PROJECT } from "../data/projects";
 
 /**
  * Spotlight for the newest, most substantial project (CruciNora): a large
@@ -14,6 +12,8 @@ const VISIT_URL = "https://crucinora.com";
  * home page, above the stack pitch, so the strongest work is seen early.
  */
 export function FeaturedProject(): React.ReactElement {
+  const project = FEATURED_PROJECT;
+
   return (
     <Box
       component="section"
@@ -36,7 +36,7 @@ export function FeaturedProject(): React.ReactElement {
         {/* Screenshot */}
         <Box
           component={Link}
-          to="/crucinora"
+          to={project.path}
           sx={{
             display: "block",
             flexShrink: 0,
@@ -49,7 +49,7 @@ export function FeaturedProject(): React.ReactElement {
         >
           <Box
             component="img"
-            src={crucinoraScreen}
+            src={project.screenshot}
             alt="The CruciNora crossword builder"
             decoding="async"
             sx={{
@@ -68,7 +68,7 @@ export function FeaturedProject(): React.ReactElement {
             component="h3"
             sx={{ color: ACCENT_BLUE, borderBottom: "none" }}
           >
-            CruciNora
+            {project.name}
           </Typography>
           <Typography variant="body1" sx={{ color: "#4a4f57" }}>
             An AI-assisted crossword construction app. Design an NYT-style grid,
@@ -79,23 +79,25 @@ export function FeaturedProject(): React.ReactElement {
             off the client.
           </Typography>
           <Box display="flex" flexWrap="wrap" gap={1.5} mt={0.5}>
-            <Button
-              variant="contained"
-              href={VISIT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                backgroundColor: ACCENT_PINK,
-                "&:hover": { backgroundColor: ACCENT_PINK_HOVER },
-                fontWeight: 600,
-              }}
-            >
-              Visit CruciNora
-            </Button>
+            {project.liveUrl && (
+              <Button
+                variant="contained"
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  backgroundColor: ACCENT_PINK,
+                  "&:hover": { backgroundColor: ACCENT_PINK_HOVER },
+                  fontWeight: 600,
+                }}
+              >
+                Visit {project.name}
+              </Button>
+            )}
             <Button
               variant="outlined"
               component={Link}
-              to="/crucinora"
+              to={project.path}
               sx={{
                 color: ACCENT_BLUE,
                 borderColor: ACCENT_BLUE,
