@@ -36,6 +36,59 @@ interface SnapshotRow {
   updated_at: string;
 }
 
+/** The site's own host, so a link to it is not an external one. */
+const SITE_HOST = "noracasey.com";
+
+/** What every external link on the site says to a screen reader. */
+const NEW_TAB_NOTE =
+  '<span class="visually-hidden"> (opens in a new tab)</span>';
+
+/**
+ * Every link in a post that leaves the site opens in a new tab and says so,
+ * the way `ExternalLink` does for the links the site writes itself.
+ *
+ * Applied here, once, at build time, rather than in the page: the studio
+ * writes the markup and the site decides how its links behave, and a rule
+ * in the JSON is prerendered, testable, and free at runtime. Same-page links
+ * (a citation's `#ref-n` and the reference list's `#cite-n-m` backlinks) and
+ * anything that is not http, a `mailto:` say, are left alone. The studio
+ * already puts `rel="noreferrer"` on these; `noopener` joins it. Idempotent,
+ * so a post that comes through with the attributes already set gains
+ * nothing twice.
+ */
+export function openExternalLinksInNewTab(html: string): string {
+  return html.replace(
+    /<a\b([^>]*)>([\s\S]*?)<\/a>/g,
+    (whole, attrs: string, inner: string) => {
+      const href = /\bhref="([^"]*)"/.exec(attrs)?.[1];
+      if (!href || !/^https?:\/\//i.test(href)) return whole;
+      let host: string;
+      try {
+        host = new URL(href).hostname;
+      } catch {
+        return whole;
+      }
+      if (host === SITE_HOST || host.endsWith(`.${SITE_HOST}`)) return whole;
+
+      let out = attrs;
+      if (!/\btarget="/.test(out)) out += ' target="_blank"';
+      const rel = /\brel="([^"]*)"/.exec(out)?.[1] ?? "";
+      const tokens = new Set(rel.split(/\s+/).filter(Boolean));
+      tokens.add("noopener");
+      tokens.add("noreferrer");
+      const relAttr = `rel="${[...tokens].join(" ")}"`;
+      out = /\brel="/.test(out)
+        ? out.replace(/\brel="[^"]*"/, relAttr)
+        : `${out} ${relAttr}`;
+
+      const content = inner.includes(NEW_TAB_NOTE)
+        ? inner
+        : `${inner}${NEW_TAB_NOTE}`;
+      return `<a${out}>${content}</a>`;
+    }
+  );
+}
+
 /** One snapshot row as the site's own post. Pure, so it is unit-tested. */
 export function toBlogPost(row: SnapshotRow): BlogPost {
   return {
@@ -44,7 +97,7 @@ export function toBlogPost(row: SnapshotRow): BlogPost {
     // untitled draft, and an empty <h1> would be worse than a placeholder.
     title: row.title?.trim() || "Untitled",
     excerpt: excerptFrom(row.body_text),
-    bodyHtml: row.body_html,
+    bodyHtml: openExternalLinksInNewTab(row.body_html),
     tags: Array.isArray(row.tags) ? row.tags : [],
     publishedAt: row.published_at,
     updatedAt: row.updated_at,
