@@ -30,11 +30,13 @@ function Fact({
 /**
  * The top of the home page, and for some readers the whole of it.
  *
- * It leads with what Nora does rather than with a job title, and the three
- * facts beside it replace the eight-chip row that used to sit under the
- * paragraph: the chips said the same things in a form nobody reads. The years
- * figure is computed from the résumé data rather than written here, so it
- * cannot go stale the way a number in a sentence does.
+ * It leads with what Nora does and who it is for rather than with a job
+ * title. The headline is her sentence, revised 17 Sep 2026 from the line the
+ * canvas drew, which she read back as immature; the runway's UI-14 has both.
+ * The three facts beside it replace the eight-chip row that used to sit
+ * under the paragraph: the chips said the same things in a form nobody
+ * reads. The years figure is computed from the résumé data rather than
+ * written here, so it cannot go stale the way a number in a sentence does.
  */
 export function Hero(): React.ReactElement {
   const years = getYearsOfExperience();
@@ -46,7 +48,7 @@ export function Hero(): React.ReactElement {
           Staff full-stack engineer · Team lead · Barcelona
         </p>
         <h1 className="h1 max-w-[18ch] text-[32px] leading-[38px] md:text-[44px] md:leading-[52px]">
-          I solve problems with technology. Which technology is a detail.
+          I build software that solves people&apos;s problems.
         </h1>
         <p className="lead max-w-[58ch] text-[17px] leading-[26px] md:text-lg md:leading-7">
           {years} years shipping software across the stack, at companies from a
