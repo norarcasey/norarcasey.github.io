@@ -11,8 +11,10 @@ import {
   ShowcasePushback,
   ShowcaseTile,
 } from "../components/ProjectShowcase";
+import { CommitHistory } from "../components/CommitHistory";
 import { Recording } from "../components/Recording";
 import { StackFacts } from "../components/StackFacts";
+import { NORA_BENE_COMMITS, NORA_BENE_RELEASES } from "../data/noraBeneHistory";
 import { useRouteMeta } from "../hooks/usePageMeta";
 
 const LIVE_URL = "https://norabene.noratives.com";
@@ -71,11 +73,6 @@ export function NoraBenePage(): React.ReactElement {
       <ShowcaseFacts
         facts={[
           {
-            value: "138",
-            label:
-              "commits in 21 days, 23 August to 13 September 2026, from an empty repo to an app used every day.",
-          },
-          {
             value: "697",
             label:
               "tests: 571 over the domain core, which imports no React, no Supabase and no browser API, and 126 end to end, run against a production build because the offline spec needs the service worker.",
@@ -86,7 +83,13 @@ export function NoraBenePage(): React.ReactElement {
               "hard rules enforced by a check rather than by remembering: no secret column, no system delete, RLS forced on every table, no item text in telemetry.",
           },
         ]}
-      />
+      >
+        <CommitHistory
+          commits={NORA_BENE_COMMITS}
+          releases={NORA_BENE_RELEASES}
+          caption="in 21 days, 23 August to 13 September 2026, from an empty repo to an app used every day. Most of it in the first nine; the rest is what using it turned up."
+        />
+      </ShowcaseFacts>
 
       <ShowcaseDetails
         title="How it is built"

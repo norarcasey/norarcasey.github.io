@@ -61,6 +61,15 @@
   --pink: #b83d6b;
   --pink-hover: #9e3259;
   --text-on-pink: #ffffff;
+
+  /* Chart marks. In light they are the text accents; in dark they are a step
+     deeper than the text accents, which are tuned to be read on the ground
+     and sit above the lightness band a mark needs. Validated as a pair with
+     the dataviz palette checks in both schemes. */
+  --chart-bar: var(--accent);
+  --chart-bar-hover: var(--accent-hover);
+  --chart-marker: var(--pink);
+  --chart-marker-ink: #ffffff;
 }
 
 /* Dark is restated rather than derived, because one ramp cannot carry both
@@ -93,6 +102,10 @@
     /* The accent inverts the same way, and the shared tokens keep white on it
        (2.2:1), so it is overridden here for the pressed tag chips. */
     --text-on-accent: #12161b;
+    --chart-bar: #3b91d6;
+    --chart-bar-hover: #6fb1ea;
+    --chart-marker: #d0628c;
+    --chart-marker-ink: #12161b;
   }
 }
 
@@ -115,6 +128,10 @@
   --pink-hover: #f0a4bf;
   --text-on-pink: #12161b;
   --text-on-accent: #12161b;
+  --chart-bar: #3b91d6;
+  --chart-bar-hover: #6fb1ea;
+  --chart-marker: #d0628c;
+  --chart-marker-ink: #12161b;
 }
 
 @theme inline {

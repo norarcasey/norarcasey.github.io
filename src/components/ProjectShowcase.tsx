@@ -252,29 +252,48 @@ export interface ShowcaseFact {
 interface ShowcaseFactsProps {
   /** Up to three. Two honest figures beat three. */
   facts: ShowcaseFact[];
+  /**
+   * A chart that stands in for a tile, above the row, for a number whose
+   * shape says more than the number: a commit history, say.
+   */
+  children?: React.ReactNode;
 }
 
-/** The row of measured-fact tiles under the recording. */
+const FACT_COLUMNS = ["", "sm:grid-cols-1", "sm:grid-cols-2", "sm:grid-cols-3"];
+
+/** The measured facts under the recording: a chart, if any, then the tiles. */
 export function ShowcaseFacts({
   facts,
+  children,
 }: ShowcaseFactsProps): React.ReactElement {
+  const shown = facts.slice(0, 3);
   return (
     <section
-      className="showcase-facts grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6"
+      className="showcase-facts flex flex-col gap-6"
       style={{ gridArea: "facts" }}
       aria-label="Measured"
     >
-      {facts.slice(0, 3).map((fact) => (
-        <div
-          key={fact.label}
-          className="flex flex-col gap-1 rounded-xl border border-border px-6 py-5"
-        >
-          <span className="text-text text-4xl leading-10 font-bold tabular-nums">
-            {fact.value}
-          </span>
-          <span className="copy">{fact.label}</span>
+      {children ? (
+        <div className="rounded-xl border border-border px-6 py-5">
+          {children}
         </div>
-      ))}
+      ) : null}
+      <div
+        className={`grid grid-cols-1 gap-4 sm:gap-6 ${FACT_COLUMNS[shown.length]}`}
+      >
+        {shown.map((fact) => (
+          <div
+            key={fact.label}
+            className="flex flex-col gap-1 rounded-xl border border-border px-6 py-5"
+          >
+            {/* Proportional figures: tabular ones make a big number look loose. */}
+            <span className="text-text text-4xl leading-10 font-bold">
+              {fact.value}
+            </span>
+            <span className="copy">{fact.label}</span>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
