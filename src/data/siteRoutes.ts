@@ -67,6 +67,11 @@ export const SITE_ROUTES = {
     description:
       "CruciNora, an AI-assisted crossword construction app by Nora Casey. Design an NYT-style grid, auto-fill it with a backtracking solver, and clue it with Claude's help.",
   },
+  "/nora-bene": {
+    title: "Nora Bene",
+    description:
+      "Nora Bene, a capture-first replacement for Google Keep by Nora Casey: an offline outbox that never loses a thought, row-level security on every table, and a vault whose key never reaches the server. How it is built, and where the plan was overruled.",
+  },
   "/blog": {
     title: "Blog",
     description:

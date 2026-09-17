@@ -10,6 +10,7 @@ import { SITE_ROUTE_PATHS } from "../src/data/siteRoutes";
 const ROUTES = [
   "/",
   "/crucinora/",
+  "/nora-bene/",
   "/legends-of-noragon/",
   "/resume/",
   "/blog/",

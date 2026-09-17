@@ -14,6 +14,7 @@ const PAGES = [
   // at build time, so only this page is guaranteed to be there in CI.
   { name: "Blog", path: "/blog" },
   { name: "CruciNora", path: "/crucinora" },
+  { name: "Nora Bene", path: "/nora-bene" },
   { name: "Legends of Noragon", path: "/legends-of-noragon" },
 ];
 

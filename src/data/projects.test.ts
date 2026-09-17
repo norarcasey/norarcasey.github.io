@@ -24,11 +24,15 @@ describe("PROJECTS", () => {
     expect(OTHER_PROJECTS).not.toContain(FEATURED_PROJECT);
   });
 
-  it("gives every project a name, a blurb, and a screenshot", () => {
+  it("gives every project a name and a blurb, and every game a screenshot", () => {
+    // A product may lead with a recording and have no screenshot yet; a game
+    // is in the strip as a thumbnail and must have one.
     for (const project of PROJECTS) {
       expect(project.name.length).toBeGreaterThan(0);
       expect(project.blurb.length).toBeGreaterThan(0);
-      expect(project.screenshot.length).toBeGreaterThan(0);
+      if (project.kind === "game") {
+        expect(project.screenshot?.length ?? 0).toBeGreaterThan(0);
+      }
     }
   });
 

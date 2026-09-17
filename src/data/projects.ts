@@ -27,8 +27,12 @@ export interface Project {
   name: string;
   /** One or two sentences, as the home page's tiles have always said it. */
   blurb: string;
-  /** The imported WebP, from `src/assets/screens`. */
-  screenshot: string;
+  /**
+   * The imported WebP, from `src/assets/screens`. A product whose page leads
+   * with a recording rather than a screenshot may have none yet; its card
+   * shows the wash the canvas draws for that case.
+   */
+  screenshot?: string;
   /**
    * `product` is something someone else could use; `game` is one of the
    * published components. It decides which part of the home page a project
@@ -65,6 +69,15 @@ export const PROJECTS: Project[] = [
     stack: "TypeScript core · Supabase · Vercel functions · Claude",
     featured: true,
     liveUrl: "https://crucinora.com",
+  },
+  {
+    path: "/nora-bene",
+    name: "Nora Bene",
+    blurb:
+      "A capture-first replacement for Google Keep that keeps working with no signal and syncs when it has one.",
+    kind: "product",
+    stack: "PWA · IndexedDB outbox · Supabase · Playwright",
+    liveUrl: "https://norabene.noratives.com",
   },
   {
     path: "/legends-of-noragon",

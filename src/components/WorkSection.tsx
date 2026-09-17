@@ -16,13 +16,15 @@ function ProductCard({ project }: { project: Project }): React.ReactElement {
           link to the same place is one more thing for a screen reader to read
           out and tab past. The canvas draws it the same way. */}
       <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-wash-blue sm:aspect-[16/10] sm:h-auto sm:w-full sm:rounded-none">
-        <img
-          src={project.screenshot}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover object-top"
-        />
+        {project.screenshot ? (
+          <img
+            src={project.screenshot}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover object-top"
+          />
+        ) : null}
       </div>
       <div className="flex min-w-0 flex-col gap-1.5 sm:gap-2 sm:p-5">
         <h3 className="h3 text-lg leading-6 sm:text-xl sm:leading-7">

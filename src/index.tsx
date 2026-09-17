@@ -109,6 +109,13 @@ const router = createBrowserRouter([
             Component: m.CruciNoraPage,
           })),
       },
+      {
+        path: "nora-bene",
+        lazy: () =>
+          import("./pages/NoraBenePage").then((m) => ({
+            Component: m.NoraBenePage,
+          })),
+      },
     ],
   },
 ]);
