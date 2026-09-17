@@ -1,8 +1,8 @@
 # noracasey.com
 
-The portfolio site at https://noracasey.com. Vite, React 19, TypeScript, MUI for now
-(the redesign in `UI-13` replaces it with Tailwind and `@noratives/tokens`). Deployed to
-Vercel by GitHub Actions on every push to `main`. There are no pull requests here: one
+The portfolio site at https://noracasey.com. Vite, React 19, TypeScript, Tailwind v4
+with `@noratives/tokens` (the shared Nora Suite tokens, pinned as a git dependency).
+Deployed to Vercel by GitHub Actions on every push to `main`. There are no pull requests here: one
 maintainer, push to `main`, the gate decides.
 
 ## Before you start
@@ -34,8 +34,8 @@ Prettier is the arbiter and CI checks it before anything else.
 | The list of pages     | `src/data/siteRoutes.ts`. Adding a route here is what puts it in the sitemap, the prerender, and the router test. Nowhere else.                       |
 | The router            | `src/index.tsx`. Every page but home is a lazy route.                                                                                                 |
 | Shell: header, footer | `src/Root.tsx`                                                                                                                                        |
-| Colours               | `src/colors.ts`. Text uses the AA-tuned pair; the brighter pair is decorative only.                                                                   |
-| Theme and global CSS  | `src/theme.ts`, `src/index.css`                                                                                                                       |
+| Colours and type      | `src/index.css`: the token overrides at the top (the cool neutral ramp, the blue accent, the flag motif), light on `:root` and dark restated twice.   |
+| The design system     | `src/index.css`, `@layer components`: `.h1` to `.h3`, `.lead`, `.copy`, `.meta`, `.eyebrow`, `.card`, `.btn`. Layout is Tailwind utilities.           |
 | Project pages         | `src/pages/*Page.tsx`, built from the slots in `src/components/ProjectShowcase.tsx`. `src/components/ProjectShowcase.md` is the recipe and checklist. |
 | Résumé content        | `src/data/resume.ts`. Dates are structured; years are computed.                                                                                       |
 | Blog                  | Content is not in this repo. `scripts/blogContent.ts` fetches it at build time into `public/blog/` (gitignored). See README, "Publishing a post".     |
@@ -52,8 +52,14 @@ Prettier is the arbiter and CI checks it before anything else.
 - **Accessibility is gated twice.** `src/a11y.test.tsx` runs axe over every page in
   jsdom and `e2e/a11y.spec.ts` runs it over the built site in Chromium. A new page goes
   into both lists, and into `e2e/seo.spec.ts`.
-- **Images below the fold** take `loading="lazy"` and reserve their box with
-  `aspectRatio` in `sx` (MUI's `Box` swallows `width` and `height` as style props).
+- **Images below the fold** take `loading="lazy"` and reserve their box with an
+  `aspect-*` utility, so the copy beside them does not jump when the file lands.
+- **The site's own classes live in Tailwind's `components` layer** so a utility
+  beside them wins (`copy text-sm` is 14px). A rule written outside a layer in
+  `index.css` beats every utility, silently. The print rules and the shell are
+  outside on purpose: they are meant to win.
+- **Both schemes are real.** The dark palette is live under `prefers-color-scheme`;
+  the e2e axe scan runs in both, so a colour that only fails in dark still fails.
 - **`index.html` is the prerender's template.** Anything added to its `<head>` reaches
   every route. Anything per page goes through `siteRoutes.ts` and `usePageMeta`.
 

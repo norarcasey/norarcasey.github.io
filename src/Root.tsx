@@ -1,8 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { ThemeProvider } from "@mui/material";
 import { Outlet, Link, useLocation } from "react-router-dom";
-
-import { theme } from "./theme";
 
 /**
  * LOGO:
@@ -105,7 +102,7 @@ export function Root(): React.ReactElement {
   }, [onKeyDown]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
@@ -215,6 +212,6 @@ export function Root(): React.ReactElement {
       <div role="status" aria-live="polite" className="visually-hidden">
         {routeAnnouncement}
       </div>
-    </ThemeProvider>
+    </>
   );
 }

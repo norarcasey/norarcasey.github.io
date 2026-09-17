@@ -55,9 +55,8 @@ converter comes from `npx sharp-cli`, so nothing is added to `package.json`:
 this runs when a screenshot changes, not on every build or CI run.
 
 Two things the pages themselves owe an image: `loading="lazy"` if it sits below
-the fold, and a reserved box (`aspectRatio` in `sx`, since MUI's `Box` treats
-`width` and `height` as style props rather than passing them to the element) so
-the copy beside it doesn't jump when the file lands.
+the fold, and a reserved box (an `aspect-*` utility on the image) so the copy
+beside it doesn't jump when the file lands.
 
 ## Deploying
 

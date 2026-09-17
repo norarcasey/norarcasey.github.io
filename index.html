@@ -1,9 +1,5 @@
 <!doctype html>
-<!-- Pinned to light until the last MUI page goes in UI-19. The dark tokens
-     are defined and every page UI-16 to UI-18 builds is drawn against them,
-     but the pages still rendering through MUI carry hardcoded light colours,
-     and a dark shell above a white page body is worse than no dark mode. -->
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
     <script
@@ -31,7 +27,17 @@
       href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500;600&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <!-- The browser chrome follows the page's ground, in either scheme. -->
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#12161b"
+      media="(prefers-color-scheme: dark)"
+    />
     <meta
       name="description"
       content="Nora Casey — software engineer building frontend and full-stack tools that empower people. Browse my projects, résumé, and ways to get in touch."

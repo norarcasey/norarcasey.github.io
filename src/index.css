@@ -1,15 +1,14 @@
 /* Tailwind v4, CSS-first: no JS config and no preset, the way every other
    repo on the shelf does it.
 
-   Preflight is deliberately left out. It is the one part of Tailwind that
-   restyles markup nobody asked it to: heading font sizes collapse to 1em and
-   list markers disappear, which would silently change the eight project pages,
-   the résumé and the blog body, all of which still render through MUI in this
-   item. It comes back in UI-19, once MUI is gone and every page is ours. Until
-   then the reset below is the site's own, as it has always been. */
-@layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+   Preflight is on, since UI-19. It was held back while the pages still
+   rendered through MUI, because it restyles markup nobody asked it to:
+   heading sizes collapse to 1em and list markers go. Every page is ours now,
+   so the only markup that still relies on a browser default is the blog body,
+   which the studio writes, and its rules below say the sizes and markers
+   preflight takes away. Preflight also sets border-box on everything, which
+   is the bug UI-15 and UI-18 each fixed once by hand. */
+@import "tailwindcss";
 @import "@noratives/tokens/tokens.css";
 
 /* ── The overrides this site makes to the shared tokens ─────────────────────
@@ -91,6 +90,9 @@
     /* The pink inverts in dark: it is a light fill, so the label is the ground
        rather than white, which measures 2.44:1 on it and 7.46:1 this way. */
     --text-on-pink: #12161b;
+    /* The accent inverts the same way, and the shared tokens keep white on it
+       (2.2:1), so it is overridden here for the pressed tag chips. */
+    --text-on-accent: #12161b;
   }
 }
 
@@ -112,6 +114,7 @@
   --pink: #e78aab;
   --pink-hover: #f0a4bf;
   --text-on-pink: #12161b;
+  --text-on-accent: #12161b;
 }
 
 @theme inline {
@@ -152,36 +155,25 @@
    every utility: `* { margin: 0 }` outranked `mt-4`, and the `a` colour
    outranked a button's own. Layered, a utility wins, which is the point. */
 @layer base {
-  /* ── Reset ──────────────────────────────────────────────────────────────── */
-
-  * {
-    margin: 0;
-    padding: 0;
-  }
+  /* ── Base ───────────────────────────────────────────────────────────────────
+     Preflight owns the reset (margins, padding, border-box, heading sizes).
+     This is what the site says on top of it. ──────────────────────────────── */
 
   html,
   body {
-    box-sizing: border-box;
     height: 100%;
-    padding: 0;
-    margin: 0;
   }
 
+  /* The ink is set here and inherited, and nowhere else by element: a rule
+     like `p { color: var(--text) }` would set ink on every paragraph directly
+     and defeat any island (the game column in dark) that wants its
+     descendants to inherit a different colour. */
   body {
     background: var(--surface);
     color: var(--text);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
-    color: var(--text);
   }
 
   code {
@@ -231,7 +223,6 @@
   }
 
   #root {
-    box-sizing: border-box;
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -367,12 +358,7 @@
 
   /* ── The page container ─────────────────────────────────────────────────── */
 
-  /* border-box, because the reset only sets it on html and body: without it the
-   side padding is added to the 100% width and the page scrolls sideways on a
-   phone, which is the same bug `.tile` had. Tailwind's preflight sets this on
-   everything, and takes the problem away for good, when UI-19 turns it on. */
   .page-wrap {
-    box-sizing: border-box;
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
@@ -691,6 +677,65 @@
       width: var(--game-width, 560px);
     }
   }
+
+  /* The games are published components that assume a light host: Mine
+     Sweeper's scoreboard inherits the page's text colour onto its own grey,
+     and Pianora hardcodes dark ink onto whatever ground it is given. On the
+     dark palette both fail contrast at 1.6:1 and 1.05:1, measured by the
+     dark axe project. So in dark the game column is a light island. Not a
+     colour: the light tokens, redeclared for the subtree, so that anything
+     inside which reads a token (the difficulty radios' `.copy` label, a
+     button's `--text-on-accent`) gets the light value too, and color-scheme
+     light so native controls match. In light it is invisible. The lasting
+     fix is in each package, which should set its own text colour and ground
+     rather than borrow the host's. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .showcase-game {
+      --surface: #ffffff;
+      --surface-raised: #ffffff;
+      --surface-sunken: #f4f7fa;
+      --text: #1c2229;
+      --text-muted: #4a5560;
+      --text-subtle: #5a6773;
+      --border: #e3e8ee;
+      --border-strong: #cbd3dc;
+      --accent: #1f78c2;
+      --accent-hover: #1a63a1;
+      --text-on-accent: #ffffff;
+      --pink: #b83d6b;
+      --pink-hover: #9e3259;
+      --text-on-pink: #ffffff;
+      --wash-blue: #eaf7fe;
+      --wash-pink: #fdf0f3;
+      background: var(--surface);
+      color: var(--text);
+      color-scheme: light;
+      border-radius: 12px;
+    }
+  }
+
+  :root[data-theme="dark"] .showcase-game {
+    --surface: #ffffff;
+    --surface-raised: #ffffff;
+    --surface-sunken: #f4f7fa;
+    --text: #1c2229;
+    --text-muted: #4a5560;
+    --text-subtle: #5a6773;
+    --border: #e3e8ee;
+    --border-strong: #cbd3dc;
+    --accent: #1f78c2;
+    --accent-hover: #1a63a1;
+    --text-on-accent: #ffffff;
+    --pink: #b83d6b;
+    --pink-hover: #9e3259;
+    --text-on-pink: #ffffff;
+    --wash-blue: #eaf7fe;
+    --wash-pink: #fdf0f3;
+    background: var(--surface);
+    color: var(--text);
+    color-scheme: light;
+    border-radius: 12px;
+  }
 }
 
 /* ── Blog ─────────────────────────────────────────────────────────────── */
@@ -724,11 +769,31 @@
   line-height: 1.7;
 }
 
+/* Sizes and markers, because preflight sets headings to 1em and lists to
+   none, and this markup comes from the studio with no classes on it. The
+   sizes are the scale's 2xl, xl and lg. */
 .blog-body h2,
 .blog-body h3,
 .blog-body h4 {
   margin-top: 32px;
   margin-bottom: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.blog-body h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.blog-body h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.blog-body h4 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .blog-body p {
@@ -769,6 +834,14 @@
 .blog-body ol {
   margin: 0 0 16px;
   padding-left: 24px;
+}
+
+.blog-body ul {
+  list-style: disc;
+}
+
+.blog-body ol {
+  list-style: decimal;
 }
 
 /* Citations, as published by the studio: a superscript marker in the prose and
