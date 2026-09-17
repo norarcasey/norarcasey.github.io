@@ -5,6 +5,7 @@ import { axe } from "jest-axe";
 
 import { Root } from "./Root";
 import Home from "./pages/HomePage";
+import { CaseStudyFixture } from "./components/caseStudyFixture";
 import { ContactMePage } from "./pages/ContactMePage";
 import { CruciNoraPage } from "./pages/CruciNoraPage";
 import { MinimaxDiagram } from "./components/MinimaxDiagram";
@@ -44,6 +45,9 @@ describe("accessibility (axe)", () => {
   it.each([
     ["Contact page", <ContactMePage />],
     ["CruciNora page", <CruciNoraPage />],
+    // No case study is served yet (UI-12). The layout is scanned on the
+    // canvas's placeholders so the first real page starts from a clean scan.
+    ["Case-study layout", <CaseStudyFixture />],
     ["Minimax diagram", <MinimaxDiagram />],
     ["Résumé", <Resume />],
   ])(

@@ -1,7 +1,13 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
 
-import { ACCENT_BLUE, ACCENT_PINK, DECORATIVE_PINK } from "../colors";
+// The diagram takes its colours from the same tokens as the page around it, so
+// it follows the theme rather than restating hex values in SVG attributes.
+const INK = "var(--text)";
+const MUTED = "var(--text-muted)";
+const GROUND = "var(--surface-raised)";
+const LINE = "var(--border-strong)";
+const BLUE = "var(--accent)";
+const PINK = "var(--pink)";
 
 const CELL = 24;
 const BOARD = CELL * 3;
@@ -34,12 +40,7 @@ function MiniBoard({ board, x, y }: MiniBoardProps): React.ReactElement {
       const key = `${rowIndex}-${columnIndex}`;
       if (mark === "X") {
         marks.push(
-          <g
-            key={key}
-            stroke={ACCENT_BLUE}
-            strokeWidth={2}
-            strokeLinecap="round"
-          >
+          <g key={key} stroke={BLUE} strokeWidth={2} strokeLinecap="round">
             <line x1={cx - 6} y1={cy - 6} x2={cx + 6} y2={cy + 6} />
             <line x1={cx + 6} y1={cy - 6} x2={cx - 6} y2={cy + 6} />
           </g>
@@ -52,7 +53,7 @@ function MiniBoard({ board, x, y }: MiniBoardProps): React.ReactElement {
             cy={cy}
             r={6.5}
             fill="none"
-            stroke={ACCENT_PINK}
+            stroke={PINK}
             strokeWidth={2}
           />
         );
@@ -67,11 +68,11 @@ function MiniBoard({ board, x, y }: MiniBoardProps): React.ReactElement {
         y={y}
         width={BOARD}
         height={BOARD}
-        fill="#ffffff"
-        stroke={DECORATIVE_PINK}
+        fill={GROUND}
+        stroke={LINE}
         strokeWidth={1}
       />
-      <g stroke={DECORATIVE_PINK} strokeWidth={1}>
+      <g stroke={LINE} strokeWidth={1}>
         <line x1={x + CELL} y1={y} x2={x + CELL} y2={y + BOARD} />
         <line x1={x + CELL * 2} y1={y} x2={x + CELL * 2} y2={y + BOARD} />
         <line x1={x} y1={y + CELL} x2={x + BOARD} y2={y + CELL} />
@@ -100,7 +101,7 @@ function ValueChip({ cx, y, label }: ValueChipProps): React.ReactElement {
         height={28}
         rx={4}
         fill="none"
-        stroke={ACCENT_BLUE}
+        stroke={BLUE}
         strokeWidth={1}
       />
       <text
@@ -109,7 +110,7 @@ function ValueChip({ cx, y, label }: ValueChipProps): React.ReactElement {
         textAnchor="middle"
         fontSize="13"
         fontWeight="600"
-        fill="#363435"
+        fill={INK}
       >
         {label}
       </text>
@@ -124,33 +125,19 @@ function ValueChip({ cx, y, label }: ValueChipProps): React.ReactElement {
  */
 export function MinimaxDiagram(): React.ReactElement {
   return (
-    <Box>
-      <Typography
-        variant="h6"
-        component="h2"
-        sx={{ color: ACCENT_BLUE, mb: 1 }}
-      >
-        How minimax picks her move
-      </Typography>
+    <div className="flex flex-col gap-2">
+      <h2 className="h3">How minimax picks her move</h2>
 
       {/* Below ~600px the diagram would scale its labels down to an unreadable
           size, so it keeps a legible minimum width and scrolls inside this
           container instead of shrinking. The paragraph below carries the same
           information for anyone who would rather not scroll. */}
-      <Box sx={{ overflowX: "auto", mt: 1, pb: 1 }}>
-        <Box
-          component="svg"
+      <div className="overflow-x-auto pb-2">
+        <svg
           viewBox="0 0 720 372"
           role="img"
           aria-labelledby="minimax-title minimax-desc"
-          sx={{
-            width: "100%",
-            minWidth: 600,
-            maxWidth: 720,
-            height: "auto",
-            display: "block",
-            mx: "auto",
-          }}
+          className="mx-auto block h-auto w-full max-w-[720px] min-w-[600px]"
         >
           <title id="minimax-title">
             A minimax game tree for one Nora move in tic-tac-toe
@@ -170,23 +157,17 @@ export function MinimaxDiagram(): React.ReactElement {
             textAnchor="middle"
             fontSize="13"
             fontWeight="600"
-            fill="#363435"
+            fill={INK}
           >
             Nora (O) to move &#183; MAX takes the highest value
           </text>
           <MiniBoard board={START} x={360 - BOARD / 2} y={28} />
-          <text
-            x={360}
-            y={122}
-            textAnchor="middle"
-            fontSize="12"
-            fill="#4a4f57"
-          >
+          <text x={360} y={122} textAnchor="middle" fontSize="12" fill={MUTED}>
             X threatens the top row
           </text>
 
           {/* Edges down to the two kinds of reply */}
-          <g stroke={DECORATIVE_PINK} strokeWidth={1}>
+          <g stroke={LINE} strokeWidth={1}>
             <line x1={340} y1={128} x2={200} y2={168} />
             <line x1={380} y1={128} x2={520} y2={168} />
           </g>
@@ -194,8 +175,8 @@ export function MinimaxDiagram(): React.ReactElement {
             cross the branch lines. */}
           <g
             fontSize="12"
-            fill="#4a4f57"
-            stroke="#ffffff"
+            fill={MUTED}
+            stroke={GROUND}
             strokeWidth={4}
             paintOrder="stroke"
           >
@@ -216,7 +197,7 @@ export function MinimaxDiagram(): React.ReactElement {
             textAnchor="middle"
             fontSize="13"
             fontWeight="600"
-            fill="#363435"
+            fill={INK}
           >
             You (X) reply &#183; MIN takes the lowest value
           </text>
@@ -225,34 +206,25 @@ export function MinimaxDiagram(): React.ReactElement {
           <ValueChip cx={200} y={286} label="0 &#183; draw with best play" />
           <ValueChip cx={520} y={286} label="&#8722;1 &#183; X wins" />
 
-          <text
-            x={360}
-            y={344}
-            textAnchor="middle"
-            fontSize="13"
-            fill="#363435"
-          >
+          <text x={360} y={344} textAnchor="middle" fontSize="13" fill={INK}>
             0 beats &#8722;1, so the block is the move she plays.
           </text>
-        </Box>
-      </Box>
+        </svg>
+      </div>
 
-      <Box display="flex" justifyContent="center">
+      <div className="flex justify-center">
         {/* The showcase block is shrink-to-fit, so any unconstrained paragraph
           here would contribute its full single-line max-content width and
           stretch the whole page. Cap it, as the stack facts do. */}
-        <Typography
-          variant="body2"
-          sx={{ color: "#4a4f57", mt: 1.5, maxWidth: "72ch" }}
-        >
+        <p className="copy mt-1 max-w-[72ch] text-sm leading-5">
           The real search continues until every branch ends in a win, loss, or
           draw, then carries those values back up: Nora takes the highest at her
           turns, you take the lowest at yours. The full tree is small enough to
           search exhaustively, so she always plays the move with the best
           guaranteed outcome. With best play from both sides, the game is a
           draw.
-        </Typography>
-      </Box>
-    </Box>
+        </p>
+      </div>
+    </div>
   );
 }

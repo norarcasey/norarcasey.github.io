@@ -1,5 +1,4 @@
 import React from "react";
-import { Typography } from "@mui/material";
 import { Arkanora } from "@norarcasey/arkanora";
 import "@norarcasey/arkanora/style.css";
 
@@ -25,13 +24,13 @@ export function ArkanoraPage(): React.ReactElement {
 
       <ShowcaseSummary>
         <NpmBadge npmPackage="@norarcasey/arkanora" title="Arkanora" />
-        <Typography variant="body1">
+        <p className="copy">
           Arkanora is my take on the classic brick-breaker. Bounce the ball off
           your paddle to chip away at the wall of bricks, and don't let it slip
           past you. I built it in TypeScript to play with real-time collision
           physics and a steady tick loop in the browser.
-        </Typography>
-        <Typography variant="body1">
+        </p>
+        <p className="copy">
           It's published as a React component on npm, dropped straight into this
           page. Grab it from{" "}
           <ExternalLink
@@ -39,10 +38,10 @@ export function ArkanoraPage(): React.ReactElement {
             label="npm"
           />
           .
-        </Typography>
-        <Typography variant="body1">
+        </p>
+        <p className="copy">
           Press Start, then steer the paddle with the arrow keys or A and D.
-        </Typography>
+        </p>
       </ShowcaseSummary>
 
       <ShowcaseGame>

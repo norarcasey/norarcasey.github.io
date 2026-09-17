@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
 import { MineSweeper, Difficulty } from "@norarcasey/mine-sweeper";
 
 import { ExternalLink } from "../components/ExternalLink";
@@ -20,8 +19,8 @@ export function MineSweeperPage(): React.ReactElement {
   const [difficulty, setDifficulty] = useState(Difficulty.Beginner);
 
   const board = (
-    <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
-      <Box display="flex" gap={2} sx={{ display: { xs: "none", md: "flex" } }}>
+    <div className="flex flex-col items-center gap-4">
+      <div className="copy hidden gap-4 md:flex">
         <input
           type="radio"
           id="beginner"
@@ -51,10 +50,10 @@ export function MineSweeperPage(): React.ReactElement {
           onChange={() => setDifficulty(Difficulty.Expert)}
         />
         <label htmlFor="expert">Expert</label>
-      </Box>
+      </div>
 
       {/* Desktop: the selected difficulty (keyed renders force a fresh board) */}
-      <Box sx={{ display: { xs: "none", md: "block" } }}>
+      <div className="hidden md:block">
         {difficulty === Difficulty.Beginner && (
           <MineSweeper difficulty={difficulty} />
         )}
@@ -64,13 +63,13 @@ export function MineSweeperPage(): React.ReactElement {
         {difficulty === Difficulty.Expert && (
           <MineSweeper difficulty={difficulty} />
         )}
-      </Box>
+      </div>
 
-      {/* Mobile: Beginner only — the larger boards don't fit small screens */}
-      <Box sx={{ display: { xs: "block", md: "none" } }}>
+      {/* Phone: Beginner only, since the larger boards do not fit. */}
+      <div className="md:hidden">
         <MineSweeper difficulty={Difficulty.Beginner} />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 
   return (
@@ -79,23 +78,23 @@ export function MineSweeperPage(): React.ReactElement {
 
       <ShowcaseSummary>
         <NpmBadge npmPackage="@norarcasey/mine-sweeper" title="Mine Sweeper" />
-        <Typography variant="body1">
+        <p className="copy">
           Mine Sweeper started as a whiteboard prompt in a 2018 interview:
           "build the popular Windows game Mine Sweeper." The interview was over
           in an hour, but the problem stuck with me, so I went home and actually
           built it in React and Redux.
-        </Typography>
-        <Typography variant="body1">
+        </p>
+        <p className="copy">
           That first version was bare bones, just the beginner level. I kept
           coming back to it over the years, extending it into the
           multi-difficulty game you can play here and packaging it as a reusable
           library along the way.
-        </Typography>
-        <Typography variant="body1" fontWeight="bold">
+        </p>
+        <p className="copy text-text font-semibold">
           If you don't see the level selector try a larger screen size.
           Currently only Beginner is enabled in small screen sizes.
-        </Typography>
-        <Typography variant="body1">
+        </p>
+        <p className="copy">
           It's published as a React component on npm, dropped straight into this
           page. Grab it from{" "}
           <ExternalLink
@@ -108,7 +107,7 @@ export function MineSweeperPage(): React.ReactElement {
             label="Github"
           />
           . I am still actively developing features for Mine Sweeper.
-        </Typography>
+        </p>
       </ShowcaseSummary>
 
       {/* The board grows with difficulty, so the column is sized by content. */}

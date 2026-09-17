@@ -1,5 +1,4 @@
 import React from "react";
-import { Typography } from "@mui/material";
 import { Anoraconda } from "@norarcasey/anoraconda";
 import "@norarcasey/anoraconda/style.css";
 
@@ -25,14 +24,14 @@ export function AnoracondaPage(): React.ReactElement {
 
       <ShowcaseSummary>
         <NpmBadge npmPackage="@norarcasey/anoraconda" title="Anoraconda" />
-        <Typography variant="body1">
+        <p className="copy">
           Anoraconda is my take on the classic Snake game. Guide the snake
           around the board to eat apples, growing a little longer with each one,
           and try not to run into the walls or your own tail. I built it in
           TypeScript to play with grid-based game state and a steady tick loop
           in the browser.
-        </Typography>
-        <Typography variant="body1">
+        </p>
+        <p className="copy">
           It's published as a React component on npm, dropped straight into this
           page. Grab it from{" "}
           <ExternalLink
@@ -40,10 +39,10 @@ export function AnoracondaPage(): React.ReactElement {
             label="npm"
           />
           .
-        </Typography>
-        <Typography variant="body1">
+        </p>
+        <p className="copy">
           Press Start, then steer with the arrow keys or WASD.
-        </Typography>
+        </p>
       </ShowcaseSummary>
 
       <ShowcaseGame>

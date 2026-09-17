@@ -7,14 +7,15 @@ import { test, expect } from "@playwright/test";
 const DESKTOP = { width: 1440, height: 1200 };
 const MOBILE = { width: 390, height: 900 };
 
-const HEADER = ".tile:has(h1)";
-const SUMMARY = "section.tile:has(img[alt$='npm version'])";
+const HEADER = ".showcase-header";
+const SUMMARY = ".showcase-summary";
+const DETAILS = ".showcase-details";
 
 test.describe("project showcase layout", () => {
   test("the title lines up with the summary column", async ({ page }) => {
-    // `.tile` sets auto side margins. Inert for a block child, but a grid item
-    // honours them by shrinking to its content and centring, which once threw
-    // the title into the middle of the row.
+    // Auto side margins once threw the title into the middle of its row: a
+    // grid item honours them by shrinking to its content and centring. The
+    // slots carry none now, and this is what keeps it that way.
     await page.setViewportSize(DESKTOP);
     await page.goto("/arkanora");
     await page.waitForLoadState("networkidle");
@@ -33,9 +34,9 @@ test.describe("project showcase layout", () => {
   test("the heading carries no trailing margin out of the header", async ({
     page,
   }) => {
-    // `.tile h1` adds a 10px bottom margin for tiles with copy under the
-    // heading. It used to escape the header box by margin collapsing; grid
-    // items don't collapse margins, so it is zeroed at the source instead.
+    // A bottom margin on the heading used to escape the header box by margin
+    // collapsing; grid items don't collapse margins, so it is zero at the
+    // source and the row spacing is the grid's own.
     await page.setViewportSize(DESKTOP);
     await page.goto("/arkanora");
     await page.waitForLoadState("networkidle");
@@ -72,7 +73,7 @@ test.describe("project showcase layout", () => {
 
     const summary = (await page.locator(SUMMARY).boundingBox())!;
     const game = (await page.locator(".showcase-game").boundingBox())!;
-    const details = (await page.locator("section.tile:has(dl)").boundingBox())!;
+    const details = (await page.locator(DETAILS).boundingBox())!;
 
     expect(details.y).toBeGreaterThan(summary.y + summary.height - 1);
     expect(details.width).toBeGreaterThan(game.x + game.width - summary.x - 2);

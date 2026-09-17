@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/material";
 
 interface NpmBadgeProps {
   /** Full scoped npm package name, e.g. "@norarcasey/star-siege-nora". */
@@ -19,7 +18,7 @@ export function NpmBadge({
   const shortName = npmPackage.replace(/^@[^/]+\//, "");
 
   return (
-    <Box>
+    <div>
       <a
         href={`https://www.npmjs.com/package/${npmPackage}`}
         target="_blank"
@@ -31,6 +30,6 @@ export function NpmBadge({
           alt={`${title} npm version`}
         />
       </a>
-    </Box>
+    </div>
   );
 }

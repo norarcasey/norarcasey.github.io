@@ -1,177 +1,359 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
 
-/**
- * Grid areas for the showcase layout. On large screens the summary column sits
- * beside the game with the header and details bands spanning both; below `lg`
- * everything stacks in source order.
+import { SectionHeading } from "./SectionHeading";
+
+/*
+ * Two layouts, one set of slots.
+ *
+ * Every slot below places itself with an inline `gridArea`, so a page can give
+ * them in any order and leave any out. `ProjectShowcase` is the grid the game
+ * pages use: a title across the top, the summary beside the game from lg, the
+ * details band under both. `CaseStudy` is the second layout on the same slots,
+ * stacked as full-width bands, plus two slots of its own: the measured facts
+ * and the pushback band. The grids themselves are in index.css.
  */
-const AREAS = {
-  xs: `"header" "summary" "game" "details"`,
-  lg: `"header header" "summary game" "details details"`,
-};
 
-interface ProjectShowcaseProps {
-  /**
-   * The showcase slots: `ShowcaseHeader`, `ShowcaseSummary`, `ShowcaseGame`,
-   * and `ShowcaseDetails`. Each one places itself in the grid, so they can be
-   * given in any order and any of them may be omitted.
-   */
+interface LayoutProps {
   children: React.ReactNode;
 }
 
-/**
- * Shared layout for the npm-component project pages. Owns nothing but the
- * grid: a full-width title header across the top, a slim summary column beside
- * the embedded game on large screens, and a full-width details band under
- * both. The whole block shrinks to its content and is centered on the page.
- */
-export function ProjectShowcase({
-  children,
-}: ProjectShowcaseProps): React.ReactElement {
+/** The game pages' layout. Owns nothing but the grid. */
+export function ProjectShowcase({ children }: LayoutProps): React.ReactElement {
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", pb: 2 }}>
-      {/* Shrink-to-fit block, centered by the flex parent above */}
-      <Box
-        sx={{
-          width: { xs: "100%", lg: "auto" },
-          maxWidth: "100%",
-          display: "grid",
-          gridTemplateAreas: AREAS,
-          // The game column is sized by the game itself, so its track is auto.
-          gridTemplateColumns: { xs: "minmax(0, 1fr)", lg: "400px auto" },
-          columnGap: { xs: 0, lg: 4 },
-          alignItems: "start",
-        }}
-      >
-        {children}
-      </Box>
-    </Box>
+    <div className="page-wrap">
+      <div className="showcase-grid">{children}</div>
+    </div>
   );
 }
+
+/**
+ * The case-study layout: the same slots as bands, in the order the canvas
+ * draws them, with `ShowcaseFacts` and `ShowcasePushback` between them.
+ */
+export function CaseStudy({ children }: LayoutProps): React.ReactElement {
+  return (
+    <div className="page-wrap">
+      <div className="case-study-grid">{children}</div>
+    </div>
+  );
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
 
 interface ShowcaseHeaderProps {
-  /** Project name, shown as the page header. */
+  /** Project name, the page's h1. */
   title: string;
+  /**
+   * "title" is the page heading at 36px. "hero" is the case study's 48px
+   * display size, one of the two sizes above the shared scale.
+   */
+  size?: "title" | "hero";
+  /** The mono line above the title: "Case study · 2026 · private". */
+  eyebrow?: string;
+  /** The one-sentence problem, at 22px under the title. */
+  problem?: string;
+  /** A paragraph under the problem. */
+  children?: React.ReactNode;
+  /** Beside the text from md: the three tiles, as `ShowcaseTile`s. */
+  aside?: React.ReactNode;
 }
 
-/** The project title, the page's h1, spanning the full width above both columns. */
+/** The page's h1, spanning the row above both columns. */
 export function ShowcaseHeader({
   title,
+  size = "title",
+  eyebrow,
+  problem,
+  children,
+  aside,
 }: ShowcaseHeaderProps): React.ReactElement {
-  return (
-    <Box
-      className="tile"
-      sx={{
-        gridArea: "header",
-        // `.tile` centers itself with auto side margins, which a grid item
-        // honours by shrinking to its content. Fill the row so the title stays
-        // aligned with the summary column beneath it.
-        width: "100%",
-        boxSizing: "border-box",
-        // The heading is the only thing in this slot, so drop the trailing
-        // margin `.tile h1` adds for tiles that have copy beneath the heading.
-        // Spacing below the header is owned here instead.
-        "& h1": { mb: 0 },
-        mb: { xs: 2, lg: 7 },
-        pb: 0,
-      }}
+  const heading = (
+    <h1
+      className={
+        size === "hero"
+          ? "h1 text-[36px] leading-[42px] md:text-[48px] md:leading-[54px]"
+          : "h1"
+      }
     >
-      <Typography variant="h3" component="h1">
-        {title}
-      </Typography>
-    </Box>
+      {title}
+    </h1>
+  );
+
+  if (!eyebrow && !problem && !children && !aside) {
+    return (
+      <header className="showcase-header" style={{ gridArea: "header" }}>
+        {heading}
+      </header>
+    );
+  }
+
+  return (
+    <header
+      className="showcase-header grid grid-cols-1 gap-8 md:grid-cols-12 md:items-end"
+      style={{ gridArea: "header" }}
+    >
+      <div className="flex flex-col gap-4 md:col-span-8">
+        {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+        {heading}
+        {problem ? (
+          <p className="lead max-w-[30ch] text-[20px] leading-[30px] md:text-[22px] md:leading-8">
+            {problem}
+          </p>
+        ) : null}
+        {children ? <div className="copy max-w-[62ch]">{children}</div> : null}
+      </div>
+      {aside ? (
+        <div className="flex flex-col gap-3 md:col-span-4 md:self-start md:pt-11">
+          {aside}
+        </div>
+      ) : null}
+    </header>
   );
 }
 
+interface ShowcaseTileProps {
+  /** The mono label: "Stack", "Where it runs", "Source". */
+  label: string;
+  /** Blue and pink are the washes; plain is a hairline on the ground. */
+  tone?: "blue" | "pink" | "plain";
+  children: React.ReactNode;
+}
+
+const TILE_TONES = {
+  blue: "bg-wash-blue",
+  pink: "bg-wash-pink",
+  plain: "border border-border",
+} as const;
+
+/** One of the tiles beside a case study's header. */
+export function ShowcaseTile({
+  label,
+  tone = "plain",
+  children,
+}: ShowcaseTileProps): React.ReactElement {
+  return (
+    <div className={`flex flex-col gap-1 rounded-xl p-4 ${TILE_TONES[tone]}`}>
+      <span className="meta text-text">{label}</span>
+      <span className="text-text text-[15px] leading-[22px]">{children}</span>
+    </div>
+  );
+}
+
+/* ── Summary and game ────────────────────────────────────────────────────── */
+
 interface ShowcaseSummaryProps {
-  /** The descriptive copy for the project. */
+  /** The descriptive copy. Give it a list of blocks; it stacks them. */
   children: React.ReactNode;
 }
 
 /**
- * The left-hand column. Kept narrow so it reads as a column beside the game
- * rather than as a full-width paragraph.
+ * The left column. Kept narrow so it reads as a column beside the game rather
+ * than as a full-width paragraph.
  */
 export function ShowcaseSummary({
   children,
 }: ShowcaseSummaryProps): React.ReactElement {
   return (
-    <Box
-      sx={{
-        gridArea: "summary",
-        width: { xs: "100%", lg: 400 },
-        maxWidth: { xs: 640, lg: 400 },
-        mx: "auto",
-      }}
+    <section
+      className="showcase-summary mx-auto flex w-full max-w-[640px] flex-col gap-4 lg:mx-0 lg:max-w-none"
+      style={{ gridArea: "summary" }}
     >
-      <section className="tile">
-        <Box display="flex" flexDirection="column" gap={2}>
-          {children}
-        </Box>
-      </section>
-    </Box>
+      {children}
+    </section>
   );
 }
 
 interface ShowcaseGameProps {
   /**
-   * Width of the game column on large screens. A number gives a fixed column
-   * (the default 560 fits the responsive games, which are width:100% capped at
-   * 560px); "fit-content" suits an intrinsically-sized game whose width varies,
-   * e.g. Mine Sweeper, whose board grows with difficulty.
+   * Width of the game column from lg. A number is a fixed column (the default
+   * 560 fits the games that are width:100% capped at 560px); "fit-content"
+   * suits a game whose width varies, like Mine Sweeper's board; "100%" is
+   * what a case study passes so the recording fills its band.
    */
   width?: number | string;
-  /** Hide the game below the `md` breakpoint (some games need the room). */
+  /** Hide the game below md (some games need the room). */
   hideOnMobile?: boolean;
-  /** The embedded game / component. */
+  /** The embedded game, a screenshot, or a `Recording`. */
   children: React.ReactNode;
 }
 
-/** The right-hand column holding the embedded game. */
+/** The right column, or the recording band. */
 export function ShowcaseGame({
   width = 560,
   hideOnMobile = false,
   children,
 }: ShowcaseGameProps): React.ReactElement {
+  const gameWidth = typeof width === "number" ? `${width}px` : width;
   return (
-    <Box
+    <div
       // Names the third-party boundary: everything inside comes from the
       // published game package, so the a11y sweep scopes itself around it.
-      className="showcase-game"
-      sx={{
-        gridArea: "game",
-        display: hideOnMobile ? { xs: "none", md: "flex" } : "flex",
-        justifyContent: "center",
-        width: { xs: "100%", lg: width },
-        pb: 4,
-      }}
+      className={`showcase-game justify-center ${hideOnMobile ? "hidden md:flex" : "flex"}`}
+      style={
+        {
+          gridArea: "game",
+          "--game-width": gameWidth,
+        } as React.CSSProperties
+      }
     >
       {children}
-    </Box>
+    </div>
   );
 }
 
+/* ── Details ─────────────────────────────────────────────────────────────── */
+
 interface ShowcaseDetailsProps {
-  /** The engineering write-up. */
+  /**
+   * With a title, the slot is a band: the section mark and heading in the
+   * left third, the content beside it. Without one it is the plain full-width
+   * band the game pages use, whose content carries its own heading.
+   */
+  title?: string;
+  /** The line under the band's heading. */
+  lead?: string;
   children: React.ReactNode;
 }
 
-/**
- * Full-width band below both columns. The engineering write-up lives here
- * rather than in the narrow summary column, where long technical prose is
- * hard to read.
- */
+/** The full-width band below both columns, for the engineering write-up. */
 export function ShowcaseDetails({
+  title,
+  lead,
   children,
 }: ShowcaseDetailsProps): React.ReactElement {
+  if (!title) {
+    return (
+      <section className="showcase-details" style={{ gridArea: "details" }}>
+        {children}
+      </section>
+    );
+  }
   return (
-    <Box
-      component="section"
-      className="tile"
-      sx={{ gridArea: "details", width: "100%", boxSizing: "border-box" }}
+    <ShowcaseBand
+      className="showcase-details"
+      area="details"
+      title={title}
+      lead={lead}
     >
       {children}
-    </Box>
+    </ShowcaseBand>
+  );
+}
+
+/* ── The case study's own slots ──────────────────────────────────────────── */
+
+export interface ShowcaseFact {
+  /** The number, as it should read: "230", "1.2s". */
+  value: string;
+  /** What it counts, and against what: "commits since June 2026". */
+  label: string;
+}
+
+interface ShowcaseFactsProps {
+  /** Up to three. Two honest figures beat three. */
+  facts: ShowcaseFact[];
+}
+
+/** The row of measured-fact tiles under the recording. */
+export function ShowcaseFacts({
+  facts,
+}: ShowcaseFactsProps): React.ReactElement {
+  return (
+    <section
+      className="showcase-facts grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6"
+      style={{ gridArea: "facts" }}
+      aria-label="Measured"
+    >
+      {facts.slice(0, 3).map((fact) => (
+        <div
+          key={fact.label}
+          className="flex flex-col gap-1 rounded-xl border border-border px-6 py-5"
+        >
+          <span className="text-text text-4xl leading-10 font-bold tabular-nums">
+            {fact.value}
+          </span>
+          <span className="copy">{fact.label}</span>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/** The subtitle the pushback band carries unless a page says otherwise. */
+export const PUSHBACK_LEAD =
+  "AI wrote most of this code. These are the calls I made against its plan, and why.";
+
+interface ShowcasePushbackProps {
+  lead?: string;
+  /** The paragraphs, and a `ShowcaseCallout` if there is one. */
+  children: React.ReactNode;
+}
+
+/** The band that carries the calls made against the plan. */
+export function ShowcasePushback({
+  lead = PUSHBACK_LEAD,
+  children,
+}: ShowcasePushbackProps): React.ReactElement {
+  return (
+    <ShowcaseBand
+      className="showcase-pushback"
+      area="pushback"
+      title="Where I pushed back"
+      lead={lead}
+    >
+      <div className="flex max-w-[64ch] flex-col gap-4 [&>p:first-child]:text-text [&>p:first-child]:text-lg [&>p:first-child]:leading-7">
+        {children}
+      </div>
+    </ShowcaseBand>
+  );
+}
+
+interface ShowcaseCalloutProps {
+  /** The mono label: "Scale lesson". */
+  label: string;
+  children: React.ReactNode;
+}
+
+/** A wash callout inside the pushback band. */
+export function ShowcaseCallout({
+  label,
+  children,
+}: ShowcaseCalloutProps): React.ReactElement {
+  return (
+    <div className="flex flex-col gap-1.5 rounded-xl bg-wash-pink px-6 py-5">
+      <span className="meta text-text">{label}</span>
+      <div className="copy text-text">{children}</div>
+    </div>
+  );
+}
+
+/* ── The band ────────────────────────────────────────────────────────────── */
+
+interface ShowcaseBandProps {
+  className: string;
+  area: string;
+  title: string;
+  lead?: string;
+  children: React.ReactNode;
+}
+
+/** A section mark and heading in the left third, the content in the rest. */
+function ShowcaseBand({
+  className,
+  area,
+  title,
+  lead,
+  children,
+}: ShowcaseBandProps): React.ReactElement {
+  return (
+    <section
+      className={`${className} grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8`}
+      style={{ gridArea: area }}
+    >
+      <div className="md:col-span-4">
+        <SectionHeading title={title}>{lead}</SectionHeading>
+      </div>
+      <div className="md:col-span-8">{children}</div>
+    </section>
   );
 }

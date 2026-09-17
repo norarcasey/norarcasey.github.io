@@ -1,17 +1,23 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 
 import {
+  CaseStudy,
   ProjectShowcase,
+  PUSHBACK_LEAD,
   ShowcaseDetails,
+  ShowcaseFacts,
   ShowcaseGame,
   ShowcaseHeader,
+  ShowcasePushback,
   ShowcaseSummary,
 } from "./ProjectShowcase";
+import { CaseStudyFixture } from "./caseStudyFixture";
 
-/** The showcase's grid container, i.e. the first grid in the tree. */
+/** The layout's grid container, whichever of the two layouts rendered. */
 function gridOf(container: HTMLElement): HTMLElement {
-  const grid = [...container.querySelectorAll<HTMLElement>("*")].find(
-    (node) => getComputedStyle(node).display === "grid"
+  const grid = container.querySelector<HTMLElement>(
+    ".showcase-grid, .case-study-grid"
   );
   if (!grid) throw new Error("no grid container rendered");
   return grid;
@@ -24,6 +30,11 @@ function slotOf(el: HTMLElement, container: HTMLElement): HTMLElement {
   );
   if (!slot) throw new Error("content is not inside any slot");
   return slot as HTMLElement;
+}
+
+/** Each slot places itself with an inline grid-area, which jsdom can read. */
+function areaOf(el: HTMLElement, container: HTMLElement): string {
+  return slotOf(el, container).style.gridArea;
 }
 
 describe("ProjectShowcase", () => {
@@ -68,8 +79,7 @@ describe("ProjectShowcase", () => {
       </ProjectShowcase>
     );
 
-    const areaFor = (el: HTMLElement) =>
-      getComputedStyle(slotOf(el, container)).gridArea;
+    const areaFor = (el: HTMLElement) => areaOf(el, container);
 
     expect(areaFor(screen.getByRole("heading", { level: 1 }))).toBe("header");
     expect(areaFor(screen.getByText("What the project is."))).toBe("summary");
@@ -91,21 +101,112 @@ describe("ProjectShowcase", () => {
     expect(screen.queryByText("How it is built.")).not.toBeInTheDocument();
   });
 
-  it("fills the header row rather than letting .tile centre it", () => {
-    // `.tile` sets auto side margins. That is inert for a block child but
-    // centres a grid item, which once pushed the title away from the summary
-    // column it should line up with.
-    const { container } = render(
+  it("passes the game column's width to the CSS as a custom property", () => {
+    // The column is full width until lg and this value from lg; index.css
+    // reads it, so a number and "fit-content" both have to arrive as CSS.
+    const { container, rerender } = render(
       <ProjectShowcase>
-        <ShowcaseHeader title="Arkanora" />
+        <ShowcaseGame width={480}>
+          <div>the game</div>
+        </ShowcaseGame>
       </ProjectShowcase>
     );
+    const slot = () => slotOf(screen.getByText("the game"), container);
+    expect(slot().style.getPropertyValue("--game-width")).toBe("480px");
 
-    const header = slotOf(screen.getByRole("heading", { level: 1 }), container);
-    expect(getComputedStyle(header).width).toBe("100%");
-    expect(getComputedStyle(header).boxSizing).toBe("border-box");
+    rerender(
+      <ProjectShowcase>
+        <ShowcaseGame width="fit-content">
+          <div>the game</div>
+        </ShowcaseGame>
+      </ProjectShowcase>
+    );
+    expect(slot().style.getPropertyValue("--game-width")).toBe("fit-content");
   });
 
   // `hideOnMobile` and the column widths resolve through media queries, which
   // jsdom does not evaluate. They are covered in e2e/showcase.spec.ts instead.
+});
+
+describe("CaseStudy", () => {
+  it("is the second layout on the same slots, plus two of its own", () => {
+    const { container } = render(
+      <MemoryRouter>
+        <CaseStudy>
+          <ShowcasePushback>
+            <p>the call I made</p>
+          </ShowcasePushback>
+          <ShowcaseFacts facts={[{ value: "230", label: "commits" }]} />
+          <ShowcaseDetails title="How it is built">
+            <p>the stack</p>
+          </ShowcaseDetails>
+          <ShowcaseGame width="100%">
+            <div>the recording</div>
+          </ShowcaseGame>
+          <ShowcaseHeader title="Kinora" size="hero" />
+        </CaseStudy>
+      </MemoryRouter>
+    );
+
+    const areaFor = (el: HTMLElement) => areaOf(el, container);
+    expect(areaFor(screen.getByRole("heading", { level: 1 }))).toBe("header");
+    expect(areaFor(screen.getByText("the recording"))).toBe("game");
+    expect(areaFor(screen.getByText("230"))).toBe("facts");
+    expect(areaFor(screen.getByText("the stack"))).toBe("details");
+    expect(areaFor(screen.getByText("the call I made"))).toBe("pushback");
+  });
+
+  it("renders the canvas's Kinora artboard: header band, tiles, and bands", () => {
+    render(
+      <MemoryRouter>
+        <CaseStudyFixture />
+      </MemoryRouter>
+    );
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Kinora" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Case study · 2026 · private, single user")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/built as though it had 100,000/)
+    ).toBeInTheDocument();
+
+    // The three tiles beside the header.
+    for (const label of ["Stack", "Where it runs", "Source"]) {
+      expect(screen.getByText(label)).toBeInTheDocument();
+    }
+
+    // The two bands carry their headings; the pushback carries its subtitle.
+    expect(
+      screen.getByRole("heading", { level: 2, name: "How it is built" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Where I pushed back" })
+    ).toBeInTheDocument();
+    expect(screen.getByText(PUSHBACK_LEAD)).toBeInTheDocument();
+    expect(screen.getByText("Scale lesson")).toBeInTheDocument();
+
+    // A StackFacts inside a titled band carries no heading of its own.
+    expect(
+      screen.queryByRole("heading", { level: 2, name: "How it's built" })
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows at most three measured facts", () => {
+    render(
+      <ShowcaseFacts
+        facts={[
+          { value: "1", label: "one" },
+          { value: "2", label: "two" },
+          { value: "3", label: "three" },
+          { value: "4", label: "four" },
+        ]}
+      />
+    );
+
+    expect(screen.getByText("three")).toBeInTheDocument();
+    expect(screen.queryByText("four")).not.toBeInTheDocument();
+  });
 });

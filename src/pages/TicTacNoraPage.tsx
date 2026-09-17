@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
 import { TicTacNora } from "@norarcasey/tic-tac-nora";
 import "@norarcasey/tic-tac-nora/style.css";
 
@@ -26,13 +25,13 @@ export function TicTacNoraPage(): React.ReactElement {
 
       <ShowcaseSummary>
         <NpmBadge npmPackage="@norarcasey/tic-tac-nora" title="Tic Tac Nora" />
-        <Typography variant="body1">
+        <p className="copy">
           Tic Tac Nora is my spin on tic-tac-toe. You play X and go first, and
           Nora plays O. Behind the scenes she runs a minimax search, so she
           always takes a win, always blocks yours, and never loses a game she
           could draw. The best you can do is force a tie.
-        </Typography>
-        <Typography variant="body1">
+        </p>
+        <p className="copy">
           It's published as a React component on npm, dropped straight into this
           page. Grab it from{" "}
           <ExternalLink
@@ -40,10 +39,10 @@ export function TicTacNoraPage(): React.ReactElement {
             label="npm"
           />
           .
-        </Typography>
-        <Typography variant="body1">
+        </p>
+        <p className="copy">
           Click any open square to make your move; press New Game to start over.
-        </Typography>
+        </p>
       </ShowcaseSummary>
 
       <ShowcaseGame>
@@ -52,7 +51,7 @@ export function TicTacNoraPage(): React.ReactElement {
 
       <ShowcaseDetails>
         <MinimaxDiagram />
-        <Box sx={{ mt: 4 }}>
+        <div className="mt-8">
           <StackFacts
             facts={[
               {
@@ -68,7 +67,7 @@ export function TicTacNoraPage(): React.ReactElement {
               ...COMPONENT_LIBRARY_FACTS,
             ]}
           />
-        </Box>
+        </div>
       </ShowcaseDetails>
     </ProjectShowcase>
   );

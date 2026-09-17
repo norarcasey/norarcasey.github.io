@@ -631,57 +631,66 @@
   }
 }
 
-/* ── Pages, until UI-16 to UI-18 rebuild them ───────────────────────────── */
+/* ── Project pages ──────────────────────────────────────────────────────────
+   Two layouts on the same slots. Each slot names its own grid area inline, so
+   the container decides where an area goes and the page decides nothing about
+   layout at all. The showcase grid puts the summary beside the game from lg;
+   the case-study grid stacks the same slots as bands and adds two of its own.
+   ------------------------------------------------------------------------ */
+@layer components {
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "header" "summary" "game" "details";
+    align-items: start;
+    row-gap: 24px;
+  }
 
-.tiles {
-  display: flex;
-  flex-direction: column;
-}
+  @media (min-width: 1024px) {
+    .showcase-grid {
+      /* The game column is sized by the game itself, so its track is auto. */
+      grid-template-columns: 400px auto;
+      grid-template-areas: "header header" "summary game" "details details";
+      column-gap: 32px;
+      row-gap: 40px;
+    }
+  }
 
-/* border-box, because the 15px of side padding was being added to a width the
-   grid had already set to the full viewport: at 390 that is the whole reason
-   the page scrolled sideways. */
-.tile {
-  box-sizing: border-box;
-  margin: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px 15px;
-}
+  /* Every area the shared slots can name is in this template, summary
+     included. An item whose grid-area names an area the template lacks is not
+     dropped: the browser resolves the name to an implicit line and places the
+     item in a second, auto-sized column, which starves the one column the
+     page has. That was the first thing the fixture found. */
+  .case-study-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "header" "summary" "game" "facts" "details" "pushback";
+  }
 
-.tile h1,
-.tile h2,
-.tile h3 {
-  margin-bottom: 10px;
-}
+  /* Band spacing as a margin between present items, not a row-gap: a gap is
+     paid on an empty named row too, and a case study rarely fills summary. */
+  .case-study-grid > * + * {
+    margin-top: 48px;
+  }
 
-.project-box {
-  align-items: center;
-  padding: 8px 4px 18px;
-  position: relative;
-  transition: background-color 0.15s ease;
-}
+  @media (min-width: 768px) {
+    .case-study-grid > * + * {
+      margin-top: 72px;
+    }
+  }
 
-/* Underline as an inset pseudo-element so it stops short of the full-width
-   section header above the list. Was the dashed pink rule; now a hairline,
-   which is what the motif has instead. */
-.project-box--divider::after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  right: 48px;
-  bottom: 0;
-  margin-right: 15px;
-  border-bottom: 1px solid var(--border);
-  transition: border-color 0.15s ease;
-}
+  /* The game column: full width until lg, then whatever the page asked for.
+     A number of pixels for a fixed column, or fit-content for a game whose
+     width varies, like a Mine Sweeper board that grows with difficulty. */
+  .showcase-game {
+    width: 100%;
+  }
 
-.project-box:hover {
-  background-color: var(--wash-blue);
-}
-
-.project-box:hover.project-box--divider::after {
-  border-bottom-color: var(--border-strong);
+  @media (min-width: 1024px) {
+    .showcase-game {
+      width: var(--game-width, 560px);
+    }
+  }
 }
 
 /* ── Blog ─────────────────────────────────────────────────────────────── */

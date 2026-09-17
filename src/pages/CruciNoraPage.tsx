@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
 
 import { ExternalLink } from "../components/ExternalLink";
 import {
@@ -11,7 +10,6 @@ import {
 } from "../components/ProjectShowcase";
 import { StackFacts } from "../components/StackFacts";
 import { useRouteMeta } from "../hooks/usePageMeta";
-import { ACCENT_BLUE, ACCENT_PINK, ACCENT_PINK_HOVER } from "../colors";
 import crucinoraScreen from "../assets/screens/crucinora.webp";
 
 const VISIT_URL = "https://crucinora.com";
@@ -24,96 +22,62 @@ export function CruciNoraPage(): React.ReactElement {
       <ShowcaseHeader title="CruciNora" />
 
       <ShowcaseSummary>
-        <Typography variant="body1">
+        <p className="copy">
           CruciNora is an AI-assisted crossword construction app. You design an
           NYT-style grid, enter the long "theme" answers, let a solver auto-fill
           the rest with valid words, then write a clue for every entry with
           Claude's help, accepting the AI's suggestions or overriding them.
           Completed crosswords are hosted at{" "}
           <ExternalLink url={VISIT_URL} label="crucinora.com" />.
-        </Typography>
+        </p>
       </ShowcaseSummary>
 
       {/* No embeddable component to drop in, so the visual column carries a
           screenshot and the link out to the live app. */}
       <ShowcaseGame width={480}>
-        <Box
-          sx={{
-            width: "100%",
-            maxWidth: 560,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 2,
-          }}
-        >
-          <Box
-            component="img"
+        <div className="flex w-full max-w-[560px] flex-col items-center gap-4">
+          <img
             src={crucinoraScreen}
             alt="The CruciNora crossword builder"
             decoding="async"
-            sx={{
-              width: "100%",
-              height: "auto",
-              borderRadius: 1,
-              display: "block",
-              // Reserves the box before the file lands, so the page doesn't
-              // reflow around it.
-              aspectRatio: "560 / 562",
-            }}
+            // Reserves the box before the file lands, so the page doesn't
+            // reflow around it.
+            className="block aspect-[560/562] w-full rounded-lg"
           />
-          <Button
-            variant="contained"
+          <a
+            className="btn btn-pink"
             href={VISIT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            sx={{
-              backgroundColor: ACCENT_PINK,
-              "&:hover": { backgroundColor: ACCENT_PINK_HOVER },
-              fontWeight: 600,
-            }}
           >
             Visit CruciNora
-          </Button>
-        </Box>
+          </a>
+        </div>
       </ShowcaseGame>
 
       <ShowcaseDetails>
         {/* The two write-ups read as a pair, so they sit side by side on wide
             screens. Grid rather than flex: equal columns that stay equal, and
-            `minmax(0, 1fr)` lets a column shrink below its longest word. */}
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "minmax(0, 1fr)",
-              md: "repeat(2, minmax(0, 1fr))",
-            },
-            gap: 4,
-            mb: 4,
-          }}
-        >
-          {/* maxWidth, not width: the column caps the measure for readability
+            Tailwind's grid-cols-2 is repeat(2, minmax(0, 1fr)), which lets a
+            column shrink below its longest word. */}
+        <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+          {/* max-width, not width: the column caps the measure for readability
               on a wide band but still narrows when the grid does. */}
-          <Box sx={{ maxWidth: "72ch" }}>
-            <Typography variant="h6" component="h2" sx={{ color: ACCENT_BLUE }}>
-              How it's built
-            </Typography>
-            <Typography variant="body1">
+          <div className="flex max-w-[72ch] flex-col gap-2">
+            <h2 className="h3">How it is built</h2>
+            <p className="copy">
               The crossword engine is plain TypeScript with no React or DOM. The
               grid, the live NYT rule checks, the word list, and the solver all
               live in a framework-free core that's unit-tested in isolation.
               Around it sits a Vite + React app backed by Supabase (magic-link
               auth with a single-admin allowlist), and a Vercel serverless
               function proxies Claude so the API key never reaches the browser.
-            </Typography>
-          </Box>
+            </p>
+          </div>
 
-          <Box sx={{ maxWidth: "72ch" }}>
-            <Typography variant="h6" component="h2" sx={{ color: ACCENT_BLUE }}>
-              Fun challenges
-            </Typography>
-            <Typography variant="body1">
+          <div className="flex max-w-[72ch] flex-col gap-2">
+            <h2 className="h3">Fun challenges</h2>
+            <p className="copy">
               The trick is splitting the work by what each tool is actually good
               at. Filling a grid is a constraint-satisfaction problem where
               every crossing must form a valid word, something LLMs do
@@ -123,9 +87,9 @@ export function CruciNoraPage(): React.ReactElement {
               Writing clues, which AI is genuinely good at, goes to Claude:
               every non-theme entry gets three Monday-difficulty suggestions to
               accept or replace.
-            </Typography>
-          </Box>
-        </Box>
+            </p>
+          </div>
+        </div>
 
         <StackFacts
           title="The stack, layer by layer"

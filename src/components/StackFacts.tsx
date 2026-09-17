@@ -1,7 +1,4 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
-
-import { ACCENT_BLUE } from "../colors";
 
 export interface StackFact {
   /** Short layer or concern, e.g. "Release". */
@@ -11,60 +8,42 @@ export interface StackFact {
 }
 
 interface StackFactsProps {
-  /** Section heading. Defaults to "How it's built". */
-  title?: string;
+  /**
+   * Section heading. Defaults to "How it is built"; pass `null` when the band
+   * around the list already carries the heading, as a case study's does.
+   */
+  title?: string | null;
   facts: StackFact[];
 }
 
 /**
  * The engineering side of a project page: a labeled breakdown of the stack,
  * from the domain core out to how the artifact gets released. Rendered as a
- * description list so each label is programmatically tied to its value. Sits
- * in a full-width band, so each row puts its label beside its value once
- * there's room for two columns.
+ * description list so each label is programmatically tied to its value, one
+ * hairline row per fact, the label in its own column once there is room.
  */
 export function StackFacts({
-  title = "How it's built",
+  title = "How it is built",
   facts,
 }: StackFactsProps): React.ReactElement {
   return (
-    <Box>
-      <Typography
-        variant="h6"
-        component="h2"
-        sx={{ color: ACCENT_BLUE, mb: 1 }}
-      >
-        {title}
-      </Typography>
-      <Box component="dl" sx={{ m: 0, display: "grid", gap: 1.5 }}>
-        {facts.map((fact) => (
-          <Box
+    <div className="flex flex-col gap-2">
+      {title ? <h2 className="h3">{title}</h2> : null}
+      <dl className="flex flex-col">
+        {facts.map((fact, index) => (
+          <div
             key={fact.label}
-            sx={{
-              display: "grid",
-              gridTemplateColumns: { xs: "1fr", md: "180px 1fr" },
-              columnGap: 3,
-              rowGap: 0.25,
-              alignItems: "baseline",
-            }}
+            className={`grid grid-cols-1 gap-1 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6 ${
+              index < facts.length - 1 ? "border-b border-border" : ""
+            }`}
           >
-            <Typography
-              component="dt"
-              variant="body2"
-              sx={{ fontWeight: 700, color: "#363435" }}
-            >
+            <dt className="text-text text-base leading-6 font-semibold">
               {fact.label}
-            </Typography>
-            <Typography
-              component="dd"
-              variant="body2"
-              sx={{ m: 0, color: "#4a4f57", maxWidth: "72ch" }}
-            >
-              {fact.value}
-            </Typography>
-          </Box>
+            </dt>
+            <dd className="copy max-w-[64ch]">{fact.value}</dd>
+          </div>
         ))}
-      </Box>
-    </Box>
+      </dl>
+    </div>
   );
 }
