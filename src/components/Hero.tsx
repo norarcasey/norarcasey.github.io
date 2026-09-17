@@ -47,13 +47,14 @@ export function Hero(): React.ReactElement {
         <p className="eyebrow">
           Staff full-stack engineer · Team lead · Barcelona
         </p>
-        <h1 className="h1 max-w-[18ch] text-[32px] leading-[38px] md:text-[44px] md:leading-[52px]">
-          I build software that solves people&apos;s problems.
+        <h1 className="h1 max-w-[24ch] text-[32px] leading-[38px] md:text-[44px] md:leading-[52px]">
+          I&apos;m passionate about helping people, and I build software to
+          solve their problems.
         </h1>
         <p className="lead max-w-[58ch] text-[17px] leading-[26px] md:text-lg md:leading-7">
-          {years} years shipping software across the stack, at companies from a
-          first hire to an enterprise. I lead teams, mentor engineers, and stay
-          in the code. AI writes most of the code now; the gap between what it
+          {years} years shipping software across the stack, at companies from
+          startups to an enterprise. I lead teams, mentor engineers, and stay in
+          the code. AI writes most of the code now; the gap between what it
           writes and what ships is where I work. Below is what I build for
           myself: tools I wanted to exist, in production, used every day.
         </p>
