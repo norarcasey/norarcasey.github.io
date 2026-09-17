@@ -49,7 +49,7 @@ export const experience: ResumeEntry[] = [
     company: "Pulley",
     companyDescription: "Equity management platform for startups and investors",
     start: "2025-10",
-    end: null,
+    end: "2026-09",
     duties: [
       "Lead engineer across core equity-platform teams, owning architecture from the React client through the API and data model while continuing to ship complex features hands-on.",
       "Built guided tax tooling end to end that lets founders and employees file 83(b) elections: the multi-step client flow plus the endpoints, validation, and persistence behind it, replacing an error-prone manual process.",
