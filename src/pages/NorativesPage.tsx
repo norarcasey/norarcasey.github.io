@@ -15,6 +15,7 @@ import { CommitHistory } from "../components/CommitHistory";
 import { NorativesPublishPath } from "../components/NorativesPublishPath";
 import { TestLayers } from "../components/TestLayers";
 import { CaseStudyMedia } from "../components/CaseStudyMedia";
+import norativesEditor from "../assets/screens/noratives-editor.webp";
 import {
   NORATIVES_COMMITS,
   NORATIVES_RELEASES,
@@ -41,10 +42,14 @@ const PASTED = 30;
  *
  * The two calls in the pushback band are drafted from that record and are
  * BRACKETED FOR NORA to confirm they were hers and to say the why in her own
- * words, exactly as the Nora Bene page's were before she confirmed them. The
- * hero is the empty frame until there is a picture or a recording: this app
- * is not screenshot-able the way Nora Bene was, because what is on the screen
- * is the writing.
+ * words, exactly as the Nora Bene page's were before she confirmed them.
+ *
+ * The hero and the home page's card were taken by driving the real app with
+ * every Supabase call answered in the browser, so the dev server, the
+ * components and the rendering are real and only the rows are invented. The
+ * writing in them is written for the shot rather than copied out of anybody's
+ * journal, which is the part a writing studio makes harder than a board of
+ * lists. The driver is scripts/shootNoratives.mjs.
  */
 export function NorativesPage(): React.ReactElement {
   useRouteMeta("/noratives");
@@ -94,9 +99,12 @@ export function NorativesPage(): React.ReactElement {
       </ShowcaseHeader>
 
       <ShowcaseGame width="100%" thirdParty={false}>
+        {/* A screenshot until there is a recording, and shown as one: no play
+            button over something that cannot be played. */}
         <CaseStudyMedia
-          label="[A picture of the studio: the editor with a piece open, the meta bar, and the publish dialog saying where it is going]"
-          caption="Not screenshotted yet. Unlike a board of lists, everything on this screen is writing, so the shot needs prose that is fine to show."
+          image={norativesEditor}
+          alt="The Noratives editor with a technical post open: a Field notes badge and the dateline along the top, then the word count and an amber Unpublished changes marker, the title and its tags, the formatting toolbar, and three paragraphs of prose set in a serif."
+          caption="A piece open, and the studio saying what is true of it: which notebook it is in, and that what is live is no longer what is written."
         />
       </ShowcaseGame>
 

@@ -5,6 +5,7 @@ import arkanoraScreen from "../assets/screens/arkanora.webp";
 import crucinoraScreen from "../assets/screens/crucinora.webp";
 import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.webp";
 import noraBeneScreen from "../assets/screens/nora-bene.webp";
+import norativesScreen from "../assets/screens/noratives.webp";
 import mineSweeperScreen from "../assets/screens/mine-sweeper.webp";
 import pianoraScreen from "../assets/screens/pianora.webp";
 import starSiegeScreen from "../assets/screens/star-siege.webp";
@@ -86,6 +87,7 @@ export const PROJECTS: Project[] = [
     name: "Noratives",
     blurb:
       "The writing studio this blog is published from. Journals that stay private, fiction and technical posts that go out to two different sites, one editor for all three.",
+    screenshot: norativesScreen,
     kind: "product",
     stack: "React · TipTap · Supabase · edge functions · Playwright",
     liveUrl: "https://noratives.com",
