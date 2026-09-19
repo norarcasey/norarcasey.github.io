@@ -21,7 +21,7 @@ describe("NorativesPublishPath", () => {
     );
     expect(
       screen.getByText(
-        /what crosses the line between the studio and a public site/i
+        /what leaves the studio for a public site, and what cannot/i
       )
     ).toBeInTheDocument();
     // The two facts the drawing exists to make: a journal has nowhere to go,

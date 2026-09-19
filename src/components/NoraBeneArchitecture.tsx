@@ -50,7 +50,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
           className="block h-auto w-full min-w-[660px]"
         >
           <title id={`${id}-title`}>
-            What crosses the line between the device and the server
+            What reaches the server from the device, and what never does
           </title>
           <desc id={`${id}-desc`}>
             On the device: typing goes into an outbox held locally, which draws

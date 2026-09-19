@@ -19,15 +19,14 @@ const FLOW = {
 };
 
 /**
- * How Noratives publishes, as the one thing prose cannot show: the line
- * between what is private and what is readable by anybody, and which notebook
- * crosses it.
+ * How Noratives publishes, as the one thing prose cannot show: which notebook
+ * can leave the studio for somewhere anybody can read it, and which cannot.
  *
  * The page could say in words that journals stay private. What only a picture
  * says is that this is structural rather than a setting: there is no path out
  * of the box for a journal, because a journal is a notebook nobody gave a
- * destination to, and the thing that crosses the line is a snapshot rather
- * than the entry itself.
+ * destination to, and what goes out is a snapshot rather than the entry
+ * itself.
  *
  * The journal is drawn first because that is the order it happened in: the
  * app was a journal before it was anything else, and the two notebooks with
@@ -57,7 +56,7 @@ export function NorativesPublishPath(): React.ReactElement {
           className="block h-auto w-full min-w-[660px]"
         >
           <title id={`${id}-title`}>
-            What crosses the line between the studio and a public site
+            What leaves the studio for a public site, and what cannot
           </title>
           <desc id={`${id}-desc`}>
             In the studio, every table is owner-only: an entry belongs to a

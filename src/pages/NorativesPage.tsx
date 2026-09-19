@@ -158,7 +158,7 @@ export function NorativesPage(): React.ReactElement {
         lead="A private database with one public window cut into it, and a fortnight spent handing everything on the private side back to whoever is writing."
         wide={
           <section className="flex flex-col gap-3">
-            <h3 className="h3">What crosses the line</h3>
+            <h3 className="h3">What leaves the studio, and what cannot</h3>
             <NorativesPublishPath />
           </section>
         }

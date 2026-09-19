@@ -21,7 +21,7 @@ describe("NoraBeneArchitecture", () => {
     );
     expect(
       screen.getByText(
-        /what crosses the line between the device and the server/i
+        /what reaches the server from the device, and what never does/i
       )
     ).toBeInTheDocument();
     expect(screen.getByText(/the key that unlocks the vault/i)).toBeVisible();

@@ -202,7 +202,7 @@ export function NoraBenePage(): React.ReactElement {
 
       <ShowcaseDetails
         title="How it is built"
-        lead="Seven rules the app is not allowed to break, and the line everything else is arranged around."
+        lead="Seven rules the app is not allowed to break, and the split between the phone and the server that everything else is arranged around."
         wide={
           /* The layers were a list of seven paragraphs, most of which the page
              now says elsewhere. What a list could not say is how they sit
@@ -210,7 +210,7 @@ export function NoraBenePage(): React.ReactElement {
              full width because it is a drawing, not prose: eight columns left
              it at its own minimum and scrolling sideways. */
           <section className="flex flex-col gap-3">
-            <h3 className="h3">What crosses the line</h3>
+            <h3 className="h3">What the server never gets</h3>
             <NoraBeneArchitecture />
           </section>
         }
