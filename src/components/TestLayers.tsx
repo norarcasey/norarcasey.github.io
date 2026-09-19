@@ -38,8 +38,9 @@ export function TestLayers({ layers }: TestLayersProps): React.ReactElement {
 
   return (
     <div className="flex flex-col gap-3">
+      {/* The unit belongs in the title, as the commit chart's does. */}
       <span className="text-text text-4xl leading-10 font-bold">
-        {total.toLocaleString("en-GB")}
+        {total.toLocaleString("en-GB")} tests
       </span>
       <ol className="flex flex-col gap-1">
         {stacked.map((layer, tier) => (

@@ -137,7 +137,7 @@ export function NoraBenePage(): React.ReactElement {
           {
             value: <TestLayers layers={NORA_BENE_TEST_LAYERS} />,
             label:
-              "tests, in three layers. The shape is a measurement rather than a target: the domain core is pure, so testing it exhaustively is cheap, and the browser tier stays small because it is the slow one.",
+              "The domain core is pure, so testing it exhaustively is cheap, and the browser tier stays small because those tests are slow.",
           },
           {
             value: "7 of 7",
