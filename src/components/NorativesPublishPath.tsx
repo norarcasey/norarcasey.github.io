@@ -35,8 +35,10 @@ const FLOW = {
  *
  * Drawn at 760 units and given a floor of 660px, so the labels stay a readable
  * size and the figure scrolls inside its own box on a phone rather than
- * shrinking. The caption under it carries the same content in words, both for
- * a reader who cannot see it and for one who would rather not scroll.
+ * shrinking. The `title` and `desc` inside the SVG carry the same content in
+ * words, which is what a screen reader is given; there is no caption, because
+ * the drawing turned out to say it and a paragraph restating a picture is a
+ * paragraph nobody reads.
  *
  * Every colour is a token, so the drawing follows the theme. One hue carries
  * meaning rather than decoration: the pink is the notebook that never leaves.
@@ -46,7 +48,7 @@ export function NorativesPublishPath(): React.ReactElement {
   const arrow = `${id}-arrow`;
 
   return (
-    <figure className="flex flex-col gap-4">
+    <figure>
       <div className="overflow-x-auto pb-1">
         <svg
           viewBox="0 0 760 520"
@@ -387,18 +389,6 @@ export function NorativesPublishPath(): React.ReactElement {
           </text>
         </svg>
       </div>
-
-      <figcaption className="copy max-w-[64ch] text-sm leading-5">
-        Nothing is told what was written. The rebuild is a request to go and
-        look, so the site reads the view with its own credentials and there is
-        no payload to sign or leak on the way. That is also why the deploy hook
-        sits in an edge function rather than in the studio: every variable the
-        studio is built with is inlined into the browser bundle, so a secret
-        there would be public. The one consequence worth knowing is that a
-        publish which does not rebuild is quiet about it: the row is written
-        either way, and a destination with no hook stored is reported as a
-        publish that skipped the refresh rather than as a failure.
-      </figcaption>
     </figure>
   );
 }
