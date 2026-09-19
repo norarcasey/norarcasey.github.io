@@ -70,7 +70,7 @@ export const SITE_ROUTES = {
   "/nora-bene": {
     title: "Nora Bene",
     description:
-      "Nora Bene, a capture-first replacement for Google Keep by Nora Casey: an offline outbox that never loses a thought, row-level security on every table, and a vault whose key never reaches the server. How it is built, and where the plan was overruled.",
+      "Nora Bene by Nora Casey, one app in place of Google Keep, 1Password and a spreadsheet of lists: an offline outbox that never loses a thought, row-level security on every table, and a vault whose key never reaches the server. How it is built, and where the plan was overruled.",
   },
   "/blog": {
     title: "Blog",

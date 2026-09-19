@@ -75,7 +75,7 @@ export const PROJECTS: Project[] = [
     path: "/nora-bene",
     name: "Nora Bene",
     blurb:
-      "A capture-first replacement for Google Keep that keeps working with no signal and syncs when it has one.",
+      "One app in place of Google Keep, 1Password and a spreadsheet of lists. It keeps working with no signal, and the vault's key never leaves the device.",
     screenshot: noraBeneScreen,
     kind: "product",
     stack: "PWA · IndexedDB outbox · Supabase · Playwright",

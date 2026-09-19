@@ -58,7 +58,9 @@ and `lg` is 1024px.
 
 `ShowcaseSummary` stacks its children with a gap, so give it a list of blocks
 (`<p className="copy">`, an `NpmBadge`) rather than one wrapper `div`.
-`ShowcaseDetails` does not, so space its own children yourself.
+`ShowcaseDetails` does not, so space its own children yourself. `ShowcaseHeader`
+stacks its `children` with a gap too, so a lead of two paragraphs is two `<p>`
+rather than one with a break in it.
 
 `ShowcaseDetails` puts `children` in the right-hand eight columns, which is a
 good measure for prose and a poor one for a figure: a drawing is sized by its

@@ -91,7 +91,7 @@ export function NoraBenePage(): React.ReactElement {
         size="hero"
         eyebrow="Case study · 2026 · a PWA, by invitation"
         title="Nora Bene"
-        problem="A capture-first replacement for Google Keep that keeps working with no signal, and draws a hard line between what syncs and what never does."
+        problem="One app in place of three: Google Keep for the thoughts, 1Password for the ones nobody else should see, and a spreadsheet for the lists that never justified one."
         aside={
           <>
             <ShowcaseTile label="Stack" tone="blue">
@@ -114,11 +114,16 @@ export function NoraBenePage(): React.ReactElement {
         }
       >
         <p>
-          Nothing here is hard because it is a notes app. It is hard because a
-          thought typed with no network has to be on the screen after a reload,
-          on the server when there is one, and there once rather than twice; and
-          because some of what you write down must never reach the server at
-          all.
+          Putting all three in one app is what makes it hard, and the notes part
+          is the easy half. A thought typed with no network has to be on the
+          screen after a reload, on the server when there is one, and there once
+          rather than twice.
+        </p>
+        <p>
+          What used to live in 1Password has to stay unreadable to the server,
+          in the same app as the shopping list and under the same sync. The
+          vault seals it on the device before it goes, and the key that opens it
+          never does.
         </p>
       </ShowcaseHeader>
 

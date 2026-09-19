@@ -100,7 +100,14 @@ export function ShowcaseHeader({
             {problem}
           </p>
         ) : null}
-        {children ? <div className="copy max-w-[62ch]">{children}</div> : null}
+        {/* Stacked with a gap, as ShowcaseSummary does: the base reset zeroes
+            every margin, so two paragraphs handed in here would otherwise run
+            together with no space between them. */}
+        {children ? (
+          <div className="copy flex max-w-[62ch] flex-col gap-4">
+            {children}
+          </div>
+        ) : null}
       </div>
       {aside ? (
         <div className="flex flex-col gap-3 md:col-span-4 md:self-start md:pt-11">
