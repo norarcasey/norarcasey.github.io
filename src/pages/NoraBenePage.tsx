@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-import { ExternalLink } from "../components/ExternalLink";
 import {
   CaseStudy,
   ShowcaseCallout,
@@ -18,7 +18,40 @@ import { NORA_BENE_COMMITS, NORA_BENE_RELEASES } from "../data/noraBeneHistory";
 import noraBeneBoard from "../assets/screens/nora-bene-board.webp";
 import { useRouteMeta } from "../hooks/usePageMeta";
 
-const LIVE_URL = "https://norabene.noratives.com";
+/**
+ * The seven, in plain words rather than the repo's.
+ *
+ * `enforced` marks the four a machine checks: a lint rule and a grep for the
+ * first, and `db:verify` asserting the schema for the others. The rest are
+ * design constraints, which a test cannot hold for you.
+ */
+const HARD_RULES: { text: string; enforced?: true }[] = [
+  {
+    text: "A secret never reaches the server in the clear. The vault seals everything on the phone, labels included, and the key that opens it never leaves your own devices.",
+    enforced: true,
+  },
+  {
+    text: "The app never deletes anything on its own. No retention timer, no cleanup pass, no bin that empties itself after thirty days.",
+    enforced: true,
+  },
+  {
+    text: "Blur is not security. Discreet mode hides a list from someone glancing over your shoulder, and nothing in the app implies it does more than that.",
+  },
+  {
+    text: "Capture never fails. Losing a thought you have just typed is the worst thing this app could do, so nothing about capture is allowed to wait for the network.",
+  },
+  {
+    text: "Every table checks who is asking, and refuses by default. There is no row anywhere that is readable because somebody forgot a policy.",
+    enforced: true,
+  },
+  {
+    text: "The app suggests, it never rewrites. A date or an address it spots is offered beside your words, never instead of them.",
+  },
+  {
+    text: "Nothing you write ever leaves as analytics. A crash report carries ids and kinds, never the words you wrote.",
+    enforced: true,
+  },
+];
 
 /**
  * The first case study (UI-12). Every figure on it was measured in the Nora
@@ -51,8 +84,11 @@ export function NoraBenePage(): React.ReactElement {
               which live on the phone.
             </ShowcaseTile>
             <ShowcaseTile label="Source">
-              Private. Ask me for a walkthrough, or an invitation to{" "}
-              <ExternalLink url={LIVE_URL} label="the app" />.
+              Private, and so is the app: it is invitation-only by design.{" "}
+              <Link className="inline-link" to="/contact-me">
+                Ask me for a walkthrough
+              </Link>
+              .
             </ShowcaseTile>
           </>
         }
@@ -66,7 +102,7 @@ export function NoraBenePage(): React.ReactElement {
         </p>
       </ShowcaseHeader>
 
-      <ShowcaseGame width="100%">
+      <ShowcaseGame width="100%" thirdParty={false}>
         {/* A screenshot until there is a recording, and shown as one: no play
             button over something that cannot be played. */}
         <CaseStudyMedia
@@ -99,8 +135,35 @@ export function NoraBenePage(): React.ReactElement {
 
       <ShowcaseDetails
         title="How it is built"
-        lead="Every layer chosen so that a captured thought cannot be lost, and every rule that can be checked by a machine is."
+        lead="Seven rules the app is not allowed to break, and the layers that keep them."
       >
+        {/* The page leans on these twice, in a fact tile and in the callout
+            below, so they are spelled out rather than alluded to. */}
+        <section className="mb-10 flex flex-col gap-3">
+          <h3 className="h3">The seven hard rules</h3>
+          <p className="copy max-w-[64ch]">
+            Invariants rather than guidelines: breaking one is a bug even if
+            every test passes. Four are enforced by a check rather than by
+            remembering, which is the difference between a rule and a hope.
+          </p>
+          <ol className="mt-1 flex list-none flex-col gap-3">
+            {HARD_RULES.map((rule, index) => (
+              <li
+                key={rule.text}
+                className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-x-2"
+              >
+                <span className="meta pt-0.5 tabular-nums">{index + 1}</span>
+                <p className="copy max-w-[64ch]">
+                  {rule.text}
+                  {rule.enforced ? (
+                    <span className="meta"> · enforced by a check</span>
+                  ) : null}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
         <StackFacts
           title={null}
           facts={[

@@ -173,6 +173,13 @@ interface ShowcaseGameProps {
   width?: number | string;
   /** Hide the game below md (some games need the room). */
   hideOnMobile?: boolean;
+  /**
+   * Whether the contents are a published component that assumes a light host.
+   * True by default, which is the safe way round: a new page that embeds a
+   * package and forgets this still reads in dark, and our own markup opts out
+   * and says so. See the note on `.showcase-game` in index.css.
+   */
+  thirdParty?: boolean;
   /** The embedded game, a screenshot, or a `CaseStudyMedia`. */
   children: React.ReactNode;
 }
@@ -181,6 +188,7 @@ interface ShowcaseGameProps {
 export function ShowcaseGame({
   width = 560,
   hideOnMobile = false,
+  thirdParty = true,
   children,
 }: ShowcaseGameProps): React.ReactElement {
   const gameWidth = typeof width === "number" ? `${width}px` : width;
@@ -188,7 +196,7 @@ export function ShowcaseGame({
     <div
       // Names the third-party boundary: everything inside comes from the
       // published game package, so the a11y sweep scopes itself around it.
-      className={`showcase-game justify-center ${hideOnMobile ? "hidden md:flex" : "flex"}`}
+      className={`showcase-game justify-center ${thirdParty ? "showcase-game--embedded" : ""} ${hideOnMobile ? "hidden md:flex" : "flex"}`}
       style={
         {
           gridArea: "game",

@@ -697,7 +697,11 @@
 
   /* The games are published components that assume a light host: Mine
      Sweeper's scoreboard inherits the page's text colour onto its own grey,
-     and Pianora hardcodes dark ink onto whatever ground it is given. On the
+     and Pianora hardcodes dark ink onto whatever ground it is given.
+
+     Only the embedded ones. The slot is also the case study's media band,
+     and an island around that put a white box behind the caption on a dark
+     page, which is what `thirdParty={false}` turns off. On the
      dark palette both fail contrast at 1.6:1 and 1.05:1, measured by the
      dark axe project. So in dark the game column is a light island. Not a
      colour: the light tokens, redeclared for the subtree, so that anything
@@ -707,7 +711,7 @@
      fix is in each package, which should set its own text colour and ground
      rather than borrow the host's. */
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .showcase-game {
+    :root:not([data-theme="light"]) .showcase-game--embedded {
       --surface: #ffffff;
       --surface-raised: #ffffff;
       --surface-sunken: #f4f7fa;
@@ -731,7 +735,7 @@
     }
   }
 
-  :root[data-theme="dark"] .showcase-game {
+  :root[data-theme="dark"] .showcase-game--embedded {
     --surface: #ffffff;
     --surface-raised: #ffffff;
     --surface-sunken: #f4f7fa;
