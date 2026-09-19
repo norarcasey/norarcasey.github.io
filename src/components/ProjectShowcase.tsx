@@ -251,8 +251,12 @@ export function ShowcaseDetails({
 /* ── The case study's own slots ──────────────────────────────────────────── */
 
 export interface ShowcaseFact {
-  /** The number, as it should read: "230", "1.2s". */
-  value: string;
+  /**
+   * The number, as it should read: "230", "1.2s". A node instead of a string
+   * is rendered as given, which is how a small chart becomes one of the
+   * boxes rather than a band of its own.
+   */
+  value: React.ReactNode;
   /** What it counts, and against what: "commits since June 2026". */
   label: string;
 }
@@ -295,9 +299,13 @@ export function ShowcaseFacts({
             className="flex flex-col gap-1 rounded-xl border border-border px-6 py-5"
           >
             {/* Proportional figures: tabular ones make a big number look loose. */}
-            <span className="text-text text-4xl leading-10 font-bold">
-              {fact.value}
-            </span>
+            {typeof fact.value === "string" ? (
+              <span className="text-text text-4xl leading-10 font-bold">
+                {fact.value}
+              </span>
+            ) : (
+              fact.value
+            )}
             <span className="copy">{fact.label}</span>
           </div>
         ))}

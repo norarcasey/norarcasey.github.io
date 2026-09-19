@@ -4,7 +4,8 @@
 //   node scripts/testLayers.mjs ~/src/norabene
 //
 // Counts the lines that open a test, per layer, so the figures on a page are
-// measured rather than typed and can be taken again when the suite grows.
+// measured rather than typed and can be taken again when the suite grows. The
+// names are short because they are rendered inside the bars of a small chart.
 //
 // The walk is done here rather than shelled out to `find`, so that what is
 // skipped is stated rather than inherited: node_modules and build output hold
@@ -22,23 +23,20 @@ const SKIP = new Set(["node_modules", "dist", ".git", "coverage", ".vercel"]);
 const LAYERS = {
   norabene: [
     {
-      name: "The domain core",
+      name: "domain core",
       dirs: ["packages"],
       match: (file) => file.endsWith(".test.ts"),
-      note: "Types, schemas, ordering, the outbox policy and the vault's crypto: no React, no Supabase, no browser API, and a lint rule that keeps it that way.",
     },
     {
-      name: "The app, in jsdom",
+      name: "jsdom",
       dirs: ["apps/web/src"],
       match: (file) => file.endsWith(".test.ts") || file.endsWith(".test.tsx"),
-      note: "Components and the helpers around them. Node by default; the few that want a DOM ask for one, rather than everything paying for it.",
     },
     {
-      name: "End to end, in a browser",
+      name: "e2e",
       dirs: ["apps/web/e2e"],
       // zz-* are benchmarks rather than assertions, and are not the suite.
       match: (file) => file.endsWith(".spec.ts") && !file.startsWith("zz-"),
-      note: "Against a production build rather than the dev server, because the offline spec needs the service worker. Ranked by what breaks, so CI can skip the least severe.",
     },
   ],
 };
@@ -80,7 +78,7 @@ const rows = LAYERS[key].map((layer) => {
       (readFileSync(file.path, "utf8").match(/^\s*(it|test)\(/gm) ?? []).length,
     0
   );
-  return { name: layer.name, note: layer.note, files: files.length, tests };
+  return { name: layer.name, files: files.length, tests };
 });
 
 process.stdout.write(JSON.stringify(rows, null, 2) + "\n");
