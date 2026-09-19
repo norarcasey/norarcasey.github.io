@@ -12,19 +12,15 @@
 /blob-report
 /.playwright
 
-# production (built by CI and published to GitHub Pages via Actions)
+# production (built by CI and deployed to Vercel by Actions)
 /build
 /dist
 
 # blog JSON, fetched from Supabase at build time (scripts/blogContent.ts)
 /public/blog
 
-# local Supabase credentials for the build-time blog fetch
-.env
-
 # misc
 .DS_Store
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local

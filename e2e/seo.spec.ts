@@ -38,8 +38,7 @@ test.describe("prerendered routes", () => {
       const { status, html } = await fetchHtml(request, path);
       expect(status).toBe(200);
       expect(html).toContain('<div id="root">');
-      // 404.html is the redirect shim, and it is the only page titled this.
-      // (index.html quotes the same phrase in a comment, so match the tag.)
+      // The shim is deleted (UI-08); this is what would catch it coming back.
       expect(html).not.toMatch(/<title>Single Page Apps/);
     });
   }
