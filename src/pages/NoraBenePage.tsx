@@ -59,8 +59,12 @@ const HARD_RULES: { text: string; enforced?: true }[] = [
  * which records each rule that was rewritten and why, on the day it was.
  *
  * The two calls in the pushback band were drafted from that record and
- * confirmed by Nora on 19 Sep as hers, so they are written in her voice
- * rather than about the repo. Nothing on this page is a placeholder.
+ * confirmed by Nora as hers, so they are written in her voice rather than
+ * about the repo, and in plain words rather than the repo's: no cipher
+ * names, no bit counts, no dates, all of which read as jargon in a
+ * paragraph about a judgement call. The technical names are a row away in
+ * `How it is built`, for a reader who wants them, and the dates are in the
+ * runway. Nothing here is a placeholder.
  */
 export function NoraBenePage(): React.ReactElement {
   useRouteMeta("/nora-bene");
@@ -208,31 +212,33 @@ export function NoraBenePage(): React.ReactElement {
 
       <ShowcasePushback>
         <p>
-          The plan had the vault never leaving the phone at all, which made it a
-          thing that dies with the phone. I rewrote the rule on 28 August to do
-          what 1Password and iCloud Keychain do: the server may hold ciphertext,
-          because AES-GCM output and a wrapped key teach it nothing, and the
-          160-bit secret key that unwraps them never reaches it. A stolen
-          database is missing 160 random bits. A stolen phone is missing the
-          passphrase.
+          The plan was for vault items never to leave your phone at all. That
+          sounds safer than it is: it means the vault dies with the phone. I
+          changed it to work the way 1Password and iCloud Keychain do. Your
+          phone locks a secret before it goes anywhere, and the server only ever
+          holds the locked copy, which tells it nothing. The key that unlocks it
+          is in two halves and the server has neither: one is your passphrase,
+          the other a long random key that only your own devices hold. Steal the
+          database and you get nothing readable. Steal the phone and you still
+          need the passphrase.
         </p>
         <p className="copy">
-          The plan said only an explicit, confirmed action deletes: one rule for
-          one kind of deleting. By 11 September there were two kinds and they
-          wanted opposite guards, so I split it. Removing a row is reversible
-          and asks nothing: a toast offers Undo, and Removed keeps the row for
-          as long as you like. Emptying Removed is irreversible and asks twice,
-          in the app&apos;s own words rather than the browser&apos;s. A
-          confirmation in front of a reversible action spends the credibility
-          the real one needs.
+          The plan had one rule for deleting: nothing goes without an explicit
+          confirmation. It turned out there were two kinds of deleting, and they
+          wanted opposite treatment, so I split the rule. Taking something off a
+          board is easy to undo, so it asks nothing at all: a message offers
+          Undo, and a Removed list keeps it for as long as you like. Emptying
+          that list is permanent, so it asks twice, in the app&apos;s own words
+          rather than the browser&apos;s. A confirmation in front of something
+          harmless only teaches people to click through the one that matters.
         </p>
         <ShowcaseCallout label="Hard rule 4">
-          Capture must never fail loudly. Losing a captured thought is the worst
-          possible bug in this app, so the inbox is a nullable column rather
-          than a list that has to exist first, and a new row&apos;s position is
-          the clock rather than a neighbour&apos;s, because anything derived
-          from what is loaded is wrong before the first fetch returns, and
-          capture is not allowed to wait for one.
+          Capture must never fail. Losing a thought you have just typed is the
+          worst thing this app could do, so nothing about capture is allowed to
+          wait. A new note does not need a list to exist first, and its place in
+          the order comes from the clock rather than from whatever is on screen,
+          because anything worked out from what is loaded is already wrong
+          before the first answer arrives.
         </ShowcaseCallout>
       </ShowcasePushback>
     </CaseStudy>
