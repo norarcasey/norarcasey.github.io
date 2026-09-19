@@ -137,7 +137,7 @@ export function NoraBenePage(): React.ReactElement {
           {
             value: <TestLayers layers={NORA_BENE_TEST_LAYERS} />,
             label:
-              "The domain core is pure, so testing it exhaustively is cheap, and the browser tier stays small because those tests are slow.",
+              "The domain core has no React, no Supabase and no browser API, and a lint rule that refuses the import rather than trusting anyone to remember. That is what makes testing it exhaustively cheap, and the browser tier stays small because those tests are slow.",
           },
           {
             value: "7 of 7",

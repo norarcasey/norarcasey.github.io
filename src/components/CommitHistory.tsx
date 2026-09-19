@@ -69,8 +69,12 @@ function tickStep(max: number): number {
  *
  * One series, so one hue and no legend; the hero number above the plot is the
  * title. The extreme days are labelled directly and the rest are in the
- * tooltip, which every bar carries on hover and on keyboard focus, and in the
- * table under the figure, so no value is gated behind the chart. Days with no
+ * tooltip, which every bar carries on hover and on keyboard focus.
+ *
+ * There was a table of every day under the figure as well, and it was more
+ * detail than the page wanted. Nothing is gated by its going: the per-day
+ * readouts below are real focusable elements carrying the same numbers as
+ * text, so every value is still reachable without a pointer. Days with no
  * commit are drawn as gaps rather than skipped: the shape of when the work
  * happened is what the chart is for. The release markers are numbered on the
  * rail and spelled out in the key beneath, because seven labels do not fit
@@ -316,35 +320,9 @@ export function CommitHistory({
         ))}
       </ol>
 
-      {/* The table twin: every value, with no hover and no picture. */}
-      <details className="copy text-sm">
-        <summary className="cursor-pointer">
-          Commits per day, as a table
-        </summary>
-        <table className="mt-2 border-collapse tabular-nums">
-          <thead>
-            <tr>
-              <th scope="col" className="pr-6 text-left font-semibold">
-                Day
-              </th>
-              <th scope="col" className="text-right font-semibold">
-                Commits
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {days.map((d) => (
-              <tr key={d.date}>
-                <td className="pr-6">{shortDate(d.date)}</td>
-                <td className="text-right">{d.commits}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </details>
-
-      {/* Keyboard access to the same readout the pointer gets: one focusable
-          per day, announced through the status region above. */}
+      {/* Keyboard access to the same readout the pointer gets, and now the
+          only textual copy of the numbers: one focusable per day, announced
+          through the status region above. */}
       <div className="visually-hidden">
         {days.map((d, i) => (
           <button
