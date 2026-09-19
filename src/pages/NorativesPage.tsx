@@ -233,11 +233,15 @@ export function NorativesPage(): React.ReactElement {
           280: Chromium has thirty-one spec files to spread across a second
           worker, and Mobile Safari has three.
         </p>
-        <ShowcaseCallout label="What the view leaves out">
-          The public window into the database carries a slug, a title, a body,
-          tags and a date, and deliberately no author. A public feed that named
-          who wrote each piece would also be a directory of who uses the studio,
-          which is a different product from the one this is.
+        <ShowcaseCallout label="Connecting a site">
+          A destination is a row you fill in: where the site lives, what path
+          its slugs sit under, whether it has to be rebuilt. Connecting takes
+          three values, none of them secret, and the studio writes out the
+          snippet with all three already in it, from code that is unit-tested,
+          because a typo in it would fail in somebody else&apos;s build and look
+          like their mistake. Plain fetch against a documented view, no package
+          to install and no sign-in step: two requests will still work in five
+          years, and a library maintained for a handful of people will not.
         </ShowcaseCallout>
       </ShowcasePushback>
     </CaseStudy>
