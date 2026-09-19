@@ -1,10 +1,20 @@
 import React, { useId } from "react";
 
+// Drawn in the commit chart's language, so the two figures on this page read
+// as one pair: hairline structure in the border tokens, the accent carrying
+// the marks that are the subject, the marker pink kept for the exception, and
+// labels at the chart's 12px.
 const BOX = {
   fill: "var(--surface-raised)",
   stroke: "var(--border-strong)",
   strokeWidth: 1,
-  rx: 8,
+  rx: 6,
+};
+
+/** The crossings are this figure's data, so they are drawn as the bars are. */
+const FLOW = {
+  stroke: "var(--chart-bar)",
+  strokeWidth: 2,
 };
 
 /**
@@ -65,7 +75,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
               markerHeight="6"
               orient="auto-start-reverse"
             >
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-muted)" />
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--chart-bar)" />
             </marker>
           </defs>
 
@@ -116,7 +126,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
           <rect x="24" y="142" width="210" height="48" {...BOX} />
           <text
             x="129"
-            y="164"
+            y="161"
             textAnchor="middle"
             fontSize="14"
             fontWeight="600"
@@ -128,7 +138,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
             x="129"
             y="180"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             IndexedDB, on this device
@@ -166,13 +176,13 @@ export function NoraBeneArchitecture(): React.ReactElement {
             height="46"
             rx="8"
             fill="none"
-            stroke="var(--border-strong)"
+            stroke="var(--border)"
             strokeWidth="1"
             strokeDasharray="4 4"
           />
           <text
             x="212"
-            y="507"
+            y="505"
             textAnchor="middle"
             fontSize="13"
             fontWeight="600"
@@ -184,7 +194,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
             x="212"
             y="523"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             the rules all of this runs on, and nothing else
@@ -204,9 +214,9 @@ export function NoraBeneArchitecture(): React.ReactElement {
           </text>
           <text
             x="603"
-            y="256"
+            y="254"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             row-level security on every table,
@@ -215,16 +225,16 @@ export function NoraBeneArchitecture(): React.ReactElement {
             x="603"
             y="272"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             forced, and refusing by default
           </text>
           <text
             x="603"
-            y="314"
+            y="312"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             the system holds DELETE on nothing
@@ -236,11 +246,10 @@ export function NoraBeneArchitecture(): React.ReactElement {
             y1="92"
             x2="129"
             y2="140"
-            stroke="var(--text-muted)"
-            strokeWidth="1.5"
+            {...FLOW}
             markerEnd={`url(#${arrow})`}
           />
-          <text x="141" y="121" fontSize="11" fill="var(--text-muted)">
+          <text x="141" y="121" fontSize="12" fill="var(--text-muted)">
             writes and returns, same tick
           </text>
 
@@ -250,11 +259,10 @@ export function NoraBeneArchitecture(): React.ReactElement {
             y1="190"
             x2="88"
             y2="314"
-            stroke="var(--text-muted)"
-            strokeWidth="1.5"
+            {...FLOW}
             markerEnd={`url(#${arrow})`}
           />
-          <text x="100" y="246" fontSize="11" fill="var(--text-muted)">
+          <text x="100" y="246" fontSize="12" fill="var(--text-muted)">
             pending writes, laid over the top
           </text>
 
@@ -264,24 +272,23 @@ export function NoraBeneArchitecture(): React.ReactElement {
             y1="166"
             x2="468"
             y2="186"
-            stroke="var(--text-muted)"
-            strokeWidth="1.5"
+            {...FLOW}
             markerEnd={`url(#${arrow})`}
           />
           <text
             x="305"
             y="202"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             drains whenever the network allows,
           </text>
           <text
             x="305"
-            y="218"
+            y="220"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             upserting so a retry is one row
@@ -293,24 +300,23 @@ export function NoraBeneArchitecture(): React.ReactElement {
             y1="292"
             x2="236"
             y2="330"
-            stroke="var(--text-muted)"
-            strokeWidth="1.5"
+            {...FLOW}
             markerEnd={`url(#${arrow})`}
           />
           <text
             x="305"
             y="266"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             only what changed since
           </text>
           <text
             x="305"
-            y="282"
+            y="284"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             the newest row already held
@@ -322,15 +328,14 @@ export function NoraBeneArchitecture(): React.ReactElement {
             y1="416"
             x2="468"
             y2="322"
-            stroke="var(--text-muted)"
-            strokeWidth="1.5"
+            {...FLOW}
             markerEnd={`url(#${arrow})`}
           />
           <text
             x="364"
             y="414"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fill="var(--text-muted)"
           >
             ciphertext, and only ciphertext
@@ -342,7 +347,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
             y1="442"
             x2="386"
             y2="442"
-            stroke="var(--pink)"
+            stroke="var(--chart-marker)"
             strokeWidth="1.5"
           />
           <line
@@ -350,16 +355,16 @@ export function NoraBeneArchitecture(): React.ReactElement {
             y1="428"
             x2="391"
             y2="456"
-            stroke="var(--pink)"
+            stroke="var(--chart-marker)"
             strokeWidth="3"
           />
           <text
             x="305"
             y="472"
             textAnchor="middle"
-            fontSize="11"
+            fontSize="12"
             fontWeight="600"
-            fill="var(--pink)"
+            fill="var(--chart-marker)"
           >
             the key that opens it, never
           </text>

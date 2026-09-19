@@ -30,12 +30,12 @@ describe("NoraBeneArchitecture", () => {
   it("keeps the one refused path in the one colour that means it", () => {
     const { container } = render(<NoraBeneArchitecture />);
 
-    // Pink is reserved here. If a second thing takes it, the drawing stops
+    // The marker pink is reserved here. If a second thing takes it, the drawing stops
     // saying "this is the exception" and starts saying "this is decoration".
     const pink = [...container.querySelectorAll("[stroke], [fill]")].filter(
       (node) =>
-        (node.getAttribute("stroke") ?? "").includes("--pink") ||
-        (node.getAttribute("fill") ?? "").includes("--pink")
+        (node.getAttribute("stroke") ?? "").includes("--chart-marker") ||
+        (node.getAttribute("fill") ?? "").includes("--chart-marker")
     );
     expect(pink.map((node) => node.tagName)).toEqual(["line", "line", "text"]);
     expect(pink.at(-1)).toHaveTextContent("the key that opens it, never");
