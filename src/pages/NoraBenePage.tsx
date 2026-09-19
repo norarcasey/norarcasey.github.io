@@ -120,10 +120,11 @@ export function NoraBenePage(): React.ReactElement {
         </p>
         <p>
           Two things came with that. Whatever I need to write down has to go
-          down in seconds, and it is a password about as often as it is an idea
-          or a task. And some of my lists run for a year or more, so they have
-          to be one living thing instead of a spreadsheet in Google Drive that I
-          have to dig through to work out which copy I was on.
+          down in seconds, usually an idea or a task and occasionally something
+          sensitive like a password. And some of my lists run for a year or
+          more, so they have to be one living thing instead of a spreadsheet in
+          Google Drive that I have to dig through to work out which copy I was
+          on.
         </p>
       </ShowcaseHeader>
 
