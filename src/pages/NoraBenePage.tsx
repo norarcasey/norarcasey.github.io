@@ -12,9 +12,9 @@ import {
   ShowcaseTile,
 } from "../components/ProjectShowcase";
 import { CommitHistory } from "../components/CommitHistory";
+import { NoraBeneArchitecture } from "../components/NoraBeneArchitecture";
 import { TestLayers } from "../components/TestLayers";
 import { CaseStudyMedia } from "../components/CaseStudyMedia";
-import { StackFacts } from "../components/StackFacts";
 import { NORA_BENE_COMMITS, NORA_BENE_RELEASES } from "../data/noraBeneHistory";
 import { NORA_BENE_TEST_LAYERS } from "../data/noraBeneTests";
 import noraBeneBoard from "../assets/screens/nora-bene-board.webp";
@@ -155,7 +155,7 @@ export function NoraBenePage(): React.ReactElement {
 
       <ShowcaseDetails
         title="How it is built"
-        lead="Seven rules the app is not allowed to break, and the layers that keep them."
+        lead="Seven rules the app is not allowed to break, and the line everything else is arranged around."
       >
         {/* The page leans on these twice, in a fact tile and in the callout
             below, so they are spelled out rather than alluded to. */}
@@ -189,46 +189,13 @@ export function NoraBenePage(): React.ReactElement {
           </ol>
         </section>
 
-        <StackFacts
-          title={null}
-          facts={[
-            {
-              label: "Domain core",
-              value:
-                "packages/core: the types, the schemas, ordering, and the outbox policy, with no React, no Supabase and no browser API. ESLint enforces the boundary rather than trusting anyone to remember it, and 571 tests run against it alone.",
-            },
-            {
-              label: "Capture",
-              value:
-                "Typing writes to an IndexedDB outbox synchronously and returns: nothing is awaited, nothing can fail, and the box is clear on the same tick. A drain loop replays the queue whenever the network allows, upserting on a client-generated UUIDv7 so a retry makes one row rather than two. What is rendered is always server state with pending writes laid over it, which is why a reload with no network still shows what you captured.",
-            },
-            {
-              label: "Data",
-              value:
-                "Postgres with row-level security enabled and forced on every table, anon holding nothing, and one migration per change with the RLS in the same file as its table. service_role holds DELETE on no table: the system never hard-deletes, and service_role is the system. Foreign keys are composite on (user_id, id), so a row cannot point at another user's list.",
-            },
-            {
-              label: "Sync",
-              value:
-                "The client reads a table whole once and then only what changed since its newest row, merged by key. A changed read must not filter deleted rows, because a removal is only ever an update, and that update is how a row leaves the client.",
-            },
-            {
-              label: "The vault",
-              value:
-                "Everything user-written is sealed on the device, labels included, with a random data key wrapped by a passphrase and a 160-bit secret key together. The server may hold the ciphertext. The secret key never reaches it.",
-            },
-            {
-              label: "Auth",
-              value:
-                "Passwordless: an emailed code, or a passkey verified by an edge function that then asks the auth service for a one-time token. Nothing in the app signs a session. Signing up is closed; an invitation is the account.",
-            },
-            {
-              label: "Tests and gates",
-              value:
-                "Vitest over the core, Playwright over a production build, and a db:verify step that asserts the schema's invariants against the running database. GitHub Actions runs all of it and refuses to deploy ahead of the schema.",
-            },
-          ]}
-        />
+        {/* The layers were a list of seven paragraphs, most of which the page
+            now says elsewhere. What a list could not say is how they sit
+            against each other, which is the whole of the design. */}
+        <section className="flex flex-col gap-3">
+          <h3 className="h3">What crosses the line</h3>
+          <NoraBeneArchitecture />
+        </section>
       </ShowcaseDetails>
 
       <ShowcasePushback>
