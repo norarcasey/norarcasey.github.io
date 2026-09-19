@@ -74,10 +74,10 @@ function GameTile({ project }: { project: Project }): React.ReactElement {
 /**
  * Work: the products first, then the games.
  *
- * The grid is three columns and currently carries two cards. That is not a
- * layout mistake: the other four the canvas draws are Kinora, Nora Bene,
- * Noravia and Noradar, which have no page on this site until UI-12 writes
- * their case studies, and a project cannot be listed here without one.
+ * The grid is three columns and fills itself from the data: a project cannot
+ * be listed here without a page to point at, so each case study UI-12 writes
+ * adds a card. Nora Bene and Noratives have arrived; Kinora, Noravia and
+ * Noradar are still to come, which is why the last row is short.
  */
 export function WorkSection(): React.ReactElement {
   return (

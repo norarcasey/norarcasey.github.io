@@ -116,6 +116,13 @@ const router = createBrowserRouter([
             Component: m.NoraBenePage,
           })),
       },
+      {
+        path: "noratives",
+        lazy: () =>
+          import("./pages/NorativesPage").then((m) => ({
+            Component: m.NorativesPage,
+          })),
+      },
     ],
   },
 ]);

@@ -72,6 +72,11 @@ export const SITE_ROUTES = {
     description:
       "Nora Bene by Nora Casey, one app in place of Google Keep, 1Password and a spreadsheet of lists: an offline outbox that never loses a thought, row-level security on every table, and a vault whose key never reaches the server. How it is built, and where the plan was overruled.",
   },
+  "/noratives": {
+    title: "Noratives",
+    description:
+      "Noratives by Nora Casey, the private writing studio this blog is published from: three kinds of entry in one editor, a database that is owner-only with one public view cut into it, and publishing as a button rather than a deploy. How it is built, and where the plan was overruled.",
+  },
   "/blog": {
     title: "Blog",
     description:

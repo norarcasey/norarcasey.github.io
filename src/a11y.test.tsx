@@ -9,6 +9,7 @@ import { CaseStudyFixture } from "./components/caseStudyFixture";
 import { ContactMePage } from "./pages/ContactMePage";
 import { CruciNoraPage } from "./pages/CruciNoraPage";
 import { NoraBenePage } from "./pages/NoraBenePage";
+import { NorativesPage } from "./pages/NorativesPage";
 import { MinimaxDiagram } from "./components/MinimaxDiagram";
 import { Resume } from "./components/Resume";
 
@@ -47,8 +48,10 @@ describe("accessibility (axe)", () => {
     ["Contact page", <ContactMePage />],
     ["CruciNora page", <CruciNoraPage />],
     ["Nora Bene case study", <NoraBenePage />],
-    // No case study is served yet (UI-12). The layout is scanned on the
-    // canvas's placeholders so the first real page starts from a clean scan.
+    ["Noratives case study", <NorativesPage />],
+    // The fixture stays scanned alongside the real pages: it is the only
+    // place the empty recording frame and the bracketed placeholders appear
+    // once a case study has filled them in.
     ["Case-study layout", <CaseStudyFixture />],
     ["Minimax diagram", <MinimaxDiagram />],
     ["Résumé", <Resume />],

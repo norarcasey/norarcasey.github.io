@@ -82,6 +82,15 @@ export const PROJECTS: Project[] = [
     liveUrl: "https://norabene.noratives.com",
   },
   {
+    path: "/noratives",
+    name: "Noratives",
+    blurb:
+      "The writing studio this blog is published from. Journals that stay private, fiction and technical posts that go out to two different sites, one editor for all three.",
+    kind: "product",
+    stack: "React · TipTap · Supabase · edge functions · Playwright",
+    liveUrl: "https://noratives.com",
+  },
+  {
     path: "/legends-of-noragon",
     name: "Legends of Noragon",
     blurb:

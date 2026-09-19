@@ -39,6 +39,28 @@ const LAYERS = {
       match: (file) => file.endsWith(".spec.ts") && !file.startsWith("zz-"),
     },
   ],
+  // Noratives has the same three tiers and does not enforce the bottom one:
+  // `src/lib` is framework-free by habit rather than by a lint rule, and one
+  // module in it is the Supabase client itself. So the layer is named after
+  // the directory rather than called a core, which would claim a guarantee
+  // the repo does not make.
+  noratives: [
+    {
+      name: "src/lib",
+      dirs: ["src/lib"],
+      match: (file) => file.endsWith(".test.ts") || file.endsWith(".test.tsx"),
+    },
+    {
+      name: "jsdom",
+      dirs: ["src/features", "src/hooks"],
+      match: (file) => file.endsWith(".test.ts") || file.endsWith(".test.tsx"),
+    },
+    {
+      name: "e2e",
+      dirs: ["e2e"],
+      match: (file) => file.endsWith(".spec.ts"),
+    },
+  ],
 };
 
 function walk(root) {

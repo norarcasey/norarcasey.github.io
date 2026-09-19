@@ -1,5 +1,7 @@
 import React, { useId, useMemo, useState } from "react";
 
+import { weeklyTickStep } from "./commitAxis";
+
 export interface CommitDay {
   /** "YYYY-MM-DD" */
   date: string;
@@ -33,6 +35,9 @@ const PAD_LEFT = 36;
 const PAD_RIGHT = 12;
 const BAR_MAX = 24;
 const DAY_MS = 86_400_000;
+// Two figures printed above two bars need roughly this much slot between them.
+const MIN_SLOT_FOR_TWO_LABELS = 20;
+const MIN_FIGURE_WIDTH = 640;
 
 function parse(date: string): number {
   return Date.parse(`${date}T00:00:00Z`);
@@ -113,15 +118,23 @@ export function CommitHistory({
   const maxDays = new Set(
     days.filter((d) => d.commits === max).map((d) => d.date)
   );
-  // The second-highest day is worth a label too when it is close to the top.
+  // The second-highest day is worth a label too when it is close to the top,
+  // and only while the axis is loose enough to hold two. A six-month span puts
+  // the days about five units apart, where a second figure sits on top of the
+  // first; on a three-week one they are forty apart and both read.
   const second = Math.max(...days.map((d) => d.commits).filter((c) => c < max));
   const labelled = new Set([
     ...maxDays,
-    ...(second >= max * 0.8
+    ...(second >= max * 0.8 && slot >= MIN_SLOT_FOR_TWO_LABELS
       ? days.filter((d) => d.commits === second).map((d) => d.date)
       : []),
   ]);
+  const tickEvery = weeklyTickStep(slot);
   const railY = PLOT_HEIGHT + AXIS_BAND + 18;
+  // Enough room for a bar a reader can see. Three weeks of work clears the
+  // 640px floor comfortably; six months of it would draw two-pixel bars at
+  // that width, so the figure grows and scrolls instead.
+  const minWidth = Math.max(MIN_FIGURE_WIDTH, days.length * 4);
 
   return (
     <figure className="flex flex-col gap-4" aria-labelledby={`${id}-title`}>
@@ -137,11 +150,12 @@ export function CommitHistory({
 
       {/* Below about 640px the axis labels would shrink past reading, so the
           figure keeps a legible minimum width and scrolls inside its own box
-          rather than shrinking, as the minimax diagram does. The key and the
-          table beneath carry the same facts for anyone who would rather not
-          scroll. */}
+          rather than shrinking, as the minimax diagram does. A long span asks
+          for more than that floor, so the width follows the number of days.
+          The key beneath carries the same facts for anyone who would rather
+          not scroll. */}
       <div className="overflow-x-auto pb-1">
-        <div className="relative min-w-[640px]">
+        <div className="relative" style={{ minWidth: `${minWidth}px` }}>
           <svg
             viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
             className="block h-auto w-full"
@@ -221,9 +235,9 @@ export function CommitHistory({
               />
             ))}
 
-            {/* Week ticks on the x axis. */}
+            {/* Week ticks on the x axis, thinned out on a long span. */}
             {days.map((d, i) =>
-              i % 7 === 0 ? (
+              i % tickEvery === 0 ? (
                 <text
                   key={d.date}
                   x={PAD_LEFT + i * slot + slot / 2}
