@@ -24,15 +24,20 @@ import { NORATIVES_TEST_LAYERS } from "../data/norativesTests";
 import { useRouteMeta } from "../hooks/usePageMeta";
 
 /**
- * The migrations, and the thing about them worth a paragraph.
+ * Words written in the studio, and the date the figure was taken.
  *
- * Counted from `supabase/migrations` on 19 Sep 2026. The second number is the
- * interesting one: everything up to it went in by being pasted into a SQL
- * editor, which applies the file and records nothing, so the history table
- * the tooling reads was empty while the database was thirty migrations deep.
+ * Read off the studio's own Stats page, which sums `entries.word_count`, a
+ * column Postgres generates from the body rather than a tally anybody keeps.
+ * It cannot be measured from here: the entries are owner-only behind row
+ * level security, in the production project, and they are journals. So this
+ * is the one number on the page that arrives by being asked for, and it is
+ * BRACKETED FOR NORA until she reads it off the app.
+ *
+ * It is the fact the whole page turns on. Everything else here measures the
+ * building; this measures whether the building worked.
  */
-const MIGRATIONS = 35;
-const PASTED = 30;
+const WORDS_WRITTEN = "[n]";
+const WORDS_SINCE = "17 March";
 
 /**
  * The second case study (UI-12). Every figure on it was measured in the
@@ -130,9 +135,8 @@ export function NorativesPage(): React.ReactElement {
               "The bottom layer is where the rules live: what a publish would write, whether a piece has drifted from what is live, how a citation is numbered. It is framework-free by habit rather than by a lint rule, which is the honest version of the claim.",
           },
           {
-            value: `${PASTED} of ${MIGRATIONS}`,
-            label:
-              "migrations that went in by being pasted into a SQL editor, which applies the file and records nothing. The history the tooling reads was empty while the database was thirty migrations deep, and the notices each migration raised to report what it had checked were swallowed on the way.",
+            value: WORDS_WRITTEN,
+            label: `words written in the studio since ${WORDS_SINCE}, counted by the app itself. Everything else on this page measures the building. This is the only number that says whether it worked, because the app exists for one reason: the writing was not happening, and now it is. At a time when so much writing is being handed to a model, these are words I wrote, and writing them keeps that part of my brain awake.`,
           },
         ]}
       >
@@ -145,7 +149,7 @@ export function NorativesPage(): React.ReactElement {
 
       <ShowcaseDetails
         title="How it is built"
-        lead="A private database with one public window cut into it, and everything arranged so that what goes through the window is a decision rather than a default."
+        lead="A private database with one public window cut into it, and a fortnight spent handing everything on the private side back to whoever is writing."
         wide={
           <section className="flex flex-col gap-3">
             <h3 className="h3">What crosses the line</h3>
@@ -154,36 +158,40 @@ export function NorativesPage(): React.ReactElement {
         }
       >
         <section className="flex flex-col gap-4">
-          <h3 className="h3">The schema is deployed by hand, on purpose</h3>
+          <h3 className="h3">
+            Everything that was ours became the writer&apos;s
+          </h3>
           <p className="copy max-w-[64ch]">
-            Everything else ships on a push to main: the checks run, the edge
-            functions deploy, then the studio, in that order because the studio
-            calls the functions and a new studio meeting an old one is the
-            failure worth avoiding. The database is not in that sequence.
-            Migrations are run deliberately and the app is pushed afterwards,
-            because the app reads columns the migration adds. Committing a
-            migration does not apply it.
+            A piece used to be one of three words of mine: journal, writing or
+            technical. Two of them could publish and one could not, and where
+            each went was decided in a file. That is fine for one writer with
+            two sites and it is the whole of what had to go before anybody else
+            could use it.
           </p>
           <p className="copy max-w-[64ch]">
-            That rule is what the {PASTED} of {MIGRATIONS} above is about. Going
-            through the SQL editor applies a file and records nothing, so the
-            migration history was empty and the tooling would have offered to
-            replay the whole folder against a database that already had all of
-            it. The history was repaired in one call and everything since has
-            gone in properly. The headers on the first thirty still say to
-            paste, and they stay that way: that is how those actually went in,
-            and a file that misdescribes its own history is worse than one
-            naming a route nobody uses any more.
+            A notebook is now whatever the writer names, and where it publishes
+            is a property of the notebook rather than a setting on the piece. A
+            journal is not a special case the app refuses to publish; it is a
+            notebook nobody gave a destination to. The sites went the same way:
+            they were two constants, and a constant cannot be owned, renamed by
+            the person it belongs to, or added without a deploy, so they are
+            rows now.
           </p>
           <p className="copy max-w-[64ch]">
-            The same era left a folder of the checks each migration made,
-            rewritten as queries anyone could run. Five have a receipt beside
-            them recording what the query returned, against which database and
-            when. Ten do not, so they are a check with no record of anyone
-            having run it, and knowing which is which is the whole value: a
-            notice scrolls past in a terminal and is gone, and a receipt lets
-            somebody who was not there tell a check that passed from a check
-            that was never run.
+            Publishing then needs both halves, the grant and a destination of
+            your own, which is why somebody can hold the grant and still have
+            nowhere to put a piece. That is the state everybody is in on the day
+            they are invited, and it is the honest one: the alternative is an
+            app that hands a new writer my sites.
+          </p>
+          <h3 className="h3">The words in it are the writer&apos;s too</h3>
+          <p className="copy max-w-[64ch]">
+            A generated prompt is offered rather than handed over, and it is
+            stored in its own column rather than in the body, so answering it
+            cannot absorb it and publishing cannot carry it. Nothing in the app
+            writes a sentence for you. The usage log follows the same line: it
+            records what somebody did, never what they wrote, so ten kinds of
+            event are counted and no words leave with them.
           </p>
         </section>
       </ShowcaseDetails>
