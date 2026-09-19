@@ -24,20 +24,26 @@ import { NORATIVES_TEST_LAYERS } from "../data/norativesTests";
 import { useRouteMeta } from "../hooks/usePageMeta";
 
 /**
- * Words written in the studio, and the date the figure was taken.
+ * Words written in the studio. Nora's own figure, 19 Sep 2026.
  *
- * Read off the studio's own Stats page, which sums `entries.word_count`, a
- * column Postgres generates from the body rather than a tally anybody keeps.
- * It cannot be measured from here: the entries are owner-only behind row
- * level security, in the production project, and they are journals. So this
- * is the one number on the page that arrives by being asked for, and it is
- * BRACKETED FOR NORA until she reads it off the app.
+ * It cannot be measured from here, and that is the product working rather
+ * than an inconvenience: the entries are owner-only behind row level
+ * security, in the production project, and they are journals. The case study
+ * argues that nothing reaches them, so nothing here does either. The studio's
+ * Stats page sums `entries.word_count`, a column Postgres generates from the
+ * body rather than a tally anybody keeps, so the figure is the database's own
+ * and she reads it off the app in seconds.
+ *
+ * A floor rather than a count, deliberately. A precise number would be stale
+ * the week after it was written and would have to be either maintained or
+ * quietly wrong; a floor is true the day it goes up and truer every day
+ * after, because the only direction this moves is up.
  *
  * It is the fact the whole page turns on. Everything else here measures the
  * building; this measures whether the building worked.
  */
-const WORDS_WRITTEN = "[n]";
-const WORDS_SINCE = "17 March";
+const WORDS_WRITTEN = "60,000+";
+const WORDS_SINCE = "March";
 
 /**
  * The second case study (UI-12). Every figure on it was measured in the
@@ -136,7 +142,7 @@ export function NorativesPage(): React.ReactElement {
           },
           {
             value: WORDS_WRITTEN,
-            label: `words written in the studio since ${WORDS_SINCE}, counted by the app itself. Everything else on this page measures the building. This is the only number that says whether it worked, because the app exists for one reason: the writing was not happening, and now it is. At a time when so much writing is being handed to a model, these are words I wrote, and writing them keeps that part of my brain awake.`,
+            label: `words written in the studio since ${WORDS_SINCE}, counted by the app rather than by me. Everything else on this page measures the building. This is the only number that says whether it worked, because the app exists for one reason: the writing was not happening, and now it is. At a time when so much writing is being handed to a model, these are words I wrote, and writing them keeps that part of my brain awake.`,
           },
         ]}
       >
