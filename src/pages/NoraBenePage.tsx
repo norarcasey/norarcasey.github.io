@@ -114,10 +114,16 @@ export function NoraBenePage(): React.ReactElement {
         }
       >
         <p>
-          What used to live in 1Password has to stay unreadable to the server,
-          in the same app as the shopping list and under the same sync. The
-          vault seals it on the device before it goes, and the key that opens it
-          never does.
+          I like to do lists, and specifically I like checking things off. I
+          wanted that tracked in one place, with real numbers about what I
+          actually finish rather than an impression of how the month went.
+        </p>
+        <p>
+          Two things came with that. Whatever I need to write down has to go
+          down in seconds, and it is a password about as often as it is an idea
+          or a task. And some of my lists run for a year or more, so they have
+          to be one living thing instead of a spreadsheet in Google Drive that I
+          have to dig through to work out which copy I was on.
         </p>
       </ShowcaseHeader>
 
