@@ -58,9 +58,13 @@ const WORDS_SINCE = "March";
  * a file and finding it again, and everything else arrived because using it
  * asked for it. That order is the whole argument of the page, so it leads.
  *
- * The two calls in the pushback band are drafted from that record and are
- * BRACKETED FOR NORA to confirm they were hers and to say the why in her own
- * words, exactly as the Nora Bene page's were before she confirmed them.
+ * The three calls in the pushback band are Nora\'s, and are the ones she
+ * found by reading the transcript archive against the commit history rather
+ * than the ones drafted here from commit bodies. The difference matters: a
+ * commit body records a decision, and only the transcript shows a plan being
+ * proposed and turned down. Each of these has all three parts UI-12 asked
+ * for, the option offered, the option taken, and what it was protecting.
+ * Verified against the Noratives log: 2f5a1a3, 17e88fc with 66db15e, 5de1e42.
  *
  * The hero and the home page's card were taken by driving the real app with
  * every Supabase call answered in the browser, so the dev server, the
@@ -204,32 +208,45 @@ export function NorativesPage(): React.ReactElement {
 
       <ShowcasePushback>
         <p>
-          [Your call, drafted from the record: the plan signed people in with a
-          magic link, which is what everything does.] It cannot work here. On
-          iOS a link in an email cannot get into an app installed to the home
-          screen: it opens in the default browser, that browser&apos;s storage
-          is a different box from the installed app&apos;s, and the app stays
-          signed out however many times you tap. There was nothing to fix on the
-          app&apos;s side. So the email is a code and nothing else, and the code
-          is the subject line, which makes signing in read-and-type without
-          opening the message at all. This one matters more than a login usually
-          would: the app exists because the friction around writing was what
-          stopped the writing, and a sign-in that does not work on the thing in
-          your hand is exactly that friction back again. [The why, in your
-          words.]
+          The plan picked a destination at publish time, from a list the app
+          declared. I moved the question to the start: you say what you are
+          writing before you write it, and the notebooks are the writer&apos;s
+          to name rather than three words of ours. That sounds like a choice
+          about a menu and it is a choice about the schema. Once the notebook is
+          picked up front and belongs to whoever is writing, a journal stops
+          being a rule the database enforces and becomes a notebook nobody gave
+          a destination to. Publishing is opt-in without anyone having built
+          opt-in, which is exactly what a second person&apos;s account needs.
+          Three items I had parked as blocked turned into one, and the file that
+          held my two sites as constants ended up with nothing left to say.
         </p>
         <p className="copy">
-          [Your second call, also drafted: the plan rebuilt this site by firing
-          an event at its repository with a GitHub token.] That works exactly as
-          long as the only writer owns the repository, and by then I knew they
-          would not be. Extending it means asking somebody for a token to their
-          own code, which is not a thing to ask a person whose birthday present
-          this is. A deploy hook is a secret URL that starts a build when
-          something posts to it: no scopes, no account, nothing GitHub-shaped.
-          Most of what was built in that fortnight is the same move made
-          elsewhere, turning the two sites into rows anyone can own and the
-          three notebooks into whatever a writer says they are. [The why, in
-          your words.]
+          I asked for the test suite to get shorter without costing more CI
+          minutes, and got a ranked list back: two workers plus explicit budgets
+          on the slowest specs, run as one experiment, with skipping the browser
+          tests on documentation-only pushes below it. I took the one underneath
+          first. It needs no experiment and it saves a whole sixteen-minute run
+          every time it fires. The experiment ran as well, and measuring it is
+          what settled the order: Chromium went from 564 seconds to 410, and
+          Mobile Safari went from 240 up to 280. Chromium has thirty-one spec
+          files, so a second worker always has another to start; Mobile Safari
+          has three, so the extra worker competed for two cores and bought
+          nothing. The worker count belongs in the matrix, not in the config.
+        </p>
+        <p className="copy">
+          Every migration in the folder opened by telling you to paste it into
+          the SQL editor, and the plan for the next one said so too, because it
+          was the habit rather than anybody&apos;s decision. Pasting records
+          nothing in the migration history, which is the hole this project had
+          already climbed out of once: production&apos;s history was empty and
+          had to be repaired in a single call before the tooling could be used
+          at all. So, no manual migrations. The half I care more about is what
+          came after. I wanted the documents cleaned up without losing the
+          record of how things had actually been applied, so the first thirty
+          headers still say paste, because that is what happened to them, and
+          the three later ones that said it untruthfully were corrected. A file
+          that misdescribes its own history is worse than one naming a route
+          nobody uses.
         </p>
         <ShowcaseCallout label="What the view leaves out">
           The public window into the database carries a slug, a title, a body,
