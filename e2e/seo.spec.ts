@@ -4,7 +4,7 @@ import { SITE_ROUTE_PATHS } from "../src/data/siteRoutes";
 
 // These assert on what the *server* hands back, before any JavaScript runs.
 // That is the whole point of prerendering: crawlers and link unfurlers see
-// only this. `yarn preview` serves the real build output, so a passing run
+// only this. `pnpm preview` serves the real build output, so a passing run
 // here means the files GitHub Pages will publish are the ones checked.
 
 const ROUTES = [

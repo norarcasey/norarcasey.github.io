@@ -28,31 +28,36 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # pnpm before setup-node: the cache: pnpm option needs the binary already
+      # on PATH to find the store, and the version comes from packageManager
+      # in package.json so CI and this machine cannot drift.
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v7
         with:
           node-version: 22
-          cache: yarn
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       # The same command that runs locally before a push: formatting, lint,
       # types, tests. One step, so the list of checks lives in package.json and
       # cannot drift from what is run by hand.
       - name: Gate
-        run: yarn gate
+        run: pnpm gate
 
       # Browser binary only — deliberately NOT `--with-deps`, which shells out
       # to apt-get and has hung for hours on a bad Ubuntu mirror. The
       # ubuntu-latest image already carries the libraries Chromium needs, so a
       # missing one fails fast at launch rather than stalling the job.
       - name: Install Playwright browser
-        run: yarn playwright install chromium
+        run: pnpm exec playwright install chromium
 
       - name: End-to-end accessibility scan
-        run: yarn test:e2e
+        run: pnpm test:e2e
         env:
-          # Playwright's webServer runs its own `yarn build`, so this step needs
+          # Playwright's webServer runs its own `pnpm build`, so this step needs
           # the same credentials as the build step below — without them the
           # blog fetch aborts the build and the scan never gets a server.
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}

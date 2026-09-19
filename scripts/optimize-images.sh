@@ -7,7 +7,7 @@
 # same image as WebP at q82 is 20 KB with nothing visible lost. Every screenshot
 # in the repo is WebP for that reason.
 #
-# Drop a .png or .jpg into src/assets/screens, run `yarn images`, then point the
+# Drop a .png or .jpg into src/assets/screens, run `pnpm images`, then point the
 # import at the .webp. sharp comes from npx rather than package.json: this runs
 # when a screenshot changes, which is rarely, and nothing about the build or CI
 # should have to install it.

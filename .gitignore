@@ -26,8 +26,7 @@
 .env.production.local
 
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+pnpm-debug.log*
 # Written by `vercel link`. Holds the project and org ids, and a short-lived
 # OIDC token.
 .vercel

@@ -12,19 +12,19 @@ maintainer, push to `main`, the gate decides.
    https://claude.ai/code/artifact/d3f41697-663c-4428-8ab8-87130a23cb52. Read the item
    you are taking before touching anything: the notes say what to change, what to leave
    alone, and what was already decided.
-2. `yarn install` (Yarn 1, not npm; `yarn.lock` is the lockfile).
-3. `yarn gate` must pass before you start, so you know a failure later is yours.
+2. `pnpm install` (pnpm, not npm or Yarn; `pnpm-lock.yaml` is the lockfile).
+3. `pnpm gate` must pass before you start, so you know a failure later is yours.
 
 ## The one check
 
 ```
-yarn gate        # format:check, lint, tsc, test. What CI runs first.
-yarn test:e2e    # Playwright + axe over the built site. Slow; CI runs it after the gate.
-yarn build       # tsc + vite build. Needs VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
+pnpm gate        # format:check, lint, tsc, test. What CI runs first.
+pnpm test:e2e    # Playwright + axe over the built site. Slow; CI runs it after the gate.
+pnpm build       # tsc + vite build. Needs VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
                  # in .env.local, or the blog fetch aborts the build.
 ```
 
-Run `yarn gate` before every push. Run `yarn format` first if it fails on formatting;
+Run `pnpm gate` before every push. Run `pnpm format` first if it fails on formatting;
 Prettier is the arbiter and CI checks it before anything else.
 
 ## Where things are
@@ -40,7 +40,7 @@ Prettier is the arbiter and CI checks it before anything else.
 | Résumé content        | `src/data/resume.ts`. Dates are structured; years are computed.                                                                                       |
 | Blog                  | Content is not in this repo. `scripts/blogContent.ts` fetches it at build time into `public/blog/` (gitignored). See README, "Publishing a post".     |
 | Prerender and sitemap | `scripts/prerender.ts`. One HTML file per route, from the built `index.html`.                                                                         |
-| Screenshots           | `src/assets/screens/*.webp`. New ones go through `yarn images`.                                                                                       |
+| Screenshots           | `src/assets/screens/*.webp`. New ones go through `pnpm images`.                                                                                       |
 | Unit tests            | Beside the file, `*.test.ts(x)`. jsdom, Testing Library, jest-axe.                                                                                    |
 | End-to-end            | `e2e/`. Accessibility, SEO of the served HTML, showcase slots.                                                                                        |
 
@@ -90,6 +90,6 @@ where `runway.html` is the published page saved to disk.
 
 An item tagged **hand-off** in the runway is specified closely enough to be taken without
 the context of the conversation that wrote it: the files are named, the acceptance is
-stated, and `yarn gate` plus the tests it names are the whole check. Take it as written.
+stated, and `pnpm gate` plus the tests it names are the whole check. Take it as written.
 If the item turns out to need a decision it does not record, stop and write the question
 into the item rather than choosing.

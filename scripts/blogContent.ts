@@ -16,7 +16,7 @@ import {
 //
 // The build turns those rows into static JSON under public/blog/, which the app
 // fetches at runtime. Writing into public/ rather than the build output means
-// one code path serves both `yarn dev` and `yarn build` — Vite copies public/
+// one code path serves both `pnpm dev` and `pnpm build` — Vite copies public/
 // into the build output on its own.
 //
 // Why static JSON rather than querying Supabase from the browser: the pages
@@ -168,7 +168,7 @@ export function writeBlogData(root: string, posts: BlogPost[]): void {
 /**
  * Fetches the blog at build (and dev-server) start and writes it to public/.
  *
- * Runs in both modes so `yarn dev` shows the real blog. Without credentials it
+ * Runs in both modes so `pnpm dev` shows the real blog. Without credentials it
  * warns and writes an empty blog: a contributor without the keys can still work
  * on the rest of the site, but CI, which has them, cannot silently ship empty.
  */

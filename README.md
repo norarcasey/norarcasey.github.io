@@ -7,21 +7,21 @@ Built with React, TypeScript, and [Vite](https://vite.dev).
 ## Running the app
 
 ```
-yarn install
-yarn dev
+pnpm install
+pnpm dev
 ```
 
 ## Scripts
 
 | Command         | What it does                                 |
 | --------------- | -------------------------------------------- |
-| `yarn dev`      | Start the local dev server                   |
-| `yarn build`    | Type-check and build to `dist/`              |
-| `yarn test`     | Run the tests                                |
-| `yarn test:e2e` | Run the Playwright accessibility and SEO e2e |
-| `yarn lint`     | Lint with ESLint                             |
-| `yarn format`   | Format with Prettier                         |
-| `yarn images`   | Convert new screenshots to WebP              |
+| `pnpm dev`      | Start the local dev server                   |
+| `pnpm build`    | Type-check and build to `dist/`              |
+| `pnpm test`     | Run the tests                                |
+| `pnpm test:e2e` | Run the Playwright accessibility and SEO e2e |
+| `pnpm lint`     | Lint with ESLint                             |
+| `pnpm format`   | Format with Prettier                         |
+| `pnpm images`   | Convert new screenshots to WebP              |
 
 ## Project pages
 
@@ -31,7 +31,7 @@ slots, the recipes, and the checklist for adding a page.
 
 ## Routes and metadata
 
-`src/data/siteRoutes.ts` is the one list of the site's pages. `yarn build`
+`src/data/siteRoutes.ts` is the one list of the site's pages. `pnpm build`
 writes a real HTML file per route (`dist/crucinora/index.html` and so on) with
 that route's title, description, canonical URL, and social card baked in, plus
 the sitemap. Without it a deep link would only ever serve the empty app shell,
@@ -46,7 +46,7 @@ WebP q82 is 20 KB with nothing visible lost.
 To add one, drop the `.png` or `.jpg` in that folder, then:
 
 ```
-yarn images
+pnpm images
 ```
 
 It converts each one in place, removes the original, and prints the sizes.

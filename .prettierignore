@@ -1,6 +1,6 @@
 docs
 node_modules
-yarn.lock
+pnpm-lock.yaml
 *.min.js
 *.min.css
 public/blog
