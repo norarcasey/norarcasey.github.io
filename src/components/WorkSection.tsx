@@ -11,10 +11,11 @@ import { GAMES, PRODUCTS, type Project } from "../data/projects";
  */
 function ProductCard({ project }: { project: Project }): React.ReactElement {
   return (
-    <article className="card flex-row items-start gap-4 overflow-hidden p-4 sm:flex-col sm:gap-0 sm:p-0">
-      {/* Not a link: the title beside it already goes there, and a second
-          link to the same place is one more thing for a screen reader to read
-          out and tab past. The canvas draws it the same way. */}
+    <article className="card relative flex-row items-start gap-4 overflow-hidden p-4 sm:flex-col sm:gap-0 sm:p-0">
+      {/* Not a link of its own: the title's link is stretched over the whole
+          card instead, so the thumbnail and the blurb are clickable without a
+          second link to the same place for a screen reader to read out and tab
+          past. The canvas draws it the same way. */}
       <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-wash-blue sm:aspect-[16/10] sm:h-auto sm:w-full sm:rounded-none">
         {project.screenshot ? (
           <img
@@ -28,7 +29,13 @@ function ProductCard({ project }: { project: Project }): React.ReactElement {
       </div>
       <div className="flex min-w-0 flex-col gap-1.5 sm:gap-2 sm:p-5">
         <h3 className="h3 text-lg leading-6 sm:text-xl sm:leading-7">
-          <Link to={project.path} className="text-text hover:text-pink">
+          {/* The ::after covers the card, so a click anywhere on it follows
+              this link. It sits above the thumbnail, which is why the card is
+              `relative`. Selecting the blurb with the mouse is what it costs. */}
+          <Link
+            to={project.path}
+            className="text-text hover:text-pink after:absolute after:inset-0 after:content-['']"
+          >
             {project.name}
           </Link>
         </h3>
