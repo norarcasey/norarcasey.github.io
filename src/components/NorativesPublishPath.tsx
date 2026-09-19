@@ -20,14 +20,18 @@ const FLOW = {
 
 /**
  * How Noratives publishes, as the one thing prose cannot show: the line
- * between what is private and what is readable by anybody, and which of the
- * three kinds of entry crosses it.
+ * between what is private and what is readable by anybody, and which notebook
+ * crosses it.
  *
  * The page could say in words that journals stay private. What only a picture
  * says is that this is structural rather than a setting: there is no path out
- * of the box for a journal, because a journal has no destination it could be
- * published to, and the thing that crosses the line is a snapshot rather than
- * the entry itself.
+ * of the box for a journal, because a journal is a notebook nobody gave a
+ * destination to, and the thing that crosses the line is a snapshot rather
+ * than the entry itself.
+ *
+ * The journal is drawn first because that is the order it happened in: the
+ * app was a journal before it was anything else, and the two notebooks with
+ * somewhere to go arrived later, because using it asked for them.
  *
  * Drawn at 760 units and given a floor of 660px, so the labels stay a readable
  * size and the figure scrolls inside its own box on a phone rather than
@@ -54,16 +58,16 @@ export function NorativesPublishPath(): React.ReactElement {
             What crosses the line between the studio and a public site
           </title>
           <desc id={`${id}-desc`}>
-            In the studio, every table is owner-only: an entry belongs to one of
-            three notebooks, and only writing and technical posts have a site
-            they can go to. A journal has none, so it is not publishable at all.
-            Publishing writes a snapshot into published_entries, which is still
-            owner-only; a view over it, public_posts, is what is readable, and
-            it carries no user_id. Two sites read that view. novellanora.com
-            reads it on every request. noracasey.com is built as static files,
-            so publishing also calls an edge function that holds a deploy hook
-            and posts to it, and the rebuilt site then reads the same view with
-            its own credentials.
+            In the studio, every table is owner-only: an entry belongs to a
+            notebook the writer made, and a notebook publishes to at most one
+            site. The journal this app began as publishes to none, so it is not
+            publishable at all. Publishing writes a snapshot into
+            published_entries, which is still owner-only; a view over it,
+            public_posts, is what is readable, and it carries no user_id. Two
+            sites read that view. novellanora.com reads it on every request.
+            noracasey.com is built as static files, so publishing also calls an
+            edge function that holds a deploy hook and posts to it, and the
+            rebuilt site then reads the same view with its own credentials.
           </desc>
 
           <defs>
@@ -100,31 +104,44 @@ export function NorativesPublishPath(): React.ReactElement {
             fontWeight="600"
             fill="var(--text)"
           >
-            An entry, in one of three notebooks
+            An entry, in a notebook the writer made
           </text>
 
-          {/* The two that can be published. */}
+          {/* The one that never leaves, in the one colour that means it, and
+              first because it is what the app was before it was anything
+              else. It also keeps the publish arrow below the box from
+              appearing to come out of the row that has nowhere to go. */}
           <rect
             x="40"
             y="80"
             width="298"
             height="26"
             rx="4"
-            fill="var(--wash-blue)"
+            fill="var(--wash-pink)"
+            stroke="var(--chart-marker)"
+            strokeWidth="1"
           />
-          <text x="52" y="97" fontSize="12" fontWeight="600" fill="var(--text)">
-            Writing
+          <text
+            x="52"
+            y="97"
+            fontSize="12"
+            fontWeight="600"
+            fill="var(--chart-marker)"
+          >
+            Journal
           </text>
           <text
             x="326"
             y="97"
             textAnchor="end"
             fontSize="12"
-            fill="var(--text-muted)"
+            fontWeight="600"
+            fill="var(--chart-marker)"
           >
-            novellanora.com
+            nowhere to publish it to
           </text>
 
+          {/* The two that came later, each with somewhere to go. */}
           <rect
             x="40"
             y="110"
@@ -140,7 +157,7 @@ export function NorativesPublishPath(): React.ReactElement {
             fontWeight="600"
             fill="var(--text)"
           >
-            Technical
+            Writing
           </text>
           <text
             x="326"
@@ -149,38 +166,34 @@ export function NorativesPublishPath(): React.ReactElement {
             fontSize="12"
             fill="var(--text-muted)"
           >
-            noracasey.com
+            novellanora.com
           </text>
 
-          {/* The one that never leaves, in the one colour that means it. */}
           <rect
             x="40"
             y="140"
             width="298"
             height="26"
             rx="4"
-            fill="var(--wash-pink)"
-            stroke="var(--chart-marker)"
-            strokeWidth="1"
+            fill="var(--wash-blue)"
           />
           <text
             x="52"
             y="157"
             fontSize="12"
             fontWeight="600"
-            fill="var(--chart-marker)"
+            fill="var(--text)"
           >
-            Journal
+            Technical
           </text>
           <text
             x="326"
             y="157"
             textAnchor="end"
             fontSize="12"
-            fontWeight="600"
-            fill="var(--chart-marker)"
+            fill="var(--text-muted)"
           >
-            nowhere to publish it to
+            noracasey.com
           </text>
 
           <text

@@ -40,6 +40,13 @@ const PASTED = 30;
  * its docs, and the commit messages, which is where this project keeps the
  * record that Nora Bene keeps in a CLAUDE.md.
  *
+ * The framing is Nora\'s own account, given 19 Sep 2026, and it replaced an
+ * invented one. The first draft had the studio designed as one place for
+ * three kinds of writing, which is what it looks like finished and is not how
+ * it happened: it was a journal, because writing in Google Drive meant naming
+ * a file and finding it again, and everything else arrived because using it
+ * asked for it. That order is the whole argument of the page, so it leads.
+ *
  * The two calls in the pushback band are drafted from that record and are
  * BRACKETED FOR NORA to confirm they were hers and to say the why in her own
  * words, exactly as the Nora Bene page's were before she confirmed them.
@@ -60,7 +67,7 @@ export function NorativesPage(): React.ReactElement {
         size="hero"
         eyebrow="Case study · 2026 · a writing studio, by invitation"
         title="Noratives"
-        problem="One place to write, whether the piece is a journal entry nobody will ever read, a short story for one site, or the post you are reading this on."
+        problem="A journal that asks nothing of me before I can write in it. No file to name, no date to type, no folder to choose, and nothing to go looking for six weeks later."
         aside={
           <>
             <ShowcaseTile label="Stack" tone="blue">
@@ -69,11 +76,12 @@ export function NorativesPage(): React.ReactElement {
             </ShowcaseTile>
             <ShowcaseTile label="Where it runs" tone="pink">
               noratives.com on Vercel, with Postgres and six edge functions on
-              Supabase. It publishes to two sites, one of which is this one.
+              Supabase. It publishes to two sites of mine, one of which is this
+              one, and to somebody else&apos;s.
             </ShowcaseTile>
             <ShowcaseTile label="Source">
-              Private, and so is the app: it is invitation-only, and most of
-              what is in it is nobody else&apos;s business.{" "}
+              Private, and so is the app: an invitation is the account, and most
+              of what is in it is nobody else&apos;s business.{" "}
               <Link className="inline-link" to="/contact-me">
                 Ask me for a walkthrough
               </Link>
@@ -83,18 +91,24 @@ export function NorativesPage(): React.ReactElement {
         }
       >
         <p>
-          A journal entry, a short story and a blog post are the same act. They
-          were three tools: a notes app, a folder of drafts, and a repository
-          with a build step. Writing in the last one meant being a developer
-          first and a writer second, which is a good way to not write.
+          I used to write in Google Drive. Every entry meant naming a file,
+          dating it and deciding where to put it, and every entry after a gap
+          meant first finding where I had put the last one. There was a folder
+          structure for a while. None of that is writing, and there was enough
+          of it that each session was its own small event rather than a habit.
         </p>
         <p>
-          So the studio is the only place any of it happens, and publishing is a
-          button rather than a deploy. The blog on this site is the proof:{" "}
+          So the first version was a journal and nothing else. Everything since
+          came from using it. Writing more made me want somewhere for the days I
+          felt like writing but not like journaling, so creative work got its
+          own notebook, and a generated prompt for when the page was blank. Some
+          of that turned out to be worth publishing, so it went to a creative
+          site. Then the technical writing went to{" "}
           <Link className="inline-link" to="/blog">
-            every post
-          </Link>{" "}
-          was written in it and put here by pressing that button.
+            this one
+          </Link>
+          . Then a friend&apos;s birthday was coming up and what they wanted was
+          a blog, and the whole thing had to stop being one person&apos;s app.
         </p>
       </ShowcaseHeader>
 
@@ -125,7 +139,7 @@ export function NorativesPage(): React.ReactElement {
         <CommitHistory
           commits={NORATIVES_COMMITS}
           releases={NORATIVES_RELEASES}
-          caption="in six months, 17 March to 14 September 2026, with two of those months empty. The gaps are the point: this is a tool that gets used, and picked back up when using it finds something."
+          caption="in six months, 17 March to 14 September 2026, with two of those months empty. The gaps are the point: it gets used, and picked back up when using it asks for something. The tall week in August is the one where it stopped being mine alone."
         />
       </ShowcaseFacts>
 
@@ -184,17 +198,24 @@ export function NorativesPage(): React.ReactElement {
           signed out however many times you tap. There was nothing to fix on the
           app&apos;s side. So the email is a code and nothing else, and the code
           is the subject line, which makes signing in read-and-type without
-          opening the message at all. [The why, in your words.]
+          opening the message at all. This one matters more than a login usually
+          would: the app exists because the friction around writing was what
+          stopped the writing, and a sign-in that does not work on the thing in
+          your hand is exactly that friction back again. [The why, in your
+          words.]
         </p>
         <p className="copy">
           [Your second call, also drafted: the plan rebuilt this site by firing
           an event at its repository with a GitHub token.] That works exactly as
-          long as the only writer owns the repository. Extending it to anybody
-          else means asking them for a token to their own code, which is not a
-          thing to ask. A deploy hook is a secret URL that starts a build when
-          something posts to it: no scopes, no account, nothing GitHub-shaped,
-          and it is what makes somebody else&apos;s site possible later. [The
-          why, in your words.]
+          long as the only writer owns the repository, and by then I knew they
+          would not be. Extending it means asking somebody for a token to their
+          own code, which is not a thing to ask a person whose birthday present
+          this is. A deploy hook is a secret URL that starts a build when
+          something posts to it: no scopes, no account, nothing GitHub-shaped.
+          Most of what was built in that fortnight is the same move made
+          elsewhere, turning the two sites into rows anyone can own and the
+          three notebooks into whatever a writer says they are. [The why, in
+          your words.]
         </p>
         <ShowcaseCallout label="What the view leaves out">
           The public window into the database carries a slug, a title, a body,

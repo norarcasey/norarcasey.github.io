@@ -9,6 +9,10 @@ import type { CommitDay, Release } from "../components/CommitHistory";
  * The gaps are most of this one. Where Nora Bene's chart is a three-week
  * sprint, this is six months with two months of nothing in the middle of it,
  * which is what a tool that is used rather than built looks like.
+ *
+ * The bursts line up with the account of how it grew: March is the journal it
+ * started as, May is publishing, and the tall week in late August is the one
+ * where it had to work for somebody other than its author.
  */
 export const NORATIVES_COMMITS: CommitDay[] = [
   { date: "2026-03-17", commits: 14 },
@@ -61,12 +65,12 @@ export const NORATIVES_RELEASES: Release[] = [
   {
     date: "2026-03-17",
     label:
-      "Day one, deployed: entries, tags, an editor, and a dashboard to find them in",
+      "Day one, deployed: a journal, and a dashboard so an entry is never lost again",
   },
   {
     date: "2026-05-14",
     label:
-      "Publishing: a finished piece can leave the studio and appear on a public site",
+      "Publishing: a finished piece can leave the studio for a site of its own",
   },
   {
     date: "2026-05-28",
@@ -76,16 +80,16 @@ export const NORATIVES_RELEASES: Release[] = [
   {
     date: "2026-08-19",
     label:
-      "Outline mode, and the first technical post published to noracasey.com",
+      "A second place to publish to: technical posts start going to noracasey.com",
   },
   {
     date: "2026-08-26",
     label:
-      "Destinations become rows, an operations log records what the app tried, and search moves into Postgres",
+      "It stops being one person's: somebody else can make a place to publish to, and the public view is locked to reading",
   },
   {
     date: "2026-09-11",
     label:
-      "Sections: the writer decides their own navigation, rather than inheriting ours",
+      "Sections: a writer designs their own navigation, rather than inheriting ours",
   },
 ];
