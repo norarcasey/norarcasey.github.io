@@ -21,53 +21,95 @@ import noraBeneBoard from "../assets/screens/nora-bene-board.webp";
 import { useRouteMeta } from "../hooks/usePageMeta";
 
 /**
- * The seven, in plain words rather than the repo's.
+ * What holds a rule, as five kinds rather than seven sentences.
  *
- * `enforced` marks the four a machine checks: a lint rule and a grep for the
- * first, and `db:verify` asserting the schema for the others. The rest are
- * design constraints, which a test cannot hold for you.
+ * Each rule used to carry its own sentence explaining its check, and seven of
+ * those is a wall: the reader has to find the pattern themselves, and the
+ * pattern is the interesting part. Naming the five kinds once and tagging each
+ * rule says the same thing and shows the shape, which is that most of these
+ * are refused by a machine rather than watched for by a person.
+ *
+ * `refuses` splits them: a grep, the schema check and a lint rule all fail
+ * before the app runs at all, so the rule cannot be broken. A unit or browser
+ * test asserts the behaviour, which is weaker, and the page says so.
  */
-const HARD_RULES: { text: string; check: string; invariant?: true }[] = [
+const CHECKS = {
+  grep: {
+    refuses: true,
+    what: "a search over the migrations and functions that fails the build",
+  },
+  schema: {
+    refuses: true,
+    what: "db:verify, asserting the database itself before a deploy",
+  },
+  lint: {
+    refuses: true,
+    what: "a lint rule, so the call never lands in the first place",
+  },
+  unit: { refuses: false, what: "a test of the pure domain core" },
+  e2e: { refuses: false, what: "a browser against a production build" },
+} as const;
+
+type Check = keyof typeof CHECKS;
+
+/** The order of the key: what refuses first, what asserts after. */
+const CHECK_ORDER = Object.keys(CHECKS) as Check[];
+
+/** The seven, in plain words rather than the repo's. */
+const HARD_RULES: { text: string; checks: Check[] }[] = [
   {
     text: "A secret never reaches the server in the clear. The vault seals everything on the phone, labels included, and the key that opens it never leaves your own devices.",
-    check:
-      "a grep over every migration and function fails the build on any column that could hold one",
-    invariant: true,
+    checks: ["grep"],
   },
   {
     text: "The app never deletes anything on its own. No retention timer, no cleanup pass, no bin that empties itself after thirty days.",
-    check:
-      "the schema check asserts the service role holds DELETE on no table, and the service role is the system",
-    invariant: true,
+    checks: ["schema"],
   },
   {
     text: "Blur is not security. Discreet mode hides a list from someone glancing over your shoulder, and nothing in the app implies it does more than that.",
-    check:
-      "end to end: a hidden note offers no chips, because a chip is legible",
+    checks: ["e2e"],
   },
   {
     text: "Capture never fails. Losing a thought you have just typed is the worst thing this app could do, so nothing about capture is allowed to wait for the network.",
-    check:
-      "end to end: capture survives being offline and reconciles when the network returns, and the app opens offline with an expired session and still captures",
+    checks: ["e2e"],
   },
   {
     text: "Every table checks who is asking, and refuses by default. There is no row anywhere that is readable because somebody forgot a policy.",
-    check:
-      "the schema check asserts row-level security is on and forced everywhere, that every table has policies, and that the anonymous role holds nothing",
-    invariant: true,
+    checks: ["schema"],
   },
   {
     text: "The app suggests, it never rewrites. A date or an address it spots is offered beside your words, never instead of them.",
-    check:
-      "a unit test that the chips never touch the words, under 118 tests of the detectors themselves",
+    checks: ["unit"],
   },
   {
     text: "Nothing you write ever leaves as analytics. A crash report carries ids and kinds, never the words you wrote.",
-    check:
-      "a lint rule against logging a body, and an end-to-end check that no item text appears in any request the app does not make itself",
-    invariant: true,
+    checks: ["lint", "e2e"],
   },
 ];
+
+/** A rule is unbreakable when something refuses it before the app runs. */
+const cannotBreak = (rule: { checks: Check[] }): boolean =>
+  rule.checks.some((check) => CHECKS[check].refuses);
+
+const UNBREAKABLE = HARD_RULES.filter(cannotBreak).length;
+
+/** Small counts read better as words in a sentence than as digits. */
+const WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven"];
+
+/** One tag, in the key and beside a rule. Blue is the half that refuses. */
+function CheckTag({ check }: { check: Check }): React.ReactElement {
+  return (
+    <span
+      className={`meta rounded px-1.5 text-[12px] leading-5 ${
+        CHECKS[check].refuses
+          ? "bg-wash-blue text-text"
+          : "border border-border"
+      }`}
+    >
+      {check}
+    </span>
+  );
+}
 
 /**
  * The first case study (UI-12). Every figure on it was measured in the Nora
@@ -146,9 +188,8 @@ export function NoraBenePage(): React.ReactElement {
               "The domain core has no React, no Supabase and no browser API, and a lint rule that refuses the import rather than trusting anyone to remember. That is what makes testing it exhaustively cheap, and the browser tier stays small because those tests are slow.",
           },
           {
-            value: "7 of 7",
-            label:
-              "hard rules with a check behind them. Four cannot be broken at all, because a grep or the schema refuses; the other three are held by tests that assert the behaviour.",
+            value: `${HARD_RULES.length} of ${HARD_RULES.length}`,
+            label: `hard rules with a check behind them: ${WORDS[UNBREAKABLE]} cannot be broken at all, because a grep, the schema or a lint rule refuses, and the other ${WORDS[HARD_RULES.length - UNBREAKABLE]} are held by tests that assert the behaviour.`,
           },
         ]}
       >
@@ -176,15 +217,46 @@ export function NoraBenePage(): React.ReactElement {
       >
         {/* The page leans on these twice, in a fact tile and in the callout
             below, so they are spelled out rather than alluded to. */}
-        <section className="flex flex-col gap-3">
+        <section className="flex flex-col gap-4">
           <h3 className="h3">The seven hard rules</h3>
           <p className="copy max-w-[64ch]">
             Invariants rather than guidelines: breaking one is a bug even if
-            every test passes. So none of them rests on remembering. Four cannot
-            be broken at all, because a grep or the schema refuses before
-            anything runs; the other three are held by tests that assert the
-            behaviour itself.
+            every test passes. So none of them rests on remembering. The tags
+            say what holds each one, and {WORDS[UNBREAKABLE]} of the seven are
+            held by something that refuses before the app runs at all.
           </p>
+
+          {/* The key, once, instead of a sentence per rule explaining the
+              same five mechanisms seven times over. Grouped rather than
+              merely coloured: which half a tag is in is the point, and a
+              reader who cannot tell the two fills apart would otherwise have
+              to take the count in the paragraph on trust. */}
+          <div className="flex flex-col gap-4 rounded-xl border border-border px-5 py-4">
+            {[true, false].map((refuses) => (
+              <div key={String(refuses)} className="flex flex-col gap-1.5">
+                <p className="meta text-text">
+                  {refuses
+                    ? "Refuses before the app runs"
+                    : "Asserts the behaviour"}
+                </p>
+                <dl className="flex flex-col gap-1.5">
+                  {CHECK_ORDER.filter(
+                    (check) => CHECKS[check].refuses === refuses
+                  ).map((check) => (
+                    <div key={check} className="flex items-baseline gap-2.5">
+                      <dt className="w-14 shrink-0">
+                        <CheckTag check={check} />
+                      </dt>
+                      <dd className="copy text-sm leading-5">
+                        {CHECKS[check].what}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ))}
+          </div>
+
           <ol className="mt-1 flex list-none flex-col gap-3">
             {HARD_RULES.map((rule, index) => (
               <li
@@ -192,15 +264,17 @@ export function NoraBenePage(): React.ReactElement {
                 className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-x-2"
               >
                 <span className="meta pt-0.5 tabular-nums">{index + 1}</span>
-                <div className="flex max-w-[64ch] flex-col gap-1">
-                  <p className="copy">{rule.text}</p>
-                  <p className="meta">
-                    <span className="text-text">
-                      {rule.invariant ? "Cannot be broken" : "Held by a test"}
-                    </span>{" "}
-                    · {rule.check}
-                  </p>
-                </div>
+                <p className="copy max-w-[64ch]">
+                  {rule.text}{" "}
+                  <span className="whitespace-nowrap">
+                    {rule.checks.map((check) => (
+                      <React.Fragment key={check}>
+                        {" "}
+                        <CheckTag check={check} />
+                      </React.Fragment>
+                    ))}
+                  </span>
+                </p>
               </li>
             ))}
           </ol>
