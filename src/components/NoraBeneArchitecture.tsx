@@ -9,7 +9,7 @@ const BOX = {
 
 /**
  * How Nora Bene is built, as the one thing prose cannot show: the line
- * between the phone and the server, and what crosses it.
+ * between the device and the server, and what crosses it.
  *
  * It replaces a list of seven layers, most of which the page now says
  * elsewhere. What the list could not say is the mechanism: that a thought is
@@ -40,10 +40,10 @@ export function NoraBeneArchitecture(): React.ReactElement {
           className="block h-auto w-full min-w-[660px]"
         >
           <title id={`${id}-title`}>
-            What crosses the line between the phone and the server
+            What crosses the line between the device and the server
           </title>
           <desc id={`${id}-desc`}>
-            On the phone: typing goes into an outbox on the device, which draws
+            On the device: typing goes into an outbox held locally, which draws
             the board together with what the server has sent, and a vault that
             seals everything before it leaves. On the server: Postgres, with
             row-level security forced on every table. Three things cross the
@@ -52,7 +52,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
             two; the server sends back only what changed since the newest row
             already held; and the vault sends ciphertext. One thing never
             crosses: the key that unlocks the vault. Underneath the device side
-            sits the pure domain core, which everything on the phone runs on.
+            sits the pure domain core, which everything on the device runs on.
           </desc>
 
           <defs>
@@ -84,18 +84,20 @@ export function NoraBeneArchitecture(): React.ReactElement {
             y="30"
             textAnchor="middle"
             fontSize="12"
+            fontWeight="600"
             fill="var(--text-muted)"
           >
-            on the phone
+            Device
           </text>
           <text
             x="580"
             y="30"
             textAnchor="middle"
             fontSize="12"
+            fontWeight="600"
             fill="var(--text-muted)"
           >
-            on the server
+            Server
           </text>
 
           {/* The device. */}
@@ -156,7 +158,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
             The vault
           </text>
 
-          {/* The pure core, underneath everything the phone does. */}
+          {/* The pure core, underneath everything the device does. */}
           <rect
             x="24"
             y="486"
@@ -189,10 +191,10 @@ export function NoraBeneArchitecture(): React.ReactElement {
           </text>
 
           {/* The server. */}
-          <rect x="470" y="150" width="266" height="170" {...BOX} />
+          <rect x="470" y="150" width="266" height="230" {...BOX} />
           <text
             x="603"
-            y="196"
+            y="212"
             textAnchor="middle"
             fontSize="14"
             fontWeight="600"
@@ -202,7 +204,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
           </text>
           <text
             x="603"
-            y="222"
+            y="256"
             textAnchor="middle"
             fontSize="11"
             fill="var(--text-muted)"
@@ -211,7 +213,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
           </text>
           <text
             x="603"
-            y="238"
+            y="272"
             textAnchor="middle"
             fontSize="11"
             fill="var(--text-muted)"
@@ -220,7 +222,7 @@ export function NoraBeneArchitecture(): React.ReactElement {
           </text>
           <text
             x="603"
-            y="264"
+            y="314"
             textAnchor="middle"
             fontSize="11"
             fill="var(--text-muted)"

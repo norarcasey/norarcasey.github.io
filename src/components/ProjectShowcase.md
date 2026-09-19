@@ -54,11 +54,17 @@ and `lg` is 1024px.
 | `ShowcaseHeader`  | `title`, `size`, `eyebrow`, `problem`, `aside` | The project name. Renders the page's `h1`, so don't add your own.                               |
 | `ShowcaseSummary` | `children`                                     | The narrow left column: what the project is and how to use it.                                  |
 | `ShowcaseGame`    | `width`, `hideOnMobile`                        | The visual column: an embedded component, a screenshot and a link, or a `CaseStudyMedia` still. |
-| `ShowcaseDetails` | `title`, `lead`, `children`                    | The full-width band under both columns, for the engineering write-up.                           |
+| `ShowcaseDetails` | `title`, `lead`, `children`, `wide`            | The full-width band under both columns, for the engineering write-up.                           |
 
 `ShowcaseSummary` stacks its children with a gap, so give it a list of blocks
 (`<p className="copy">`, an `NpmBadge`) rather than one wrapper `div`.
 `ShowcaseDetails` does not, so space its own children yourself.
+
+`ShowcaseDetails` puts `children` in the right-hand eight columns, which is a
+good measure for prose and a poor one for a figure: a drawing is sized by its
+own content, not by a line length, and one that needs 660px to stay legible
+spends the difference on a sideways scrollbar. Pass it as `wide` instead and it
+gets a row of its own under the heading and the prose both, across all twelve.
 
 Headings inside the slots start at `h2`, since the header owns the `h1`. Skipping
 a level fails the axe suite. `StackFacts` renders its own `h2`; pass
@@ -91,7 +97,8 @@ package, and `e2e/showcase.spec.ts` measures the others.
 +---------+---------+---------+
 | fact    | fact    | fact    |    <- ShowcaseFacts, up to three
 +-----------------------------+
-| How it is built (4) | dl (8)|    <- ShowcaseDetails with a title, holding StackFacts
+| How it is built (4) | prose |    <- ShowcaseDetails with a title
+|        wide: a diagram      |    <- the same slot's `wide`, all twelve columns
 +-----------------------------+
 | Where I pushed back | prose |    <- ShowcasePushback, with a ShowcaseCallout
 +-----------------------------+

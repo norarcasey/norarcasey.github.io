@@ -221,6 +221,12 @@ interface ShowcaseDetailsProps {
   /** The line under the band's heading. */
   lead?: string;
   children: React.ReactNode;
+  /**
+   * Content that runs the band's whole width, under the heading and the
+   * children both. For the thing that is too wide for the right-hand eight
+   * columns: a diagram, a chart, a wide table.
+   */
+  wide?: React.ReactNode;
 }
 
 /** The full-width band below both columns, for the engineering write-up. */
@@ -228,11 +234,13 @@ export function ShowcaseDetails({
   title,
   lead,
   children,
+  wide,
 }: ShowcaseDetailsProps): React.ReactElement {
   if (!title) {
     return (
       <section className="showcase-details" style={{ gridArea: "details" }}>
         {children}
+        {wide}
       </section>
     );
   }
@@ -242,6 +250,7 @@ export function ShowcaseDetails({
       area="details"
       title={title}
       lead={lead}
+      wide={wide}
     >
       {children}
     </ShowcaseBand>
@@ -374,15 +383,24 @@ interface ShowcaseBandProps {
   title: string;
   lead?: string;
   children: React.ReactNode;
+  wide?: React.ReactNode;
 }
 
-/** A section mark and heading in the left third, the content in the rest. */
+/**
+ * A section mark and heading in the left third, the content in the rest.
+ *
+ * `wide` is a second row under both, spanning all twelve columns. Eight
+ * columns is a good measure for prose and a poor one for a figure, which is
+ * sized by its own content rather than by a line length: a drawing that needs
+ * 660px to stay legible spends the difference on a sideways scrollbar.
+ */
 function ShowcaseBand({
   className,
   area,
   title,
   lead,
   children,
+  wide,
 }: ShowcaseBandProps): React.ReactElement {
   return (
     <section
@@ -393,6 +411,7 @@ function ShowcaseBand({
         <SectionHeading title={title}>{lead}</SectionHeading>
       </div>
       <div className="md:col-span-8">{children}</div>
+      {wide ? <div className="md:col-span-12">{wide}</div> : null}
     </section>
   );
 }

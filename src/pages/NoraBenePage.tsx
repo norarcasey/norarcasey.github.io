@@ -156,10 +156,21 @@ export function NoraBenePage(): React.ReactElement {
       <ShowcaseDetails
         title="How it is built"
         lead="Seven rules the app is not allowed to break, and the line everything else is arranged around."
+        wide={
+          /* The layers were a list of seven paragraphs, most of which the page
+             now says elsewhere. What a list could not say is how they sit
+             against each other, which is the whole of the design. It takes the
+             full width because it is a drawing, not prose: eight columns left
+             it at its own minimum and scrolling sideways. */
+          <section className="flex flex-col gap-3">
+            <h3 className="h3">What crosses the line</h3>
+            <NoraBeneArchitecture />
+          </section>
+        }
       >
         {/* The page leans on these twice, in a fact tile and in the callout
             below, so they are spelled out rather than alluded to. */}
-        <section className="mb-10 flex flex-col gap-3">
+        <section className="flex flex-col gap-3">
           <h3 className="h3">The seven hard rules</h3>
           <p className="copy max-w-[64ch]">
             Invariants rather than guidelines: breaking one is a bug even if
@@ -187,14 +198,6 @@ export function NoraBenePage(): React.ReactElement {
               </li>
             ))}
           </ol>
-        </section>
-
-        {/* The layers were a list of seven paragraphs, most of which the page
-            now says elsewhere. What a list could not say is how they sit
-            against each other, which is the whole of the design. */}
-        <section className="flex flex-col gap-3">
-          <h3 className="h3">What crosses the line</h3>
-          <NoraBeneArchitecture />
         </section>
       </ShowcaseDetails>
 
