@@ -25,31 +25,45 @@ import { useRouteMeta } from "../hooks/usePageMeta";
  * first, and `db:verify` asserting the schema for the others. The rest are
  * design constraints, which a test cannot hold for you.
  */
-const HARD_RULES: { text: string; enforced?: true }[] = [
+const HARD_RULES: { text: string; check: string; invariant?: true }[] = [
   {
     text: "A secret never reaches the server in the clear. The vault seals everything on the phone, labels included, and the key that opens it never leaves your own devices.",
-    enforced: true,
+    check:
+      "a grep over every migration and function fails the build on any column that could hold one",
+    invariant: true,
   },
   {
     text: "The app never deletes anything on its own. No retention timer, no cleanup pass, no bin that empties itself after thirty days.",
-    enforced: true,
+    check:
+      "the schema check asserts the service role holds DELETE on no table, and the service role is the system",
+    invariant: true,
   },
   {
     text: "Blur is not security. Discreet mode hides a list from someone glancing over your shoulder, and nothing in the app implies it does more than that.",
+    check:
+      "end to end: a hidden note offers no chips, because a chip is legible",
   },
   {
     text: "Capture never fails. Losing a thought you have just typed is the worst thing this app could do, so nothing about capture is allowed to wait for the network.",
+    check:
+      "end to end: capture survives being offline and reconciles when the network returns, and the app opens offline with an expired session and still captures",
   },
   {
     text: "Every table checks who is asking, and refuses by default. There is no row anywhere that is readable because somebody forgot a policy.",
-    enforced: true,
+    check:
+      "the schema check asserts row-level security is on and forced everywhere, that every table has policies, and that the anonymous role holds nothing",
+    invariant: true,
   },
   {
     text: "The app suggests, it never rewrites. A date or an address it spots is offered beside your words, never instead of them.",
+    check:
+      "a unit test that the chips never touch the words, under 118 tests of the detectors themselves",
   },
   {
     text: "Nothing you write ever leaves as analytics. A crash report carries ids and kinds, never the words you wrote.",
-    enforced: true,
+    check:
+      "a lint rule against logging a body, and an end-to-end check that no item text appears in any request the app does not make itself",
+    invariant: true,
   },
 ];
 
@@ -124,9 +138,9 @@ export function NoraBenePage(): React.ReactElement {
               "tests: 571 over the domain core, which imports no React, no Supabase and no browser API, and 126 end to end, run against a production build because the offline spec needs the service worker.",
           },
           {
-            value: "4 of 7",
+            value: "7 of 7",
             label:
-              "hard rules enforced by a check rather than by remembering: no secret column, no system delete, RLS forced on every table, no item text in telemetry.",
+              "hard rules with a check behind them. Four cannot be broken at all, because a grep or the schema refuses; the other three are held by tests that assert the behaviour.",
           },
         ]}
       >
@@ -147,8 +161,10 @@ export function NoraBenePage(): React.ReactElement {
           <h3 className="h3">The seven hard rules</h3>
           <p className="copy max-w-[64ch]">
             Invariants rather than guidelines: breaking one is a bug even if
-            every test passes. Four are enforced by a check rather than by
-            remembering, which is the difference between a rule and a hope.
+            every test passes. So none of them rests on remembering. Four cannot
+            be broken at all, because a grep or the schema refuses before
+            anything runs; the other three are held by tests that assert the
+            behaviour itself.
           </p>
           <ol className="mt-1 flex list-none flex-col gap-3">
             {HARD_RULES.map((rule, index) => (
@@ -157,12 +173,15 @@ export function NoraBenePage(): React.ReactElement {
                 className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-x-2"
               >
                 <span className="meta pt-0.5 tabular-nums">{index + 1}</span>
-                <p className="copy max-w-[64ch]">
-                  {rule.text}
-                  {rule.enforced ? (
-                    <span className="meta"> · enforced by a check</span>
-                  ) : null}
-                </p>
+                <div className="flex max-w-[64ch] flex-col gap-1">
+                  <p className="copy">{rule.text}</p>
+                  <p className="meta">
+                    <span className="text-text">
+                      {rule.invariant ? "Cannot be broken" : "Held by a test"}
+                    </span>{" "}
+                    · {rule.check}
+                  </p>
+                </div>
               </li>
             ))}
           </ol>
