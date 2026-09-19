@@ -304,7 +304,7 @@ export function ShowcaseFacts({
           >
             {/* Proportional figures: tabular ones make a big number look loose. */}
             {typeof fact.value === "string" ? (
-              <span className="text-text text-4xl leading-10 font-bold">
+              <span className="text-text text-right text-4xl leading-10 font-bold">
                 {fact.value}
               </span>
             ) : (

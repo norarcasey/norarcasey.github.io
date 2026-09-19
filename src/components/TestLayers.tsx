@@ -40,8 +40,10 @@ export function TestLayers({ layers }: TestLayersProps): React.ReactElement {
     // Title, bars and the sentence beneath read as three things, so they are
     // spaced as three rather than as a block.
     <div className="flex flex-col gap-4">
-      {/* The unit belongs in the title, as the commit chart's does. */}
-      <span className="text-text text-4xl leading-10 font-bold">
+      {/* The unit belongs in the title, as the commit chart's does. Ranged
+          right to match the tile beside it, where the figure is the thing
+          being compared and the sentence under it is the reading. */}
+      <span className="text-text text-right text-4xl leading-10 font-bold">
         {total.toLocaleString("en-GB")} tests
       </span>
       <ol className="flex flex-col gap-1">
