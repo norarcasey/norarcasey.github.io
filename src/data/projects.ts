@@ -4,6 +4,7 @@ import anoracondaScreen from "../assets/screens/anoraconda.webp";
 import arkanoraScreen from "../assets/screens/arkanora.webp";
 import crucinoraScreen from "../assets/screens/crucinora.webp";
 import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.webp";
+import noraBeneScreen from "../assets/screens/nora-bene.webp";
 import mineSweeperScreen from "../assets/screens/mine-sweeper.webp";
 import pianoraScreen from "../assets/screens/pianora.webp";
 import starSiegeScreen from "../assets/screens/star-siege.webp";
@@ -75,6 +76,7 @@ export const PROJECTS: Project[] = [
     name: "Nora Bene",
     blurb:
       "A capture-first replacement for Google Keep that keeps working with no signal and syncs when it has one.",
+    screenshot: noraBeneScreen,
     kind: "product",
     stack: "PWA · IndexedDB outbox · Supabase · Playwright",
     liveUrl: "https://norabene.noratives.com",
