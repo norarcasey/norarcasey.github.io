@@ -14,10 +14,15 @@ interface TestLayersProps {
 /**
  * A suite by layer, as the shape the layers actually make.
  *
- * Each bar's width is its share of the tests, so the pyramid is a
- * measurement rather than a diagram: this suite makes one because the domain
- * core is pure and cheap to test exhaustively, not because a pyramid was the
- * target. A suite shaped like an ice cream cone would draw one of those.
+ * Each bar's width is its share of the tests, so the shape is a measurement
+ * rather than a diagram: it widens downward because the domain core is pure
+ * and cheap to test exhaustively, not because that shape was the target. A
+ * suite weighted the other way would draw itself the other way.
+ *
+ * The bars start from a common left edge rather than a shared centre. Centred,
+ * the eye compares two edges at once and does neither well; against one edge
+ * the lengths are read directly, which is the only comparison the chart is
+ * for.
  *
  * The fill is an ordinal ramp, one hue light to dark, carrying depth rather
  * than value: the browser tier at the top is the lightest step and the core
@@ -33,7 +38,8 @@ interface TestLayersProps {
 export function TestLayers({ layers }: TestLayersProps): React.ReactElement {
   const total = layers.reduce((sum, layer) => sum + layer.tests, 0);
   const widest = Math.max(...layers.map((layer) => layer.tests));
-  // Narrowest at the top, so the stack reads as the pyramid it is.
+  // Shortest at the top, so the layers run from the slow browser tier down
+  // to the cheap one, which is also the order they are worth reading in.
   const stacked = [...layers].sort((a, b) => a.tests - b.tests);
 
   return (
@@ -48,7 +54,7 @@ export function TestLayers({ layers }: TestLayersProps): React.ReactElement {
       </span>
       <ol className="flex flex-col gap-1">
         {stacked.map((layer, tier) => (
-          <li key={layer.name} className="flex items-center justify-center">
+          <li key={layer.name} className="flex items-center">
             <span
               className="flex h-7 items-center rounded px-2"
               style={{
