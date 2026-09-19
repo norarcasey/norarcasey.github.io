@@ -37,7 +37,9 @@ export function TestLayers({ layers }: TestLayersProps): React.ReactElement {
   const stacked = [...layers].sort((a, b) => a.tests - b.tests);
 
   return (
-    <div className="flex flex-col gap-3">
+    // Title, bars and the sentence beneath read as three things, so they are
+    // spaced as three rather than as a block.
+    <div className="flex flex-col gap-4">
       {/* The unit belongs in the title, as the commit chart's does. */}
       <span className="text-text text-4xl leading-10 font-bold">
         {total.toLocaleString("en-GB")} tests

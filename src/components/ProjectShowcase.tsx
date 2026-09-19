@@ -296,7 +296,11 @@ export function ShowcaseFacts({
         {shown.map((fact) => (
           <div
             key={fact.label}
-            className="flex flex-col gap-1 rounded-xl border border-border px-6 py-5"
+            // A number and its line belong close together; a chart needs room
+            // between itself and the sentence underneath it.
+            className={`flex flex-col rounded-xl border border-border px-6 py-5 ${
+              typeof fact.value === "string" ? "gap-1" : "gap-4"
+            }`}
           >
             {/* Proportional figures: tabular ones make a big number look loose. */}
             {typeof fact.value === "string" ? (
