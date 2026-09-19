@@ -12,9 +12,11 @@ import {
   ShowcaseTile,
 } from "../components/ProjectShowcase";
 import { CommitHistory } from "../components/CommitHistory";
+import { TestLayers } from "../components/TestLayers";
 import { CaseStudyMedia } from "../components/CaseStudyMedia";
 import { StackFacts } from "../components/StackFacts";
 import { NORA_BENE_COMMITS, NORA_BENE_RELEASES } from "../data/noraBeneHistory";
+import { NORA_BENE_TEST_LAYERS } from "../data/noraBeneTests";
 import noraBeneBoard from "../assets/screens/nora-bene-board.webp";
 import { useRouteMeta } from "../hooks/usePageMeta";
 
@@ -133,11 +135,6 @@ export function NoraBenePage(): React.ReactElement {
       <ShowcaseFacts
         facts={[
           {
-            value: "697",
-            label:
-              "tests: 571 over the domain core, which imports no React, no Supabase and no browser API, and 126 end to end, run against a production build because the offline spec needs the service worker.",
-          },
-          {
             value: "7 of 7",
             label:
               "hard rules with a check behind them. Four cannot be broken at all, because a grep or the schema refuses; the other three are held by tests that assert the behaviour.",
@@ -148,6 +145,10 @@ export function NoraBenePage(): React.ReactElement {
           commits={NORA_BENE_COMMITS}
           releases={NORA_BENE_RELEASES}
           caption="in 21 days, 23 August to 13 September 2026, from an empty repo to an app used every day. Most of it in the first nine; the rest is what using it turned up."
+        />
+        <TestLayers
+          layers={NORA_BENE_TEST_LAYERS}
+          caption="in three layers, and the shape is a measurement rather than a target: the domain core is pure, so testing it exhaustively is cheap, and the browser tier stays small because it is the slow one."
         />
       </ShowcaseFacts>
 

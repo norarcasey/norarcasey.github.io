@@ -70,6 +70,17 @@
   --chart-bar-hover: var(--accent-hover);
   --chart-marker: var(--pink);
   --chart-marker-ink: #ffffff;
+
+  /* An ordinal ramp for layered tiers: one hue, light to dark, carrying depth
+     rather than value. Validated as an ordinal scale against this surface;
+     the lightest step clears the 2:1 floor a ramp's light end has to. Each
+     tier's ink is whichever of ink or white clears 4.5:1 on it. */
+  --tier-1: #6fb1ea;
+  --tier-1-ink: #1c2229;
+  --tier-2: #3b91d6;
+  --tier-2-ink: #1c2229;
+  --tier-3: #1a63a1;
+  --tier-3-ink: #ffffff;
 }
 
 /* Dark is restated rather than derived, because one ramp cannot carry both
@@ -106,6 +117,14 @@
     --chart-bar-hover: #6fb1ea;
     --chart-marker: #d0628c;
     --chart-marker-ink: #12161b;
+    /* Stepped for the dark surface, and the ink goes the other way: every
+       step is light enough there that the ground reads on it. */
+    --tier-1: #ade0f8;
+    --tier-1-ink: #12161b;
+    --tier-2: #6fb1ea;
+    --tier-2-ink: #12161b;
+    --tier-3: #3b91d6;
+    --tier-3-ink: #12161b;
   }
 }
 
@@ -132,6 +151,12 @@
   --chart-bar-hover: #6fb1ea;
   --chart-marker: #d0628c;
   --chart-marker-ink: #12161b;
+  --tier-1: #ade0f8;
+  --tier-1-ink: #12161b;
+  --tier-2: #6fb1ea;
+  --tier-2-ink: #12161b;
+  --tier-3: #3b91d6;
+  --tier-3-ink: #12161b;
 }
 
 @theme inline {
