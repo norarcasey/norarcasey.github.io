@@ -173,7 +173,7 @@ interface ShowcaseGameProps {
   width?: number | string;
   /** Hide the game below md (some games need the room). */
   hideOnMobile?: boolean;
-  /** The embedded game, a screenshot, or a `Recording`. */
+  /** The embedded game, a screenshot, or a `CaseStudyMedia`. */
   children: React.ReactNode;
 }
 

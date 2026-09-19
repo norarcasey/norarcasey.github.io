@@ -11,7 +11,7 @@ import {
   ShowcaseSummary,
   ShowcaseTile,
 } from "./ProjectShowcase";
-import { Recording } from "./Recording";
+import { CaseStudyMedia } from "./CaseStudyMedia";
 import { StackFacts } from "./StackFacts";
 
 /**
@@ -27,8 +27,8 @@ import { StackFacts } from "./StackFacts";
 export function CaseStudyFixture({
   recording,
 }: {
-  /** Pass sources to render the player rather than the poster frame. */
-  recording?: React.ComponentProps<typeof Recording>["sources"];
+  /** Pass sources to render the player rather than the empty frame. */
+  recording?: React.ComponentProps<typeof CaseStudyMedia>["sources"];
 }): React.ReactElement {
   return (
     <CaseStudy>
@@ -67,7 +67,7 @@ export function CaseStudyFixture({
       </ShowcaseSummary>
 
       <ShowcaseGame width="100%">
-        <Recording
+        <CaseStudyMedia
           label="[45-second recording: ingest a file, watch the renditions land, play it back]"
           sources={recording}
           caption="Muted, loops, no sound. Captions in the frame where a step needs a word."

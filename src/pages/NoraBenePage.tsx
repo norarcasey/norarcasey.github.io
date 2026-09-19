@@ -12,9 +12,10 @@ import {
   ShowcaseTile,
 } from "../components/ProjectShowcase";
 import { CommitHistory } from "../components/CommitHistory";
-import { Recording } from "../components/Recording";
+import { CaseStudyMedia } from "../components/CaseStudyMedia";
 import { StackFacts } from "../components/StackFacts";
 import { NORA_BENE_COMMITS, NORA_BENE_RELEASES } from "../data/noraBeneHistory";
+import noraBeneBoard from "../assets/screens/nora-bene-board.webp";
 import { useRouteMeta } from "../hooks/usePageMeta";
 
 const LIVE_URL = "https://norabene.noratives.com";
@@ -64,9 +65,12 @@ export function NoraBenePage(): React.ReactElement {
       </ShowcaseHeader>
 
       <ShowcaseGame width="100%">
-        <Recording
-          label="[45-second recording: turn the network off, capture, reload, turn it on, watch it sync]"
-          caption="Muted, loops, no sound. Captions in the frame where a step needs a word."
+        {/* A screenshot until there is a recording, and shown as one: no play
+            button over something that cannot be played. */}
+        <CaseStudyMedia
+          image={noraBeneBoard}
+          alt="The Nora Bene board: an inbox of three untriaged captures beside coloured lists for today, shopping, a reading list of quotes, a trip, a gratitude list and a catalogue of countries, with finished items collapsed under a rule."
+          caption="The board, with a week in it."
         />
       </ShowcaseGame>
 

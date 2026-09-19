@@ -49,12 +49,12 @@ and `lg` is 1024px.
 
 ## The slots
 
-| Slot              | Props                                          | Holds                                                                                |
-| ----------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `ShowcaseHeader`  | `title`, `size`, `eyebrow`, `problem`, `aside` | The project name. Renders the page's `h1`, so don't add your own.                    |
-| `ShowcaseSummary` | `children`                                     | The narrow left column: what the project is and how to use it.                       |
-| `ShowcaseGame`    | `width`, `hideOnMobile`                        | The visual column: an embedded component, a screenshot and a link, or a `Recording`. |
-| `ShowcaseDetails` | `title`, `lead`, `children`                    | The full-width band under both columns, for the engineering write-up.                |
+| Slot              | Props                                          | Holds                                                                                           |
+| ----------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `ShowcaseHeader`  | `title`, `size`, `eyebrow`, `problem`, `aside` | The project name. Renders the page's `h1`, so don't add your own.                               |
+| `ShowcaseSummary` | `children`                                     | The narrow left column: what the project is and how to use it.                                  |
+| `ShowcaseGame`    | `width`, `hideOnMobile`                        | The visual column: an embedded component, a screenshot and a link, or a `CaseStudyMedia` still. |
+| `ShowcaseDetails` | `title`, `lead`, `children`                    | The full-width band under both columns, for the engineering write-up.                           |
 
 `ShowcaseSummary` stacks its children with a gap, so give it a list of blocks
 (`<p className="copy">`, an `NpmBadge`) rather than one wrapper `div`.
@@ -87,7 +87,7 @@ package, and `e2e/showcase.spec.ts` measures the others.
 +-----------------------------+
 |   header (8) | tiles (4)    |    <- ShowcaseHeader, size="hero", with aside
 +-----------------------------+
-|        game: recording      |    <- ShowcaseGame width="100%" holding a Recording
+|        game: recording      |    <- ShowcaseGame width="100%" holding a CaseStudyMedia
 +---------+---------+---------+
 | fact    | fact    | fact    |    <- ShowcaseFacts, up to three
 +-----------------------------+
@@ -107,9 +107,12 @@ order the UI-14 canvas draws them, and adds two slots of its own:
 
 Helpers: `ShowcaseTile` (`label`, `tone`, children) is one of the three tiles
 beside the header; `ShowcaseCallout` (`label`, children) is the wash callout
-inside the pushback band; `Recording` (`label`, `poster`, `sources`, `caption`)
-is the 16:9 slot. With no `sources` it renders the poster frame and the label,
-which is what a page looks like before its file exists.
+inside the pushback band; `CaseStudyMedia` (`image`, `alt`, `sources`, `label`,
+`caption`) is the 16:9 slot at the top. It has three states and picks by what
+it is given: a still on its own is shown as a still, with no play button over
+something that cannot be played; a still plus `sources` makes the still the
+video's poster; neither renders the empty frame with the bracketed `label`
+naming the recording that belongs there.
 
 `src/components/caseStudyFixture.tsx` is the canvas's Kinora artboard on this
 layout, with the bracketed placeholders intact. It is not a page: the tests and
@@ -119,9 +122,10 @@ writes a real one on it. Copy it to start a case study.
 **What is not decided about the recording.** Which formats to encode (WebM and
 an MP4 fallback?), whether each recording gets its own poster, and whether a
 page loads the file before it is scrolled to are weight decisions that wait on
-real files. `Recording` assumes no answer: it takes whatever `sources` it is
-given, in order, and sets no `preload`. Record the answers in UI-17 on the
-runway when they are made.
+real files. `CaseStudyMedia` assumes no answer: it takes whatever `sources` it
+is given, in order, and sets no `preload`. Record the answers in UI-17 on the
+runway when they are made. Until a page has a file, a screenshot of the thing
+running is a better hero than a frame promising a video: pass `image`.
 
 ## Recipes
 
