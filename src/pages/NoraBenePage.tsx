@@ -22,10 +22,12 @@ const LIVE_URL = "https://norabene.noratives.com";
 
 /**
  * The first case study (UI-12). Every figure on it was measured in the Nora
- * Bene repo on 18 Sep 2026 and every decision is quoted from its CLAUDE.md,
+ * Bene repo on 18 Sep 2026 and every decision is taken from its CLAUDE.md,
  * which records each rule that was rewritten and why, on the day it was.
- * Square brackets mark what only Nora can supply: the recording, and her own
- * wording of the calls she made against the plan.
+ *
+ * The two calls in the pushback band were drafted from that record and
+ * confirmed by Nora on 19 Sep as hers, so they are written in her voice
+ * rather than about the repo. Nothing on this page is a placeholder.
  */
 export function NoraBenePage(): React.ReactElement {
   useRouteMeta("/nora-bene");
@@ -144,23 +146,22 @@ export function NoraBenePage(): React.ReactElement {
       <ShowcasePushback>
         <p>
           The plan had the vault never leaving the phone at all, which made it a
-          thing that dies with the phone. The rule was rewritten on 28 August to
-          what 1Password and iCloud Keychain actually do: the server may hold
-          ciphertext, because AES-GCM output and a wrapped key teach it nothing,
-          and the 160-bit secret key that unwraps them never reaches it. A
-          stolen database is missing 160 random bits. A stolen phone is missing
-          the passphrase. [Confirm this was your call against the plan, and say
-          the why in your own words.]
+          thing that dies with the phone. I rewrote the rule on 28 August to do
+          what 1Password and iCloud Keychain do: the server may hold ciphertext,
+          because AES-GCM output and a wrapped key teach it nothing, and the
+          160-bit secret key that unwraps them never reaches it. A stolen
+          database is missing 160 random bits. A stolen phone is missing the
+          passphrase.
         </p>
         <p className="copy">
-          The plan said only an explicit, confirmed action deletes, one rule for
-          one kind of deleting. By 11 September there were two, and they wanted
-          opposite guards. Removing a row is reversible and asks nothing: a
-          toast offers Undo, and Removed keeps the row for as long as you like.
-          Emptying Removed is irreversible and asks twice, in the app&apos;s own
-          words rather than the browser&apos;s. A confirmation in front of a
-          reversible action spends the credibility the real one needs. [Same:
-          confirm, and reword.]
+          The plan said only an explicit, confirmed action deletes: one rule for
+          one kind of deleting. By 11 September there were two kinds and they
+          wanted opposite guards, so I split it. Removing a row is reversible
+          and asks nothing: a toast offers Undo, and Removed keeps the row for
+          as long as you like. Emptying Removed is irreversible and asks twice,
+          in the app&apos;s own words rather than the browser&apos;s. A
+          confirmation in front of a reversible action spends the credibility
+          the real one needs.
         </p>
         <ShowcaseCallout label="Hard rule 4">
           Capture must never fail loudly. Losing a captured thought is the worst
