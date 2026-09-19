@@ -36,12 +36,7 @@ export function About(): React.ReactElement {
             url="https://www.gettyimages.com/search/photographer?photographer=Nora%20Casey&assettype=image&sort=mostpopular&family=creative"
             label="Getty Images"
           />
-          , and perform improv with the{" "}
-          <ExternalLink
-            url="https://www.barcelonaimprovgroup.com/"
-            label="Barcelona Improv Group"
-          />
-          . MS in Computer Science, Georgia Tech.
+          , and do improv comedy in Barcelona.
         </p>
       </div>
     </section>
