@@ -58,13 +58,19 @@ const WORDS_SINCE = "March";
  * a file and finding it again, and everything else arrived because using it
  * asked for it. That order is the whole argument of the page, so it leads.
  *
- * The three calls in the pushback band are Nora\'s, and are the ones she
- * found by reading the transcript archive against the commit history rather
- * than the ones drafted here from commit bodies. The difference matters: a
- * commit body records a decision, and only the transcript shows a plan being
- * proposed and turned down. Each of these has all three parts UI-12 asked
- * for, the option offered, the option taken, and what it was protecting.
- * Verified against the Noratives log: 2f5a1a3, 17e88fc with 66db15e, 5de1e42.
+ * The two calls in the pushback band are Nora\'s, and are the ones she found
+ * by reading the transcript archive against the commit history rather than
+ * the ones drafted here from commit bodies. The difference matters: a commit
+ * body records a decision, and only the transcript shows a plan being
+ * proposed and turned down. Both have all three parts UI-12 asked for, the
+ * option offered, the option taken, and what it was protecting. Verified
+ * against the Noratives log: 2f5a1a3, and 17e88fc with 66db15e.
+ *
+ * A third, about ending the habit of pasting migrations into a SQL editor,
+ * was written and cut. It is a good call and it is the second time that
+ * material has been taken off this page: as a fact tile it was a misstep
+ * displayed as a measurement, and as a paragraph it was still the page
+ * spending its best band on a repair. The runway keeps it.
  *
  * The hero and the home page's card were taken by driving the real app with
  * every Supabase call answered in the browser, so the dev server, the
@@ -208,45 +214,24 @@ export function NorativesPage(): React.ReactElement {
 
       <ShowcasePushback>
         <p>
-          The plan picked a destination at publish time, from a list the app
-          declared. I moved the question to the start: you say what you are
-          writing before you write it, and the notebooks are the writer&apos;s
-          to name rather than three words of ours. That sounds like a choice
-          about a menu and it is a choice about the schema. Once the notebook is
-          picked up front and belongs to whoever is writing, a journal stops
-          being a rule the database enforces and becomes a notebook nobody gave
-          a destination to. Publishing is opt-in without anyone having built
-          opt-in, which is exactly what a second person&apos;s account needs.
-          Three items I had parked as blocked turned into one, and the file that
-          held my two sites as constants ended up with nothing left to say.
+          The plan asked where a piece should go at publish time, from a list
+          the app declared. I moved the question to the start and handed it to
+          the writer: you say what you are writing before you write it, and you
+          name the notebooks yourself. That looks like a choice about a menu and
+          it is a choice about the schema. A journal stops being a rule the
+          database enforces and becomes a notebook with nowhere to send
+          anything, so publishing turns opt-in without anyone building opt-in,
+          which is exactly what a second person&apos;s account needs.
         </p>
         <p className="copy">
-          I asked for the test suite to get shorter without costing more CI
-          minutes, and got a ranked list back: two workers plus explicit budgets
-          on the slowest specs, run as one experiment, with skipping the browser
-          tests on documentation-only pushes below it. I took the one underneath
-          first. It needs no experiment and it saves a whole sixteen-minute run
-          every time it fires. The experiment ran as well, and measuring it is
-          what settled the order: Chromium went from 564 seconds to 410, and
-          Mobile Safari went from 240 up to 280. Chromium has thirty-one spec
-          files, so a second worker always has another to start; Mobile Safari
-          has three, so the extra worker competed for two cores and bought
-          nothing. The worker count belongs in the matrix, not in the config.
-        </p>
-        <p className="copy">
-          Every migration in the folder opened by telling you to paste it into
-          the SQL editor, and the plan for the next one said so too, because it
-          was the habit rather than anybody&apos;s decision. Pasting records
-          nothing in the migration history, which is the hole this project had
-          already climbed out of once: production&apos;s history was empty and
-          had to be repaired in a single call before the tooling could be used
-          at all. So, no manual migrations. The half I care more about is what
-          came after. I wanted the documents cleaned up without losing the
-          record of how things had actually been applied, so the first thirty
-          headers still say paste, because that is what happened to them, and
-          the three later ones that said it untruthfully were corrected. A file
-          that misdescribes its own history is worse than one naming a route
-          nobody uses.
+          I asked for a shorter test suite that did not cost more CI minutes,
+          and got a ranked list: more workers first, skip the browser tests on
+          documentation-only pushes second. I took the second one first. It
+          needs no experiment, and it saves a whole sixteen-minute run every
+          time it fires. I ran the experiment too, and it was half right.
+          Chromium fell from 564 seconds to 410. Mobile Safari rose from 240 to
+          280: Chromium has thirty-one spec files to spread across a second
+          worker, and Mobile Safari has three.
         </p>
         <ShowcaseCallout label="What the view leaves out">
           The public window into the database carries a slug, a title, a body,
