@@ -114,12 +114,6 @@ export function NoraBenePage(): React.ReactElement {
         }
       >
         <p>
-          Putting all three in one app is what makes it hard, and the notes part
-          is the easy half. A thought typed with no network has to be on the
-          screen after a reload, on the server when there is one, and there once
-          rather than twice.
-        </p>
-        <p>
           What used to live in 1Password has to stay unreadable to the server,
           in the same app as the shopping list and under the same sync. The
           vault seals it on the device before it goes, and the key that opens it
