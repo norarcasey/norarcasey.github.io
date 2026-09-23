@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 /**
  * LOGO:
@@ -212,6 +213,10 @@ export function Root(): React.ReactElement {
       <div role="status" aria-live="polite" className="visually-hidden">
         {routeAnnouncement}
       </div>
+      {/* Vercel Web Analytics: no cookies, and it counts client-side
+          navigations as page views, not only the first load. In production
+          it loads /_vercel/insights/script.js from this origin. */}
+      <Analytics />
     </>
   );
 }
