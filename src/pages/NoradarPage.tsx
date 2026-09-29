@@ -159,7 +159,7 @@ export function NoradarPage(): React.ReactElement {
             because nearly every request is conditional: since the last restart,
             7,836 of 7,872 came back unchanged and cost nothing.
           </p>
-          <h3 className="h3">An hour reaches an item through the commit</h3>
+          <h3 className="h3">How agent time gets counted per ticket</h3>
           <p className="copy max-w-[64ch]">
             A commit in these projects carries a <code>Runway:</code> trailer
             naming the item it belongs to, or <code>none</code>, and a git hook
