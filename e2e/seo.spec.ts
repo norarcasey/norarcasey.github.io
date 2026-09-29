@@ -12,6 +12,7 @@ const ROUTES = [
   "/crucinora/",
   "/nora-bene/",
   "/noratives/",
+  "/noradar/",
   "/legends-of-noragon/",
   "/resume/",
   "/blog/",

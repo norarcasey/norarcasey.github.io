@@ -123,6 +123,13 @@ const router = createBrowserRouter([
             Component: m.NorativesPage,
           })),
       },
+      {
+        path: "noradar",
+        lazy: () =>
+          import("./pages/NoradarPage").then((m) => ({
+            Component: m.NoradarPage,
+          })),
+      },
     ],
   },
 ]);

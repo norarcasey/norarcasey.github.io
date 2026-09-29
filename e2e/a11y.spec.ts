@@ -16,6 +16,7 @@ const PAGES = [
   { name: "CruciNora", path: "/crucinora" },
   { name: "Nora Bene", path: "/nora-bene" },
   { name: "Noratives", path: "/noratives" },
+  { name: "Noradar", path: "/noradar" },
   { name: "Legends of Noragon", path: "/legends-of-noragon" },
 ];
 

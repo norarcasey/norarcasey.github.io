@@ -6,6 +6,7 @@ import crucinoraScreen from "../assets/screens/crucinora.webp";
 import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.webp";
 import noraBeneScreen from "../assets/screens/nora-bene.webp";
 import norativesScreen from "../assets/screens/noratives.webp";
+import noradarScreen from "../assets/screens/noradar.webp";
 import mineSweeperScreen from "../assets/screens/mine-sweeper.webp";
 import pianoraScreen from "../assets/screens/pianora.webp";
 import starSiegeScreen from "../assets/screens/star-siege.webp";
@@ -91,6 +92,15 @@ export const PROJECTS: Project[] = [
     kind: "product",
     stack: "React · TipTap · Supabase · edge functions · Playwright",
     liveUrl: "https://noratives.com",
+  },
+  {
+    path: "/noradar",
+    name: "Noradar",
+    blurb:
+      "Whether each push actually deployed, and what it cost in agent time, for every project I work on. A daemon on my laptop, a dashboard and a menu bar.",
+    screenshot: noradarScreen,
+    kind: "product",
+    stack: "Node · node:sqlite · React · Swift · Vitest",
   },
   {
     path: "/legends-of-noragon",

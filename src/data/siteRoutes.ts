@@ -77,6 +77,11 @@ export const SITE_ROUTES = {
     description:
       "Noratives by Nora Casey, the private writing studio this blog is published from: three kinds of entry in one editor, a database that is owner-only with one public view cut into it, and publishing as a button rather than a deploy. How it is built, and where the plan was overruled.",
   },
+  "/noradar": {
+    title: "Noradar",
+    description:
+      "Noradar by Nora Casey, a local daemon, dashboard and Mac menu bar app that says whether each push actually deployed, and what the work cost in agent time per runway item. How it is built, and where the plan was overruled.",
+  },
   "/blog": {
     title: "Blog",
     description:
