@@ -19,7 +19,15 @@ function renderShell() {
     <MemoryRouter initialEntries={["/"]}>
       <Routes>
         <Route path="/" element={<Root />}>
-          <Route index element={<StubPage title="Home" />} />
+          <Route
+            index
+            element={
+              <>
+                <StubPage title="Home" />
+                <section id="work" tabIndex={-1} aria-label="Work" />
+              </>
+            }
+          />
           <Route path="resume" element={<StubPage title="Résumé" />} />
         </Route>
       </Routes>
@@ -76,6 +84,25 @@ describe("Root", () => {
 
     await userEvent.keyboard("{Escape}");
     expect(toggle).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("lands the header's Work link on the Work section, even from home", async () => {
+    // jsdom has no layout, so it has no scrollIntoView either.
+    const scrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoView;
+    renderShell();
+
+    const work = screen.getByRole("link", { name: "Work" });
+    expect(work).toHaveAttribute("href", "/#work");
+
+    await userEvent.click(work);
+    const section = screen.getByRole("region", { name: "Work" });
+    expect(section).toHaveFocus();
+    expect(scrollIntoView).toHaveBeenCalledTimes(1);
+
+    // A second click, after scrolling away, has to land again.
+    await userEvent.click(work);
+    expect(scrollIntoView).toHaveBeenCalledTimes(2);
   });
 
   it("sends the feed link at a real request rather than through the router", () => {

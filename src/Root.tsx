@@ -38,8 +38,7 @@ function Wordmark(): React.ReactElement {
 
 /** The three page links, as one list: a row in the bar, or the phone's panel. */
 const NAV_LINKS = [
-  // Work is the home page until UI-16 gives its Work section an id to land on.
-  { to: "/", label: "Work" },
+  { to: "/#work", label: "Work" },
   { to: "/blog", label: "Writing" },
   { to: "/resume", label: "Résumé" },
 ];
@@ -92,6 +91,19 @@ export function Root(): React.ReactElement {
     // Child route effects set document.title before this parent effect runs.
     setRouteAnnouncement(`${document.title} loaded`);
   }, [location.pathname]);
+
+  // The router does not scroll to a hash, so a link to a section (the
+  // header's Work) moved nothing, and from the home page did nothing at all.
+  // This runs after the effect above, so the section wins focus over main.
+  // Keyed on the location rather than the hash, so a second click on Work
+  // after scrolling away still lands.
+  useEffect(() => {
+    if (!location.hash) return;
+    const target = document.getElementById(location.hash.slice(1));
+    if (!target) return;
+    target.scrollIntoView();
+    target.focus({ preventScroll: true });
+  }, [location.key, location.hash]);
 
   const onKeyDown = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape") setMenuOpen(false);

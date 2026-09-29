@@ -88,7 +88,13 @@ function GameTile({ project }: { project: Project }): React.ReactElement {
  */
 export function WorkSection(): React.ReactElement {
   return (
-    <section className="flex flex-col gap-8">
+    // The header's Work link lands here, and the shell focuses it on arrival,
+    // so it takes focus without joining the tab order.
+    <section
+      id="work"
+      tabIndex={-1}
+      className="flex flex-col gap-8 outline-none"
+    >
       <SectionHeading title="Work">
         Products first. Each one has a write-up of how it is built, what was
         measured, and where I pushed back on the plan.
