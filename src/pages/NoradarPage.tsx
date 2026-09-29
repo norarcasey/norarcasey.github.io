@@ -26,14 +26,25 @@ import { useRouteMeta } from "../hooks/usePageMeta";
 const SILENT_GREENS = "6";
 
 /**
- * An hour of Fable 5.1 against an hour of Opus 5.5, at list rates, from
- * Noradar's Models tab on 29 Sep 2026: $109.63 and $112.54 per hour of agent
- * time. Fable's per-token price is twice Opus's; the cache reads are what
- * close the gap, because an agentic session re-reads its whole context every
- * turn and Fable's cache-read rate is the lower one. List rates are not what
- * a subscription costs, so this is a rate of spending the plan, not a bill.
+ * Fable 5.1 against Opus 5.5, per runway item, measured on 29 Sep 2026 from
+ * Noradar's database: agent time placed on each item through its Runway:
+ * trailer, counting an item for a model when 80% or more of its time came
+ * from sessions on that model. Only Kinora has enough of both to compare on
+ * one project: a small item's median was 11.8 minutes on each (16 items on
+ * Fable, 30 on Opus 5.5), and medium and large were within a few minutes on
+ * smaller samples. Across projects the two cannot be compared, because Fable's
+ * items are mostly Kinora and Nora Bene and Opus 5.5's mostly Dinora.
+ *
+ * An hour costs about the same on either at list rates ($109.63 and $112.54),
+ * so the cost per item is about the same too. Fable spends more on output and
+ * Opus far more on re-reading its context, at twice Fable's cache-read rate.
+ *
+ * Kinora's Fable items came before its Opus 5.5 ones, over weeks when the
+ * workflow itself was getting faster, so if anything this favours Opus. It
+ * says nothing about whether the work was better, which Noradar does not
+ * measure.
  */
-const FABLE_PER_OPUS_HOUR = "0.97×";
+const FABLE_AGAINST_OPUS = "Same";
 
 /**
  * The third case study (UI-12). Every figure was measured on 29 Sep 2026, in
@@ -121,9 +132,9 @@ export function NoradarPage(): React.ReactElement {
               "runs that went green without deploying, caught since 14 September: three on Noratives, two on Nora Bene, one on Dinora. GitHub showed each one as a success.",
           },
           {
-            value: FABLE_PER_OPUS_HOUR,
+            value: FABLE_AGAINST_OPUS,
             label:
-              "what an hour of Fable 5.1 spends against an hour of Opus 5.5, at list rates, when its price per token is twice as high. Cache reads are most of what an agent session costs, and Fable's are cheaper. It is the answer the meter post was missing.",
+              "time and cost per runway item on Fable 5.1 as on Opus 5.5, measured on Kinora, the one project with enough of both: a small item took 11.8 minutes of agent time on each. Fable's price per token is twice Opus's, and the work did not cost twice as much. Whether it came out better is not something this measures.",
           },
         ]}
       >
