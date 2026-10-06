@@ -11,6 +11,7 @@ import { CruciNoraPage } from "./pages/CruciNoraPage";
 import { NoraBenePage } from "./pages/NoraBenePage";
 import { NorativesPage } from "./pages/NorativesPage";
 import { NoradarPage } from "./pages/NoradarPage";
+import { DinoraPage } from "./pages/DinoraPage";
 import { MinimaxDiagram } from "./components/MinimaxDiagram";
 import { Resume } from "./components/Resume";
 
@@ -51,6 +52,7 @@ describe("accessibility (axe)", () => {
     ["Nora Bene case study", <NoraBenePage />],
     ["Noratives case study", <NorativesPage />],
     ["Noradar case study", <NoradarPage />],
+    ["Dinora case study", <DinoraPage />],
     // The fixture stays scanned alongside the real pages: it is the only
     // place the empty recording frame and the bracketed placeholders appear
     // once a case study has filled them in.

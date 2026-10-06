@@ -82,6 +82,11 @@ export const SITE_ROUTES = {
     description:
       "Noradar by Nora Casey, a local daemon, dashboard and Mac menu bar app that says whether each push actually deployed, and what the work cost in agent time per runway item. How it is built, and where the plan was overruled.",
   },
+  "/dinora": {
+    title: "Dinora",
+    description:
+      "Dinora by Nora Casey, the finance app that replaced Monarch for her: every account in one place, read-only, with budgets, goals, history and projections across two currencies, in a browser, on a phone and as a Mac app. How it is built, and where the plan was overruled.",
+  },
   "/blog": {
     title: "Blog",
     description:

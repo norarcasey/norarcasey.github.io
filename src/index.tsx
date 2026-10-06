@@ -130,6 +130,13 @@ const router = createBrowserRouter([
             Component: m.NoradarPage,
           })),
       },
+      {
+        path: "dinora",
+        lazy: () =>
+          import("./pages/DinoraPage").then((m) => ({
+            Component: m.DinoraPage,
+          })),
+      },
     ],
   },
 ]);

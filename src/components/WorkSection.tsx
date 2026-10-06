@@ -83,8 +83,8 @@ function GameTile({ project }: { project: Project }): React.ReactElement {
  *
  * The grid is three columns and fills itself from the data: a project cannot
  * be listed here without a page to point at, so each case study UI-12 writes
- * adds a card. Nora Bene and Noratives have arrived; Kinora, Noravia and
- * Noradar are still to come, which is why the last row is short.
+ * adds a card. Nora Bene, Noratives, Noradar and Dinora have arrived; Kinora
+ * and Noravia are still to come.
  */
 export function WorkSection(): React.ReactElement {
   return (

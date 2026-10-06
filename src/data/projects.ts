@@ -7,6 +7,7 @@ import legendsOfNoragonScreen from "../assets/screens/legends-of-noragon.webp";
 import noraBeneScreen from "../assets/screens/nora-bene.webp";
 import norativesScreen from "../assets/screens/noratives.webp";
 import noradarScreen from "../assets/screens/noradar.webp";
+import dinoraScreen from "../assets/screens/dinora.webp";
 import mineSweeperScreen from "../assets/screens/mine-sweeper.webp";
 import pianoraScreen from "../assets/screens/pianora.webp";
 import starSiegeScreen from "../assets/screens/star-siege.webp";
@@ -101,6 +102,15 @@ export const PROJECTS: Project[] = [
     screenshot: noradarScreen,
     kind: "product",
     stack: "Node · node:sqlite · React · Swift · Vitest",
+  },
+  {
+    path: "/dinora",
+    name: "Dinora",
+    blurb:
+      "The finance app that replaced Monarch for me. Every account in one place, read-only, with budgets and goals that work the way I do.",
+    screenshot: dinoraScreen,
+    kind: "product",
+    stack: "React · Supabase · Vercel Cron · PWA · Swift",
   },
   {
     path: "/legends-of-noragon",
