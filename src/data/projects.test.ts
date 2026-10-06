@@ -47,6 +47,22 @@ describe("PROJECTS", () => {
     expect(GAMES.every((p) => p.kind === "game")).toBe(true);
   });
 
+  it("lists the products newest first, by when each page was added", () => {
+    // The Work grid's order is this sort and nothing else (CASEY-3): a
+    // product without a time would sort as NaN and land anywhere.
+    for (const project of PRODUCTS) {
+      expect(Number.isNaN(Date.parse(project.addedAt ?? ""))).toBe(false);
+    }
+    expect(PRODUCTS.map((p) => p.name)).toEqual([
+      "Dinora",
+      "Noradar",
+      "Noratives",
+      "Nora Bene",
+      "CruciNora",
+      "Legends of Noragon",
+    ]);
+  });
+
   it("gives every product a stack line for its card, and no game one", () => {
     // The card on the home page prints it; a game prints its package instead.
     for (const project of PRODUCTS) {

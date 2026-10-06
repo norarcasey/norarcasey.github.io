@@ -49,6 +49,14 @@ export interface Project {
    * the line under a card. Games use `npmPackage` instead.
    */
   stack?: string;
+  /**
+   * When the project's page was added to this site: the author time of the
+   * commit that first added its `src/pages/*Page.tsx`. Every product has one,
+   * because the Work grid is ordered by it, newest first (CASEY-3). A time
+   * rather than a day, because CruciNora and Legends of Noragon went in on the
+   * same afternoon.
+   */
+  addedAt?: string;
   /** The one project the home page leads with. Exactly one may carry it. */
   featured?: true;
   /** Where it runs, if it is somewhere other than this site. */
@@ -59,12 +67,14 @@ export interface Project {
 }
 
 /**
- * In display order. The featured project is first because that is where the
- * page puts it; the rest follow in the order the tiles have always been in.
+ * Every project, in the order they were written down. The Work grid does not
+ * read this order: it sorts the products by `addedAt`, newest first. The games
+ * strip under it does keep this order.
  */
 export const PROJECTS: Project[] = [
   {
     path: "/crucinora",
+    addedAt: "2026-06-24T14:20:02+02:00",
     name: "CruciNora",
     blurb:
       "AI-assisted crossword construction. A backtracking solver fills the grid in under a second; Claude writes the clues.",
@@ -76,6 +86,7 @@ export const PROJECTS: Project[] = [
   },
   {
     path: "/nora-bene",
+    addedAt: "2026-09-18T01:14:27+02:00",
     name: "Nora Bene",
     blurb:
       "One app in place of Google Keep, 1Password and a spreadsheet of lists. It keeps working with no signal, and the vault's key never leaves the device.",
@@ -86,6 +97,7 @@ export const PROJECTS: Project[] = [
   },
   {
     path: "/noratives",
+    addedAt: "2026-09-19T15:26:28+02:00",
     name: "Noratives",
     blurb:
       "The writing studio this blog is published from. Journals that stay private, fiction and technical posts that go out to two different sites, one editor for all three.",
@@ -96,6 +108,7 @@ export const PROJECTS: Project[] = [
   },
   {
     path: "/noradar",
+    addedAt: "2026-09-29T08:49:27+02:00",
     name: "Noradar",
     blurb:
       "Whether each push actually deployed, and what it cost in agent time, for every project I work on. A daemon on my laptop, a dashboard and a menu bar.",
@@ -105,6 +118,7 @@ export const PROJECTS: Project[] = [
   },
   {
     path: "/dinora",
+    addedAt: "2026-10-07T01:44:49+02:00",
     name: "Dinora",
     blurb:
       "The finance app that replaced Monarch for me. Every account in one place, read-only, with budgets and goals that work the way I do.",
@@ -114,6 +128,7 @@ export const PROJECTS: Project[] = [
   },
   {
     path: "/legends-of-noragon",
+    addedAt: "2026-06-24T14:08:01+02:00",
     name: "Legends of Noragon",
     blurb:
       "A dungeon crawler with procedurally generated dungeons. No two descents into Noragon are the same.",
@@ -186,10 +201,14 @@ export const OTHER_PROJECTS: Project[] = PROJECTS.filter(
   (project) => !project.featured
 );
 
-/** The home page's Work grid: the products, in order. */
+/**
+ * The home page's Work grid: the products, newest first by when each page was
+ * added (Nora, 7 Oct 2026, CASEY-3), so a new case study lands at the front
+ * without anyone remembering to move it.
+ */
 export const PRODUCTS: Project[] = PROJECTS.filter(
   (project) => project.kind === "product"
-);
+).sort((a, b) => Date.parse(b.addedAt ?? "") - Date.parse(a.addedAt ?? ""));
 
 /** The strip under it: the games this site installs from npm, in order. */
 export const GAMES: Project[] = PROJECTS.filter(
