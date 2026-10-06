@@ -14,10 +14,12 @@
 //
 // The app is real: the dev server, the components, the charts, the budget's
 // arithmetic. Only the rows are invented, and they are invented from nothing:
-// a household with a condo, a car loan, two cards, a euro account and some
-// savings, whose every figure comes from the generator below. Nora asked for
+// a household with a house, a car loan, two cards, a euro account and a
+// brokerage, whose every figure comes from the generator below. Nora asked for
 // exactly this (CASEY-2): screenshots that look real and show none of her
 // finances. No institution she banks with is named, and no amount is hers.
+// And then for a millionaire (CASEY-4), so net worth is about $1.15M today and
+// crosses a million partway through the chart's year.
 //
 // **Nothing can leave this machine.** Dinora's own .env.local points at the
 // production project, so this is the Noratives driver's single catch-all: it
@@ -75,21 +77,21 @@ const live = (row) => ({ updated_at: STAMP, deleted_at: null, ...row });
 // ── Accounts ─────────────────────────────────────────────────────────────
 // Balances are what the bank reports: a card or a loan is negative.
 const A = {
-  checking: ["Chase", "Total Checking", "USD", 6_842.17, "cash", "simplefin"],
+  checking: ["Chase", "Total Checking", "USD", 14_820.4, "cash", "simplefin"],
   savings: [
     "Ally Bank",
     "Online Savings",
     "USD",
-    18_406.55,
+    86_406.55,
     "cash",
     "simplefin",
   ],
-  euro: ["BBVA", "Cuenta Online", "EUR", 3_215.4, "cash", "simplefin"],
+  euro: ["BBVA", "Cuenta Online", "EUR", 12_215.4, "cash", "simplefin"],
   sapphire: [
     "Chase",
     "Sapphire Preferred",
     "USD",
-    -1_284.33,
+    -3_284.33,
     "card",
     "simplefin",
   ],
@@ -97,7 +99,7 @@ const A = {
     "American Express",
     "Blue Cash Everyday",
     "USD",
-    -462.1,
+    -862.1,
     "card",
     "simplefin",
   ],
@@ -105,20 +107,27 @@ const A = {
     "Fidelity",
     "Individual Brokerage",
     "USD",
-    48_920.12,
+    512_920.12,
     "investment",
     "simplefin",
   ],
-  roth: ["Vanguard", "Roth IRA", "USD", 31_505.77, "investment", "simplefin"],
+  roth: ["Vanguard", "Roth IRA", "USD", 148_505.77, "investment", "simplefin"],
   mortgage: [
     "Rocket Mortgage",
     "Home Loan",
     "USD",
-    -246_310.0,
+    -588_310.0,
     "loan",
     "plaid",
   ],
-  auto: ["Honda Financial", "Auto Loan", "USD", -9_874.45, "loan", "plaid"],
+  auto: [
+    "Audi Financial Services",
+    "Auto Loan",
+    "USD",
+    -18_874.45,
+    "loan",
+    "plaid",
+  ],
 };
 
 const ACCOUNTS = {};
@@ -162,15 +171,16 @@ const BANK_PULLS = [
 // Drawn backwards from today's balance: savings and investments grew into
 // it, the loans shrank into it, checking saws around two paydays a month.
 const SHAPE = {
-  checking: (d) => -900 * Math.sin((2 * Math.PI * d) / 15) - d * 1.2,
-  savings: (d) => -d * 22,
-  euro: (d) => 120 * Math.sin(d / 9) - d * 1.5,
+  checking: (d) => -2_500 * Math.sin((2 * Math.PI * d) / 15) - d * 1.2,
+  savings: (d) => -d * 90,
+  euro: (d) => 300 * Math.sin(d / 9) - d * 1.5,
   sapphire: (d) => 700 * Math.sin((2 * Math.PI * d) / 30),
   amex: (d) => 220 * Math.sin((2 * Math.PI * d) / 30 + 1),
-  brokerage: (d) => -d * 31 + 1_400 * Math.sin(d / 23) - 900 * Math.sin(d / 7),
-  roth: (d) => -d * 19 + 800 * Math.sin(d / 29),
-  mortgage: (d) => -d * 26.5,
-  auto: (d) => -d * 11.2,
+  brokerage: (d) =>
+    -d * 260 + 9_000 * Math.sin(d / 23) - 5_000 * Math.sin(d / 7),
+  roth: (d) => -d * 60 + 3_000 * Math.sin(d / 29),
+  mortgage: (d) => -d * 95,
+  auto: (d) => -d * 24,
 };
 const BALANCE_SNAPSHOTS = [];
 for (const [key, account] of Object.entries(ACCOUNTS)) {
@@ -219,7 +229,7 @@ const ACCOUNT_TERMS = [
     account_id: ACCOUNTS.sapphire.id,
     kind: "credit_limit",
     effective_on: "2024-02-01",
-    amount_minor: cents(16_000),
+    amount_minor: cents(35_000),
     rate_bp: null,
     ends_on: null,
   }),
@@ -237,7 +247,7 @@ const ACCOUNT_TERMS = [
     account_id: ACCOUNTS.amex.id,
     kind: "credit_limit",
     effective_on: "2023-06-15",
-    amount_minor: cents(7_500),
+    amount_minor: cents(15_000),
     rate_bp: null,
     ends_on: null,
   }),
@@ -265,39 +275,39 @@ const asset = (row) =>
   });
 const ASSET = {
   condo: asset({
-    name: "Condo",
+    name: "House",
     kind: "home",
     acquired_on: "2021-05-14",
-    cost_minor: cents(318_000),
+    cost_minor: cents(640_000),
     financed_by: ACCOUNTS.mortgage.id,
-    address: "1427 Linden Ave, Unit 3",
+    address: "1427 Linden Ave",
     postal_code: "97214",
   }),
   car: asset({
-    name: "2022 Honda CR-V",
+    name: "2023 Audi Q5",
     kind: "vehicle",
-    acquired_on: "2022-08-20",
-    cost_minor: cents(31_850),
+    acquired_on: "2023-04-15",
+    cost_minor: cents(54_200),
     financed_by: ACCOUNTS.auto.id,
-    vin: "7FARW2H85NE000000",
-    odometer_miles: 38_210,
+    vin: "WA1BBAFY5P2000000",
+    odometer_miles: 21_480,
     odometer_on: dayOf(daysAgo(40)),
   }),
   silver: asset({
-    name: "Silver rounds",
+    name: "Silver bars",
     kind: "valuables",
     acquired_on: "2025-03-10",
-    cost_minor: cents(660),
+    cost_minor: cents(6_600),
     metal: "silver",
-    // Twenty troy ounces.
-    metal_mg: 622_070,
+    // Two hundred troy ounces.
+    metal_mg: 6_220_700,
     fineness: 999,
   }),
   ether: asset({
     name: "Ether",
     kind: "crypto",
     coin: "ETH",
-    coin_quantity: "1.85",
+    coin_quantity: "18.5",
   }),
 };
 
@@ -317,16 +327,16 @@ const value = (assetId, d, dollars, source, extra = {}) =>
   });
 const since = (day) => Math.round((NOW - Date.parse(day)) / DAY_MS);
 const ASSET_VALUES = [
-  value(ASSET.condo.id, since("2021-05-14"), 318_000, "entered"),
-  value(ASSET.condo.id, 420, 362_000, "entered"),
-  value(ASSET.condo.id, 45, 365_000, "entered"),
-  value(ASSET.car.id, since("2022-08-20"), 31_850, "entered"),
-  value(ASSET.car.id, 410, 24_500, "entered"),
+  value(ASSET.condo.id, since("2021-05-14"), 640_000, "entered"),
+  value(ASSET.condo.id, 420, 845_000, "entered"),
+  value(ASSET.condo.id, 45, 860_000, "entered"),
+  value(ASSET.car.id, since("2023-04-15"), 54_200, "entered"),
+  value(ASSET.car.id, 410, 41_500, "entered"),
 ];
 // A weekly market estimate beside the value entered by hand: the entered one
 // wins, and the estimate sits next to it, quieter (ACCT-11).
 for (let w = 12; w >= 0; w -= 1) {
-  const home = 371_500 + w * -220 + between(-1, 1) * 1_500;
+  const home = 872_000 + w * -600 + between(-1, 1) * 4_000;
   ASSET_VALUES.push(
     value(ASSET.condo.id, w * 7 + 1, home, "estimate", {
       provider: "rentcast",
@@ -334,7 +344,7 @@ for (let w = 12; w >= 0; w -= 1) {
       high_minor: cents(home * 1.07),
     })
   );
-  const car = 23_400 + w * 85 + between(-1, 1) * 200;
+  const car = 40_200 + w * 140 + between(-1, 1) * 400;
   ASSET_VALUES.push(
     value(ASSET.car.id, w * 7 + 2, car, "estimate", {
       provider: "marketcheck",
@@ -383,7 +393,7 @@ for (let d = 400; d >= 0; d -= 1) {
 for (const row of METAL_PRICES) {
   const d = Math.round((NOW - Date.parse(row.price_date)) / DAY_MS);
   ASSET_VALUES.push(
-    value(ASSET.silver.id, d, 20 * Number(row.price), "estimate", {
+    value(ASSET.silver.id, d, 200 * Number(row.price), "estimate", {
       provider: "lbma",
     })
   );
@@ -391,9 +401,9 @@ for (const row of METAL_PRICES) {
 for (const row of CRYPTO_PRICES) {
   const d = Math.round((NOW - Date.parse(row.price_date)) / DAY_MS);
   ASSET_VALUES.push(
-    value(ASSET.ether.id, d, 1.85 * Number(row.price), "estimate", {
+    value(ASSET.ether.id, d, 18.5 * Number(row.price), "estimate", {
       provider: "gemini",
-      coin_quantity: "1.85",
+      coin_quantity: "18.5",
     })
   );
 }
@@ -402,12 +412,12 @@ for (const row of CRYPTO_PRICES) {
 const GOAL = {
   fund: live({
     id: uid("o"),
-    name: "Emergency fund",
+    name: "Cabin down payment",
     kind: "save",
     currency: "USD",
-    target_minor: cents(25_000),
+    target_minor: cents(150_000),
     starts_on: firstOfMonth(8),
-    target_on: firstOfMonth(-6),
+    target_on: firstOfMonth(-18),
     created_at: iso(daysAgo(240)),
   }),
   car: live({
@@ -434,13 +444,13 @@ const GOAL_PLANS = [
     id: uid("r"),
     goal_id: GOAL.fund.id,
     starts_on: firstOfMonth(8),
-    amount_minor: cents(650),
+    amount_minor: cents(2_500),
   }),
   live({
     id: uid("r"),
     goal_id: GOAL.car.id,
     starts_on: firstOfMonth(10),
-    amount_minor: cents(420),
+    amount_minor: cents(890),
   }),
 ];
 
@@ -470,14 +480,14 @@ const CAT = {
 const CATEGORIES = Object.values(CAT);
 
 const CATEGORY_BUDGETS = [
-  [CAT.groceries, 700],
-  [CAT.dining, 280],
-  [CAT.transport, 220],
-  [CAT.utilities, 260],
-  [CAT.subscriptions, 70],
-  [CAT.shopping, 250],
-  [CAT.health, 120],
-  [CAT.home, 150],
+  [CAT.groceries, 1_100],
+  [CAT.dining, 600],
+  [CAT.transport, 300],
+  [CAT.utilities, 400],
+  [CAT.subscriptions, 120],
+  [CAT.shopping, 800],
+  [CAT.health, 250],
+  [CAT.home, 600],
 ].map(([cat, dollars]) =>
   live({
     id: uid("b"),
@@ -520,12 +530,12 @@ for (let d = 182; d >= 0; d -= 1) {
     spend(
       card(),
       d,
-      -between(18, 80),
+      -between(30, 120),
       rand() < 0.6 ? "Trader Joe's" : "New Seasons Market",
       "Groceries"
     );
   if (weekday === 6 && rand() < 0.55)
-    spend(card(), d, -between(70, 160), "Whole Foods Market", "Groceries");
+    spend(card(), d, -between(110, 240), "Whole Foods Market", "Groceries");
   if (rand() < 0.35)
     spend(
       card(),
@@ -538,7 +548,7 @@ for (let d = 182; d >= 0; d -= 1) {
     spend(
       card(),
       d,
-      -between(28, 88),
+      -between(60, 180),
       rand() < 0.5 ? "Pok Pok" : "Lardo",
       "Restaurants"
     );
@@ -548,7 +558,7 @@ for (let d = 182; d >= 0; d -= 1) {
     spend(
       card(),
       d,
-      -between(14, 120),
+      -between(40, 300),
       rand() < 0.5 ? "Amazon" : "Powell's Books",
       "Shopping"
     );
@@ -561,15 +571,15 @@ for (const months of [5, 4, 3, 2, 1, 0]) {
   const start = Date.parse(firstOfMonth(months));
   const on = (day) => Math.round((NOW - (start + (day - 1) * DAY_MS)) / DAY_MS);
   const fixed = [
-    [1, "checking", -1_684.22, "Rocket Mortgage", null],
-    [3, "checking", 3_412.5, "Northwind Labs Payroll", "Payroll"],
+    [1, "checking", -3_948.6, "Rocket Mortgage", null],
+    [3, "checking", 9_850, "Northwind Labs Payroll", "Payroll"],
     [5, "sapphire", -15.49, "Netflix", "Subscriptions"],
     [8, "amex", -11.99, "Spotify", "Subscriptions"],
     [12, "checking", -142.6, "Portland General Electric", "Utilities"],
     [14, "checking", -79.99, "Xfinity", "Utilities"],
-    [15, "checking", -420.0, "Honda Financial", null],
-    [18, "checking", 3_412.5, "Northwind Labs Payroll", "Payroll"],
-    [20, "checking", -650.0, "Transfer to Ally Savings", null],
+    [15, "checking", -890.0, "Audi Financial Services", null],
+    [18, "checking", 9_850, "Northwind Labs Payroll", "Payroll"],
+    [20, "checking", -2_500.0, "Transfer to Ally Savings", null],
     [22, "checking", -64.3, "NW Natural", "Utilities"],
     // Two a month that no bank names a category for, so the budget has
     // something to ask about (BUD-03: categorized where it is shown).
@@ -582,13 +592,13 @@ for (const months of [5, 4, 3, 2, 1, 0]) {
     const file =
       payee === "Rocket Mortgage"
         ? CAT.mortgage
-        : payee === "Honda Financial" || payee.startsWith("Transfer")
+        : payee === "Audi Financial Services" || payee.startsWith("Transfer")
           ? CAT.saving
           : undefined;
     spend(account, d, dollars, payee, src, file);
     if (payee.startsWith("Transfer"))
       spend("savings", d, -dollars, "Transfer from Chase", null, CAT.saving);
-    if (payee === "Honda Financial")
+    if (payee === "Audi Financial Services")
       spend("auto", d, -dollars, "Payment received", null, CAT.saving);
   }
   // Each card paid in full from checking, both sides filed as one transfer.

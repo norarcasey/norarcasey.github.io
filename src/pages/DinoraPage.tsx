@@ -96,7 +96,7 @@ export function DinoraPage(): React.ReactElement {
       <ShowcaseGame width="100%" thirdParty={false}>
         <CaseStudyMedia
           image={dinoraDashboard}
-          alt="The Dinora overview with invented figures. Banks last read five and six hours ago. Net worth of $249,680.52 across nine accounts and four assets, with a line under it saying the euro account was converted at the ECB's rate for the day before. Four totals: cash, investments, property and debt owed. Below, a year of net worth by day as a line rising from about $200,000, running on into a dashed projection with a shaded likely range."
+          alt="The Dinora overview with invented figures. Banks last read five and six hours ago. Net worth of $1,154,160.75 across nine accounts and four assets, with a line under it saying the euro account was converted at the ECB's rate for the day before. Four totals: cash, investments, property and debt owed. Below, a year of net worth by day as a line rising from about $920,000, past a million in February, and running on into a dashed projection with a shaded likely range."
           caption="The overview. The money is invented for this page: the app is real, and every account, charge and balance in it comes from a generator."
         />
       </ShowcaseGame>
@@ -149,25 +149,25 @@ export function DinoraPage(): React.ReactElement {
                 screens={[
                   {
                     image: dinoraBudget,
-                    alt: "The budget for September 2026: $2,073.59 spent of $2,050.00 budgeted, $23.59 over. A chart of spending through the month against an even pace and against August. Below it, a notice that two transactions have no category, with a button to categorize them, then the categories that went over.",
+                    alt: "The budget for September 2026: $3,295.97 spent of $4,170.00 budgeted, $874.03 left. A chart of spending through the month against an even pace and against August. Below it, a notice that two transactions have no category, with a button to categorize them, then the categories that went over.",
                     caption:
                       "A month, closed. Two charges no bank named a category for are offered for sorting right there.",
                   },
                   {
                     image: dinoraCondo,
-                    alt: "A condo's page. The value I set, $365,000, counts. Since it was bought for $318,000 in 2021, it is up $47,000. What is mine after the home loan is shown beside what is still owed. A line below gives RentCast's estimate and its range, and says mine is the one that counts.",
+                    alt: "A house's page. The value I set, $860,000, counts. Since it was bought for $640,000 in 2021, it is up $220,000. What is mine after the home loan is shown beside what is still owed. A line below gives RentCast's estimate and its range, and says mine is the one that counts.",
                     caption:
                       "A home, tied to the loan that bought it. My value counts; the market's estimate sits beside it, quieter.",
                   },
                   {
                     image: dinoraEther,
-                    alt: "An Ether holding's page: $7,733.00, from 1.85 ETH at Gemini's close the day before. The value is listed under Values with the quantity it was taken at.",
+                    alt: "An Ether holding's page: $77,330.00, from 18.5 ETH at Gemini's close the day before. The value is listed under Values with the quantity it was taken at.",
                     caption:
                       "Crypto entered as how much is held, once, and priced at each day's close.",
                   },
                   {
                     image: dinoraRecurring,
-                    alt: "The Activity page, with a search box over 380 transactions and a Recurring list: Spotify, Whole Foods Market, Portland General Electric, Xfinity, NW Natural and Netflix, each with how often it comes back, when it is next expected, and about how much a year.",
+                    alt: "The Activity page, with a search box over 333 transactions and a Recurring list: New Seasons Market, Spotify, Venmo, Portland General Electric, Xfinity and NW Natural, each with how often it comes back, when it is next expected, and about how much a year.",
                     caption:
                       "Recurring charges, found from the history rather than typed in.",
                   },
@@ -175,7 +175,7 @@ export function DinoraPage(): React.ReactElement {
                 phones={[
                   {
                     image: dinoraPhoneBudget,
-                    alt: "The September budget on a phone, with the spending chart and the first category over budget, and a tab bar for Overview, Budget and Activity at the bottom.",
+                    alt: "The September budget on a phone, with the spending chart and the month within budget, and a tab bar for Overview, Budget and Activity at the bottom.",
                     caption: "The budget, on the installed phone app.",
                   },
                   {
