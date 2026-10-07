@@ -70,7 +70,16 @@ to check, and making a post wait on a full test run would only make publishing
 slow. Code changes are gated; content is not. How that is wired, and what goes
 quiet when it is not, is [Publishing a post](#publishing-a-post).
 
-`vercel.json` holds a catch-all rewrite so that any route the prerender did not
+`vercel.json` turns off Vercel's own Git deployments for `main`
+(`"git": { "deploymentEnabled": { "main": false } }`). Without it, every push was
+deployed twice: the Git integration built and aliased the commit straight away,
+and the Actions run replaced it about two minutes later. For those two minutes,
+and for good if the gate failed, production served a commit nothing had checked
+(OPS-10). The deploy from Actions is the only production deploy a push makes.
+After a change to this setting, check that publishing still rebuilds: trigger
+the hook once and look for `meta.deployHookName` on a new deployment.
+
+`vercel.json` also holds a catch-all rewrite so that any route the prerender did not
 emit a file for still lands in the app rather than on Vercel's own 404.
 
 ## Publishing a post

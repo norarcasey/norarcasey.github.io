@@ -6,5 +6,7 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
 
+  "git": { "deploymentEnabled": { "main": false } },
+
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
