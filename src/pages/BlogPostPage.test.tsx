@@ -1,4 +1,4 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -84,7 +84,11 @@ describe("BlogPostPage", () => {
     expect(container.querySelector(".blog-body")?.innerHTML).toBe(
       "<p>The first paragraph.</p>"
     );
-    expect(document.title).toContain("The meter showed up");
+    // The title is set in a passive effect, which React may run after the
+    // heading is already in the DOM, so it is waited for, not read once.
+    await waitFor(() =>
+      expect(document.title).toContain("The meter showed up")
+    );
   });
 
   it("links back to the listing whatever the post's state", async () => {
