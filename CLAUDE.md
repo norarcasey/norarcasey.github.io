@@ -7,25 +7,29 @@ maintainer, push to `main`, the gate decides.
 
 ## Before you start
 
-1. `node ~/src/noradar/scripts/runway.mjs open .` lists the unfinished items. The runway
-   itself is the Artifact at
-   https://claude.ai/code/artifact/d3f41697-663c-4428-8ab8-87130a23cb52. Read the item
-   you are taking before touching anything: the notes say what to change, what to leave
-   alone, and what was already decided.
-2. `pnpm install` (pnpm, not npm or Yarn; `pnpm-lock.yaml` is the lockfile).
-3. `pnpm gate` must pass before you start, so you know a failure later is yours.
+1. The work items are tickets in Linora, app `CASEY` (`.linora-app`). Read the one you are
+   taking with `get_ticket` before touching anything, earlier runs included: the spec says
+   what to change, what to leave alone, and what was already decided, and a run handed back
+   says why. Then `claim_ticket`.
+2. Work in a worktree, never the main checkout: `EnterWorktree` named for the ticket
+   in lower case (`.claude/worktrees/ops-10`), or its `path` when that worktree already exists. Link
+   `.env.local` in from the main checkout (`ln -s ../../../.env.local .env.local`) so
+   `pnpm build` and `pnpm test:e2e` can fetch the blog; it is gitignored either way.
+3. `pnpm install` (pnpm, not npm or Yarn; `pnpm-lock.yaml` is the lockfile).
+4. `pnpm gate` must pass before you start, so you know a failure later is yours.
 
 ## The one check
 
 ```
 pnpm gate        # format:check, lint, tsc, test. What CI runs first.
-pnpm test:e2e    # Playwright + axe over the built site. Slow; CI runs it after the gate.
+pnpm test:e2e    # Playwright + axe over the built site. Builds first; CI runs it after the gate.
 pnpm build       # tsc + vite build. Needs VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
                  # in .env.local, or the blog fetch aborts the build.
 ```
 
-Run `pnpm gate` before every push. Run `pnpm format` first if it fails on formatting;
-Prettier is the arbiter and CI checks it before anything else.
+Run `pnpm gate` and `pnpm test:e2e` before every push (Ship it, below). Run `pnpm format`
+first if the gate fails on formatting; Prettier is the arbiter and CI checks it before
+anything else.
 
 ## Where things are
 
@@ -72,24 +76,63 @@ files moved. The trailer is mandatory and the hook enforces it:
 Runway: UI-11
 ```
 
-or `Runway: none` for a change that belongs to no item. The hook refuses an id the
-runway does not have, so an item is written before its first commit, not after.
+or `Runway: none` for a change that belongs to no item. The hook refuses an id Linora
+does not have, so a ticket is filed before its first commit, not after.
 
-## When you finish an item
+## Ship it
 
-Update the runway Artifact: not "done", but what it turned out to be, what was found on
-the way, and what the plan got wrong. Then re-import it so the hook and Noradar see it:
+The four steps from `~/src/linora/docs/ship-it.md`, with this repo's commands. Run them
+from the ticket's worktree, before `complete_run`.
 
-```
-node ~/src/noradar/scripts/runway.mjs import . runway.html --url https://claude.ai/code/artifact/d3f41697-663c-4428-8ab8-87130a23cb52
-```
+1. **Merge to main.** `git fetch`, then `git rebase origin/main`. No pull request, no merge
+   commit.
+2. **Verify.** `pnpm gate`, then `pnpm test:e2e`, on the rebased commit. Both, every time:
+   the e2e suite builds the site and scans every page in both schemes. A red check is fixed
+   or handed back with the reason, never shipped as flaky.
+3. **Push.** `git push origin HEAD:main`. If it is refused because `main` moved, rebase,
+   verify again, push again.
+4. **Deploy.** CI deploys on push: `.github/workflows/deploy.yml` runs the gate, the e2e
+   scan, then `vercel deploy --prod`. Find the run for your commit
+   (`gh run list --workflow deploy.yml --commit <sha>`) and watch it to the end with
+   `gh run watch <id> --exit-status`. Only a run whose **Deploy to Vercel** step succeeded
+   on that commit counts. A push is not a deploy.
 
-where `runway.html` is the published page saved to disk.
+**Why step 2 matters more here than the CI gate does.** Until `OPS-10` is fixed, Vercel's
+Git integration puts every push live about two minutes before CI finishes, and leaves it
+live if CI fails. So the local verify is the only check that runs before visitors see the
+commit, and a red CI run means production is already serving a commit that failed: fix it
+forward straight away, in the same run.
 
-## Items marked for hand-off
+CI keeps the e2e scan, unlike the heavy apps that moved theirs into local verify only.
+Here it costs under a minute of a two-minute run (54 of 138 seconds, 8 Oct 2026), and it
+builds with the repository's secrets rather than `.env.local`. There are no project hooks,
+so the main checkout is not pulled after a deploy.
 
-An item tagged **hand-off** in the runway is specified closely enough to be taken without
+Then `complete_run` with `shipped: true`, naming the commit and the Actions run that
+deployed it. The summary is not "done" but what the ticket turned out to be, what was found
+on the way, and what the plan got wrong. Work found that is not yours to do now is filed
+with `create_tickets`.
+
+Ask Nora for a **Shipit** first (`AskUserQuestion`, **Shipit** / **Hold**), after verify and
+before pushing, when the change:
+
+- touches how the site is deployed: `vercel.json`, the deploy step or secrets in
+  `deploy.yml`, Vercel's project settings or environment, or the New Content deploy hook
+  (`OPS-10`, `CASEY-5`). Every publish depends on the hook, and breaking it fails silently
+  (`OPS-04`).
+- touches what the build reads from Supabase (`scripts/blogContent.ts`, the `public_posts`
+  view). The schema belongs to Noratives and is shared with novellanora.com.
+- touches DNS or analytics for noracasey.com.
+- was held by its ticket or by Nora, or you are not sure it is right.
+
+Otherwise ship without asking. On **Hold**, stop merged and verified but unpushed, and end
+the run with `shipped: false` and a summary that starts with `Not shipped:` and names the
+branch.
+
+## Tickets marked for hand-off
+
+A ticket tagged **hand-off** is specified closely enough to be taken without
 the context of the conversation that wrote it: the files are named, the acceptance is
 stated, and `pnpm gate` plus the tests it names are the whole check. Take it as written.
-If the item turns out to need a decision it does not record, stop and write the question
-into the item rather than choosing.
+If the ticket turns out to need a decision it does not record, stop and write the question
+into the ticket (`log_progress`, then hand it back) rather than choosing.
