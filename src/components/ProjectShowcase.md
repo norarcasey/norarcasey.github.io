@@ -76,7 +76,7 @@ a level fails the axe suite. `StackFacts` renders its own `h2`; pass
 
 - `width` sizes the desktop column. The default `560` fits the games that are
   `width: 100%` capped at 560px. Pass a number for a different fixed column
-  (CruciNora uses `480` for its screenshot), `"fit-content"` when the
+  (Legends of Noragon uses `480` for its screenshot), `"fit-content"` when the
   content's own width varies (Mine Sweeper's board grows with difficulty), or
   `"100%"` in a case study so the recording fills its band. It reaches the CSS
   as the `--game-width` custom property.
@@ -141,7 +141,7 @@ running is a better hero than a frame promising a video: pass `image`.
 **A page with no npm component.** Put a screenshot and the link out to the live
 app in `ShowcaseGame`. Wrap them in one centered flex column so the button sits
 under the image, and cap the image with `max-w-*` so it doesn't blow up on
-mobile, where the slot goes full width. `CruciNoraPage.tsx` is the example.
+mobile, where the slot goes full width. `NoragonPage.tsx` is the example.
 
 **Two write-ups side by side in the details band.** Make the band a grid, one
 column below `md` and two above:

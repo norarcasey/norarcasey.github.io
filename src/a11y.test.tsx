@@ -48,7 +48,7 @@ describe("accessibility (axe)", () => {
 
   it.each([
     ["Contact page", <ContactMePage />],
-    ["CruciNora page", <CruciNoraPage />],
+    ["CruciNora case study", <CruciNoraPage />],
     ["Nora Bene case study", <NoraBenePage />],
     ["Noratives case study", <NorativesPage />],
     ["Noradar case study", <NoradarPage />],

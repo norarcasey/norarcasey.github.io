@@ -65,7 +65,7 @@ export const SITE_ROUTES = {
   "/crucinora": {
     title: "CruciNora",
     description:
-      "CruciNora, an AI-assisted crossword construction app by Nora Casey. Design an NYT-style grid, auto-fill it with a backtracking solver, and clue it with Claude's help.",
+      "CruciNora by Nora Casey, a crossword construction app: she makes the theme, a backtracking solver fills the grid from 119,331 words, and Claude drafts clues she edits, with the New York Times' rules checked before a submission. How it is built, and where the plan was overruled.",
   },
   "/nora-bene": {
     title: "Nora Bene",

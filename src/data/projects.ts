@@ -77,7 +77,7 @@ export const PROJECTS: Project[] = [
     addedAt: "2026-06-24T14:20:02+02:00",
     name: "CruciNora",
     blurb:
-      "AI-assisted crossword construction. A backtracking solver fills the grid in under a second; Claude writes the clues.",
+      "The crosswords I make, without filling the grid by hand. I choose the theme, a solver fills the rest, and Claude drafts clues I edit.",
     screenshot: crucinoraScreen,
     kind: "product",
     stack: "TypeScript core · Supabase · Vercel functions · Claude",
