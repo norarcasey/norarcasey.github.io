@@ -1,10 +1,14 @@
 import { defineConfig, devices } from "@playwright/test";
 
-// Dedicated port so the e2e server doesn't collide with a manual `pnpm dev`.
-const PORT = 4321;
+// A port nothing else on this laptop claims (CASEY-7). It was 4321 until
+// Pictora's server took it, and reusing the server already there ran every
+// spec against Pictora. 4391, CASEY-6's stopgap, is Dinora's.
+const PORT = 4373;
 
 export default defineConfig({
   testDir: "./e2e",
+  // Fails the run before any spec if the server is not this site.
+  globalSetup: "./e2e/global-setup.ts",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
@@ -28,7 +32,9 @@ export default defineConfig({
   webServer: {
     command: `pnpm build && pnpm preview --port ${PORT} --strictPort`,
     url: `http://localhost:${PORT}`,
-    reuseExistingServer: !process.env.CI,
+    // Never reuse: a server already on the port is another app, or a stale
+    // build of this one. Either way the run should fail, not scan it.
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 });
