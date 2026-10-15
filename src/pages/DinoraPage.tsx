@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import {
   CaseStudy,
@@ -13,6 +12,7 @@ import {
 } from "../components/ProjectShowcase";
 import { CommitHistory } from "../components/CommitHistory";
 import { DinoraSources } from "../components/DinoraSources";
+import { ExternalLink } from "../components/ExternalLink";
 import { CaseStudyMedia } from "../components/CaseStudyMedia";
 import { ScreenGallery } from "../components/ScreenGallery";
 import dinoraDashboard from "../assets/screens/dinora-dashboard.webp";
@@ -45,7 +45,12 @@ const UNIT_TESTS = "1,340";
  * **None of the money in the screenshots is hers.** She asked for that
  * (CASEY-2): scripts/shootDinora.mjs runs the real app against invented rows
  * and lets no request leave the laptop, and it retakes every picture here.
+ *
+ * The source has been public since 14 Oct 2026 (CASEY-9), as dinora-public: one
+ * commit per release, made by `pnpm public:export` in the private repo (DIN-12,
+ * DIN-17), which redacts, gates the copy and pushes nothing.
  */
+const PUBLIC_REPO = "https://github.com/norarcasey/dinora-public";
 export function DinoraPage(): React.ReactElement {
   useRouteMeta("/dinora");
 
@@ -67,11 +72,8 @@ export function DinoraPage(): React.ReactElement {
               installed app on my phone, and as a Mac app, all the same build.
             </ShowcaseTile>
             <ShowcaseTile label="Source">
-              Private. It reads every account I hold, so it is built for one
-              person and closed to everyone else.{" "}
-              <Link className="inline-link" to="/contact-me">
-                Ask me for a walkthrough
-              </Link>
+              Public, MIT licensed, for anyone who wants their own copy:{" "}
+              <ExternalLink url={PUBLIC_REPO} label="dinora-public on GitHub" />
               .
             </ShowcaseTile>
           </>
@@ -207,6 +209,23 @@ export function DinoraPage(): React.ReactElement {
             that rate, so last March in dollars does not move because
             today&apos;s rate did. The euro side is built; linking my bank in
             Spain is the next piece.
+          </p>
+          <h3 className="h3">A copy anyone can run</h3>
+          <p className="copy max-w-[64ch]">
+            Dinora is built for one person, and that person does not have to be
+            me. The public repository is a copy anyone can run as their own:
+            their own Supabase and Vercel projects, their own read-only bank
+            links, and exactly one account. Its README walks through the setup,
+            and the deploy refuses a project anyone else could sign up to.
+          </p>
+          <p className="copy max-w-[64ch]">
+            I did not open the private repository itself. Its history holds
+            account names, real figures and months of my own notes, and two
+            hundred commits are too many to be sure of. Instead, a script copies
+            the code as it stands, swaps every private name for an invented
+            stand-in, refuses if a name or a secret survives, and runs the full
+            test suite on the copy before it commits anything. Each release is
+            one new commit on the public repository, and I publish it by hand.
           </p>
           <h3 className="h3">One build, three ways in</h3>
           <p className="copy max-w-[64ch]">
