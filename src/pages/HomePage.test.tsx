@@ -109,6 +109,23 @@ describe("HomePage blog", () => {
     expect(
       screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent)
     ).toEqual(["Work", "About"]);
+    expect(
+      screen.queryByTestId("latest-post-skeleton")
+    ).not.toBeInTheDocument();
+  });
+
+  it("holds the well's space until the post arrives, then shows the post", async () => {
+    respondWith([summary("newest", "The newest post", "2026-03-18")]);
+
+    renderHome();
+
+    // Before the fetch resolves: the skeleton, in the well's place.
+    expect(screen.getByTestId("latest-post-skeleton")).toBeInTheDocument();
+
+    await screen.findByRole("region", { name: "The newest post" });
+    expect(
+      screen.queryByTestId("latest-post-skeleton")
+    ).not.toBeInTheDocument();
   });
 });
 

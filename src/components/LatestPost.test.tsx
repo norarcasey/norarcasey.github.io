@@ -18,10 +18,10 @@ const POST: BlogSummary = {
   updatedAt: "2026-10-19T20:04:06Z",
 };
 
-function renderWell(post: BlogSummary | undefined) {
+function renderWell(post: BlogSummary | undefined, loading = false) {
   return render(
     <MemoryRouter>
-      <LatestPost post={post} />
+      <LatestPost post={post} loading={loading} />
     </MemoryRouter>
   );
 }
@@ -54,14 +54,27 @@ describe("LatestPost", () => {
     expect(document.querySelectorAll(".meta")).toHaveLength(0);
   });
 
-  it("renders nothing until there is a post", () => {
+  it("holds the well's space while loading, hidden from assistive tech", () => {
+    renderWell(undefined, true);
+
+    const skeleton = screen.getByTestId("latest-post-skeleton");
+    expect(skeleton).toHaveAttribute("aria-hidden", "true");
+    expect(skeleton).toHaveClass("card");
+    expect(screen.queryByRole("region")).not.toBeInTheDocument();
+    expect(screen.queryByRole("link")).not.toBeInTheDocument();
+  });
+
+  it("renders nothing once loaded with no post", () => {
     const { container } = renderWell(undefined);
 
     expect(container).toBeEmptyDOMElement();
   });
 
-  it("has no axe violations", async () => {
-    const { container } = renderWell(POST);
+  it.each([
+    ["the post", false],
+    ["the skeleton", true],
+  ])("has no axe violations in %s", async (_, loading) => {
+    const { container } = renderWell(loading ? undefined : POST, loading);
 
     expect(await axe(container)).toHaveNoViolations();
   });
