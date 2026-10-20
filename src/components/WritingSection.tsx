@@ -6,28 +6,31 @@ import {
   BLOG_BASE,
   blogPath,
   formatPostDate,
-  sortByNewest,
+  type BlogSummary,
 } from "../data/blog";
-import { useBlogIndex } from "../hooks/useBlogPosts";
 
-/** How many of the newest posts the home page shows. */
+/** How many posts the section lists. */
 const SHOWN = 3;
 
 /**
- * The newest writing, on the home page. The index is fetched client side, so
- * until it arrives (or if it never does, or there are no posts yet) this
- * renders nothing rather than a placeholder: the rest of the page stands on
- * its own, and an empty slot reads better than a broken promise.
+ * Recent writing, on the home page: the posts after the one `LatestPost`
+ * leads with, newest first, as the home page hands them over. The index is
+ * fetched client side, so until it arrives (or if it never does, or there is
+ * nothing after the newest post) this renders nothing rather than a
+ * placeholder: the rest of the page stands on its own, and an empty slot
+ * reads better than a broken promise.
  *
- * It was `LatestPost` and showed one post beside two buttons. The canvas shows
- * three under a heading, which is the same rule about never advertising a post
- * the blog does not have, applied to a list.
+ * It listed the newest three until CASEY-10 put the newest in its own well
+ * under the hero; before that it was `LatestPost` with one post beside two
+ * buttons. The rule about never advertising a post the blog does not have is
+ * the same throughout.
  */
-export function WritingSection(): React.ReactElement | null {
-  const result = useBlogIndex();
-  if (result.status !== "ready") return null;
-
-  const posts = sortByNewest(result.data).slice(0, SHOWN);
+export function WritingSection({
+  posts: all,
+}: {
+  posts: BlogSummary[];
+}): React.ReactElement | null {
+  const posts = all.slice(0, SHOWN);
   if (posts.length === 0) return null;
 
   return (
