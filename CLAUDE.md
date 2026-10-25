@@ -81,7 +81,7 @@ does not have, so a ticket is filed before its first commit, not after.
 
 ## Ship it
 
-The four steps from `~/src/linora/docs/ship-it.md`, with this repo's commands. Run them
+The five steps from `~/src/linora/docs/ship-it.md`, with this repo's commands. Run them
 from the ticket's worktree, before `complete_run`.
 
 1. **Merge to main.** `git fetch`, then `git rebase origin/main`. No pull request, no merge
@@ -96,6 +96,11 @@ from the ticket's worktree, before `complete_run`.
    (`gh run list --workflow deploy.yml --commit <sha>`) and watch it to the end with
    `gh run watch <id> --exit-status`. Only a run whose **Deploy to Vercel** step succeeded
    on that commit counts. A push is not a deploy.
+5. **Fast-forward the main checkout.** Leave the worktree (`ExitWorktree`, `keep`) and run
+   `git pull --ff-only` in the main checkout, changing nothing else there. A pull that will
+   not fast-forward means the main checkout has work of its own: stop and tell Nora.
+   There are no project hooks here, so nothing breaks without it, but the folder Nora opens
+   goes stale: on 25 Oct 2026 this one was 5 behind (`LIN/LIN-81`).
 
 **Why step 2 matters more here than the CI gate does.** Until `OPS-10` is fixed, Vercel's
 Git integration puts every push live about two minutes before CI finishes, and leaves it
@@ -105,8 +110,7 @@ forward straight away, in the same run.
 
 CI keeps the e2e scan, unlike the heavy apps that moved theirs into local verify only.
 Here it costs under a minute of a two-minute run (54 of 138 seconds, 8 Oct 2026), and it
-builds with the repository's secrets rather than `.env.local`. There are no project hooks,
-so the main checkout is not pulled after a deploy.
+builds with the repository's secrets rather than `.env.local`.
 
 Then `complete_run` with `shipped: true`, naming the commit and the Actions run that
 deployed it. The summary is not "done" but what the ticket turned out to be, what was found
