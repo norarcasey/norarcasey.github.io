@@ -42,6 +42,11 @@ const HOSTED_AT: Partial<Record<SiteRoutePath, string>> = {
   "/legends-of-noragon": "https://www.legendsofnoragon.com",
 };
 
+/** Projects that are also native apps, by their store listing. */
+const APP_STORE: Partial<Record<SiteRoutePath, string>> = {
+  "/mine-sweeper": "https://apps.apple.com/app/noras-mine-sweeper/id6824740774",
+};
+
 type JsonLd = Record<string, unknown>;
 
 function person(): JsonLd {
@@ -61,6 +66,7 @@ function pageNode(path: SiteRoutePath): JsonLd {
   const url = canonicalUrl(path);
   const packageName = NPM_PACKAGES[path];
   const hostedAt = HOSTED_AT[path];
+  const appStore = APP_STORE[path];
 
   if (packageName || hostedAt) {
     return {
@@ -69,8 +75,9 @@ function pageNode(path: SiteRoutePath): JsonLd {
       description,
       url: hostedAt ?? url,
       applicationCategory: packageName ? "GameApplication" : "WebApplication",
-      operatingSystem: "Web browser",
+      operatingSystem: appStore ? "Web browser, iOS" : "Web browser",
       author: { "@id": PERSON_ID },
+      ...(appStore ? { sameAs: [appStore] } : {}),
       ...(packageName
         ? {
             softwareHelp: `https://www.npmjs.com/package/${packageName}`,

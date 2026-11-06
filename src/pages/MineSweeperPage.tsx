@@ -13,6 +13,10 @@ import {
 import { StackFacts } from "../components/StackFacts";
 import { useRouteMeta } from "../hooks/usePageMeta";
 
+/** The iPhone app, released 5 Nov 2026 (MINE/MINE-22). */
+const APP_STORE_URL =
+  "https://apps.apple.com/app/noras-mine-sweeper/id6824740774";
+
 export function MineSweeperPage(): React.ReactElement {
   useRouteMeta("/mine-sweeper");
 
@@ -90,9 +94,19 @@ export function MineSweeperPage(): React.ReactElement {
           multi-difficulty game you can play here and packaging it as a reusable
           library along the way.
         </p>
+        <p className="copy">
+          It is also an iPhone app.{" "}
+          <ExternalLink url={APP_STORE_URL} label="Nora's Mine Sweeper" /> is a
+          native SwiftUI rewrite with the same rules as the component here. It
+          adds a Flag mode, an Expert board turned on its side to fit an upright
+          phone, VoiceOver support and haptics. It has no ads, no tracking and
+          makes no network requests. It was released on the App Store in
+          November 2026.
+        </p>
         <p className="copy text-text font-semibold">
           If you don't see the level selector try a larger screen size.
-          Currently only Beginner is enabled in small screen sizes.
+          Currently only Beginner is enabled in small screen sizes. On a phone,
+          the App Store version plays every level.
         </p>
         <p className="copy">
           It's published as a React component on npm, dropped straight into this
@@ -135,6 +149,11 @@ export function MineSweeperPage(): React.ReactElement {
               label: "Released",
               value:
                 "Published to npm behind a prepublishOnly gate that runs lint, typecheck, tests, and the library build, so a broken build cannot reach the registry.",
+            },
+            {
+              label: "On iPhone",
+              value:
+                "A native SwiftUI rewrite, not a web view. The rules exist twice, in TypeScript and in Swift, and the TypeScript copy is the reference: each Swift test names the component test it mirrors. Signed with automatic signing, shipped through TestFlight, and released on the App Store.",
             },
             {
               label: "Running here",

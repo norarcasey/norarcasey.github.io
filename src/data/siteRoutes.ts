@@ -30,7 +30,7 @@ export const SITE_ROUTES = {
   "/mine-sweeper": {
     title: "Mine Sweeper",
     description:
-      "A React Mine Sweeper game by Nora Casey, also published as the @norarcasey/mine-sweeper npm package.",
+      "A React Mine Sweeper game by Nora Casey, published as the @norarcasey/mine-sweeper npm package and as an iPhone app on the App Store.",
   },
   "/tic-tac-nora": {
     title: "Tic Tac Nora",

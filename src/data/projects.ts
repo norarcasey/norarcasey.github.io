@@ -140,7 +140,7 @@ export const PROJECTS: Project[] = [
     path: "/mine-sweeper",
     name: "Mine Sweeper",
     blurb:
-      "The classic flag-the-bombs puzzle. Clear the board without detonating a mine.",
+      "The classic flag-the-bombs puzzle. Clear the board without detonating a mine. Also an iPhone app on the App Store.",
     screenshot: mineSweeperScreen,
     kind: "game",
     npmPackage: "@norarcasey/mine-sweeper",
