@@ -101,4 +101,33 @@ test.describe("project showcase layout", () => {
     const slot = (await page.locator(".showcase-game").boundingBox())!;
     expect(slot.width).toBeLessThan(560);
   });
+
+  test("Mine Sweeper's stylesheet leaves the page layout alone", async ({
+    page,
+  }) => {
+    // The package's CSS is unlayered, so any global rule in it beats the
+    // site's layered ones. Its old `* { margin: 0; padding: 0 }` took the
+    // padding and max width off every work page once /mine-sweeper had loaded
+    // (CASEY-17, fixed in the package as MINE-25).
+    await page.setViewportSize(DESKTOP);
+    const layout = () =>
+      page.evaluate(() => {
+        const wrap = getComputedStyle(document.querySelector(".page-wrap")!);
+        const bar = getComputedStyle(document.querySelector(".header-bar")!);
+        return {
+          wrapPadding: wrap.paddingLeft,
+          wrapMaxWidth: wrap.maxWidth,
+          barPadding: bar.paddingLeft,
+        };
+      });
+
+    await page.goto("/arkanora");
+    await page.waitForLoadState("networkidle");
+    const reference = await layout();
+
+    await page.goto("/mine-sweeper");
+    await page.waitForLoadState("networkidle");
+    expect(await layout()).toEqual(reference);
+    expect(reference.wrapPadding).not.toBe("0px");
+  });
 });

@@ -19,8 +19,8 @@ importers:
         specifier: ^0.1.1
         version: 0.1.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@norarcasey/mine-sweeper':
-        specifier: ^1.0.1
-        version: 1.0.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        specifier: ^1.0.4
+        version: 1.0.4(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@norarcasey/pianora':
         specifier: ^0.1.0
         version: 0.1.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -416,8 +416,8 @@ packages:
       react: ^19
       react-dom: ^19
 
-  '@norarcasey/mine-sweeper@1.0.1':
-    resolution: {integrity: sha512-/ZVaL3FLykXERkOKxlzuOzoJ7KRKIseBWY++eGl3iyYzznu6ENMoWeNzDkr+65+CTS5Gg9fkEH4gtS33t7f0tw==}
+  '@norarcasey/mine-sweeper@1.0.4':
+    resolution: {integrity: sha512-nF9DmUF0K5VeMPlXN4DhUnNcl0GOr74ekPeuu1ftrfxPzMNWCLJhGLvLfGy+kU2RRZ69FL7osht0EKhQpe4sgA==}
     peerDependencies:
       react: ^19
       react-dom: ^19
@@ -2125,7 +2125,7 @@ snapshots:
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
 
-  '@norarcasey/mine-sweeper@1.0.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@norarcasey/mine-sweeper@1.0.4(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@fortawesome/fontawesome-svg-core': 7.2.0
       '@fortawesome/free-solid-svg-icons': 7.2.0
