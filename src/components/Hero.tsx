@@ -19,7 +19,7 @@ function Fact({
         last ? "" : "md:border-b md:border-border"
       }`}
     >
-      <span className="text-text text-lg leading-6 font-bold md:text-2xl md:leading-8">
+      <span className="text-lg leading-6 font-bold whitespace-nowrap text-text md:text-2xl md:leading-8">
         {value}
       </span>
       <span className="meta text-xs md:text-[13px]">{label}</span>
@@ -71,7 +71,7 @@ export function Hero(): React.ReactElement {
       <div className="mt-2 flex flex-row gap-5 border-t border-border pt-4 md:col-span-4 md:mt-0 md:flex-col md:gap-0 md:self-center md:border-t-0 md:border-l md:border-border md:pt-0 md:pl-8">
         <Fact value={`${years}+ yrs`} label="building for the web" />
         <Fact value="MS CS" label="Georgia Tech" />
-        <Fact value="US and EU" label="work authorized" last />
+        <Fact value="US, EU, UK" label="work authorized" last />
       </div>
     </section>
   );

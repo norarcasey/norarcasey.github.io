@@ -36,7 +36,7 @@ export function Resume(): React.ReactElement {
         <p className="copy">
           Barcelona, Spain | {yearsOfExperience}+ years of experience
         </p>
-        <p className="copy">US &amp; EU work authorized</p>
+        <p className="copy">US, EU &amp; UK work authorized</p>
         <p className="copy flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
           <ExternalLink
             url="mailto:noracasey@duck.com"
