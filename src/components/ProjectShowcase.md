@@ -136,6 +136,69 @@ is given, in order, and sets no `preload`. Record the answers in UI-17 on the
 runway when they are made. Until a page has a file, a screenshot of the thing
 running is a better hero than a frame promising a video: pass `image`.
 
+## Writing a case study
+
+The layout is the easy half. What follows is the method six pages taught
+(Nora Bene, Noratives, Noradar, Dinora, CruciNora, and the Kinora fixture),
+in the order to do it. The full record is ticket `CASEY/UI-12` in Linora and
+the run summaries of `CASEY-2` and `CASEY-6`. Each rule names the page that
+learned it.
+
+1. **Ask Nora why she built it, before writing the lead.** The repo says what
+   a thing is and its record says how it got built. Neither says what it was
+   for. The first Noratives lead was inferred from the finished app and was
+   wrong: it was a journal first, and the multi-writer architecture was a
+   birthday present for a friend. Her answer is the lead, close to her words.
+   The log can confirm the story; it cannot produce it.
+2. **Read whatever record the project kept.** Its `CLAUDE.md`, README and
+   `docs/`, its tickets and their run summaries in Linora, and its commit
+   bodies. Noratives had no `CLAUDE.md` and was still well documented. Check
+   the record against the code: CruciNora's README claimed a fill time no
+   test measures, and Dinora's claimed a bank link that was still in the
+   backlog. Nothing goes on the page that the code or a measurement does not
+   back.
+3. **Find the pushback in the transcripts, not the log.** A commit records a
+   decision. Only a transcript shows a plan proposed and turned down, which
+   is the half the band needs: the option offered, the option Nora chose, and
+   what it was protecting. Noradar indexes the archive. Three shapes have
+   turned up: an offer refused; a recommended order reversed (Noratives, CI
+   minutes); and the plan saying something could not be done while Nora named
+   how (Noradar, the Mac shell). Keep calls that changed what the software
+   is. A repair, like ending a bad habit, is cut even when it is a good story
+   (Noratives, twice). Offer candidates with their commits; Nora picks. If
+   she did not pick, say so in the run summary. Older sessions may be gone
+   from the archive (CruciNora's first nine days are), and then a decision is
+   stated as design, not credited as hers.
+4. **Measure every fact that day, in the repo, and count rather than
+   characterise.** Dinora's draft said "most" tests were in the core; the
+   count said half. A fact answers a question a reader has: Noradar's first
+   cost tile was a true ratio that answered nothing, and was replaced by the
+   measurement the question needed. A misstep is not a measurement
+   (Noratives' migrations tile). A number only Nora can read, because the
+   data is private, is asked for and shown as a floor (`60,000+`), which
+   stays true as it grows. Date any figure that moves, in the code beside it.
+5. **The commit chart.** `node scripts/commitHistory.mjs <repo>` gives the
+   rows for `src/data/<name>History.ts`. Release markers are editorial, read
+   from the subjects and the tickets, and about six is the most an axis
+   holds before markers overlap. `CommitHistory` and `commitAxis.ts` already
+   handle spans from three weeks to six months.
+6. **Screenshots come from driving the real app**, with a driver committed as
+   `scripts/shoot<Name>.mjs` so the shots can be retaken. Where the rows are
+   personal (lists, journals, money), the driver answers the app's data calls
+   in the browser with invented rows, from one catch-all handler that aborts
+   anything it does not know, since an app's `.env` may point at production.
+   Never write rows to a local stack another session may be testing against.
+   Where nothing is personal (Noradar), photograph the running thing with
+   reads only. Driving the real app finds real bugs; report them to that
+   app's Linora app rather than fixing them from here. Planting a forged
+   sign-in to reach an admin screen was refused (`CASEY-8`): ask Nora instead.
+7. **One drawing, for what prose cannot show.** Each page has a component
+   beside its test (`NoradarVerdict`, `DinoraSources`), on the chart tokens,
+   with the marker pink kept for the one exception the drawing is about.
+8. **Wire it in** with "Adding a new project page", below. The home grid
+   orders case studies newest first by `addedAt` in `src/data/projects.ts`:
+   the author time of the commit that first added the page.
+
 ## Recipes
 
 **A page with no npm component.** Put a screenshot and the link out to the live
@@ -195,6 +258,7 @@ than restating it.
    entry, so the title React sets matches the one the build served.
 4. Add it to `src/data/projects.ts`, which is what puts it on the home page.
 5. Add the path to `e2e/a11y.spec.ts`: `PAGES` if the page is entirely our own
-   markup, `SHOWCASE_PAGES` if it embeds a published component.
+   markup, `SHOWCASE_PAGES` if it embeds a published component. Add the page
+   to `src/a11y.test.tsx` and its served path to `e2e/seo.spec.ts` too.
 6. Layout facts that depend on media queries can't be tested in jsdom. Cover
    those in `e2e/showcase.spec.ts` instead of the Vitest suite.
