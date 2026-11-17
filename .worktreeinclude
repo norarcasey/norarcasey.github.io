@@ -1,0 +1,6 @@
+# Gitignored files Claude Code copies into a new worktree under .claude/worktrees/. Only files
+# that are ignored AND listed here are copied; tracked files come from git as usual.
+# The root env files only, anchored: .env holds the Supabase keys the build needs to fetch
+# the blog (LIN/LIN-84).
+/.env
+/.env.*

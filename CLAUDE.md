@@ -12,9 +12,9 @@ maintainer, push to `main`, the gate decides.
    what to change, what to leave alone, and what was already decided, and a run handed back
    says why. Then `claim_ticket`.
 2. Work in a worktree, never the main checkout: `EnterWorktree` named for the ticket
-   in lower case (`.claude/worktrees/ops-10`), or its `path` when that worktree already exists. Link
-   `.env.local` in from the main checkout (`ln -s ../../../.env.local .env.local`) so
-   `pnpm build` and `pnpm test:e2e` can fetch the blog; it is gitignored either way.
+   in lower case (`.claude/worktrees/ops-10`), or its `path` when that worktree already exists.
+   `.worktreeinclude` copies the root `.env` files into a new worktree, so `pnpm build` and
+   `pnpm test:e2e` can fetch the blog.
 3. `pnpm install` (pnpm, not npm or Yarn; `pnpm-lock.yaml` is the lockfile).
 4. `pnpm gate` must pass before you start, so you know a failure later is yours.
 
@@ -24,7 +24,7 @@ maintainer, push to `main`, the gate decides.
 pnpm gate        # format:check, lint, tsc, test. What CI runs first.
 pnpm test:e2e    # Playwright + axe over the built site. Builds first; CI runs it after the gate.
 pnpm build       # tsc + vite build. Needs VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
-                 # in .env.local, or the blog fetch aborts the build.
+                 # in .env, or the blog fetch aborts the build.
 ```
 
 Run `pnpm gate` and `pnpm test:e2e` before every push (Ship it, below). Run `pnpm format`
@@ -110,7 +110,7 @@ forward straight away, in the same run.
 
 CI keeps the e2e scan, unlike the heavy apps that moved theirs into local verify only.
 Here it costs under a minute of a two-minute run (54 of 138 seconds, 8 Oct 2026), and it
-builds with the repository's secrets rather than `.env.local`.
+builds with the repository's secrets rather than `.env`.
 
 Then `complete_run` with `shipped: true`, naming the commit and the Actions run that
 deployed it. The summary is not "done" but what the ticket turned out to be, what was found
