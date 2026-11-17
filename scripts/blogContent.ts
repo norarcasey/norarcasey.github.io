@@ -89,6 +89,52 @@ export function openExternalLinksInNewTab(html: string): string {
   );
 }
 
+/** A superscript digit for each of 0 to 9, for the second and later backlinks. */
+const SUPERSCRIPT = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+
+/** The return arrow, held to its text form so iOS does not draw an emoji. */
+const RETURN_ARROW = "↩︎";
+
+const LEADING_BACKLINKS =
+  /(<li id="ref-(\d+)"[^>]*>)((?:<a class="reference-backlink"[^>]*>[^<]*<\/a>\s*)+)([\s\S]*?)<\/li>/g;
+const BACKLINK = /<a class="reference-backlink"[^>]*\bhref="([^"]*)"[^>]*>/g;
+
+/**
+ * The reference list reads the way a paper's does: the number, then the
+ * source. The studio publishes it Wikipedia style, with the links back to
+ * the text in front of each entry, `^` for a source cited once and `a b c`
+ * for one cited more often. Numbered styles in print (IEEE, Vancouver) put
+ * nothing before an entry, and repeat the same number in the text each time
+ * a source is cited, which the studio already does.
+ *
+ * The links back are a web addition worth keeping, so they move after the
+ * source as `↩`, `↩²`, `↩³`, the convention of GitHub and Pandoc footnotes,
+ * and each one still lands on the same `#cite-n-m` it did. Rewritten here at
+ * build time rather than in the studio, so the studio's other site keeps
+ * its markup. Idempotent: an entry that no longer starts with a backlink is
+ * left alone.
+ */
+export function referencesLikeAPaper(html: string): string {
+  return html.replace(
+    LEADING_BACKLINKS,
+    (_whole, open: string, n: string, backlinks: string, source: string) => {
+      const targets = [...backlinks.matchAll(BACKLINK)].map((m) => m[1]);
+      const links = targets.map((href, i) => {
+        const nth =
+          i === 0
+            ? ""
+            : [...String(i + 1)].map((d) => SUPERSCRIPT[Number(d)]).join("");
+        const label =
+          targets.length === 1
+            ? `Back to citation ${n}`
+            : `Back to citation ${n}, use ${i + 1} of ${targets.length}`;
+        return `<a class="reference-backlink" href="${href}" aria-label="${label}">${RETURN_ARROW}${nth}</a>`;
+      });
+      return `${open}${source.trimEnd()} <span class="reference-backlinks">${links.join(" ")}</span></li>`;
+    }
+  );
+}
+
 /** One snapshot row as the site's own post. Pure, so it is unit-tested. */
 export function toBlogPost(row: SnapshotRow): BlogPost {
   return {
@@ -97,7 +143,7 @@ export function toBlogPost(row: SnapshotRow): BlogPost {
     // untitled draft, and an empty <h1> would be worse than a placeholder.
     title: row.title?.trim() || "Untitled",
     excerpt: excerptFrom(row.body_text),
-    bodyHtml: openExternalLinksInNewTab(row.body_html),
+    bodyHtml: referencesLikeAPaper(openExternalLinksInNewTab(row.body_html)),
     tags: Array.isArray(row.tags) ? row.tags : [],
     publishedAt: row.published_at,
     updatedAt: row.updated_at,

@@ -1,5 +1,6 @@
 import {
   openExternalLinksInNewTab,
+  referencesLikeAPaper,
   summarize,
   toBlogPost,
 } from "./blogContent";
@@ -110,6 +111,80 @@ describe("openExternalLinksInNewTab", () => {
       ...row,
       body_html: '<p><a href="https://example.com">x</a></p>',
     });
+    expect(post.bodyHtml).toContain('target="_blank"');
+  });
+});
+
+describe("referencesLikeAPaper", () => {
+  const arrow = "↩︎";
+  const source = '<a href="https://supabase.com/pricing">Supabase pricing</a>';
+  const once =
+    '<li id="ref-1"><a class="reference-backlink" href="#cite-1-1" aria-label="Back to citation 1">^</a> ' +
+    source +
+    "</li>";
+  const many =
+    '<li id="ref-2">' +
+    ["a", "b", "c"]
+      .map(
+        (l, i) =>
+          `<a class="reference-backlink" href="#cite-2-${i + 1}" aria-label="Back to citation 2${l}">${l}</a> `
+      )
+      .join("") +
+    source +
+    "</li>";
+
+  it("starts an entry with its source, not with a caret", () => {
+    expect(referencesLikeAPaper(once)).toBe(
+      `<li id="ref-1">${source} <span class="reference-backlinks"><a class="reference-backlink" href="#cite-1-1" aria-label="Back to citation 1">${arrow}</a></span></li>`
+    );
+  });
+
+  it("numbers a source's backlinks instead of lettering them", () => {
+    const out = referencesLikeAPaper(many);
+    expect(out.startsWith(`<li id="ref-2">${source} `)).toBe(true);
+    expect(out).not.toMatch(/>[abc]<\/a>/);
+    expect(out).toContain(
+      `href="#cite-2-1" aria-label="Back to citation 2, use 1 of 3">${arrow}</a>`
+    );
+    expect(out).toContain(
+      `href="#cite-2-2" aria-label="Back to citation 2, use 2 of 3">${arrow}²</a>`
+    );
+    expect(out).toContain(
+      `href="#cite-2-3" aria-label="Back to citation 2, use 3 of 3">${arrow}³</a>`
+    );
+  });
+
+  it("writes a two-digit use count in superscript too", () => {
+    const twelve =
+      '<li id="ref-3">' +
+      Array.from(
+        { length: 12 },
+        (_, i) =>
+          `<a class="reference-backlink" href="#cite-3-${i + 1}" aria-label="x">x</a> `
+      ).join("") +
+      source +
+      "</li>";
+    expect(referencesLikeAPaper(twelve)).toContain(`${arrow}¹²</a>`);
+  });
+
+  it("is idempotent", () => {
+    const out = referencesLikeAPaper(many);
+    expect(referencesLikeAPaper(out)).toBe(out);
+  });
+
+  it("leaves a list item that is not a reference alone", () => {
+    const html = "<ol><li>One</li></ol>";
+    expect(referencesLikeAPaper(html)).toBe(html);
+  });
+
+  it("is applied when a row becomes a post", () => {
+    const post = toBlogPost({
+      ...row,
+      body_html: `<ol class="references">${once}</ol>`,
+    });
+    expect(post.bodyHtml).toContain(
+      '<span class="reference-backlinks"><a class="reference-backlink"'
+    );
     expect(post.bodyHtml).toContain('target="_blank"');
   });
 });

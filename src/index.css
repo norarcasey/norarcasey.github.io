@@ -920,8 +920,16 @@
   overflow-wrap: anywhere;
 }
 
+/* The links back to the text trail the source (scripts/blogContent.ts moves
+   them there), quieter than the source itself so the entry reads as a
+   citation first. */
+.blog-body .reference-backlinks {
+  margin-left: 2px;
+  white-space: nowrap;
+}
+
 .blog-body .reference-backlink {
-  margin-right: 6px;
+  margin-right: 4px;
   text-decoration: none;
 }
 
