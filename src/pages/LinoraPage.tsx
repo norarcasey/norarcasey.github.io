@@ -15,6 +15,7 @@ import { LinoraClaim } from "../components/LinoraClaim";
 import { CaseStudyMedia } from "../components/CaseStudyMedia";
 import linoraBoard from "../assets/screens/linora-board.webp";
 import linoraTicket from "../assets/screens/linora-ticket.webp";
+import linoraForecast from "../assets/screens/linora-forecast.webp";
 import { LINORA_COMMITS, LINORA_RELEASES } from "../data/linoraHistory";
 import { useRouteMeta } from "../hooks/usePageMeta";
 
@@ -186,6 +187,29 @@ export function LinoraPage(): React.ReactElement {
             </Link>{" "}
             reads the trailer to place agent time on the ticket it was for.
           </p>
+          <h3 className="h3">A forecast without estimates</h3>
+          <p className="copy max-w-[64ch]">
+            Linora has no points. Insights runs 2,000 trials that replay past
+            weeks&apos; finished counts at random until the open work runs out,
+            and shows the week by which half, 85% and 95% of them were done, and
+            how many tickets could be finished in the weeks ahead. The trials
+            are seeded, so the same record gives the same date; a date that
+            moved on every refresh would read as news when nothing happened. It
+            is labelled as a guess, never as a measurement.
+          </p>
+          <figure className="flex flex-col gap-3">
+            <img
+              src={linoraForecast}
+              alt="The Forecast section of Linora's Insights page. A note reads: a guess, not a measurement, projected from 12 finished weeks. A table gives how many tickets could be finished by 1, 2, 4, 8 and 13 weeks from now, at even odds, 85% sure and 95% sure. Three tiles say when the 120 open tickets are done: 50% likely in 12 weeks, 85% in 14, 95% in 15. Below, a bar chart of 2,000 trials shows the share finishing after each number of weeks, peaking at 12, with the three percentiles marked."
+              loading="lazy"
+              decoding="async"
+              className="block aspect-[1464/1374] w-full rounded-xl border border-border"
+            />
+            <figcaption className="meta">
+              Insights&apos; forecast. The weeks are invented; the trials and
+              the percentiles are Linora&apos;s own code run on them.
+            </figcaption>
+          </figure>
           <h3 className="h3">It starts the agents too</h3>
           <p className="copy max-w-[64ch]">
             A ticket can start its own agent, which opens as a pane in one

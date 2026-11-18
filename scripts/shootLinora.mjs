@@ -22,14 +22,13 @@ import { readFileSync } from "node:fs";
 import { mkdirSync } from "node:fs";
 import { homedir } from "node:os";
 import { extname, join } from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { chromium } from "@playwright/test";
 
 const OUT = process.argv[2];
-const DIST = join(
-  process.env.LINORA_DIR ?? join(homedir(), "src/linora"),
-  "apps/web/dist"
-);
+const LINORA = process.env.LINORA_DIR ?? join(homedir(), "src/linora");
+const DIST = join(LINORA, "apps/web/dist");
 const ORIGIN = "http://linora.stub";
 
 if (!OUT) {
@@ -403,6 +402,83 @@ const WORKSPACE = {
   labels: LABELS,
 };
 
+// ── Insights: the forecast ───────────────────────────────────────────────
+// The weeks are invented; the forecast is not. It is Linora's own `forecast`
+// and `pace` from its core, run on these weeks, so the percentiles and the
+// spread are what Linora would draw for a record like this (CASEY-30). The
+// core imports only types, which Node strips, so it loads as it is.
+const analytics = await import(
+  pathToFileURL(join(LINORA, "packages/core/src/analytics.ts")).href
+);
+// Uneven weeks and a backlog of a couple of months, so the trials spread over
+// several weeks and the three percentiles land apart, which is the point of
+// running trials rather than dividing by an average.
+const OPEN = 120;
+const FINISHED_WEEKS = [3, 14, 6, 18, 9, 2, 16, 11, 5, 13, 20, 8];
+const thisWeek = ago(2 * DAY);
+const weekStarts = FINISHED_WEEKS.map(
+  (_, i) => thisWeek - (FINISHED_WEEKS.length - i) * 7 * DAY
+);
+const empty = { count: 0, p50: null, p90: null };
+const STATUSES = [
+  "triage",
+  "backlog",
+  "todo",
+  "in_progress",
+  "in_review",
+  "done",
+  "canceled",
+];
+const ANALYTICS = {
+  scope: {
+    app: null,
+    project: null,
+    model: null,
+    weeks: FINISHED_WEEKS.length,
+    from: weekStarts[0],
+    to: NOW,
+    offsetMinutes: 0,
+  },
+  tickets: TICKETS.length,
+  leadTime: { measured: empty, reconstructed: empty },
+  cycleTime: {
+    measured: empty,
+    reconstructed: empty,
+    unstarted: 0,
+    points: [],
+  },
+  reviewWait: {
+    measured: empty,
+    reconstructed: empty,
+    waiting: [],
+    shipit: empty,
+  },
+  throughput: [
+    ...weekStarts.map((start, i) => ({
+      start,
+      measured: FINISHED_WEEKS[i],
+      reconstructed: 0,
+      partial: false,
+    })),
+    { start: thisWeek, measured: 4, reconstructed: 0, partial: true },
+  ],
+  arrivals: [],
+  flow: {
+    daily: [],
+    timeIn: Object.fromEntries(STATUSES.map((s) => [s, 0])),
+  },
+  forecast: analytics.forecast(OPEN, FINISHED_WEEKS, NOW),
+  basis: {
+    from: weekStarts[0],
+    weeks: FINISHED_WEEKS.length,
+    measured: FINISHED_WEEKS.reduce((a, b) => a + b, 0),
+    reconstructed: 0,
+  },
+  pace: analytics.pace(FINISHED_WEEKS, NOW),
+  held: [],
+  agents: { models: [], imported: 0 },
+};
+
 // ── The one handler ──────────────────────────────────────────────────────
 const TYPES = {
   ".html": "text/html",
@@ -445,6 +521,7 @@ async function handle(route) {
     return route.abort();
   }
   if (path === "/api/v1/workspace") return json(route, WORKSPACE);
+  if (path === "/api/v1/analytics") return json(route, ANALYTICS);
   const t = path.match(
     /^\/api\/v1\/apps\/([^/]+)\/tickets\/([^/]+)\/(detail|commits)$/
   );
@@ -537,6 +614,33 @@ await shoot(
     };
   },
   "comments"
+);
+
+// Insights' Forecast section, which sits in the details column like the
+// ticket, so the window is sized for the section to come out about 700 CSS px
+// wide, and the shot is the section alone.
+await shoot(
+  "dark",
+  "#/insights",
+  "linora-forecast",
+  { width: 960, height: 1600 },
+  async (page) => {
+    const box = await page.evaluate(() => {
+      const section = document
+        .getElementById("forecast-title")
+        .closest("section");
+      section.scrollIntoView({ block: "start" });
+      const r = section.getBoundingClientRect();
+      return { x: r.x, y: r.y, width: r.width, height: r.height };
+    });
+    console.log("forecast section", box);
+    return {
+      x: Math.round(box.x - 16),
+      y: Math.round(box.y - 16),
+      width: Math.round(box.width + 32),
+      height: Math.round(box.height + 32),
+    };
+  }
 );
 
 // The home page's card, at the size and proportion Noradar's was taken at.
