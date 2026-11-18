@@ -82,6 +82,11 @@ export const SITE_ROUTES = {
     description:
       "Noradar by Nora Casey, a local daemon, dashboard and Mac menu bar app that says whether each push actually deployed, and what the work cost in agent time per runway item. How it is built, and where the plan was overruled.",
   },
+  "/linora": {
+    title: "Linora",
+    description:
+      "Linora by Nora Casey, the local tracker every project's work runs through: AI agents claim tickets in one step only one can win, and close each with a summary of what was built, what was found and what the plan got wrong. How it is built, and where the plan was overruled.",
+  },
   "/dinora": {
     title: "Dinora",
     description:

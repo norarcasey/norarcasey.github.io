@@ -131,6 +131,13 @@ const router = createBrowserRouter([
           })),
       },
       {
+        path: "linora",
+        lazy: () =>
+          import("./pages/LinoraPage").then((m) => ({
+            Component: m.LinoraPage,
+          })),
+      },
+      {
         path: "dinora",
         lazy: () =>
           import("./pages/DinoraPage").then((m) => ({

@@ -54,6 +54,7 @@ describe("PROJECTS", () => {
       expect(Number.isNaN(Date.parse(project.addedAt ?? ""))).toBe(false);
     }
     expect(PRODUCTS.map((p) => p.name)).toEqual([
+      "Linora",
       "Dinora",
       "Noradar",
       "Noratives",

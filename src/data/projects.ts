@@ -8,6 +8,7 @@ import noraBeneScreen from "../assets/screens/nora-bene.webp";
 import norativesScreen from "../assets/screens/noratives.webp";
 import noradarScreen from "../assets/screens/noradar.webp";
 import dinoraScreen from "../assets/screens/dinora.webp";
+import linoraScreen from "../assets/screens/linora.webp";
 import mineSweeperScreen from "../assets/screens/mine-sweeper.webp";
 import pianoraScreen from "../assets/screens/pianora.webp";
 import starSiegeScreen from "../assets/screens/star-siege.webp";
@@ -115,6 +116,16 @@ export const PROJECTS: Project[] = [
     screenshot: noradarScreen,
     kind: "product",
     stack: "Node · node:sqlite · React · Swift · Vitest",
+  },
+  {
+    path: "/linora",
+    addedAt: "2026-11-17T19:45:00-08:00",
+    name: "Linora",
+    blurb:
+      "The tracker every project's work runs through. AI agents claim tickets, work them and close each with what was built, what was found and what the plan got wrong.",
+    screenshot: linoraScreen,
+    kind: "product",
+    stack: "Node · node:sqlite · MCP · React · Swift",
   },
   {
     path: "/dinora",
