@@ -108,7 +108,7 @@ export function LinoraPage(): React.ReactElement {
       <ShowcaseGame width="100%" thirdParty={false}>
         <CaseStudyMedia
           image={linoraBoard}
-          alt="Linora in its dark theme, on the tickets of one app, Linora itself. A sidebar lists the review queue with a count of 4, triage, every ticket, projects, insights, labels and admin, then the apps. The list is grouped by status: two in review, one marked Not shipped; two in progress, each held by a named agent session; four to do; three in the backlog; and three done, folded. Each row has a priority, a key, a title, labels and an age."
+          alt="Linora in its dark theme, on the tickets of one app, Linora itself. A sidebar lists the review queue with a count of 4, triage, every ticket, projects, insights, labels and admin, then the apps. The list is grouped by status: two in review, one marked Not shipped; two in progress, each held by a named agent session; four to do; three in the backlog; and three done, folded. Each row has a priority, a key, a title, labels and an age. The sidebar ends on Live."
           caption="An app's tickets, grouped by status. The page is the real one, driven by a script; the rows are invented, because the real board holds private work."
         />
       </ShowcaseGame>

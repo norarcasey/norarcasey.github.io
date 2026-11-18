@@ -53,28 +53,11 @@ const APPS = [
   { id: 5, key: "RADAR", name: "Noradar", archivedAt: null },
 ];
 
-const PROJECTS = [
-  {
-    id: 1,
-    appId: 1,
-    slug: "review",
-    name: "Review queue",
-    description: "What waits on Nora, in the order it has waited.",
-    status: "active",
-    priority: 2,
-    createdAt: ago(30 * DAY),
-  },
-  {
-    id: 2,
-    appId: 1,
-    slug: "insights",
-    name: "Insights",
-    description: "Cycle time, flow and throughput, from the event log.",
-    status: "planned",
-    priority: 3,
-    createdAt: ago(20 * DAY),
-  },
-];
+// No projects. The real record has none (0 on 17 Nov 2026), and the first
+// shots invented two, which put a sub-nav under the app and a tag on its rows
+// that Nora's Linora has never shown (CASEY-28). Invented rows stand in for
+// private ones; they do not add parts of the page that are not there.
+const PROJECTS = [];
 
 const LABELS = [
   ["Feature", "#5e6ad2", "Something new it does."],
@@ -104,7 +87,7 @@ const ROWS = [
     "in_review",
     2,
     ["Feature"],
-    "review",
+    null,
     { age: 3 * HOUR },
   ],
   [
@@ -114,7 +97,7 @@ const ROWS = [
     "in_review",
     2,
     ["Feature"],
-    "review",
+    null,
     { age: 5 * HOUR, awaitingShipit: true },
   ],
   [
@@ -134,7 +117,7 @@ const ROWS = [
     "in_progress",
     3,
     ["Feature"],
-    "review",
+    null,
     { age: 40 * MIN, holder: "9c02" },
   ],
   [
@@ -144,7 +127,7 @@ const ROWS = [
     "todo",
     2,
     ["Feature", "hand-off"],
-    "insights",
+    null,
     {},
   ],
   [
@@ -184,7 +167,7 @@ const ROWS = [
     "backlog",
     4,
     ["Feature"],
-    "insights",
+    null,
     {},
   ],
   [
