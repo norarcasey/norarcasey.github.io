@@ -511,33 +511,58 @@ async function shoot(scheme, hash, name, viewport, clip, scrollTo) {
     }, scrollTo);
     await page.waitForTimeout(300);
   }
-  await page.screenshot({ path: `${OUT}/${name}.png`, clip });
+  await page.screenshot({
+    path: `${OUT}/${name}.png`,
+    clip: typeof clip === "function" ? await clip(page) : clip,
+  });
   await context.close();
 }
 
-const HERO = { width: 1440, height: 810 };
-await shoot("dark", "#/app/LIN", "linora-board", HERO);
+// Each shot is taken at about the width the case study shows it at, at 2x, so
+// a 2x screen draws it close to pixel for pixel. The first shots were taken
+// from a 1440 px window and came out blurry (CASEY-27): the hero frame stops
+// at 1018 CSS px and the details column at 669, so Linora's 13 px text was
+// drawn at 9 px in one and 6 px in the other, resampled by an awkward ratio.
+// A window the width of the frame shows the same board at its own size.
+
+// The hero frame: 1018 CSS px wide from a 1280 px window up, at 16:9.
+await shoot("dark", "#/app/LIN", "linora-board", { width: 1024, height: 576 });
+
+// The ticket sits in the details column, 669 CSS px at most. Its own content
+// column is about that wide, so the shot is that column, at 16:9, ending
+// under the run summary, and the sidebar is left out.
 await shoot(
   "dark",
   "#/app/LIN/ticket/LIN-44",
   "linora-ticket",
-  HERO,
-  undefined,
+  { width: 1200, height: 900 },
+  async (page) => {
+    const run = await page.evaluate(() => {
+      const heading = [...document.querySelectorAll("h1,h2,h3,h4")].find(
+        (h) => h.textContent.trim().toLowerCase() === "runs"
+      );
+      const box = heading.nextElementSibling.getBoundingClientRect();
+      return { x: box.x, width: box.width, bottom: box.bottom };
+    });
+    const width = Math.round(run.width + 32);
+    const height = Math.round((width * 9) / 16);
+    return {
+      x: Math.round(run.x - 16),
+      y: Math.round(run.bottom + 16 - height),
+      width,
+      height,
+    };
+  },
   "comments"
 );
-await shoot("dark", "#/review", "linora-review", HERO);
-// The home page's card, at the proportion the other cards were taken at.
+
+// The home page's card, at the size and proportion Noradar's was taken at.
 await shoot(
   "dark",
   "#/app/LIN",
   "linora",
-  { width: 1000, height: 704 },
-  {
-    x: 0,
-    y: 0,
-    width: 1000,
-    height: 704,
-  }
+  { width: 800, height: 563 },
+  { x: 0, y: 0, width: 800, height: 563 }
 );
 
 await browser.close();

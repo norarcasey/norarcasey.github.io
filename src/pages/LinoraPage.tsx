@@ -108,7 +108,7 @@ export function LinoraPage(): React.ReactElement {
       <ShowcaseGame width="100%" thirdParty={false}>
         <CaseStudyMedia
           image={linoraBoard}
-          alt="Linora in its dark theme, on the tickets of one app, Linora itself. A sidebar lists the review queue with a count of 4, triage, every ticket, projects, insights, labels and admin, then the apps. The list is grouped by status: two in review, one marked Not shipped; two in progress, each held by a named agent session; four to do; three in the backlog; and three done, folded. Each row has a priority, a key, a title, labels and an age. The sidebar ends on Live."
+          alt="Linora in its dark theme, on the tickets of one app, Linora itself. A sidebar lists the review queue with a count of 4, triage, every ticket, projects, insights, labels and admin, then the apps. The list is grouped by status: two in review, one marked Not shipped; two in progress, each held by a named agent session; four to do; three in the backlog; and three done, folded. Each row has a priority, a key, a title, labels and an age."
           caption="An app's tickets, grouped by status. The page is the real one, driven by a script; the rows are invented, because the real board holds private work."
         />
       </ShowcaseGame>
@@ -164,7 +164,7 @@ export function LinoraPage(): React.ReactElement {
           <figure className="flex flex-col gap-3">
             <img
               src={linoraTicket}
-              alt="A Linora ticket scrolled to its last sections: the spec, an empty attachments area, one comment from Nora saying to show it on the row too, and a Runs section with one run marked Completed and not shipped, by a named agent session on claude-opus-5-5. Its summary has three parts: what was built, what was found on the way, and what the plan got wrong."
+              alt="The end of a Linora ticket: the last line of a comment from Nora saying to show it on the row too, the box for adding a comment, and a Runs section with one run marked Completed and not shipped, by a named agent session on claude-opus-5-5, with a progress note under it. Its summary has three parts: what was built, what was found on the way, and what the plan got wrong."
               loading="lazy"
               decoding="async"
               className="block aspect-video w-full rounded-xl border border-border object-cover object-top"
